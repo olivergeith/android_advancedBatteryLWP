@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+ 
+    <PreferenceCategory android:title="@string/app_name">
+    
+	    <Preference 
+	        android:title="My Apps on Google Play" 
+	        android:icon="@drawable/googleplay"
+	        >
+	        <intent android:action="android.intent.action.VIEW"
+	            android:data="https://play.google.com/store/apps/developer?id=Oliver+Geith" />
+	    </Preference>
+
+	    <Preference 
+	        android:title="The BatteryLWP on Google+" 
+	        android:icon="@drawable/googleplus"
+	        >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://plus.google.com/u/0/communities/102647653092301648632" />
+        </Preference>
+	    
+	    <Preference 
+	        android:title="Contact developer" 
+	        android:icon="@drawable/email"
+	        >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="mailto:oliver.geith@gmail.com?subject=BatteryLWP-Mail" />
+        </Preference>
+	    </PreferenceCategory>
+	    
+    <PreferenceCategory android:title="Special internal Options">
+	    <Preference 
+		    android:key="premium"
+    		android:defaultValue="false"
+		    android:title="Premium" 
+            />
+        <CheckBoxPreference 
+		    android:key="debug"
+    		android:defaultValue="false"
+		    android:title="Debugging" 
+		    android:summary="Enables Debugging within the LWP. This will cost lots of performance! Do not enable unless you know what you do!!!"
+            />
+	    <CheckBoxPreference 
+		    android:key="debug2"
+    		android:defaultValue="false"
+		    android:title="DebuggingMessages" 
+		    android:summary="Enables DebuggMessages"
+            />
+	    
+    </PreferenceCategory>
+
+    
+    
+</PreferenceScreen>

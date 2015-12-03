@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<preference-headers
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <header android:fragment="de.geithonline.abattlwp.BattPreferencesFragment"
+            android:icon="@drawable/icon"
+            android:title="@string/header_title_battery"
+            android:summary="@string/header_summary_battery" />
+
+    <header android:fragment="de.geithonline.abattlwp.BattSizePositionFragment"
+            android:icon="@drawable/size"
+            android:title="@string/header_title_sizeposition"
+            android:summary="@string/header_summary_sizeposition" />
+    
+    <header android:fragment="de.geithonline.abattlwp.BattColorPreferencesFragment"
+            android:icon="@drawable/color"
+            android:title="@string/header_title_battery_options"
+            android:summary="@string/header_summary_battery_options" />
+
+    
+    <header android:fragment="de.geithonline.abattlwp.BattNumberPreferencesFragment"
+            android:icon="@drawable/number"
+            android:title="@string/header_title_number_options"
+            android:summary="@string/header_summary_number_options" />
+    
+    <header android:fragment="de.geithonline.abattlwp.BattChargingPreferencesFragment"
+            android:icon="@drawable/charge"
+            android:title="@string/header_title_charge_options"
+            android:summary="@string/header_summary_charge_options" />
+    
+    <header android:fragment="de.geithonline.abattlwp.BackgroundPreferencesFragment"
+            android:icon="@drawable/wallpaper"
+            android:title="@string/header_title_background_options"
+            android:summary="@string/header_summary_background_options"
+            />
+
+    <header android:fragment="de.geithonline.abattlwp.AboutFragment"
+            android:icon="@drawable/about"
+            android:title="@string/header_about_options"
+            android:summary="@string/header_about_options_summary"
+            />
+    
+    
+</preference-headers>

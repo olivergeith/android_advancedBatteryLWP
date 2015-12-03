@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+     xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences"
+     >
+    
+    <PreferenceCategory android:title="@string/category_battery_options">
+
+	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+	        android:key="battery_color"
+	        android:title="@string/color" 
+	        android:summary="Battery --> Color"
+	        android:defaultValue="@integer/COLOR_WHITE"
+	        />
+	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+	        android:key="battery_color_mid"
+	        android:title="Color (mid level)" 
+	        android:summary="Battery --> Color (mid level)"
+	        android:defaultValue="@integer/COLOR_ORANGE"
+	        />
+	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+	        android:key="battery_color_low"
+	        android:title="Color (low level)" 
+	        android:summary="Battery --> Color (low level)"
+	        android:defaultValue="@integer/COLOR_RED"
+	        />
+        
+        <CheckBoxPreference 
+		    android:key="gradient_colors"
+    		android:defaultValue="false"
+		    android:title="@string/gradient_colors" 
+		    android:summary="@string/gradient_colors_summary"
+            />
+        <CheckBoxPreference 
+		    android:key="gradient_colors_mid"
+    		android:defaultValue="false"
+		    android:title="@string/gradient_colors_mid" 
+		    android:summary="@string/gradient_colors_mid_summary"
+            />
+        	    	    
+       <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="128"
+	        android:dialogMessage="Battery --> Opacity"
+	        android:key="opacityInt"
+	        android:summary="%1$d"
+	        android:title="@string/opacity"
+	        seekbarpreference:maxValue="255"
+	        seekbarpreference:minValue="0"
+	        seekbarpreference:stepValue="1" />
+
+       
+       <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="30"
+    		android:dialogMessage="@string/threshold_mid"
+	        android:key="threshold_mid_Int"
+	        android:summary="%1$d"
+	        android:title="@string/threshold_mid"
+	        seekbarpreference:maxValue="50"
+	        seekbarpreference:minValue="16"
+	        seekbarpreference:stepValue="1" />
+
+       <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="10"
+    		android:dialogMessage="@string/threshold_low"
+	        android:key="threshold_low_Int"
+	        android:summary="%1$d"
+	        android:title="@string/threshold_low"
+	        seekbarpreference:maxValue="15"
+	        seekbarpreference:minValue="1"
+	        seekbarpreference:stepValue="1" />
+       
+       
+    </PreferenceCategory>>
+        
+    <PreferenceCategory android:title="@string/category_battery_background_options">
+        
+	        <!-- alphaSlider="true" -->
+	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+	        android:key="background_color"
+	        android:title="@string/color" 
+	        android:summary="Battery-Background --> Color"
+	        android:defaultValue="@integer/COLOR_DARKGRAY"
+	        />
+
+	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="128"
+	        android:dialogMessage="Battery-Background --> Opacity"
+	        android:key="background_opacityInt"
+	        android:summary="%1$d"
+	        android:title="@string/opacity"
+	        seekbarpreference:maxValue="255"
+	        seekbarpreference:minValue="0"
+	        seekbarpreference:stepValue="1" />
+	    
+	</PreferenceCategory>>
+
+
+</PreferenceScreen>

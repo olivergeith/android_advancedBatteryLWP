@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="Theme.BatteryLWP" parent="@android:style/Theme.Holo.Wallpaper">
+    	<item name="android:windowBackground">@color/COLOR_BLACK_TRANSPARENT_128</item>
+    </style>
+    
+ 	
+</resources>

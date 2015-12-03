@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  	
+    <PreferenceCategory android:title="@string/category_custom_background">
+	    <CheckBoxPreference 
+	  	    android:key="customBackground"
+	    	android:title="@string/enable_custom_background"
+	    	android:defaultValue="true"
+	    	/>
+	  	
+	    <Preference
+	        android:key="backgroundPicker"
+	        android:summary="@string/choose_background_summary"
+	        android:title="@string/choose_background"
+	        android:dependency="customBackground"
+	        />
+
+	    <CheckBoxPreference 
+	  	    android:key="keepAspectRatio"
+	    	android:title="@string/keepAspectRatio"
+	        android:summary="@string/keepAspectRatio_summary"
+	    	android:defaultValue="true"
+	        android:dependency="customBackground"
+	    	/>
+	    	    
+	</PreferenceCategory>
+    
+    <PreferenceCategory android:title="@string/category_colored_background">
+        <CheckBoxPreference 
+            android:key="gradientBackground"
+            android:title="@string/enable_gradient_background"
+            android:defaultValue="false"
+            />
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+	        android:key="color_plain_bgrnd"
+	        android:title="@string/color" 
+	        android:summary="Use plain color instad of Image"
+	        android:defaultValue="@integer/COLOR_BLACK"
+	        />
+	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+	        android:key="color2_plain_bgrnd"
+	        android:title="@string/color" 
+	        android:summary="Second Color for gradient Background"
+	        android:defaultValue="@integer/COLOR_WHITE"
+	        android:dependency="gradientBackground"
+	        />
+    </PreferenceCategory>
+</PreferenceScreen> 

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:stylelistpreference="http://schemas.android.com/apk/res/de.geithonline.abattlwp"
+     xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
+ 
+    <PreferenceCategory android:title="Battery Style"/>
+    
+        <de.geithonline.abattlwp.stylelistpreference.StyleListPreference
+	        android:key="batt_style"
+	        android:defaultValue="ClockV3"
+	        android:title="@string/style" 
+	        android:summary="@string/style_summary" 
+	        android:dialogTitle="Battery Style"
+	        />
+        
+        
+    <PreferenceCategory android:title="Pointer Options"/>
+        
+        <CheckBoxPreference 
+            android:key="show_zeiger"
+            android:title="@string/show_zeiger"
+            android:defaultValue="true"
+            />
+        
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            android:key="color_zeiger"
+            android:title="@string/color_zeiger" 
+            android:defaultValue="@integer/COLOR_WHITE"
+            />
+
+     <PreferenceCategory android:title="Scale Options"/>
+        <CheckBoxPreference 
+            android:key="glowScala"
+            android:title="@string/glowScala"
+            android:defaultValue="true"
+            android:dependency=""
+            />
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            android:key="glowScalaColor"
+            android:title="@string/glowScalaColor" 
+            android:defaultValue="@integer/COLOR_WHITE"
+            android:dependency="glowScala"
+            />
+        
+        
+    <PreferenceCategory android:title="Level-Bar Options"/>
+    <PreferenceCategory android:title="@string/premiumOnly"/>
+    <ListPreference
+	        android:defaultValue="Normal"
+	        android:title="@string/levelStyles" 
+	        android:dialogTitle="@string/levelStyles"
+	        android:entries="@array/levelStyles"
+	        android:entryValues="@array/levelStyles"
+	        android:key="levelStyles"
+	        />
+        <ListPreference
+	        android:defaultValue="1"
+	        android:title="@string/levelMode" 
+	        android:dialogTitle="@string/levelMode"
+	        android:entries="@array/levelMode"
+	        android:entryValues="@array/levelMode"
+	        android:key="levelMode"
+	        />
+
+        <CheckBoxPreference 
+            android:key="showVoltmeter"
+            android:title="@string/showVoltmeter"
+            android:defaultValue="false"
+            />
+
+        <CheckBoxPreference 
+            android:key="showThermometer"
+            android:title="@string/showThermometer"
+            android:defaultValue="false"
+            />
+        
+    <PreferenceCategory android:title="Misc Options"/>
+        <CheckBoxPreference 
+            android:key="showExtraLevelBars"
+            android:title="@string/showExtraLevelBars"
+            android:defaultValue="false"
+            />
+    	<CheckBoxPreference 
+            android:key="show_rand"
+            android:title="@string/show_rand"
+            android:defaultValue="true"
+            />
+        
+        
+        
+</PreferenceScreen>

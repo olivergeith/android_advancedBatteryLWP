@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  	
+    <PreferenceCategory android:title="@string/category_custom_background">
+	  	
+	    <Preference
+	        android:key="backgroundPicker"
+	        android:summary="@string/choose_background_summary"
+	        android:title="@string/choose_background"
+	        android:dependency="customBackground"
+	        />
+
+	    <CheckBoxPreference 
+	  	    android:key="keepAspectRatio"
+	    	android:title="@string/keepAspectRatio"
+	        android:summary="@string/keepAspectRatio_summary"
+	    	android:defaultValue="true"
+	        android:dependency="customBackground"
+	    	/>
+	    	    
+	</PreferenceCategory>
+</PreferenceScreen> 

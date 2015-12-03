@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:stylelistpreference="http://schemas.android.com/apk/res/de.geithonline.abattlwp"
+     xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
+   
+    <PreferenceCategory 
+        android:title="@string/category_size"
+        android:summary="@string/category_size_summary">
+        
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="75"
+	        android:dialogMessage="@string/resizePortrait"
+	        android:key="resizePortraitInt"
+	        android:summary="%1$d percent"
+	        android:title="@string/resizePortrait"
+	        seekbarpreference:maxValue="100"
+	        seekbarpreference:minValue="25"
+	        seekbarpreference:stepValue="1" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="75"
+	        android:dialogMessage="@string/resizeLandscape"
+	        android:key="resizeLandscapeInt"
+	        android:summary="%1$d percent"
+	        android:title="@string/resizeLandscape"
+	        seekbarpreference:maxValue="100"
+	        seekbarpreference:minValue="25"
+	        seekbarpreference:stepValue="1" />
+        
+        <CheckBoxPreference 
+            android:key="centerBattery"
+            android:title="@string/centerBattery"
+            android:summary="@string/centerBattery_summary"
+            android:defaultValue="true"
+            android:disableDependentsState="true"
+        	/>
+        
+        <EditTextPreference
+		    android:key="vertical_position"
+    		android:defaultValue="0"
+		    android:title="@string/vertical_position" 
+    		android:dialogTitle="@string/vertical_position"
+		    android:inputType="number"
+		    android:summary="@string/vertical_position_summary"
+		    android:dependency="centerBattery"
+         	/>
+        <EditTextPreference
+		    android:key="vertical_position_landscape"
+    		android:defaultValue="0"
+		    android:title="@string/vertical_position_landscape" 
+    		android:dialogTitle="@string/vertical_position_landscape"
+		    android:inputType="number"
+		    android:summary="@string/vertical_position_landscape_summary"
+		    android:dependency="centerBattery"
+         	/>
+        
+    </PreferenceCategory>
+        
+</PreferenceScreen>

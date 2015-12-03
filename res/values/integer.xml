@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<integer name="COLOR_BLACK">0xff000000</integer>
+	<integer name="COLOR_GREEN">0xff00ff00</integer>
+	<integer name="COLOR_RED">0xffff0000</integer>
+	<integer name="COLOR_GREEN_SAMSUNG">0xff8ecd00</integer>
+	<integer name="COLOR_BLUE_AOKP">0xff2787ad</integer>
+	<integer name="COLOR_BLUE_AOKP_LIGHT">0xff33b5e5</integer>
+	<integer name="COLOR_DARKGRAY">0xff404040</integer>
+	<integer name="COLOR_ORANGE">0xffffc800</integer>
+	<integer name="COLOR_WHITE">0xffffffff</integer>
+</resources>

@@ -100,6 +100,11 @@ public class StyleListPreference extends ListPreference {
 		}
 
 		iconListPreferenceAdapter = new IconListPreferenceScreenAdapter(mContext);
+		builder.setIcon(R.drawable.icon);
+		// final ImageView title = new ImageView(builder.getContext());
+		// title.setBackgroundResource(R.drawable.choosebatterystyle);
+		// title.setScaleType(ScaleType.CENTER_CROP);
+		// builder.setCustomTitle(title);
 		builder.setSingleChoiceItems(iconListPreferenceAdapter, selectedEntry, null);
 	}
 
@@ -122,7 +127,12 @@ public class StyleListPreference extends ListPreference {
 
 				text = (CheckedTextView) row.findViewById(R.id.image_list_view_row_text_view);
 				text.setText(entries[position]);
-				text.setChecked(selectedEntry == position);
+				if (selectedEntry == position) {
+					text.setBackgroundResource(R.color.accent);
+					text.setChecked(selectedEntry == position);
+				} else {
+					text.setBackgroundResource(R.color.primary);
+				}
 				// in
 				final Bitmap b = DrawerManager.getIconForDrawer(text.getText().toString(), Settings.getIconSize());
 				if (b != null) {
@@ -149,7 +159,7 @@ public class StyleListPreference extends ListPreference {
 			CustomHolder holder = null;
 			final int p = position;
 			if (row == null) {
-				row = mInflater.inflate(R.layout.style_list_preference_row, parent, false);
+				row = mInflater.inflate(R.layout.style_list_preference_row_material, parent, false);
 			}
 			holder = new CustomHolder(row, position);
 

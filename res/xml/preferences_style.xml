@@ -7,7 +7,7 @@
 
     <de.geithonline.abattlwp.stylelistpreference.StyleListPreference
         android:defaultValue="ClockV3"
-        android:dialogTitle="Battery Style"
+        android:dialogTitle="Choose Battery Style"
         android:key="batt_style"
         android:summary="@string/style_summary"
         android:title="@string/style" />

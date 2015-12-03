@@ -474,7 +474,7 @@ public class Settings {
 			prefs.edit().putInt("color_zeiger", Color.WHITE).commit();
 			prefs.edit().putBoolean("show_status", false).commit();
 		}
-		iconSize = Math.round(getDisplayWidth(context) * 0.15f);
+		iconSize = Math.round(getDisplayWidth(context) * 0.5f);
 	}
 
 	public static int getIconSize() {

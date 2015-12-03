@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:outlineProvider="paddedBounds" 
+	 >
+
+   <ImageView
+       android:id="@+id/image"
+       android:layout_width="match_parent"
+       android:layout_height="150dp"
+       android:layout_gravity="center"
+       android:layout_margin="8dp"
+       android:background="@color/primary_dark"
+       android:scaleType="center" />
+
+    <CheckedTextView
+        android:id="@+id/image_list_view_row_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="4dp"
+        android:background="@color/primary"
+        android:gravity="right"
+        android:paddingRight="8dp"
+        android:shadowColor="@color/super_dark"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="20"
+        android:text="TextView"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
+</RelativeLayout>

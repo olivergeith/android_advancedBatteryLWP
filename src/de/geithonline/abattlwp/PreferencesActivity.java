@@ -50,17 +50,16 @@ public class PreferencesActivity extends PreferenceActivity {
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
-			// Respond to the action bar's Up/Home button
-			case android.R.id.home:
-				finish();
-				return true;
+		// Respond to the action bar's Up/Home button
+		case android.R.id.home:
+			finish();
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
-	public void onRequestPermissionsResult(final int requestCode, final String permissions[],
-			final int[] grantResults) {
+	public void onRequestPermissionsResult(final int requestCode, final String permissions[], final int[] grantResults) {
 		permissionRequester.onRequestPermissionsResult(requestCode, permissions, grantResults);
 	}
 
@@ -79,6 +78,7 @@ public class PreferencesActivity extends PreferenceActivity {
 		// A button to set us as Wallpaper
 		buttonSetWP = new Button(this);
 		buttonSetWP.setText("Set Wallpaper");
+		buttonSetWP.setBackgroundResource(R.color.primary);
 		buttonSetWP.setOnClickListener(new OnClickListener() {
 
 			@Override

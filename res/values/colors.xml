@@ -6,14 +6,35 @@
 	<color name="COLOR_BLACK_TRANSPARENT_128">#80000000</color>
 	<color name="COLOR_BLACK_NOTTRANSPARENT">#FF000000</color>
 
-	<color name="window_bg_128">#80006064</color>
+	<color name="window_bg">#1A262B</color>
+	<color name="primary">#005885</color>
+    <color name="primary_dark">#004466</color>
+    <color name="dark">#002C42</color>
+    <color name="super_dark">#1A262B</color>
+    <color name="accent">#00AAFF</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#AADCEDC8</color>
+	
+
+<!--
+	 
+	<color name="window_bg_128">#80002021</color>
 	<color name="primary">#00BCD4</color>
     <color name="primary_dark">#0097A7</color>
     <color name="dark">#003032</color>
+    <color name="super_dark">#001516</color>
     <color name="accent">#00BCD4</color>
-    <color name="text_primary">#E0F7FA</color>
-    <color name="text_secondary">#B2EBF2</color>
-	
-	
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#FFFFFF</color>
+    
+	<color name="window_bg_128">#80002021</color>
+	<color name="primary">#8BC34A</color>
+    <color name="primary_dark">#558B2F</color>
+    <color name="dark">#33691E</color>
+    <color name="super_dark">#19360E</color>
+    <color name="accent">#4FE615</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#AADCEDC8</color>
+	-->
 		
 </resources>

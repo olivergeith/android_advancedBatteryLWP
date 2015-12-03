@@ -28,7 +28,7 @@
             android:defaultValue="@integer/COLOR_WHITE"
             />
 
-     <PreferenceCategory android:title="Scale Options"/>
+     <PreferenceScreen android:title="Scale Options">
         <CheckBoxPreference 
             android:key="glowScala"
             android:title="@string/glowScala"
@@ -42,8 +42,8 @@
             android:dependency="glowScala"
             />
         
-        
-    <PreferenceCategory android:title="Level-Bar Options"/>
+        </PreferenceScreen>
+    <PreferenceScreen android:title="Level-Bar Options">
     <ListPreference
 	        android:defaultValue="Normal"
 	        android:title="@string/levelStyles" 
@@ -72,7 +72,7 @@
             android:title="@string/showThermometer"
             android:defaultValue="false"
             />
-        
+        </PreferenceScreen>
     <PreferenceCategory android:title="Misc Options"/>
         <CheckBoxPreference 
             android:key="showExtraLevelBars"

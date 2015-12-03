@@ -7,7 +7,6 @@
 	        android:key="backgroundPicker"
 	        android:summary="@string/choose_background_summary"
 	        android:title="@string/choose_background"
-	        android:dependency="customBackground"
 	        />
 
 	    <CheckBoxPreference 
@@ -15,7 +14,6 @@
 	    	android:title="@string/keepAspectRatio"
 	        android:summary="@string/keepAspectRatio_summary"
 	    	android:defaultValue="true"
-	        android:dependency="customBackground"
 	    	/>
 	    	    
 	</PreferenceCategory>

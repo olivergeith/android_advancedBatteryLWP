@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.BatteryManager;
+import android.preference.Preference;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
@@ -44,9 +45,9 @@ public class Settings {
 
 	public static boolean isScaleTransparent() {
 		if (prefs == null) {
-			return true;
+			return false;
 		}
-		return prefs.getBoolean("scale_numbers_transparent", true);
+		return prefs.getBoolean("scale_numbers_transparent", false);
 	}
 
 	public static int getScaleColor() {
@@ -90,7 +91,8 @@ public class Settings {
 				return "Battery: " + (float) battTemperature / 10 + "°C, " + (float) (battVoltage / 10) / 100 + "V";
 			default:
 			case BATT_STATUS_STYLE_TEMP_VOLT_HEALTH:
-				return "Battery: health " + getHealthText(battHealth) + ", " + (float) battTemperature / 10 + "°C, " + (float) (battVoltage / 10) / 100 + "V";
+				return "Battery: health " + getHealthText(battHealth) + ", " + (float) battTemperature / 10 + "°C, "
+						+ (float) (battVoltage / 10) / 100 + "V";
 		}
 	}
 
@@ -541,6 +543,15 @@ public class Settings {
 			return false;
 		}
 		return prefs.getBoolean("showThermometer", false);
+	}
+
+	public static void handlePremium(final Preference preference) {
+		if (Settings.isPremium()) {
+			preference.setSummary("");
+		} else {
+			preference.setSummary(R.string.premiumOnly);
+		}
+		preference.setEnabled(Settings.isPremium());
 	}
 
 }

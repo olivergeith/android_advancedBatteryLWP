@@ -69,10 +69,10 @@ public class StyleListPreference extends ListPreference {
 		return DrawerManager.getDrawerNames();
 	}
 
-	// @Override
-	// public CharSequence[] getEntryValues() {
-	// return DrawerManager.getDrawerNames();
-	// }
+	@Override
+	public CharSequence[] getEntryValues() {
+		return DrawerManager.getDrawerNames();
+	}
 
 	@Override
 	public String getValue() {
@@ -84,9 +84,11 @@ public class StyleListPreference extends ListPreference {
 
 	@Override
 	protected void onPrepareDialogBuilder(final Builder builder) {
-		super.onPrepareDialogBuilder(builder);
-
 		entries = getEntries();
+		// hier befriedigen wir die Super klasse
+		setEntries(entries);
+		setEntryValues(entries);
+		super.onPrepareDialogBuilder(builder);
 
 		// searchinentriested index
 		final String selectedValue = prefs.getString(mKey, "");

@@ -48,7 +48,7 @@
     		android:defaultValue="true"
 		    android:title="@string/scale_numbers_transparent" 
 		    android:summary="@string/scale_numbers_transparent_summary"
-		    android:disableDependentsState="true"
+		    android:disableDependentsState="false"
             />
         
 	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference

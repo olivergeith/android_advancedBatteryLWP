@@ -44,7 +44,6 @@
         
         
     <PreferenceCategory android:title="Level-Bar Options"/>
-    <PreferenceCategory android:title="@string/premiumOnly"/>
     <ListPreference
 	        android:defaultValue="Normal"
 	        android:title="@string/levelStyles" 

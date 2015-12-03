@@ -18,7 +18,6 @@ import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.BitmapHelper;
 import de.geithonline.abattlwp.utils.Toaster;
 import de.geithonline.abattlwp.utils.URIHelper;
-import de.geithonline.abattlwp.R;
 
 /**
  * This fragment shows the preferences for the first header.
@@ -46,8 +45,8 @@ public class BattPreferencesFragment extends PreferenceFragment {
 		});
 
 		// initialize Properties
+		Log.i(this.getClass().getSimpleName(), "Initializing Style -> " + Settings.getStyle());
 		enableSettingsForStyle(Settings.getStyle());
-		enableProFeatures();
 	}
 
 	@Override
@@ -75,7 +74,8 @@ public class BattPreferencesFragment extends PreferenceFragment {
 		Log.i(this.getClass().getSimpleName(), "ImagePath Received via URIHelper! " + filePath);
 
 		// und in die SharedPreferences schreiben
-		final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+		final SharedPreferences sharedPref = PreferenceManager
+				.getDefaultSharedPreferences(getActivity().getApplicationContext());
 
 		if (sharedPref == null) {
 			Log.e(this.getClass().getSimpleName(), "SharedPreferences were null!!");
@@ -92,15 +92,11 @@ public class BattPreferencesFragment extends PreferenceFragment {
 		}
 	}
 
-	private void enableProFeatures() {
-		final Preference levelMode = findPreference("levelMode");
-		levelMode.setEnabled(Settings.isPremium());
-		final Preference levelStyles = findPreference("levelStyles");
-		levelStyles.setEnabled(Settings.isPremium());
-		final Preference showVoltmeter = findPreference("showVoltmeter");
-		showVoltmeter.setEnabled(Settings.isPremium());
-		final Preference showThermometer = findPreference("showThermometer");
-		showThermometer.setEnabled(Settings.isPremium());
+	private void handleProFeatures() {
+		Settings.handlePremium(findPreference("levelMode"));
+		Settings.handlePremium(findPreference("levelStyles"));
+		Settings.handlePremium(findPreference("showVoltmeter"));
+		Settings.handlePremium(findPreference("showThermometer"));
 	}
 
 	private void enableSettingsForStyle(final String style) {
@@ -129,7 +125,8 @@ public class BattPreferencesFragment extends PreferenceFragment {
 		colorZeiger.setEnabled(drawer.supportsPointerColor());
 		levelStyles.setEnabled(drawer.supportsLevelStyle());
 		levelMode.setEnabled(drawer.supportsLevelStyle());
+		stylePref.setSummary(style);
 
-		stylePref.setSummary("Current style: " + style);
+		handleProFeatures();
 	}
 }

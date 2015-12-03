@@ -1,8 +1,10 @@
 package de.geithonline.abattlwp.settings;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import android.graphics.Bitmap;
 import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerAsymetricV1;
@@ -42,7 +44,7 @@ public class DrawerManager {
 	public static IBitmapDrawer getDrawer(final String name) {
 		IBitmapDrawer d = drawer.get(name);
 		if (d == null) {
-			d = drawer.get("ZoopaWideV1");
+			d = drawer.get("ClockV3");
 		}
 		return d;
 	}
@@ -58,7 +60,14 @@ public class DrawerManager {
 	}
 
 	public static String[] getDrawerNames() {
-		final Set<String> keySet = drawer.keySet();
-		return (String[]) keySet.toArray();
+		final List<String> keySet = new ArrayList<String>(drawer.keySet());
+		Collections.sort(keySet);
+		final String[] array = new String[keySet.size()];
+		int i = 0;
+		for (final String string : keySet) {
+			array[i] = string;
+			i++;
+		}
+		return array;
 	}
 }

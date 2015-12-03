@@ -5,5 +5,15 @@
 	<color name="COLOR_BLACK_TRANSPARENT_192">#C0000000</color>
 	<color name="COLOR_BLACK_TRANSPARENT_128">#80000000</color>
 	<color name="COLOR_BLACK_NOTTRANSPARENT">#FF000000</color>
+
+	<color name="window_bg_128">#80006064</color>
+	<color name="primary">#00BCD4</color>
+    <color name="primary_dark">#0097A7</color>
+    <color name="dark">#003032</color>
+    <color name="accent">#00BCD4</color>
+    <color name="text_primary">#E0F7FA</color>
+    <color name="text_secondary">#B2EBF2</color>
 	
+	
+		
 </resources>

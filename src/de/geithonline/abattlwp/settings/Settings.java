@@ -83,16 +83,15 @@ public class Settings {
 
 	public static String getBattStatusCompleteShort() {
 		switch (getStatusStyle()) {
-			case BATT_STATUS_STYLE_VOLT:
-				return "Battery: " + (float) (battVoltage / 10) / 100 + "V";
-			case BATT_STATUS_STYLE_TEMP:
-				return "Battery: " + (float) battTemperature / 10 + "°C";
-			case BATT_STATUS_STYLE_TEMP_VOLT:
-				return "Battery: " + (float) battTemperature / 10 + "°C, " + (float) (battVoltage / 10) / 100 + "V";
-			default:
-			case BATT_STATUS_STYLE_TEMP_VOLT_HEALTH:
-				return "Battery: health " + getHealthText(battHealth) + ", " + (float) battTemperature / 10 + "°C, "
-						+ (float) (battVoltage / 10) / 100 + "V";
+		case BATT_STATUS_STYLE_VOLT:
+			return "Battery: " + (float) (battVoltage / 10) / 100 + "V";
+		case BATT_STATUS_STYLE_TEMP:
+			return "Battery: " + (float) battTemperature / 10 + "°C";
+		case BATT_STATUS_STYLE_TEMP_VOLT:
+			return "Battery: " + (float) battTemperature / 10 + "°C, " + (float) (battVoltage / 10) / 100 + "V";
+		default:
+		case BATT_STATUS_STYLE_TEMP_VOLT_HEALTH:
+			return "Battery: health " + getHealthText(battHealth) + ", " + (float) battTemperature / 10 + "°C, " + (float) (battVoltage / 10) / 100 + "V";
 		}
 	}
 
@@ -128,31 +127,31 @@ public class Settings {
 
 	public static EZMode getLevelMode() {
 		switch (getLevelModeString()) {
-			default:
-			case "1":
-				return EZMode.Einer;
-			case "5":
-				return EZMode.Fuenfer;
-			case "10":
-				return EZMode.Zehner;
+		default:
+		case "1":
+			return EZMode.Einer;
+		case "5":
+			return EZMode.Fuenfer;
+		case "10":
+			return EZMode.Zehner;
 		}
 	}
 
 	public static EZStyle getLevelStyle() {
 		switch (getLevelStyleString()) {
-			default:
-			case "Normal":
-				return EZStyle.sweep;
-			case "Normal (alpha)":
-				return EZStyle.sweep_withAplpah;
-			case "Normal (outline)":
-				return EZStyle.sweep_withOutline;
-			case "Only activ segments":
-				return EZStyle.segmented_onlyactive;
-			case "All segments (outline)":
-				return EZStyle.segmented_all;
-			case "All segments (alpha)":
-				return EZStyle.segmented_all_alpha;
+		default:
+		case "Normal":
+			return EZStyle.sweep;
+		case "Normal (alpha)":
+			return EZStyle.sweep_withAplpah;
+		case "Normal (outline)":
+			return EZStyle.sweep_withOutline;
+		case "Only activ segments":
+			return EZStyle.segmented_onlyactive;
+		case "All segments (outline)":
+			return EZStyle.segmented_all;
+		case "All segments (alpha)":
+			return EZStyle.segmented_all_alpha;
 		}
 	}
 
@@ -162,21 +161,21 @@ public class Settings {
 
 	private static String getHealthText(final int health) {
 		switch (health) {
-			case BatteryManager.BATTERY_HEALTH_GOOD:
-				return "good";
-			case BatteryManager.BATTERY_HEALTH_OVERHEAT:
-				return "overheat";
-			case BatteryManager.BATTERY_HEALTH_DEAD:
-				return "dead";
-			case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE:
-				return "overvoltage";
-			case BatteryManager.BATTERY_HEALTH_COLD:
-				return "cold";
-			case BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE:
-				return "failure";
+		case BatteryManager.BATTERY_HEALTH_GOOD:
+			return "good";
+		case BatteryManager.BATTERY_HEALTH_OVERHEAT:
+			return "overheat";
+		case BatteryManager.BATTERY_HEALTH_DEAD:
+			return "dead";
+		case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE:
+			return "overvoltage";
+		case BatteryManager.BATTERY_HEALTH_COLD:
+			return "cold";
+		case BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE:
+			return "failure";
 
-			default:
-				return "unknown";
+		default:
+			return "unknown";
 		}
 	}
 
@@ -243,9 +242,9 @@ public class Settings {
 			return defVal;
 		}
 		if (isPortrait) {
-			return Integer.valueOf(prefs.getString("vertical_position", "0"));
+			return prefs.getInt("vertical_positionInt", defVal);
 		} else {
-			return Integer.valueOf(prefs.getString("vertical_position_landscape", "0"));
+			return prefs.getInt("vertical_position_landscapeInt", defVal);
 		}
 	}
 

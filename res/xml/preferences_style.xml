@@ -16,12 +16,14 @@
         android:summary="@string/style_summary"
         android:title="@string/style" />
 
-
+    <de.geithonline.android.basics.preferences.IconOnlyPreference android:key="stylePreview" />
+  
     <!-- ##################################################################################### -->
     <!-- ##################################################################################### -->
     <!-- ##################################################################################### -->
     <!-- ##################################################################################### -->
     <PreferenceCategory android:title="Levelbar Design" />
+
     <PreferenceScreen
         android:icon="@drawable/options_pointer"
         android:title="Pointer" >

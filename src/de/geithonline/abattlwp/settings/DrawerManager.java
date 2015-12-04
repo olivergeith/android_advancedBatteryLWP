@@ -59,6 +59,12 @@ public class DrawerManager {
 		return b;
 	}
 
+	public static Bitmap getIconForDrawerForceDrawNew(final String drawerName, final int size, final int level) {
+		final IBitmapDrawer drawer = getDrawer(drawerName);
+		final Bitmap b = drawer.drawIcon(level, size);
+		return b;
+	}
+
 	public static String[] getDrawerNames() {
 		final List<String> keySet = new ArrayList<String>(drawer.keySet());
 		Collections.sort(keySet);

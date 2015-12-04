@@ -3,12 +3,14 @@ package de.geithonline.abattlwp;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -18,20 +20,33 @@ import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.BitmapHelper;
 import de.geithonline.abattlwp.utils.Toaster;
 import de.geithonline.abattlwp.utils.URIHelper;
+import de.geithonline.android.basics.preferences.IconOnlyPreference;
 
 /**
  * This fragment shows the preferences for the first header.
  */
-public class BattPreferencesFragment extends PreferenceFragment {
+public class BattPreferencesFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 	private final int PICK_LOGO = 3;
 	public static final String STYLE_PICKER_KEY = "batt_style";
 	private ListPreference stylePref;
+	private IconOnlyPreference stylePreview;
+	private int level = 66;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_style);
+		// adding an additional imageview
+		stylePreview = (IconOnlyPreference) findPreference("stylePreview");
+		stylePreview.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				redrawPreview();
+
+				return false;
+			}
+		});
 		// initializing Members
 		stylePref = (ListPreference) findPreference(STYLE_PICKER_KEY);
 		// changelistener auf stylepicker
@@ -43,7 +58,10 @@ public class BattPreferencesFragment extends PreferenceFragment {
 				return true;
 			}
 		});
-
+		// register for preference Changes
+		final SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(getActivity().getApplicationContext());
+		prefs.registerOnSharedPreferenceChangeListener(this);
 		// initialize Properties
 		Log.i(this.getClass().getSimpleName(), "Initializing Style -> " + Settings.getStyle());
 		enableSettingsForStyle(Settings.getStyle());
@@ -92,13 +110,24 @@ public class BattPreferencesFragment extends PreferenceFragment {
 		}
 	}
 
-	private void enableSettingsForStyle(final String style) {
-		// Ausgewählte Batterie zeichnen
-		final Bitmap b = DrawerManager.getIconForDrawer(style, Settings.getIconSize());
-		final IBitmapDrawer drawer = DrawerManager.getDrawer(style);
+	private void redrawPreview() {
+		final String style = Settings.getStyle();
+		level++;
+		if (level > 100) {
+			level = 0;
+		}
+		final Bitmap b = DrawerManager.getIconForDrawerForceDrawNew(style, Settings.getIconSize(), level);
 		if (b != null) {
 			stylePref.setIcon(BitmapHelper.bitmapToIcon(b));
+			stylePreview.setImage(b);
 		}
+	}
+
+	private void enableSettingsForStyle(final String style) {
+		// Ausgewählte Batterie zeichnen
+		redrawPreview();
+
+		final IBitmapDrawer drawer = DrawerManager.getDrawer(style);
 		stylePref.setSummary(style);
 		// was supported der style
 		handleAvailability(findPreference("show_zeiger"), drawer.supportsShowPointer());
@@ -139,4 +168,15 @@ public class BattPreferencesFragment extends PreferenceFragment {
 		preference.setEnabled(available);
 	}
 
+	@Override
+	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
+		redrawPreview();
+
+	}
+
+	@Override
+	public void onResume() {
+		// enableSettingsForStyle(Settings.getStyle());
+		super.onResume();
+	}
 }

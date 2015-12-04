@@ -265,7 +265,7 @@ public class Settings {
 		if (prefs == null) {
 			return 50;
 		}
-		final int thr = Integer.valueOf(prefs.getString("animation_delay", "50"));
+		final int thr = prefs.getInt("animation_delayInt", 50);
 		return thr;
 	}
 
@@ -273,7 +273,7 @@ public class Settings {
 		if (prefs == null) {
 			return 2500;
 		}
-		final int thr = Integer.valueOf(prefs.getString("animation_delay_level", "2500"));
+		final int thr = prefs.getInt("animation_delay_levelInt", 2500);
 		return thr;
 	}
 

@@ -34,12 +34,19 @@ public class BattPreferencesFragment extends PreferenceFragment implements OnSha
 		// adding an additional imageview
 		stylePreview = (IconOnlyPreference) findPreference("stylePreview");
 		stylePreview.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			private long lastclick = 0;
 
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
+				final long time = System.currentTimeMillis();
+				final long diff = time - lastclick;
+				lastclick = time;
+				Log.i("Click", "Time was " + diff);
+				if (diff < 150) {
+					Log.i("DoubleClick", "Time was " + diff);
+				}
 				redrawPreview();
-
-				return false;
+				return true;
 			}
 		});
 		// initializing Members
@@ -71,7 +78,7 @@ public class BattPreferencesFragment extends PreferenceFragment implements OnSha
 		if (b != null) {
 			stylePref.setIcon(BitmapHelper.bitmapToIcon(b));
 			stylePreview.setImage(b);
-			stylePreview.setTitle(style);
+			// stylePreview.setTitle("Preview: " + style);
 		}
 	}
 

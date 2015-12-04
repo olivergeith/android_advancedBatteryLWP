@@ -4,10 +4,13 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.RectF;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
-import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
+import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
@@ -20,9 +23,6 @@ import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.RectF;
 
 public class BitmapDrawerClockV4 extends AdvancedBitmapDrawer {
 
@@ -59,6 +59,11 @@ public class BitmapDrawerClockV4 extends AdvancedBitmapDrawer {
 
 	@Override
 	public boolean supportsGlowScala() {
+		return true;
+	}
+
+	@Override
+	public boolean supportsExtraLevelBars() {
 		return true;
 	}
 
@@ -124,30 +129,31 @@ public class BitmapDrawerClockV4 extends AdvancedBitmapDrawer {
 		}
 
 		// Timer
-		final float maxScala = 120f;
-		final float ri = maxRadius * 0.54f;
-		new LevelPart(center, maxRadius * 0.64f, ri, level, -225, maxScala, EZColoring.ColorOf100)//
-				.setSegemteAbstand(1.5f)//
-				.setStrokeWidth(strokeWidth / 3)//
-				.setMode(EZMode.Zehner)//
-				.setStyle(EZStyle.segmented_all)//
-				.draw(bitmapCanvas);
-		new ZeigerPart(center, level, ri, maxRadius * 0.20f, strokeWidth * 1.0f, -225, maxScala, EZMode.Zehner)//
-				.setDropShadow(new DropShadow(1.5f * strokeWidth, 0, 1.5f * strokeWidth, Color.BLACK))//
-				.setZeigerType(ZEIGER_TYP.rect)//
-				.draw(bitmapCanvas);
+		if (Settings.isShowExtraLevelBars()) {
+			final float maxScala = 120f;
+			final float ri = maxRadius * 0.54f;
+			new LevelPart(center, maxRadius * 0.64f, ri, level, -225, maxScala, EZColoring.ColorOf100)//
+					.setSegemteAbstand(1.5f)//
+					.setStrokeWidth(strokeWidth / 3)//
+					.setMode(EZMode.Zehner)//
+					.setStyle(EZStyle.segmented_all)//
+					.draw(bitmapCanvas);
+			new ZeigerPart(center, level, ri, maxRadius * 0.20f, strokeWidth * 1.0f, -225, maxScala, EZMode.Zehner)//
+					.setDropShadow(new DropShadow(1.5f * strokeWidth, 0, 1.5f * strokeWidth, Color.BLACK))//
+					.setZeigerType(ZEIGER_TYP.rect)//
+					.draw(bitmapCanvas);
 
-		new LevelPart(center, maxRadius * 0.64f, ri, level, 45, -maxScala, EZColoring.ColorOf100)//
-				.setSegemteAbstand(1.5f)//
-				.setStrokeWidth(strokeWidth / 3)//
-				.setMode(EZMode.EinerOnly10Segmente)//
-				.setStyle(EZStyle.segmented_all)//
-				.draw(bitmapCanvas);
-		new ZeigerPart(center, level, ri, maxRadius * 0.20f, strokeWidth * 1.0f, 45, -maxScala, EZMode.EinerOnly10Segmente)//
-				.setDropShadow(new DropShadow(1.5f * strokeWidth, 0, 1.5f * strokeWidth, Color.BLACK))//
-				.setZeigerType(ZEIGER_TYP.rect)//
-				.draw(bitmapCanvas);
-
+			new LevelPart(center, maxRadius * 0.64f, ri, level, 45, -maxScala, EZColoring.ColorOf100)//
+					.setSegemteAbstand(1.5f)//
+					.setStrokeWidth(strokeWidth / 3)//
+					.setMode(EZMode.EinerOnly10Segmente)//
+					.setStyle(EZStyle.segmented_all)//
+					.draw(bitmapCanvas);
+			new ZeigerPart(center, level, ri, maxRadius * 0.20f, strokeWidth * 1.0f, 45, -maxScala, EZMode.EinerOnly10Segmente)//
+					.setDropShadow(new DropShadow(1.5f * strokeWidth, 0, 1.5f * strokeWidth, Color.BLACK))//
+					.setZeigerType(ZEIGER_TYP.rect)//
+					.draw(bitmapCanvas);
+		}
 		// Zeiger
 		new ZeigerPart(center, level, maxRadius * 0.78f, maxRadius * 0.20f, strokeWidth * 1.5f, -90, 360, EZMode.Einer)//
 				.setDropShadow(new DropShadow(1.5f * strokeWidth, 0, 1.5f * strokeWidth, Color.BLACK))//

@@ -126,7 +126,7 @@
             android:summary="@string/animation_enable_summary"
             android:title="@string/animation_enable" />
 
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
             android:defaultValue="1"
             android:dependency="animation_enable"
             android:dialogTitle="@string/animation_style"
@@ -136,22 +136,26 @@
             android:summary="@string/animation_style_summary"
             android:title="@string/animation_style" />
 
-        <EditTextPreference
+        <de.geithonline.android.basics.preferences.SeekBarPreference
             android:defaultValue="50"
-            android:dependency="animation_enable"
-            android:dialogTitle="@string/animation_delay"
-            android:inputType="number"
-            android:key="animation_delay"
+            android:dialogMessage="@string/animation_delay"
+            android:key="animation_delayInt"
             android:summary="@string/animation_delay_summary"
-            android:title="@string/animation_delay" />
-        <EditTextPreference
-            android:defaultValue="2500"
+            android:title="@string/animation_delay"
             android:dependency="animation_enable"
-            android:dialogTitle="@string/animation_delay_level"
-            android:inputType="number"
-            android:key="animation_delay_level"
+            seekbarpreference:maxValue="500"
+            seekbarpreference:minValue="50"
+            seekbarpreference:stepValue="50" />
+         <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="2500"
+            android:dialogMessage="@string/animation_delay_level"
+            android:key="animation_delay_levelInt"
             android:summary="@string/animation_delay_level_summary"
-            android:title="@string/animation_delay_level" />
+            android:title="@string/animation_delay_level"
+            android:dependency="animation_enable"
+            seekbarpreference:maxValue="5000"
+            seekbarpreference:minValue="500"
+            seekbarpreference:stepValue="50" />
 
         <PreferenceCategory android:title="Charge Options" />
 
@@ -298,7 +302,7 @@
             android:key="show_status"
             android:title="@string/show_status" />
 
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
             android:defaultValue="0"
             android:dependency="show_status"
             android:dialogTitle="@string/battStatusStyle"

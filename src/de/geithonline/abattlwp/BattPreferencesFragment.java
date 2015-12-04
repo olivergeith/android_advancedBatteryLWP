@@ -92,41 +92,51 @@ public class BattPreferencesFragment extends PreferenceFragment {
 		}
 	}
 
-	private void handleProFeatures() {
-		Settings.handlePremium(findPreference("levelMode"));
-		Settings.handlePremium(findPreference("levelStyles"));
-		Settings.handlePremium(findPreference("showVoltmeter"));
-		Settings.handlePremium(findPreference("showThermometer"));
-	}
-
 	private void enableSettingsForStyle(final String style) {
+		// Ausgewählte Batterie zeichnen
 		final Bitmap b = DrawerManager.getIconForDrawer(style, Settings.getIconSize());
 		final IBitmapDrawer drawer = DrawerManager.getDrawer(style);
 		if (b != null) {
 			stylePref.setIcon(BitmapHelper.bitmapToIcon(b));
 		}
-
-		final Preference zeiger = findPreference("show_zeiger");
-		final Preference levelStyles = findPreference("levelStyles");
-		final Preference levelMode = findPreference("levelMode");
-		final Preference rand = findPreference("show_rand");
-		final Preference colorZeiger = findPreference("color_zeiger");
-		final Preference glowScala = findPreference("glowScala");
-		final Preference showExtraLevelBars = findPreference("showExtraLevelBars");
-		final Preference showVoltmeter = findPreference("showVoltmeter");
-		final Preference showThermometer = findPreference("showThermometer");
-
-		showExtraLevelBars.setEnabled(drawer.supportsExtraLevelBars());
-		showThermometer.setEnabled(drawer.supportsThermometer());
-		showVoltmeter.setEnabled(drawer.supportsVoltmeter());
-		glowScala.setEnabled(drawer.supportsGlowScala());
-		zeiger.setEnabled(drawer.supportsShowPointer());
-		rand.setEnabled(drawer.supportsShowRand());
-		colorZeiger.setEnabled(drawer.supportsPointerColor());
-		levelStyles.setEnabled(drawer.supportsLevelStyle());
-		levelMode.setEnabled(drawer.supportsLevelStyle());
 		stylePref.setSummary(style);
+		// was supported der style
+		handleAvailability(findPreference("show_zeiger"), drawer.supportsShowPointer());
+		handleAvailability(findPreference("color_zeiger"), drawer.supportsPointerColor());
 
-		handleProFeatures();
+		handleAvailability(findPreference("levelStyles"), drawer.supportsLevelStyle());
+		handleAvailability(findPreference("levelMode"), drawer.supportsLevelStyle());
+		handleAvailability(findPreference("showExtraLevelBars"), drawer.supportsExtraLevelBars());
+
+		handleAvailability(findPreference("show_rand"), drawer.supportsShowRand());
+		handleAvailability(findPreference("glowScala"), drawer.supportsGlowScala());
+
+		handleAvailability(findPreference("showVoltmeter"), drawer.supportsVoltmeter());
+		handleAvailability(findPreference("showThermometer"), drawer.supportsThermometer());
+
+		// pro Features
+		handlePremium(findPreference("levelMode"));
+		handlePremium(findPreference("levelStyles"));
+		handlePremium(findPreference("showVoltmeter"));
+		handlePremium(findPreference("showThermometer"));
 	}
+
+	private static void handlePremium(final Preference preference) {
+		if (Settings.isPremium()) {
+			preference.setSummary("");
+		} else {
+			preference.setSummary(R.string.premiumOnly);
+		}
+		preference.setEnabled(Settings.isPremium());
+	}
+
+	private static void handleAvailability(final Preference preference, final boolean available) {
+		if (available) {
+			// Nothing so far ---- preference.setSummary("");
+		} else {
+			preference.setSummary("Not available for this style");
+		}
+		preference.setEnabled(available);
+	}
+
 }

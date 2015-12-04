@@ -6,11 +6,11 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PorterDuff.Mode;
-import de.geithonline.abattlwp.utils.ColorHelper;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import de.geithonline.abattlwp.utils.ColorHelper;
 
 public class PaintProvider {
 
@@ -109,13 +109,14 @@ public class PaintProvider {
 	public static int getGradientColorForLevel(final int level) {
 
 		if (level > Settings.getMidThreshold()) {
-			return ColorHelper.getRadiantColor(Settings.getBattColor(), Settings.getBattColorMid(), level, 100, Settings.getMidThreshold());
+			return ColorHelper.getRadiantColor(Settings.getBattColor(), Settings.getBattColorMid(), level, 100,
+					Settings.getMidThreshold());
 		} else {
 			if (level < Settings.getLowThreshold()) {
 				return Settings.getBattColorLow();
 			} else {
-				return ColorHelper.getRadiantColor(Settings.getBattColorLow(), Settings.getBattColorMid(), level, Settings.getLowThreshold(),
-						Settings.getMidThreshold());
+				return ColorHelper.getRadiantColor(Settings.getBattColorLow(), Settings.getBattColorMid(), level,
+						Settings.getLowThreshold(), Settings.getMidThreshold());
 			}
 		}
 	}
@@ -135,9 +136,10 @@ public class PaintProvider {
 		return getNumberPaint(level, fontSize, Align.LEFT, true, false);
 	}
 
-	public static Paint getNumberPaint(final int level, final float fontSize, final Align align, final boolean bold, final boolean erase) {
+	public static Paint getNumberPaint(final int level, final float fontSize, final Align align, final boolean bold,
+			final boolean erase) {
 		final Paint numberPaint = initNumberPaint();
-		numberPaint.setAlpha(Settings.getOpacity());
+		// TODO numberPaint.setAlpha(Settings.getOpacity());
 		if (Settings.isColoredNumber()) {
 			numberPaint.setColor(getColorForLevel(level));
 		} else {
@@ -166,9 +168,10 @@ public class PaintProvider {
 		return getTextPaint(level, fontSize, Align.RIGHT, true, false);
 	}
 
-	public static Paint getTextPaint(final int level, final float fontSizeArc, final Align align, final boolean bold, final boolean erase) {
+	public static Paint getTextPaint(final int level, final float fontSizeArc, final Align align, final boolean bold,
+			final boolean erase) {
 		final Paint textPaint = initTextPaint();
-		textPaint.setAlpha(Settings.getOpacity());
+		// TODO textPaint.setAlpha(Settings.getOpacity());
 		if (Settings.isColoredNumber()) {
 			textPaint.setColor(getColorForLevel(level));
 		} else {
@@ -202,23 +205,23 @@ public class PaintProvider {
 		final Paint battPaint = initBattPaint();
 		// battPaint.setAlpha(Settings.getOpacity());
 		battPaint.setColor(getColorForLevel(level));
-		battPaint.setAlpha(Settings.getOpacity());
+		// TODO battPaint.setAlpha(Settings.getOpacity());
 		return battPaint;
 	}
 
-	public static Paint getBatteryPaintSourceIn(final int level) {
-		final Paint paint = getBatteryPaint(level);
-		final PorterDuffXfermode xfermode = new PorterDuffXfermode(Mode.SRC_IN);
-		// because of SRC in the alphas of background and overpaint somhow "add"
-		// so the SRC in must be mor opacid then normal
-		int alpha = Settings.getOpacity() + Settings.getBackgroundOpacity();
-		if (alpha > 255) {
-			alpha = 255;
-		}
-		paint.setAlpha(alpha);
-		paint.setXfermode(xfermode);
-		return paint;
-	}
+	// TODO // public static Paint getBatteryPaintSourceIn(final int level) {
+	// final Paint paint = getBatteryPaint(level);
+	// final PorterDuffXfermode xfermode = new PorterDuffXfermode(Mode.SRC_IN);
+	// // because of SRC in the alphas of background and overpaint somhow "add"
+	// // so the SRC in must be mor opacid then normal
+	// int alpha = Settings.getOpacity() + Settings.getBackgroundOpacity();
+	// if (alpha > 255) {
+	// alpha = 255;
+	// }
+	// paint.setAlpha(alpha);
+	// paint.setXfermode(xfermode);
+	// return paint;
+	// }
 
 	public static Paint getZeigerPaint() {
 		final Paint zeigerPaint = initZeigerPaint();

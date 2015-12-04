@@ -12,6 +12,7 @@
         android:summary="@string/style_summary"
         android:title="@string/style" />
 
+    <!-- ##################################################################################### -->
     <PreferenceScreen
         android:icon="@drawable/options_pointer"
         android:title="Pointer Options" >
@@ -25,9 +26,37 @@
             android:key="color_zeiger"
             android:title="@string/color_zeiger" />
     </PreferenceScreen>
+    <!-- ##################################################################################### -->
     <PreferenceScreen
         android:icon="@drawable/options_scala"
         android:title="Scale Options" >
+        <PreferenceCategory android:title="Color of scale" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:disableDependentsState="true"
+            android:key="scale_numbers_transparent"
+            android:summary="@string/scale_numbers_transparent_summary"
+            android:title="@string/scale_numbers_transparent" />
+
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            android:defaultValue="@integer/COLOR_WHITE"
+            android:dependency="scale_numbers_transparent"
+            android:key="scale_color"
+            android:summary="@string/scale_color_summary"
+            android:title="@string/scale_color" />
+
+        <PreferenceCategory android:title="Scale Background" />
+
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            alphaSlider="true"
+            android:defaultValue="@integer/COLOR_DARKGRAY_128"
+            android:key="background_color"
+            android:summary="Battery-Background --> Color"
+            android:title="@string/color" />
+
+        <PreferenceCategory android:title="Scale Glowing" />
+
         <CheckBoxPreference
             android:defaultValue="true"
             android:dependency=""
@@ -40,9 +69,89 @@
             android:key="glowScalaColor"
             android:title="@string/glowScalaColor" />
     </PreferenceScreen>
+    <!-- ##################################################################################### -->
+    <PreferenceScreen
+        android:icon="@drawable/color"
+        android:title="Level-Bar Colors" >
+        <PreferenceCategory android:title="Color - Main" />
+
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            alphaSlider="true"
+            android:defaultValue="@integer/COLOR_WHITE_128"
+            android:key="battery_color"
+            android:title="@string/color" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="gradient_colors"
+            android:summary="@string/gradient_colors_summary"
+            android:title="@string/gradient_colors" />
+
+        <PreferenceCategory android:title="Color - Middle Battery Level" />
+
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            alphaSlider="true"
+            android:defaultValue="@integer/COLOR_ORANGE_128"
+            android:key="battery_color_mid"
+            android:title="Color" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="gradient_colors_mid"
+            android:summary="@string/gradient_colors_summary"
+            android:title="@string/gradient_colors_mid" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="30"
+            android:dialogMessage="@string/threshold_mid"
+            android:key="threshold_mid_Int"
+            android:summary="%1$d"
+            android:title="Threshold"
+            seekbarpreference:maxValue="50"
+            seekbarpreference:minValue="16"
+            seekbarpreference:stepValue="1" />
+
+        <PreferenceCategory android:title="Color - Low Battery Level" />
+
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            alphaSlider="true"
+            android:defaultValue="@integer/COLOR_RED_128"
+            android:key="battery_color_low"
+            android:title="Color" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="10"
+            android:dialogMessage="@string/threshold_low"
+            android:key="threshold_low_Int"
+            android:summary="%1$d"
+            android:title="Threshold"
+            seekbarpreference:maxValue="15"
+            seekbarpreference:minValue="1"
+            seekbarpreference:stepValue="1" />
+
+        <PreferenceCategory android:title="Color - on Charge" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="charge_colors_enable"
+            android:summary="@string/charge_colors_enable_summary"
+            android:title="@string/charge_colors_enable" />
+
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            alphaSlider="true"
+            android:defaultValue="@integer/COLOR_GREEN_SAMSUNG_128"
+            android:dependency="charge_colors_enable"
+            android:key="charge_color"
+            android:summary="Battery --> Color on charge"
+            android:title="@string/charge_color" />
+    </PreferenceScreen>
+    <!-- ##################################################################################### -->
+
     <PreferenceScreen
         android:icon="@drawable/options_level"
         android:title="Level-Bar Options" >
+        <PreferenceCategory android:title="Style" />
+
         <ListPreference
             android:defaultValue="Normal"
             android:dialogTitle="@string/levelStyles"
@@ -58,6 +167,8 @@
             android:key="levelMode"
             android:title="@string/levelMode" />
 
+        <PreferenceCategory android:title="Extra &apos;Levelbars&apos;" />
+
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="showVoltmeter"
@@ -70,6 +181,115 @@
             android:defaultValue="false"
             android:key="showExtraLevelBars"
             android:title="@string/showExtraLevelBars" />
+    </PreferenceScreen>
+    <!-- ##################################################################################### -->
+    <PreferenceScreen
+        android:icon="@drawable/number"
+        android:title="Level-Number Options" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="show_number"
+            android:title="@string/show_number" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="show_number"
+            android:key="colored_numbers"
+            android:summary="@string/colored_numbers_summary"
+            android:title="@string/colored_numbers" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="100"
+            android:dependency="show_number"
+            android:dialogMessage="@string/fontsize"
+            android:key="fontsizeInt"
+            android:summary="%1$d percent"
+            android:title="@string/fontsize"
+            seekbarpreference:maxValue="150"
+            seekbarpreference:minValue="50"
+            seekbarpreference:stepValue="1" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="100"
+            android:dependency="show_number"
+            android:dialogMessage="@string/fontsize100"
+            android:key="fontsize100Int"
+            android:summary="%1$d percent reduction of fontsize when Battery is showing &apos;100&apos;"
+            android:title="@string/fontsize100"
+            seekbarpreference:maxValue="100"
+            seekbarpreference:minValue="50"
+            seekbarpreference:stepValue="1" />
+    </PreferenceScreen>
+    <!-- ##################################################################################### -->
+    <PreferenceScreen
+        android:icon="@drawable/options_level"
+        android:title="Status-Display Options" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="show_status"
+            android:title="@string/show_status" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:dependency="show_status"
+            android:dialogTitle="@string/battStatusStyle"
+            android:entries="@array/battStatusStyle"
+            android:entryValues="@array/battStatusStyleValues"
+            android:key="battStatusStyle"
+            android:summary="@string/battStatusStyle_summary"
+            android:title="@string/battStatusStyle" />
+
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            android:defaultValue="@integer/COLOR_WHITE"
+            android:dependency="show_status"
+            android:key="status_color"
+            android:summary="@string/status_color_summary"
+            android:title="@string/status_color" />
+    </PreferenceScreen>
+    <!-- ##################################################################################### -->
+    <PreferenceScreen
+        android:icon="@drawable/charge"
+        android:title="Charging Options" >
+        <PreferenceCategory android:title="Charge Animation Options" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="animation_enable"
+            android:summary="@string/animation_enable_summary"
+            android:title="@string/animation_enable" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:dependency="animation_enable"
+            android:dialogTitle="@string/animation_style"
+            android:entries="@array/animation_styl"
+            android:entryValues="@array/animation_stylValues"
+            android:key="animationStyle"
+            android:summary="@string/animation_style_summary"
+            android:title="@string/animation_style" />
+
+        <EditTextPreference
+            android:defaultValue="50"
+            android:dependency="animation_enable"
+            android:dialogTitle="@string/animation_delay"
+            android:inputType="number"
+            android:key="animation_delay"
+            android:summary="@string/animation_delay_summary"
+            android:title="@string/animation_delay" />
+        <EditTextPreference
+            android:defaultValue="2500"
+            android:dependency="animation_enable"
+            android:dialogTitle="@string/animation_delay_level"
+            android:inputType="number"
+            android:key="animation_delay_level"
+            android:summary="@string/animation_delay_level_summary"
+            android:title="@string/animation_delay_level" />
+
+        <PreferenceCategory android:title="Charge Options" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="showChargeStatus"
+            android:summary="@string/showChargeStatus_summary"
+            android:title="@string/showChargeStatus" />
     </PreferenceScreen>
 
     <PreferenceCategory android:title="Misc Options" />

@@ -9,4 +9,13 @@
 	<integer name="COLOR_DARKGRAY">0xff404040</integer>
 	<integer name="COLOR_ORANGE">0xffffc800</integer>
 	<integer name="COLOR_WHITE">0xffffffff</integer>
+
+	
+	
+	<integer name="COLOR_GREEN_128">0x8000ff00</integer>
+	<integer name="COLOR_GREEN_SAMSUNG_128">0x808ecd00</integer>
+	<integer name="COLOR_ORANGE_128">0x80ffc800</integer>
+	<integer name="COLOR_RED_128">0x80ff0000</integer>
+	<integer name="COLOR_WHITE_128">0x80ffffff</integer>
+	<integer name="COLOR_DARKGRAY_128">0x80404040</integer>
 </resources>

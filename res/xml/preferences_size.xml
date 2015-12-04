@@ -3,57 +3,56 @@
     xmlns:stylelistpreference="http://schemas.android.com/apk/res/de.geithonline.abattlwp"
     xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
 
-    <PreferenceCategory
-        android:summary="@string/category_size_summary"
-        android:title="@string/category_size" >
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:defaultValue="75"
-            android:dialogMessage="@string/resizePortrait"
-            android:icon="@drawable/portrait"
-            android:key="resizePortraitInt"
-            android:summary="%1$d percent"
-            android:title="@string/resizePortrait"
-            seekbarpreference:maxValue="100"
-            seekbarpreference:minValue="25"
-            seekbarpreference:stepValue="1" />
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:defaultValue="75"
-            android:dialogMessage="@string/resizeLandscape"
-            android:icon="@drawable/landscape"
-            android:key="resizeLandscapeInt"
-            android:summary="%1$d percent"
-            android:title="@string/resizeLandscape"
-            seekbarpreference:maxValue="100"
-            seekbarpreference:minValue="25"
-            seekbarpreference:stepValue="1" />
+    <PreferenceCategory android:title="Battery Size" />
 
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:disableDependentsState="true"
-            android:key="centerBattery"
-            android:summary="@string/centerBattery_summary"
-            android:title="@string/centerBattery" />
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:defaultValue="75"
+        android:dialogMessage="@string/resizePortrait"
+        android:icon="@drawable/portrait"
+        android:key="resizePortraitInt"
+        android:summary="%1$d percent"
+        android:title="@string/resizePortrait"
+        seekbarpreference:maxValue="100"
+        seekbarpreference:minValue="25"
+        seekbarpreference:stepValue="1" />
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:defaultValue="75"
+        android:dialogMessage="@string/resizeLandscape"
+        android:icon="@drawable/landscape"
+        android:key="resizeLandscapeInt"
+        android:summary="%1$d percent"
+        android:title="@string/resizeLandscape"
+        seekbarpreference:maxValue="100"
+        seekbarpreference:minValue="25"
+        seekbarpreference:stepValue="1" />
 
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:defaultValue="0"
-            android:dependency="centerBattery"
-            android:dialogMessage="@string/vertical_position"
-            android:key="vertical_positionInt"
-            android:summary="%1$d pixel"
-            android:title="@string/vertical_position"
-            seekbarpreference:maxValue="1000"
-            seekbarpreference:minValue="0"
-            seekbarpreference:stepValue="1" />
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:defaultValue="0"
-            android:dependency="centerBattery"
-            android:dialogMessage="@string/vertical_position_landscape"
-            android:key="vertical_position_landscapeInt"
-            android:summary="%1$d pixel"
-            android:title="@string/vertical_position_landscape"
-            seekbarpreference:maxValue="1000"
-            seekbarpreference:minValue="0"
-            seekbarpreference:stepValue="1" />
-    </PreferenceCategory>
+    <PreferenceCategory android:title="Position" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:disableDependentsState="true"
+        android:key="centerBattery"
+        android:summary="@string/centerBattery_summary"
+        android:title="@string/centerBattery" />
+
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:defaultValue="0"
+        android:dependency="centerBattery"
+        android:dialogMessage="@string/vertical_position"
+        android:key="vertical_positionInt"
+        android:summary="%1$d pixel"
+        android:title="@string/vertical_position"
+        seekbarpreference:maxValue="1000"
+        seekbarpreference:minValue="0"
+        seekbarpreference:stepValue="1" />
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:defaultValue="0"
+        android:dependency="centerBattery"
+        android:dialogMessage="@string/vertical_position_landscape"
+        android:key="vertical_position_landscapeInt"
+        android:summary="%1$d pixel"
+        android:title="@string/vertical_position_landscape"
+        seekbarpreference:maxValue="1000"
+        seekbarpreference:minValue="0"
+        seekbarpreference:stepValue="1" />
 
 </PreferenceScreen>

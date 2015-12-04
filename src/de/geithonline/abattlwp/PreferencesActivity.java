@@ -40,9 +40,6 @@ public class PreferencesActivity extends PreferenceActivity {
 
 		return AboutFragment.class.getName().equals(fragmentName) //
 				|| BattPreferencesFragment.class.getName().equals(fragmentName) //
-				|| BattColorPreferencesFragment.class.getName().equals(fragmentName) //
-				|| BattNumberPreferencesFragment.class.getName().equals(fragmentName) //
-				|| BattChargingPreferencesFragment.class.getName().equals(fragmentName) //
 				|| BattSizePositionFragment.class.getName().equals(fragmentName) //
 				|| BackgroundPreferencesFragment.class.getName().equals(fragmentName);
 	}
@@ -50,16 +47,17 @@ public class PreferencesActivity extends PreferenceActivity {
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
-		// Respond to the action bar's Up/Home button
-		case android.R.id.home:
-			finish();
-			return true;
+			// Respond to the action bar's Up/Home button
+			case android.R.id.home:
+				finish();
+				return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
-	public void onRequestPermissionsResult(final int requestCode, final String permissions[], final int[] grantResults) {
+	public void onRequestPermissionsResult(final int requestCode, final String permissions[],
+			final int[] grantResults) {
 		permissionRequester.onRequestPermissionsResult(requestCode, permissions, grantResults);
 	}
 

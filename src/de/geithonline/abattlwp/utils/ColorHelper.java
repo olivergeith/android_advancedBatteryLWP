@@ -73,11 +73,12 @@ public class ColorHelper {
 		final int diffpercent = min - level;
 		final float factor = Math.abs((float) diffpercent / (float) diff);
 
-		final int a = Color.alpha(col1);
+		final int diffa = Color.alpha(col1) - Color.alpha(col2);
 		final int diffr = Color.red(col1) - Color.red(col2);
 		final int diffg = Color.green(col1) - Color.green(col2);
 		final int diffb = Color.blue(col1) - Color.blue(col2);
 
+		final int a = Math.round(Color.alpha(col1) - diffa * factor);
 		final int r = Math.round(Color.red(col1) - diffr * factor);
 		final int g = Math.round(Color.green(col1) - diffg * factor);
 		final int b = Math.round(Color.blue(col1) - diffb * factor);

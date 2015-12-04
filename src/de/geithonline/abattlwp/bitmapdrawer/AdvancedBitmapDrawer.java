@@ -7,6 +7,7 @@ import android.graphics.Paint.Align;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import de.geithonline.abattlwp.PermissionRequester;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.enums.BitmapRatio;
 import de.geithonline.abattlwp.settings.PaintProvider;
@@ -130,7 +131,9 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 		// den aktuellen level merken
 		this.level = level;
 		if (Settings.isDebugging()) {
-			BitmapHelper.saveBitmap(bitmap, getClass().getSimpleName(), level);
+			if (PermissionRequester.isReadWritePermission()) {
+				BitmapHelper.saveBitmap(bitmap, getClass().getSimpleName(), level);
+			}
 		}
 		drawOnCanvas(bitmap, canvas);
 	}

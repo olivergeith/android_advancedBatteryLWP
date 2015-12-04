@@ -47,32 +47,37 @@ public class PreferencesActivity extends PreferenceActivity {
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
-			// Respond to the action bar's Up/Home button
-			case android.R.id.home:
-				finish();
-				return true;
+		// Respond to the action bar's Up/Home button
+		case android.R.id.home:
+			finish();
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
-	public void onRequestPermissionsResult(final int requestCode, final String permissions[],
-			final int[] grantResults) {
+	public void onRequestPermissionsResult(final int requestCode, final String permissions[], final int[] grantResults) {
 		permissionRequester.onRequestPermissionsResult(requestCode, permissions, grantResults);
 	}
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		// Setting up Permission requester
 		permissionRequester = new PermissionRequester(this);
 		permissionRequester.requestPermission();
 		// initialize Settings if not already done
 		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		Settings.initPrefs(prefs, getApplicationContext());
+
+		// Homebutton im Action bar
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
+		// Setting up Billing
 		billingManager = new BillingManager(this);
 		final boolean isPremium = billingManager.isPremium();
+
 		// A button to set us as Wallpaper
 		buttonSetWP = new Button(this);
 		buttonSetWP.setText("Set Wallpaper");

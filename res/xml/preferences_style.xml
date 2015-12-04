@@ -16,7 +16,8 @@
         android:summary="@string/style_summary"
         android:title="@string/style" />
 
-    <de.geithonline.android.basics.preferences.IconOnlyPreference android:key="stylePreview" />
+    <de.geithonline.android.basics.preferences.IconOnlyPreference 
+        android:key="stylePreview" />
   
     <!-- ##################################################################################### -->
     <!-- ##################################################################################### -->
@@ -205,7 +206,7 @@
 
     <PreferenceScreen
         android:icon="@drawable/options_scala"
-        android:title="Scale Options" >
+        android:title="Scale" >
         <PreferenceCategory android:title="Color of scale" />
 
         <CheckBoxPreference
@@ -255,7 +256,7 @@
     <!-- ##################################################################################### -->
     <PreferenceScreen
         android:icon="@drawable/number"
-        android:title="Level-Number Options" >
+        android:title="Level-Number" >
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="show_number"
@@ -290,8 +291,8 @@
     </PreferenceScreen>
     <!-- ##################################################################################### -->
     <PreferenceScreen
-        android:icon="@drawable/options_level"
-        android:title="Status-Display Options" >
+        android:icon="@drawable/options_statusdisplay"
+        android:title="Status-Display" >
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="show_status"

@@ -12,6 +12,8 @@ public class PermissionRequester {
 
 	private static final int MY_PERMISSIONS_REQUEST_INT = 99;
 
+	private static boolean readWritePermission = false;
+
 	private final Activity activity;
 
 	public PermissionRequester(final Activity activity) {
@@ -19,15 +21,13 @@ public class PermissionRequester {
 	}
 
 	/**
-	 * Requests the {@link android.Manifest.permission#WRITE_EXTERNAL_STORAGE} permission. If an additional rationale
-	 * should be displayed, the user has to launch the request from a SnackBar that includes additional information.
+	 * Requests the {@link android.Manifest.permission#WRITE_EXTERNAL_STORAGE} permission. If an additional rationale should be displayed, the user has to
+	 * launch the request from a SnackBar that includes additional information.
 	 */
 	public void requestPermission() {
-		if (ContextCompat.checkSelfPermission(activity,
-				Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+		if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 			// Permission has not been granted and must be requested.
-			if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
-					Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+			if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 				// Provide an additional rationale to the user if the permission was not granted
 				// and the user would benefit from additional context for the use of the permission.
 				// Display a SnackBar with a button to request the missing permission.
@@ -58,30 +58,37 @@ public class PermissionRequester {
 	}
 
 	private void requestWritePersission() {
-		ActivityCompat.requestPermissions(activity, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
-				MY_PERMISSIONS_REQUEST_INT);
+		ActivityCompat.requestPermissions(activity, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, MY_PERMISSIONS_REQUEST_INT);
 	}
 
-	public void onRequestPermissionsResult(final int requestCode, final String permissions[],
-			final int[] grantResults) {
+	public void onRequestPermissionsResult(final int requestCode, final String permissions[], final int[] grantResults) {
 		switch (requestCode) {
-			case MY_PERMISSIONS_REQUEST_INT: {
-				// If request is cancelled, the result arrays are empty.
-				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-					onGrantedPermission();
-				} else {
-					onNotGrantedPermission();
-				}
-				break;
+		case MY_PERMISSIONS_REQUEST_INT: {
+			// If request is cancelled, the result arrays are empty.
+			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				onGrantedPermission();
+			} else {
+				onNotGrantedPermission();
 			}
+			break;
+		}
 		}
 	}
 
 	private void onGrantedPermission() {
-		// TODO Auto-generated method stub
+		setReadWritePermission(true);
 	}
 
 	private void onNotGrantedPermission() {
-		// TODO Auto-generated method stub
+		setReadWritePermission(false);
 	}
+
+	private static void setReadWritePermission(final boolean b) {
+		readWritePermission = b;
+	}
+
+	public static boolean isReadWritePermission() {
+		return readWritePermission;
+	}
+
 }

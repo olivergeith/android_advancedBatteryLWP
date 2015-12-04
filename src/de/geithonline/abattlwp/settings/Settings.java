@@ -82,16 +82,15 @@ public class Settings {
 
 	public static String getBattStatusCompleteShort() {
 		switch (getStatusStyle()) {
-			case BATT_STATUS_STYLE_VOLT:
-				return "Battery: " + (float) (battVoltage / 10) / 100 + "V";
-			case BATT_STATUS_STYLE_TEMP:
-				return "Battery: " + (float) battTemperature / 10 + "°C";
-			case BATT_STATUS_STYLE_TEMP_VOLT:
-				return "Battery: " + (float) battTemperature / 10 + "°C, " + (float) (battVoltage / 10) / 100 + "V";
-			default:
-			case BATT_STATUS_STYLE_TEMP_VOLT_HEALTH:
-				return "Battery: health " + getHealthText(battHealth) + ", " + (float) battTemperature / 10 + "°C, "
-						+ (float) (battVoltage / 10) / 100 + "V";
+		case BATT_STATUS_STYLE_VOLT:
+			return "Battery: " + (float) (battVoltage / 10) / 100 + "V";
+		case BATT_STATUS_STYLE_TEMP:
+			return "Battery: " + (float) battTemperature / 10 + "°C";
+		case BATT_STATUS_STYLE_TEMP_VOLT:
+			return "Battery: " + (float) battTemperature / 10 + "°C, " + (float) (battVoltage / 10) / 100 + "V";
+		default:
+		case BATT_STATUS_STYLE_TEMP_VOLT_HEALTH:
+			return "Battery: health " + getHealthText(battHealth) + ", " + (float) battTemperature / 10 + "°C, " + (float) (battVoltage / 10) / 100 + "V";
 		}
 	}
 
@@ -127,31 +126,31 @@ public class Settings {
 
 	public static EZMode getLevelMode() {
 		switch (getLevelModeString()) {
-			default:
-			case "1":
-				return EZMode.Einer;
-			case "5":
-				return EZMode.Fuenfer;
-			case "10":
-				return EZMode.Zehner;
+		default:
+		case "1":
+			return EZMode.Einer;
+		case "5":
+			return EZMode.Fuenfer;
+		case "10":
+			return EZMode.Zehner;
 		}
 	}
 
 	public static EZStyle getLevelStyle() {
 		switch (getLevelStyleString()) {
-			default:
-			case "Normal":
-				return EZStyle.sweep;
-			case "Normal (alpha)":
-				return EZStyle.sweep_withAplpah;
-			case "Normal (outline)":
-				return EZStyle.sweep_withOutline;
-			case "Only activ segments":
-				return EZStyle.segmented_onlyactive;
-			case "All segments (outline)":
-				return EZStyle.segmented_all;
-			case "All segments (alpha)":
-				return EZStyle.segmented_all_alpha;
+		default:
+		case "Normal":
+			return EZStyle.sweep;
+		case "Normal (alpha)":
+			return EZStyle.sweep_withAplpah;
+		case "Normal (outline)":
+			return EZStyle.sweep_withOutline;
+		case "Only activ segments":
+			return EZStyle.segmented_onlyactive;
+		case "All segments (outline)":
+			return EZStyle.segmented_all;
+		case "All segments (alpha)":
+			return EZStyle.segmented_all_alpha;
 		}
 	}
 
@@ -161,21 +160,21 @@ public class Settings {
 
 	private static String getHealthText(final int health) {
 		switch (health) {
-			case BatteryManager.BATTERY_HEALTH_GOOD:
-				return "good";
-			case BatteryManager.BATTERY_HEALTH_OVERHEAT:
-				return "overheat";
-			case BatteryManager.BATTERY_HEALTH_DEAD:
-				return "dead";
-			case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE:
-				return "overvoltage";
-			case BatteryManager.BATTERY_HEALTH_COLD:
-				return "cold";
-			case BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE:
-				return "failure";
+		case BatteryManager.BATTERY_HEALTH_GOOD:
+			return "good";
+		case BatteryManager.BATTERY_HEALTH_OVERHEAT:
+			return "overheat";
+		case BatteryManager.BATTERY_HEALTH_DEAD:
+			return "dead";
+		case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE:
+			return "overvoltage";
+		case BatteryManager.BATTERY_HEALTH_COLD:
+			return "cold";
+		case BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE:
+			return "failure";
 
-			default:
-				return "unknown";
+		default:
+			return "unknown";
 		}
 	}
 
@@ -202,9 +201,9 @@ public class Settings {
 
 	public static int getChargeColor() {
 		if (prefs == null) {
-			return R.integer.COLOR_GREEN_SAMSUNG_128;
+			return R.color.green_128;
 		}
-		final int col = prefs.getInt("charge_color", R.integer.COLOR_GREEN_SAMSUNG_128);
+		final int col = prefs.getInt("charge_color", R.color.green_128);
 		return col;
 	}
 
@@ -366,9 +365,9 @@ public class Settings {
 
 	public static int getBackgroundColor() {
 		if (prefs == null) {
-			return R.integer.COLOR_DARKGRAY;
+			return R.color.primary_128;
 		}
-		final int col = prefs.getInt("background_color", R.integer.COLOR_DARKGRAY_128);
+		final int col = prefs.getInt("background_color", R.color.primary_128);
 		return col;
 	}
 
@@ -452,14 +451,6 @@ public class Settings {
 			Log.i("GEITH", "FirstRun --> initializing the SharedPreferences with some colors...");
 			prefs.edit().putBoolean("firstrun", false).commit();
 			// init colors
-			prefs.edit().putInt("scale_color", Color.WHITE).commit();
-			prefs.edit().putInt("status_color", Color.WHITE).commit();
-			prefs.edit().putInt("charge_color", Color.GREEN).commit();
-			prefs.edit().putInt("battery_color", Color.WHITE).commit();
-			prefs.edit().putInt("background_color", Color.DKGRAY).commit();
-			prefs.edit().putInt("battery_color_mid", Color.YELLOW).commit();
-			prefs.edit().putInt("battery_color_low", Color.RED).commit();
-			prefs.edit().putInt("color_zeiger", Color.WHITE).commit();
 			prefs.edit().putBoolean("show_status", false).commit();
 		}
 		iconSize = Math.round(getDisplayWidth(context) * 0.5f);
@@ -505,9 +496,9 @@ public class Settings {
 
 	public static int getGlowScalaColor() {
 		if (prefs == null) {
-			return R.integer.COLOR_WHITE;
+			return R.color.accent;
 		}
-		final int col = prefs.getInt("glowScalaColor", R.integer.COLOR_WHITE);
+		final int col = prefs.getInt("glowScalaColor", R.color.accent);
 		return col;
 	}
 

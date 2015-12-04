@@ -4,14 +4,14 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
+import android.graphics.PointF;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.enums.BitmapRatio;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.BitmapHelper;
-import android.graphics.PointF;
-import android.graphics.Rect;
-import android.graphics.RectF;
 
 public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	private int displayHeight = 0;
@@ -147,7 +147,12 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 		bitmapCanvas = new Canvas(icon);
 		icon = drawBitmap(level, icon);
 		isDrawIcon = false;
-		drawLevelNumber(level);
+		if (Settings.isShowNumber()) {
+			drawLevelNumber(level);
+		}
+		if (Settings.isShowStatus()) {
+			drawBattStatusText();
+		}
 		return icon;
 	}
 

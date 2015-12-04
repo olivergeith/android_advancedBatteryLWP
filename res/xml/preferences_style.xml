@@ -45,7 +45,7 @@
 
         <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
             alphaSlider="true"
-            android:defaultValue="@integer/COLOR_WHITE_128"
+            android:defaultValue="@color/white_128"
             android:key="battery_color"
             android:title="@string/color" />
 
@@ -59,7 +59,7 @@
 
         <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
             alphaSlider="true"
-            android:defaultValue="@integer/COLOR_ORANGE_128"
+            android:defaultValue="@color/orange_128"
             android:key="battery_color_mid"
             android:title="Color" />
 
@@ -83,7 +83,7 @@
 
         <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
             alphaSlider="true"
-            android:defaultValue="@integer/COLOR_RED_128"
+            android:defaultValue="@color/red_128"
             android:key="battery_color_low"
             android:title="Color" />
 
@@ -107,7 +107,7 @@
 
         <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
             alphaSlider="true"
-            android:defaultValue="@integer/COLOR_GREEN_SAMSUNG_128"
+            android:defaultValue="@color/green_128"
             android:dependency="charge_colors_enable"
             android:key="charge_color"
             android:summary="Battery --> Color on charge"
@@ -226,7 +226,7 @@
 
         <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
             alphaSlider="true"
-            android:defaultValue="@integer/COLOR_DARKGRAY_128"
+            android:defaultValue="@color/primary_128"
             android:key="background_color"
             android:summary="Battery-Background --> Color"
             android:title="@string/color" />
@@ -240,7 +240,7 @@
             android:title="@string/glowScala" />
 
         <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
-            android:defaultValue="@integer/COLOR_WHITE"
+            android:defaultValue="@color/accent"
             android:dependency="glowScala"
             android:key="glowScalaColor"
             android:title="@string/glowScalaColor" />

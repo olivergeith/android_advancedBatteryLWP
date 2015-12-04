@@ -151,11 +151,11 @@ public class LiveWallpaperService extends WallpaperService {
 
 		private int getAnimationResetLevel() {
 			switch (Settings.getAnimationStyle()) {
-				default:
-				case Settings.ANIMATION_STYLE_0_TO_100:
-					return 100;
-				case Settings.ANIMATION_STYLE_0_TO_LEVEL:
-					return level;
+			default:
+			case Settings.ANIMATION_STYLE_0_TO_100:
+				return 100;
+			case Settings.ANIMATION_STYLE_0_TO_LEVEL:
+				return level;
 			}
 		}
 
@@ -217,11 +217,13 @@ public class LiveWallpaperService extends WallpaperService {
 
 			final File bgF = new File(filePath);
 			if (bgF.exists()) {
+				Log.i(this.getClass().getSimpleName(), "Loading CustomBG: " + filePath);
 				// sollen wir ein custom BG laden ?
 				bgInput = BitmapHelper.getCustomImageSampled(filePath, Math.round(cWidth * 1.4f), cHeight);
 			}
 			// if it is null...wenn das angegebene Bild nicht existiert, oder es nicht decodiert werden konnte
 			if (bgInput == null) {
+				Log.i(this.getClass().getSimpleName(), "Loading ResourceBG");
 				bgInput = BitmapFactory.decodeResource(getResources(), R.drawable.background);
 			}
 			// now we should have a BG

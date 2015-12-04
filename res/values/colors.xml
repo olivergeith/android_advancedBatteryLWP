@@ -14,27 +14,12 @@
     <color name="accent">#00AAFF</color>
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#AADCEDC8</color>
-	
-
-<!--
-	 
-	<color name="window_bg_128">#80002021</color>
-	<color name="primary">#00BCD4</color>
-    <color name="primary_dark">#0097A7</color>
-    <color name="dark">#003032</color>
-    <color name="super_dark">#001516</color>
-    <color name="accent">#00BCD4</color>
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#FFFFFF</color>
-    
-	<color name="window_bg_128">#80002021</color>
-	<color name="primary">#8BC34A</color>
-    <color name="primary_dark">#558B2F</color>
-    <color name="dark">#33691E</color>
-    <color name="super_dark">#19360E</color>
-    <color name="accent">#4FE615</color>
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#AADCEDC8</color>
-	-->
-		
+    	
+	<color name="primary_128">#80005885</color>
+	<color name="white_128">#80FFFFFF</color>
+	<color name="orange_128">#80ff7801</color>
+	<color name="red_128">#80ff0101</color>
+	<color name="green_128">#806eff01</color>
+				
+			
 </resources>

@@ -217,12 +217,14 @@ public class LiveWallpaperService extends WallpaperService {
 
 			final File bgF = new File(filePath);
 			// Dürfen wir überhaupt ins Filesystem?
-			if (PermissionRequester.isReadWritePermission()) {
+			if (Settings.isReadWritePermission()) {
 				if (bgF.exists()) {
 					Log.i(this.getClass().getSimpleName(), "Loading CustomBG: " + filePath);
 					// sollen wir ein custom BG laden ?
 					bgInput = BitmapHelper.getCustomImageSampled(filePath, Math.round(cWidth * 1.4f), cHeight);
 				}
+			} else {
+				Log.i(this.getClass().getSimpleName(), "Not loading CustomBG No Permission: ");
 			}
 			// if it is null...wenn das angegebene Bild nicht existiert, oder es nicht decodiert werden konnte
 			if (bgInput == null) {

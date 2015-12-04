@@ -111,7 +111,7 @@ public class BattPreferencesFragment extends PreferenceFragment implements OnSha
 
 	private static void handlePremium(final Preference preference) {
 		if (Settings.isPremium()) {
-			preference.setSummary("");
+			// preference.setSummary("");
 		} else {
 			preference.setSummary(R.string.premiumOnly);
 		}

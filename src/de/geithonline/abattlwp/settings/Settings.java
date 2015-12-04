@@ -523,4 +523,15 @@ public class Settings {
 		return prefs.getBoolean("showThermometer", false);
 	}
 
+	public static void setReadWritePermission(final boolean b) {
+		prefs.edit().putBoolean("readWritePermission", b).commit();
+	}
+
+	public static boolean isReadWritePermission() {
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean("readWritePermission", false);
+	}
+
 }

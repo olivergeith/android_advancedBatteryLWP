@@ -172,14 +172,14 @@
         android:title="Extras" >
         <PreferenceCategory android:title="Style" />
 
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
             android:defaultValue="Normal"
             android:dialogTitle="@string/levelStyles"
             android:entries="@array/levelStyles"
             android:entryValues="@array/levelStyles"
             android:key="levelStyles"
             android:title="@string/levelStyles" />
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
             android:defaultValue="1"
             android:dialogTitle="@string/levelMode"
             android:entries="@array/levelMode"

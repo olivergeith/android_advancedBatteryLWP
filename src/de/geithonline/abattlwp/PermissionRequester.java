@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.Alerter;
 
 public class PermissionRequester {
@@ -84,7 +85,10 @@ public class PermissionRequester {
 	}
 
 	private static void setReadWritePermission(final boolean b) {
+		// Intern merken
 		readWritePermission = b;
+		// Und in den Settings auch nochmal speichern!
+		Settings.setReadWritePermission(b);
 	}
 
 	public static boolean isReadWritePermission() {

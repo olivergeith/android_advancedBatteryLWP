@@ -15,6 +15,7 @@ import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
 
 public class Settings {
 	public static final String LWP_PREFERENCE_FILE = "LWP";
+	public static final String WIDGET_PREFERENCE_FILE = "WIDGET";
 
 	public static SharedPreferences prefs = null;
 	private static String style = "aaa";

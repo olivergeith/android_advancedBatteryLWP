@@ -1,4 +1,4 @@
-package de.geithonline.abattlwp.settings;
+package de.geithonline.abattlwp.settingsnew;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,14 +8,14 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
 import de.geithonline.abattlwp.BackgroundPreferencesFragment;
-import de.geithonline.abattlwp.LiveWallpaperService;
 import de.geithonline.abattlwp.R;
 import de.geithonline.abattlwp.bitmapdrawer.IBitmapDrawer;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
+import de.geithonline.abattlwp.settings.DrawerManager;
 
-public class Settings {
-	public static SharedPreferences prefs = LiveWallpaperService.prefs;
+public class SettingsBatteryOptions {
+	public static SharedPreferences prefs;
 	private static String style = "aaa";
 	private static IBitmapDrawer bitmapDrawer;
 	public static final int ANIMATION_STYLE_0_TO_100 = 1;
@@ -34,23 +34,6 @@ public class Settings {
 	public static final int BATT_STATUS_STYLE_TEMP_VOLT = 1;
 	public static final int BATT_STATUS_STYLE_TEMP = 2;
 	public static final int BATT_STATUS_STYLE_VOLT = 3;
-
-	/**
-	 * Initializes some preferences on first run with defaults
-	 * 
-	 * @param preferences
-	 */
-	public static void initPrefs(final SharedPreferences preferences, final Context context) {
-		Log.i("Settings", "Init Settings-Class");
-		prefs = preferences;
-		if (prefs.getBoolean("firstrun", true)) {
-			Log.i("Settings", "FirstRun --> initializing the SharedPreferences with some colors...");
-			prefs.edit().putBoolean("firstrun", false).commit();
-			// init colors
-			prefs.edit().putBoolean("show_status", false).commit();
-		}
-		iconSize = Math.round(getDisplayWidth(context) * 0.5f);
-	}
 
 	public static boolean isKeepAspectRatio() {
 		if (prefs == null) {
@@ -437,9 +420,9 @@ public class Settings {
 
 	public static String getStyle() {
 		if (prefs == null) {
-			return "ZoopaWideV3";
+			return "ClockV3";
 		}
-		return prefs.getString("batt_style", "ZoopaWideV3");
+		return prefs.getString("batt_style", "ClockV3");
 	}
 
 	// #####################################################################################
@@ -455,6 +438,22 @@ public class Settings {
 		}
 		final String filePath = prefs.getString(BackgroundPreferencesFragment.BACKGROUND_PICKER_KEY, "aaa");
 		return filePath;
+	}
+
+	/**
+	 * Initializes some preferences on first run with defaults
+	 * 
+	 * @param preferences
+	 */
+	public static void initPrefs(final SharedPreferences preferences, final Context context) {
+		prefs = preferences;
+		if (prefs.getBoolean("firstrun", true)) {
+			Log.i("GEITH", "FirstRun --> initializing the SharedPreferences with some colors...");
+			prefs.edit().putBoolean("firstrun", false).commit();
+			// init colors
+			prefs.edit().putBoolean("show_status", false).commit();
+		}
+		iconSize = Math.round(getDisplayWidth(context) * 0.5f);
 	}
 
 	public static int getIconSize() {

@@ -169,7 +169,7 @@
 
     <PreferenceScreen
         android:icon="@drawable/options_level"
-        android:title="Extras" >
+        android:title="Style + Extras" >
         <PreferenceCategory android:title="Style" />
 
         <de.geithonline.android.basics.preferences.CoolListPreference

@@ -63,13 +63,13 @@ public class PreferencesActivity extends PreferenceActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// als erstes !!! initialize Settings if not already done
+		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		Settings.initPrefs(prefs, getApplicationContext());
 
 		// Setting up Permission requester
 		permissionRequester = new PermissionRequester(this);
 		permissionRequester.requestPermission();
-		// initialize Settings if not already done
-		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		Settings.initPrefs(prefs, getApplicationContext());
 
 		// Homebutton im Action bar
 		getActionBar().setDisplayHomeAsUpEnabled(true);

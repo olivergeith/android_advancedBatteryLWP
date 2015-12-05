@@ -29,8 +29,8 @@ public class BattPreferencesFragment extends PreferenceFragment implements OnSha
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		addPreferencesFromResource(R.xml.preferences_style);
+
 		// adding an additional imageview
 		stylePreview = (IconOnlyPreference) findPreference("stylePreview");
 		stylePreview.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -114,8 +114,8 @@ public class BattPreferencesFragment extends PreferenceFragment implements OnSha
 			// preference.setSummary("");
 		} else {
 			preference.setSummary(R.string.premiumOnly);
+			preference.setEnabled(false);
 		}
-		preference.setEnabled(Settings.isPremium());
 	}
 
 	private static void handleAvailability(final Preference preference, final boolean available) {

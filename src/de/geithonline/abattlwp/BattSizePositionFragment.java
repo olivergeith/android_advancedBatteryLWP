@@ -1,13 +1,12 @@
 package de.geithonline.abattlwp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
-import de.geithonline.abattlwp.R;
 
 /**
  * This fragment shows the preferences for the first header.
  */
-public class BattSizePositionFragment extends PreferenceFragment {
+public class BattSizePositionFragment extends MyAbstractPreferenceFragment {
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -19,6 +18,10 @@ public class BattSizePositionFragment extends PreferenceFragment {
 	}
 
 	private void enableProFeatures() {
+	}
+
+	@Override
+	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
 	}
 
 }

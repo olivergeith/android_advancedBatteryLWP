@@ -8,14 +8,15 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
 import de.geithonline.abattlwp.BackgroundPreferencesFragment;
-import de.geithonline.abattlwp.LiveWallpaperService;
 import de.geithonline.abattlwp.R;
 import de.geithonline.abattlwp.bitmapdrawer.IBitmapDrawer;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
 
 public class Settings {
-	public static SharedPreferences prefs = LiveWallpaperService.prefs;
+	public static final String LWP_PREFERENCE_FILE = "LWP";
+
+	public static SharedPreferences prefs = null;
 	private static String style = "aaa";
 	private static IBitmapDrawer bitmapDrawer;
 	public static final int ANIMATION_STYLE_0_TO_100 = 1;
@@ -214,6 +215,10 @@ public class Settings {
 			return false;
 		}
 		return prefs.getBoolean("muimerp", false);
+	}
+
+	public static void saveProStatusToPrefs(final boolean isPre) {
+		prefs.edit().putBoolean("muimerp", isPre).commit();
 	}
 
 	public static int getChargeColor() {
@@ -457,6 +462,12 @@ public class Settings {
 		return filePath;
 	}
 
+	public static void setCustomBackgroundFilePath(final String savefile) {
+		final SharedPreferences.Editor editor = prefs.edit();
+		editor.putString(BackgroundPreferencesFragment.BACKGROUND_PICKER_KEY, savefile);
+		editor.commit();
+	}
+
 	public static int getIconSize() {
 		return iconSize;
 	}
@@ -535,4 +546,16 @@ public class Settings {
 		return prefs.getBoolean("readWritePermission", false);
 	}
 
+	public static void saveAnyString(final String key, final String value) {
+		final SharedPreferences.Editor editor = prefs.edit();
+		editor.putString(key, value);
+		editor.commit();
+	}
+
+	public static String getAnyString(final String key, final String defaultValue) {
+		if (prefs == null) {
+			return defaultValue;
+		}
+		return prefs.getString(key, defaultValue);
+	}
 }

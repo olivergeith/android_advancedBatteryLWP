@@ -3,11 +3,9 @@ package de.geithonline.abattlwp.stylelistpreference;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.preference.ListPreference;
-import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,8 +28,6 @@ public class StyleListPreference extends ListPreference {
 	private final Context mContext;
 	private final LayoutInflater mInflater;
 	private CharSequence[] entries;
-	private final SharedPreferences prefs;
-	private final SharedPreferences.Editor prefsEditor;
 	private final String mKey;
 	private int selectedEntry = -1;
 
@@ -47,8 +43,6 @@ public class StyleListPreference extends ListPreference {
 
 		mInflater = LayoutInflater.from(context);
 		mKey = getKey();
-		prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		prefsEditor = prefs.edit();
 		a.recycle();
 	}
 
@@ -91,7 +85,7 @@ public class StyleListPreference extends ListPreference {
 		super.onPrepareDialogBuilder(builder);
 
 		// searchinentriested index
-		final String selectedValue = prefs.getString(mKey, "");
+		final String selectedValue = Settings.getAnyString(mKey, "");
 		for (int i = 0; i < entries.length; i++) {
 			if (selectedValue.compareTo((String) entries[i]) == 0) {
 				selectedEntry = i;
@@ -173,9 +167,8 @@ public class StyleListPreference extends ListPreference {
 					mDialog.dismiss();
 
 					callChangeListener(entries[p]);
-					prefsEditor.putString(mKey, entries[p].toString());
+					Settings.saveAnyString(mKey, entries[p].toString());
 					selectedEntry = p;
-					prefsEditor.commit();
 				}
 			});
 			return row;

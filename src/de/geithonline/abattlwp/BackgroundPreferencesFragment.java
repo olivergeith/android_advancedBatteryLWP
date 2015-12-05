@@ -8,8 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.BitmapHelper;
@@ -19,7 +17,7 @@ import de.geithonline.abattlwp.utils.URIHelper;
 /**
  * This fragment shows the preferences for the second header.
  */
-public class BackgroundPreferencesFragment extends PreferenceFragment {
+public class BackgroundPreferencesFragment extends MyAbstractPreferenceFragment {
 	private final int PICK_IMAGE = 1;
 	public static final String BACKGROUND_PICKER_KEY = "backgroundPicker";
 	private Preference backgroundPicker;
@@ -75,18 +73,8 @@ public class BackgroundPreferencesFragment extends PreferenceFragment {
 		Log.i(this.getClass().getSimpleName(), "ImagePath Received via URIHelper! " + filePath);
 
 		// und in die SharedPreferences schreiben
-		final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-
-		if (sharedPref == null) {
-			Log.e(this.getClass().getSimpleName(), "SharedPreferences were null!!");
-			Toaster.showErrorToast(getActivity(), "Could not save imagepath " + filePath
-					+ "Sharedfreferences not found!!! (null). Make sure you set the Wallpaper at least once before editing preferences of it (SystemSettings->Display->Wallpaper->LiveWallpaper->Choose BatteryLWP and set it!");
-			return;
-		}
-		final SharedPreferences.Editor editor = sharedPref.edit();
-		editor.putString(BACKGROUND_PICKER_KEY, filePath);
+		Settings.setCustomBackgroundFilePath(filePath);
 		Log.i(this.getClass().getSimpleName(), "ImagePath written to preferences: " + filePath);
-		editor.commit();
 		if (Settings.isDebuggingMessages()) {
 			Toaster.showInfoToast(getActivity(), "SetBG to " + filePath);
 		}
@@ -104,8 +92,14 @@ public class BackgroundPreferencesFragment extends PreferenceFragment {
 			backgroundPicker.setIcon(dr);
 		} else {
 			backgroundPicker.setSummary(R.string.choose_background_summary);
-			backgroundPicker.setIcon(R.drawable.icon); // TODO anderes Icon
+			backgroundPicker.setIcon(R.drawable.icon);
 		}
+	}
+
+	@Override
+	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

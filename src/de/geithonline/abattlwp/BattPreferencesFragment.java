@@ -1,15 +1,12 @@
 package de.geithonline.abattlwp;
 
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import de.geithonline.abattlwp.bitmapdrawer.IBitmapDrawer;
 import de.geithonline.abattlwp.settings.DrawerManager;
@@ -20,15 +17,17 @@ import de.geithonline.android.basics.preferences.IconOnlyPreference;
 /**
  * This fragment shows the preferences for the first header.
  */
-public class BattPreferencesFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 	public static final String STYLE_PICKER_KEY = "batt_style";
 	private ListPreference stylePref;
 	private IconOnlyPreference stylePreview;
 	private int level = 66;
+	// private SharedPreferences prefs;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		addPreferencesFromResource(R.xml.preferences_style);
 
 		// adding an additional imageview
@@ -60,9 +59,6 @@ public class BattPreferencesFragment extends PreferenceFragment implements OnSha
 				return true;
 			}
 		});
-		// register for preference Changes
-		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-		prefs.registerOnSharedPreferenceChangeListener(this);
 		// initialize Properties
 		Log.i(this.getClass().getSimpleName(), "Initializing Style -> " + Settings.getStyle());
 		enableSettingsForStyle(Settings.getStyle());
@@ -130,12 +126,5 @@ public class BattPreferencesFragment extends PreferenceFragment implements OnSha
 	@Override
 	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
 		redrawPreview();
-
-	}
-
-	@Override
-	public void onResume() {
-		// enableSettingsForStyle(Settings.getStyle());
-		super.onResume();
 	}
 }

@@ -13,7 +13,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.BatteryManager;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.service.wallpaper.WallpaperService;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -29,7 +28,7 @@ public class LiveWallpaperService extends WallpaperService {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		prefs = getSharedPreferences(Settings.LWP_PREFERENCE_FILE, MODE_PRIVATE);
 		Settings.initPrefs(prefs, getApplicationContext());
 	}
 

@@ -13,7 +13,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -26,7 +25,7 @@ import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.IntendHelper;
 import de.geithonline.abattlwp.utils.Toaster;
 
-public class PreferencesActivity extends PreferenceActivity {
+public class LiveWallpaperPreferencesActivity extends PreferenceActivity {
 
 	private BillingManager billingManager;
 	private static final int REQUEST = 999;
@@ -63,16 +62,19 @@ public class PreferencesActivity extends PreferenceActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// Homebutton im Action bar
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+
+		// Unsere eigenes PreferenceFile für den LWPService
+		prefs = getSharedPreferences(Settings.LWP_PREFERENCE_FILE, MODE_PRIVATE);
 		// als erstes !!! initialize Settings if not already done
-		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		Settings.initPrefs(prefs, getApplicationContext());
+
+		// getPreferenceManager().setSharedPreferencesName("preference_file_name");
 
 		// Setting up Permission requester
 		permissionRequester = new PermissionRequester(this);
 		permissionRequester.requestPermission();
-
-		// Homebutton im Action bar
-		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// Setting up Billing
 		billingManager = new BillingManager(this);

@@ -9,21 +9,19 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.BitmapHelper;
 import de.geithonline.abattlwp.utils.URIHelper;
-import de.geithonline.abattlwp.R;
 
 public class ImageReceiverActivity extends Activity {
 
@@ -120,11 +118,8 @@ public class ImageReceiverActivity extends Activity {
 	 * @param savefile
 	 */
 	private void setBackground(final String savefile) {
-		final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		final SharedPreferences.Editor editor = sharedPref.edit();
-		editor.putString(BackgroundPreferencesFragment.BACKGROUND_PICKER_KEY, savefile);
+		Settings.setCustomBackgroundFilePath(savefile);
 		Log.i(this.getClass().getSimpleName(), "ImagePath written to preferences: " + savefile);
-		editor.commit();
 		// Triggering the LiveWallpaperService for the change!
 		LiveWallpaperService.filePath = "aaa";
 	}
@@ -137,8 +132,8 @@ public class ImageReceiverActivity extends Activity {
 	 * @return
 	 */
 	private String copyfileToMyData(final String source, final String filename) {
-		final String destinationDir = Environment.getExternalStorageDirectory().getPath() + File.separator + "data"
-				+ File.separator + "BatteryLWP" + File.separator;
+		final String destinationDir = Environment.getExternalStorageDirectory().getPath() + File.separator + "data" + File.separator + "BatteryLWP"
+				+ File.separator;
 		final File dir = new File(destinationDir);
 		dir.mkdirs();
 		final String destinationFilename = destinationDir + filename;

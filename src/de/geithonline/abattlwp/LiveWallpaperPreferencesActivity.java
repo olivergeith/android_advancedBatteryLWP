@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -66,8 +67,8 @@ public class LiveWallpaperPreferencesActivity extends PreferenceActivity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// Unsere eigenes PreferenceFile für den LWPService
-		prefs = getSharedPreferences(Settings.LWP_PREFERENCE_FILE, MODE_PRIVATE);
-		// als erstes !!! initialize Settings if not already done
+		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		// prefs = getSharedPreferences(Settings.LWP_PREFERENCE_FILE, MODE_PRIVATE);
 		Settings.initPrefs(prefs, getApplicationContext());
 
 		// getPreferenceManager().setSharedPreferencesName("preference_file_name");

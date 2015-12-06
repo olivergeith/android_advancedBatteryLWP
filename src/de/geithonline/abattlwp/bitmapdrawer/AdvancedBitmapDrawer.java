@@ -153,6 +153,9 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 		if (Settings.isShowNumber()) {
 			drawLevelNumber(level);
 		}
+		if (Settings.isCharging && Settings.isShowChargeState()) {
+			drawChargeStatusText(level);
+		}
 		if (Settings.isShowStatus()) {
 			drawBattStatusText();
 		}

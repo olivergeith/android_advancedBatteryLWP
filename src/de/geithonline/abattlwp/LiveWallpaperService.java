@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.BatteryManager;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.service.wallpaper.WallpaperService;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -28,7 +29,8 @@ public class LiveWallpaperService extends WallpaperService {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		prefs = getSharedPreferences(Settings.LWP_PREFERENCE_FILE, MODE_PRIVATE);
+		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		// prefs = getSharedPreferences(Settings.LWP_PREFERENCE_FILE, MODE_PRIVATE);
 		Settings.initPrefs(prefs, getApplicationContext());
 	}
 
@@ -131,7 +133,7 @@ public class LiveWallpaperService extends WallpaperService {
 						}
 
 						i += 1;
-						if (i > getAnimationResetLevel()) {
+						if (i > Settings.getAnimationResetLevel(level)) {
 							i = 0;
 						}
 						handler.removeCallbacks(drawRunner);
@@ -146,16 +148,6 @@ public class LiveWallpaperService extends WallpaperService {
 				}
 			}
 			forcedraw = false;
-		}
-
-		private int getAnimationResetLevel() {
-			switch (Settings.getAnimationStyle()) {
-			default:
-			case Settings.ANIMATION_STYLE_0_TO_100:
-				return 100;
-			case Settings.ANIMATION_STYLE_0_TO_LEVEL:
-				return level;
-			}
 		}
 
 		/**

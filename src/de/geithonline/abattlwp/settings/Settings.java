@@ -14,8 +14,8 @@ import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
 
 public class Settings {
-	public static final String LWP_PREFERENCE_FILE = "LWP";
-	public static final String WIDGET_PREFERENCE_FILE = "WIDGET";
+	// public static final String LWP_PREFERENCE_FILE = "LWP";
+	// public static final String WIDGET_PREFERENCE_FILE = "WIDGET";
 
 	public static SharedPreferences prefs = null;
 	private static String style = "aaa";
@@ -298,6 +298,16 @@ public class Settings {
 		}
 		final int thr = prefs.getInt("animation_delay_levelInt", 2500);
 		return thr;
+	}
+
+	public static int getAnimationResetLevel(final int level) {
+		switch (Settings.getAnimationStyle()) {
+		default:
+		case Settings.ANIMATION_STYLE_0_TO_100:
+			return 100;
+		case Settings.ANIMATION_STYLE_0_TO_LEVEL:
+			return level;
+		}
 	}
 
 	public static boolean isDebuggingMessages() {

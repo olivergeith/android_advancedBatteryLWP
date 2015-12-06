@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.View;
-import de.geithonline.abattlwp.settings.Settings;
 
 /**
  * Diese Klasse sorgt dafüür, dass die Fragmente die richtigen Preferences benutzen... Dazu schaut diese Klasse in die Zugehörige Activity und entscheidet dann
@@ -26,13 +25,13 @@ public abstract class MyAbstractPreferenceFragment extends PreferenceFragment im
 		 * Hier schauen wir, wer die Parent Activity ist... und dann entscheiden wir welches PreferenceFile wir benutzen So können wir dies später erweitern für
 		 * ein Widget! Und das Widget benutz dann andere Preferencen bzw eine andere PreferenceActivity!
 		 */
-		if (getActivity() instanceof LiveWallpaperPreferencesActivity) {
-			getPreferenceManager().setSharedPreferencesName(Settings.LWP_PREFERENCE_FILE);
-			prefs = getPreferenceManager().getSharedPreferences();
-		} else {
-			// default Preferences
-			prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-		}
+		// if (getActivity() instanceof LiveWallpaperPreferencesActivity) {
+		// getPreferenceManager().setSharedPreferencesName(Settings.LWP_PREFERENCE_FILE);
+		// prefs = getPreferenceManager().getSharedPreferences();
+		// } else {
+		// // default Preferences
+		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+		// }
 
 	}
 

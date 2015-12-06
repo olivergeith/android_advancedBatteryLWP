@@ -75,6 +75,7 @@
             android:label="ABatteryLWP-Widget" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="de.geithonline.abattlwp.action.UPDATE" />
             </intent-filter>
 
             <meta-data

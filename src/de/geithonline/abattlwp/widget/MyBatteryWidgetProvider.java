@@ -145,24 +145,6 @@ public class MyBatteryWidgetProvider extends AppWidgetProvider {
 		// future.cancel(true);
 		// }
 		draw(context, batteryLevel);
-		// } else {
-		// draw(context, i);
-		// // i hochzählen
-		// if (i == batteryLevel) {
-		// millies = Settings.getAnimationDelaýOnCurrentLevel();
-		// } else {
-		// millies = Settings.getAnimationDelaý();
-		// }
-		//
-		// i += 1;
-		// if (i > Settings.getAnimationResetLevel(batteryLevel)) {
-		// i = 0;
-		// }
-		// log("animation - Level =" + i + " Millies=" + millies);
-		// // und neuen auftrag für repaint geben
-		// // triggerUpdate(context);
-		// triggerAnimationUpdate(context, millies);
-		// }
 	}
 
 	private void draw(final Context context, final int level) {
@@ -175,5 +157,4 @@ public class MyBatteryWidgetProvider extends AppWidgetProvider {
 		final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 		appWidgetManager.updateAppWidget(componentName, remoteViews);
 	}
-
 }

@@ -1,5 +1,6 @@
 package de.geithonline.abattlwp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.util.Log;
 import de.geithonline.abattlwp.bitmapdrawer.IBitmapDrawer;
 import de.geithonline.abattlwp.settings.DrawerManager;
 import de.geithonline.abattlwp.settings.Settings;
+import de.geithonline.abattlwp.stylelistrecycler.StyleListRecyclerActivity;
 import de.geithonline.abattlwp.utils.BitmapHelper;
 import de.geithonline.android.basics.preferences.IconOnlyPreference;
 
@@ -43,6 +45,8 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 				Log.i("Click", "Time was " + diff);
 				if (diff < 150) {
 					Log.i("DoubleClick", "Time was " + diff);
+					final Intent i = new Intent(getActivity(), StyleListRecyclerActivity.class);
+					startActivity(i);
 				}
 				redrawPreview();
 				return true;

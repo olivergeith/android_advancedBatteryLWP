@@ -51,7 +51,6 @@
             android:theme="@style/Theme.BatteryLWP" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -62,10 +61,18 @@
             android:theme="@style/Theme.BatteryLWP" >
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="de.geithonline.abattlwp.stylelistrecycler.StyleListRecyclerActivity"
+            android:exported="true"
+            android:label="@string/style_summary"
+            android:theme="@style/Theme.Recycler" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         

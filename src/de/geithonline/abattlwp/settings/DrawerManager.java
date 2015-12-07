@@ -65,6 +65,12 @@ public class DrawerManager {
 		return b;
 	}
 
+	public static List<String> getStyleNames() {
+		final List<String> keySet = new ArrayList<String>(drawer.keySet());
+		Collections.sort(keySet);
+		return keySet;
+	}
+
 	public static String[] getDrawerNames() {
 		final List<String> keySet = new ArrayList<String>(drawer.keySet());
 		Collections.sort(keySet);

@@ -5,9 +5,9 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="lib/android-support-v4.jar"/>
-	<classpathentry kind="lib" path="lib/android-support-v7-appcompat.jar"/>
-	<classpathentry kind="lib" path="/android-support-v7-recyclerview/libs/android-support-v7-recyclerview.jar"/>
+	<classpathentry kind="lib" path="/android-support-v7-appcompat/libs/android-support-v4.jar" sourcepath="C:/Users/Geith.KIEL/.sourceattacher/compatibility-v4-23.1.1-sources.jar"/>
+	<classpathentry kind="lib" path="/android-support-v7-appcompat/libs/android-support-v7-appcompat.jar" sourcepath="/android-support-v7-appcompat/libs/src/android-support-v7-appcompat-sources.jar"/>
 	<classpathentry kind="lib" path="/android-support-v7-cardview/libs/android-support-v7-cardview.jar"/>
+	<classpathentry kind="lib" path="/android-support-v7-recyclerview/libs/android-support-v7-recyclerview.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

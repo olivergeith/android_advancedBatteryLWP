@@ -4,24 +4,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 import de.geithonline.abattlwp.bitmapdrawer.IBitmapDrawer;
 import de.geithonline.abattlwp.settings.DrawerManager;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.stylelistrecycler.StyleListRecyclerActivity;
-import de.geithonline.abattlwp.utils.BitmapHelper;
 import de.geithonline.android.basics.preferences.IconOnlyPreference;
 
 /**
  * This fragment shows the preferences for the first header.
  */
 public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
-	public static final String STYLE_PICKER_KEY = "batt_style";
-	private ListPreference stylePref;
+	private static final int REQUESTCODE_START_STYL_RECYCLER = 987;
+	// private ListPreference stylePref;
 	private IconOnlyPreference stylePreview;
 	private int level = 66;
 	// private SharedPreferences prefs;
@@ -35,37 +32,38 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 		// adding an additional imageview
 		stylePreview = (IconOnlyPreference) findPreference("stylePreview");
 		stylePreview.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			private long lastclick = 0;
 
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				final long time = System.currentTimeMillis();
-				final long diff = time - lastclick;
-				lastclick = time;
-				Log.i("Click", "Time was " + diff);
-				if (diff < 150) {
-					Log.i("DoubleClick", "Time was " + diff);
-					final Intent i = new Intent(getActivity(), StyleListRecyclerActivity.class);
-					startActivity(i);
-				}
-				redrawPreview();
+				final Intent i = new Intent(getActivity(), StyleListRecyclerActivity.class);
+				// open Recyclerview
+				startActivityForResult(i, REQUESTCODE_START_STYL_RECYCLER);
 				return true;
 			}
 		});
 		// initializing Members
-		stylePref = (ListPreference) findPreference(STYLE_PICKER_KEY);
-		// changelistener auf stylepicker
-		stylePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newStyle) {
-				enableSettingsForStyle((String) newStyle);
-				return true;
-			}
-		});
+		// stylePref = (ListPreference) findPreference(Settings.KEY_BATT_STYLE);
+		// // changelistener auf stylepicker
+		// stylePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+		//
+		// @Override
+		// public boolean onPreferenceChange(final Preference preference, final Object newStyle) {
+		// enableSettingsForStyle((String) newStyle);
+		// return true;
+		// }
+		// });
 		// initialize Properties
 		Log.i(this.getClass().getSimpleName(), "Initializing Style -> " + Settings.getStyle());
 		enableSettingsForStyle(Settings.getStyle());
+	}
+
+	@Override
+	public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+		if (requestCode == REQUESTCODE_START_STYL_RECYCLER) {
+			Log.i("MENU", "Coming beack from Style Selection with recyclerview");
+			redrawPreview();
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	private void redrawPreview() {
@@ -76,9 +74,9 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 		}
 		final Bitmap b = DrawerManager.getIconForDrawerForceDrawNew(style, Settings.getIconSize(), level);
 		if (b != null) {
-			stylePref.setIcon(BitmapHelper.bitmapToIcon(b));
+			// stylePref.setIcon(BitmapHelper.bitmapToIcon(b));
 			stylePreview.setImage(b);
-			// stylePreview.setTitle("Preview: " + style);
+			stylePreview.setTitle(style + "    (click image to choose)");
 		}
 	}
 
@@ -87,7 +85,7 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 		redrawPreview();
 
 		final IBitmapDrawer drawer = DrawerManager.getDrawer(style);
-		stylePref.setSummary(style);
+		// stylePref.setSummary(style);
 		// was supported der style
 		handleAvailability(findPreference("show_zeiger"), drawer.supportsShowPointer());
 		handleAvailability(findPreference("color_zeiger"), drawer.supportsPointerColor());

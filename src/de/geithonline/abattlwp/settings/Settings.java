@@ -14,6 +14,7 @@ import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
 
 public class Settings {
+	public static final String KEY_BATT_STYLE = "batt_style";
 	// public static final String LWP_PREFERENCE_FILE = "LWP";
 	// public static final String WIDGET_PREFERENCE_FILE = "WIDGET";
 
@@ -30,7 +31,7 @@ public class Settings {
 	public static int battTemperature = -1;
 	public static int battHealth = -1;
 	public static int battVoltage = -1;
-	public static int iconSize;
+	public static int iconSize = 500;
 
 	public static final int BATT_STATUS_STYLE_TEMP_VOLT_HEALTH = 0;
 	public static final int BATT_STATUS_STYLE_TEMP_VOLT = 1;
@@ -51,7 +52,7 @@ public class Settings {
 			// init colors
 			prefs.edit().putBoolean("show_status", false).commit();
 		}
-		iconSize = Math.round(getDisplayWidth(context) * 0.5f);
+		iconSize = Math.round(getDisplayWidth(context) * 0.4f);
 	}
 
 	public static boolean isKeepAspectRatio() {
@@ -101,15 +102,15 @@ public class Settings {
 
 	public static String getBattStatusCompleteShort() {
 		switch (getStatusStyle()) {
-		case BATT_STATUS_STYLE_VOLT:
-			return "Battery: " + (float) (battVoltage / 10) / 100 + "V";
-		case BATT_STATUS_STYLE_TEMP:
-			return "Battery: " + (float) battTemperature / 10 + "°C";
-		case BATT_STATUS_STYLE_TEMP_VOLT:
-			return "Battery: " + (float) battTemperature / 10 + "°C, " + (float) (battVoltage / 10) / 100 + "V";
-		default:
-		case BATT_STATUS_STYLE_TEMP_VOLT_HEALTH:
-			return "Battery: health " + getHealthText(battHealth) + ", " + (float) battTemperature / 10 + "°C, " + (float) (battVoltage / 10) / 100 + "V";
+			case BATT_STATUS_STYLE_VOLT:
+				return "Battery: " + (float) (battVoltage / 10) / 100 + "V";
+			case BATT_STATUS_STYLE_TEMP:
+				return "Battery: " + (float) battTemperature / 10 + "°C";
+			case BATT_STATUS_STYLE_TEMP_VOLT:
+				return "Battery: " + (float) battTemperature / 10 + "°C, " + (float) (battVoltage / 10) / 100 + "V";
+			default:
+			case BATT_STATUS_STYLE_TEMP_VOLT_HEALTH:
+				return "Battery: health " + getHealthText(battHealth) + ", " + (float) battTemperature / 10 + "°C, " + (float) (battVoltage / 10) / 100 + "V";
 		}
 	}
 
@@ -145,31 +146,31 @@ public class Settings {
 
 	public static EZMode getLevelMode() {
 		switch (getLevelModeString()) {
-		default:
-		case "1":
-			return EZMode.Einer;
-		case "5":
-			return EZMode.Fuenfer;
-		case "10":
-			return EZMode.Zehner;
+			default:
+			case "1":
+				return EZMode.Einer;
+			case "5":
+				return EZMode.Fuenfer;
+			case "10":
+				return EZMode.Zehner;
 		}
 	}
 
 	public static EZStyle getLevelStyle() {
 		switch (getLevelStyleString()) {
-		default:
-		case "Normal":
-			return EZStyle.sweep;
-		case "Normal (alpha)":
-			return EZStyle.sweep_withAplpah;
-		case "Normal (outline)":
-			return EZStyle.sweep_withOutline;
-		case "Only activ segments":
-			return EZStyle.segmented_onlyactive;
-		case "All segments (outline)":
-			return EZStyle.segmented_all;
-		case "All segments (alpha)":
-			return EZStyle.segmented_all_alpha;
+			default:
+			case "Normal":
+				return EZStyle.sweep;
+			case "Normal (alpha)":
+				return EZStyle.sweep_withAplpah;
+			case "Normal (outline)":
+				return EZStyle.sweep_withOutline;
+			case "Only activ segments":
+				return EZStyle.segmented_onlyactive;
+			case "All segments (outline)":
+				return EZStyle.segmented_all;
+			case "All segments (alpha)":
+				return EZStyle.segmented_all_alpha;
 		}
 	}
 
@@ -179,21 +180,21 @@ public class Settings {
 
 	private static String getHealthText(final int health) {
 		switch (health) {
-		case BatteryManager.BATTERY_HEALTH_GOOD:
-			return "good";
-		case BatteryManager.BATTERY_HEALTH_OVERHEAT:
-			return "overheat";
-		case BatteryManager.BATTERY_HEALTH_DEAD:
-			return "dead";
-		case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE:
-			return "overvoltage";
-		case BatteryManager.BATTERY_HEALTH_COLD:
-			return "cold";
-		case BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE:
-			return "failure";
+			case BatteryManager.BATTERY_HEALTH_GOOD:
+				return "good";
+			case BatteryManager.BATTERY_HEALTH_OVERHEAT:
+				return "overheat";
+			case BatteryManager.BATTERY_HEALTH_DEAD:
+				return "dead";
+			case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE:
+				return "overvoltage";
+			case BatteryManager.BATTERY_HEALTH_COLD:
+				return "cold";
+			case BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE:
+				return "failure";
 
-		default:
-			return "unknown";
+			default:
+				return "unknown";
 		}
 	}
 
@@ -302,11 +303,11 @@ public class Settings {
 
 	public static int getAnimationResetLevel(final int level) {
 		switch (Settings.getAnimationStyle()) {
-		default:
-		case Settings.ANIMATION_STYLE_0_TO_100:
-			return 100;
-		case Settings.ANIMATION_STYLE_0_TO_LEVEL:
-			return level;
+			default:
+			case Settings.ANIMATION_STYLE_0_TO_100:
+				return 100;
+			case Settings.ANIMATION_STYLE_0_TO_LEVEL:
+				return level;
 		}
 	}
 
@@ -453,9 +454,9 @@ public class Settings {
 
 	public static String getStyle() {
 		if (prefs == null) {
-			return "ZoopaWideV3";
+			return "ClockV3";
 		}
-		return prefs.getString("batt_style", "ZoopaWideV3");
+		return prefs.getString(KEY_BATT_STYLE, "ClockV3");
 	}
 
 	// #####################################################################################

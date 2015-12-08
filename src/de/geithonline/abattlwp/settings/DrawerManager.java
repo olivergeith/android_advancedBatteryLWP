@@ -49,14 +49,18 @@ public class DrawerManager {
 		return d;
 	}
 
-	public static Bitmap getIconForDrawer(final String name, final int size) {
+	public static Bitmap getIconForDrawer(final String name, final int size, final int level) {
 		Bitmap b = iconCache.get(name);
 		if (b == null) {
 			final IBitmapDrawer drawer = getDrawer(name);
-			b = drawer.drawIcon(66, size);
+			b = drawer.drawIcon(level, size);
 			iconCache.put(name, b);
 		}
 		return b;
+	}
+
+	public static void clearIconCache() {
+		iconCache.clear();
 	}
 
 	public static Bitmap getIconForDrawerForceDrawNew(final String drawerName, final int size, final int level) {
@@ -69,6 +73,11 @@ public class DrawerManager {
 		final List<String> keySet = new ArrayList<String>(drawer.keySet());
 		Collections.sort(keySet);
 		return keySet;
+	}
+
+	public static int getPostionOfSelectedStyleInList() {
+		final List<String> styleNames = getStyleNames();
+		return styleNames.indexOf(Settings.getStyle());
 	}
 
 	public static String[] getDrawerNames() {

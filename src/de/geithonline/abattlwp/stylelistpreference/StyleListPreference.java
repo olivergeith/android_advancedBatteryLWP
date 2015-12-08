@@ -128,7 +128,7 @@ public class StyleListPreference extends ListPreference {
 					text.setBackgroundResource(R.color.primary);
 				}
 				// in
-				final Bitmap b = DrawerManager.getIconForDrawer(text.getText().toString(), Settings.getIconSize());
+				final Bitmap b = DrawerManager.getIconForDrawer(text.getText().toString(), Settings.getIconSize(), 66);
 				if (b != null) {
 					imageView.setImageBitmap(b);
 					text.setText(" " + text.getText());

@@ -5,10 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
+import android.view.View;
 import de.geithonline.abattlwp.R;
 import de.geithonline.abattlwp.settings.DrawerManager;
+import de.geithonline.abattlwp.settings.Settings;
 
-public class StyleListRecyclerActivity extends AppCompatActivity {
+public class StyleListRecyclerActivity extends AppCompatActivity implements RecyclerViewClickListener {
 
 	private StaggeredGridLayoutManager gaggeredGridLayoutManager;
 
@@ -24,8 +27,18 @@ public class StyleListRecyclerActivity extends AppCompatActivity {
 		gaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 		recyclerView.setLayoutManager(gaggeredGridLayoutManager);
 
-		final StyleListRecyclerViewAdapter rcAdapter = new StyleListRecyclerViewAdapter(StyleListRecyclerActivity.this, DrawerManager.getStyleNames());
+		final StyleListRecyclerViewAdapter rcAdapter = new StyleListRecyclerViewAdapter(StyleListRecyclerActivity.this, DrawerManager.getStyleNames(), this);
 		recyclerView.setAdapter(rcAdapter);
+
+		// Scrolling to selected Style
+		gaggeredGridLayoutManager.scrollToPosition(DrawerManager.getPostionOfSelectedStyleInList());
+	}
+
+	@Override
+	public void recyclerViewListClicked(final View v, final int position, final String style) {
+		Log.i("Activity", "Clicked AdapterPosition = " + position + " Style=" + style);
+		Settings.saveAnyString(Settings.KEY_BATT_STYLE, style);
+		finish();
 	}
 
 }

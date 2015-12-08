@@ -8,14 +8,14 @@
     <!-- ##################################################################################### -->
     <!-- ##################################################################################### -->
     <PreferenceCategory android:title="Battery Design" />
-
+ <!-- 
     <de.geithonline.abattlwp.stylelistpreference.StyleListPreference
         android:defaultValue="ClockV3"
         android:dialogTitle="Choose a battery style"
         android:key="batt_style"
         android:summary="@string/style_summary"
         android:title="@string/style" />
-
+ -->
     <de.geithonline.android.basics.preferences.IconOnlyPreference 
         android:key="stylePreview" />
   

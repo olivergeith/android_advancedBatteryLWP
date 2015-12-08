@@ -85,8 +85,7 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 		redrawPreview();
 
 		final IBitmapDrawer drawer = DrawerManager.getDrawer(style);
-		// stylePref.setSummary(style);
-		// was supported der style
+		// was supported der style?
 		handleAvailability(findPreference("show_zeiger"), drawer.supportsShowPointer());
 		handleAvailability(findPreference("color_zeiger"), drawer.supportsPointerColor());
 

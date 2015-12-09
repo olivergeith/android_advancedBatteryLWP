@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class StyleListRecyclerViewAdapter extends RecyclerView.Adapter<StyleView
 	public StyleListRecyclerViewAdapter(final Context context, final List<String> itemList, final RecyclerViewClickListener itemListener) {
 		this.itemListener = itemListener;
 		DrawerManager.clearIconCache();
+		// man könnte sich noch üerlegen, ob man die Liste umsortiert und den gerade selektierten eintrag ganz an den Anfang setzt?!
 		styleNames = itemList;
 		this.context = context;
 	}
@@ -34,15 +36,31 @@ public class StyleListRecyclerViewAdapter extends RecyclerView.Adapter<StyleView
 
 	@Override
 	public void onBindViewHolder(final StyleViewHolder holder, final int position) {
-		final String style = styleNames.get(position);
-		holder.textview.setText(style);
-		holder.imageview.setImageBitmap(DrawerManager.getIconForDrawer(style, Settings.getIconSize(), 66));
+		final String currentStyle = styleNames.get(position);
+		holder.textview.setText(currentStyle);
+		holder.imageview.setImageBitmap(DrawerManager.getIconForDrawer(currentStyle, Settings.getIconSize(), 66));
+		// highlight some stuff
+		highlightItem(holder, currentStyle, R.color.primary, R.color.accent, true);
+	}
 
-		if (Settings.getStyle().equals(style)) {
-			// wir haben das gerade selektierte element
-			holder.textview.setBackgroundResource(R.color.accent);
+	private void highlightItem(//
+			final StyleViewHolder holder, //
+			final String currentStyle, //
+			final int normalColor, //
+			final int highlightColor, //
+			final boolean fullSpanForSelectedItem) {
+		final StaggeredGridLayoutManager.LayoutParams layoutParams = ((StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams());
+		// is this the selected style
+		if (Settings.getStyle().equals(currentStyle)) {
+			holder.textview.setBackgroundResource(highlightColor);
+			if (fullSpanForSelectedItem) {
+				layoutParams.setFullSpan(true);
+			}
 		} else {
-			holder.textview.setBackgroundResource(R.color.primary);
+			holder.textview.setBackgroundResource(normalColor);
+			if (fullSpanForSelectedItem) {
+				layoutParams.setFullSpan(false);
+			}
 		}
 	}
 
@@ -54,4 +72,5 @@ public class StyleListRecyclerViewAdapter extends RecyclerView.Adapter<StyleView
 	public int getPosition() {
 		return position;
 	}
+
 }

@@ -109,14 +109,13 @@ public class PaintProvider {
 	public static int getGradientColorForLevel(final int level) {
 
 		if (level > Settings.getMidThreshold()) {
-			return ColorHelper.getRadiantColor(Settings.getBattColor(), Settings.getBattColorMid(), level, 100,
-					Settings.getMidThreshold());
+			return ColorHelper.getRadiantColor(Settings.getBattColor(), Settings.getBattColorMid(), level, 100, Settings.getMidThreshold());
 		} else {
 			if (level < Settings.getLowThreshold()) {
 				return Settings.getBattColorLow();
 			} else {
-				return ColorHelper.getRadiantColor(Settings.getBattColorLow(), Settings.getBattColorMid(), level,
-						Settings.getLowThreshold(), Settings.getMidThreshold());
+				return ColorHelper.getRadiantColor(Settings.getBattColorLow(), Settings.getBattColorMid(), level, Settings.getLowThreshold(),
+						Settings.getMidThreshold());
 			}
 		}
 	}
@@ -136,14 +135,12 @@ public class PaintProvider {
 		return getNumberPaint(level, fontSize, Align.LEFT, true, false);
 	}
 
-	public static Paint getNumberPaint(final int level, final float fontSize, final Align align, final boolean bold,
-			final boolean erase) {
+	public static Paint getNumberPaint(final int level, final float fontSize, final Align align, final boolean bold, final boolean erase) {
 		final Paint numberPaint = initNumberPaint();
-		// TODO numberPaint.setAlpha(Settings.getOpacity());
 		if (Settings.isColoredNumber()) {
 			numberPaint.setColor(getColorForLevel(level));
 		} else {
-			numberPaint.setColor(Settings.getBattColor());
+			numberPaint.setColor(Settings.getNumberColor());
 		}
 		final float fSize = adjustFontSize(level, fontSize);
 		numberPaint.setTextSize(fSize);
@@ -168,8 +165,7 @@ public class PaintProvider {
 		return getTextPaint(level, fontSize, Align.RIGHT, true, false);
 	}
 
-	public static Paint getTextPaint(final int level, final float fontSizeArc, final Align align, final boolean bold,
-			final boolean erase) {
+	public static Paint getTextPaint(final int level, final float fontSizeArc, final Align align, final boolean bold, final boolean erase) {
 		final Paint textPaint = initTextPaint();
 		// TODO textPaint.setAlpha(Settings.getOpacity());
 		if (Settings.isColoredNumber()) {

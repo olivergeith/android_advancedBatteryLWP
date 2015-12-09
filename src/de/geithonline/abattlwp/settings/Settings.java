@@ -37,6 +37,7 @@ public class Settings {
 	public static final int BATT_STATUS_STYLE_TEMP_VOLT = 1;
 	public static final int BATT_STATUS_STYLE_TEMP = 2;
 	public static final int BATT_STATUS_STYLE_VOLT = 3;
+	private static Context context;
 
 	/**
 	 * Initializes some preferences on first run with defaults
@@ -44,6 +45,7 @@ public class Settings {
 	 * @param preferences
 	 */
 	public static void initPrefs(final SharedPreferences preferences, final Context context) {
+		Settings.context = context;
 		Log.i("Settings", "Init Settings-Class");
 		prefs = preferences;
 		if (prefs.getBoolean("firstrun", true)) {
@@ -570,4 +572,13 @@ public class Settings {
 		}
 		return prefs.getString(key, defaultValue);
 	}
+
+	public static int getNumberColor() {
+		if (prefs == null) {
+			return R.color.white;
+		}
+		final int col = prefs.getInt("numberColor", R.color.white);
+		return col;
+	}
+
 }

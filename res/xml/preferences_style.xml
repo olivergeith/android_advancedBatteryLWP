@@ -270,8 +270,17 @@
             android:dependency="show_number"
             android:key="colored_numbers"
             android:summary="@string/colored_numbers_summary"
+            android:disableDependentsState="true"
             android:title="@string/colored_numbers" />
 
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            alphaSlider="true"
+            android:dependency="colored_numbers"
+            android:defaultValue="@color/white"
+            android:key="numberColor"
+            android:title="@string/color" />
+        
+        
         <de.geithonline.android.basics.preferences.SeekBarPreference
             android:defaultValue="100"
             android:dependency="show_number"

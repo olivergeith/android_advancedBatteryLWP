@@ -48,8 +48,8 @@
     <string name="threshold_low_summary">Threshold for low battery levels</string>
     <string name="threshold_mid">Threshold for mid battery</string>
     <string name="threshold_mid_summary">Threshold for mid battery levels</string>
-    <string name="colored_numbers">Numbers are colored</string>
-    <string name="colored_numbers_summary">Numbers are colored like Battery-Level-Color</string>
+    <string name="colored_numbers">Use battery colors</string>
+    <string name="colored_numbers_summary">Numbers are colored like Level-Arch-Colors</string>
     <string name="show_number">Show Battery-Level-Numbers</string>
     <string name="show_number_summary">Premium Version only</string>
     <string name="show_rand">Show Border</string>

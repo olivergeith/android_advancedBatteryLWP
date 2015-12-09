@@ -14,6 +14,8 @@ import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerClockV3;
 import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerClockV4;
 import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerClockV5;
 import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerClockV6;
+import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerFancyV1;
+import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerFancyV2;
 import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerNewSimpleCircleV1;
 import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerNewTachoV1;
 import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerNewTachoV3;
@@ -39,6 +41,8 @@ public class DrawerManager {
 		drawer.put("AsymetricV1", new BitmapDrawerAsymetricV1());
 		drawer.put("RotatingV1", new BitmapDrawerRotatingV1());
 		drawer.put("RotatingV2", new BitmapDrawerRotatingV2());
+		drawer.put("FancyV1", new BitmapDrawerFancyV1());
+		drawer.put("FancyV2", new BitmapDrawerFancyV2());
 	}
 
 	public static IBitmapDrawer getDrawer(final String name) {

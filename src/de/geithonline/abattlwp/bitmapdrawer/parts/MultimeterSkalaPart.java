@@ -5,14 +5,14 @@ import java.util.Locale;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.RectF;
 import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.RectF;
 
 public class MultimeterSkalaPart {
 
@@ -55,6 +55,17 @@ public class MultimeterSkalaPart {
 		final float[] deviderScala = new float[] { 3.6f, 3.7f, 3.8f, 3.9f, 4.1f, 4.2f, 4.3f, 4.4f };
 
 		final MultimeterSkalaPart voltmeter = new MultimeterSkalaPart(center, ra, ri, startWinkel, sweep, scala)//
+				.setDividerScala(deviderScala, ri + (ra - ri) / 2, ri);
+		return voltmeter;
+	}
+
+	public static MultimeterSkalaPart getDefaultVoltmeterPartMoreLines(final PointF center, final float ra, final float ri, final float startWinkel,
+			final float sweep) {
+		final float[] scala = new float[] { 3.5f, 3.75f, 4.0f, 4.25f, 4.5f };
+		final float[] deviderScala = new float[] { 3.55f, 3.6f, 3.65f, 3.7f, 3.8f, 3.85f, 3.9f, 3.95f, 4.05f, 4.1f, 4.15f, 4.2f, 4.3f, 4.35f, 4.4f, 4.45f };
+
+		final MultimeterSkalaPart voltmeter = new MultimeterSkalaPart(center, ra, ri, startWinkel, sweep, scala)//
+				.setNumberFormat("%.2f")//
 				.setDividerScala(deviderScala, ri + (ra - ri) / 2, ri);
 		return voltmeter;
 	}

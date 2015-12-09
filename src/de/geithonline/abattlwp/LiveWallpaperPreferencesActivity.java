@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,7 +25,7 @@ import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.IntendHelper;
 import de.geithonline.abattlwp.utils.Toaster;
 
-public class LiveWallpaperPreferencesActivity extends PreferenceActivity {
+public class LiveWallpaperPreferencesActivity extends AppCompatPreferenceActivity {
 
 	private BillingManager billingManager;
 	private static final int REQUEST = 999;
@@ -47,10 +46,10 @@ public class LiveWallpaperPreferencesActivity extends PreferenceActivity {
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
-		// Respond to the action bar's Up/Home button
-		case android.R.id.home:
-			finish();
-			return true;
+			// Respond to the action bar's Up/Home button
+			case android.R.id.home:
+				finish();
+				return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

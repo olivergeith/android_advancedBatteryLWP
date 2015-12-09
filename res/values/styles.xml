@@ -7,7 +7,7 @@
         <item name="android:navigationBarColor">@color/primary_dark</item>
  		<item name="android:windowBackground">@color/window_bg</item> 
     </style>
-        <style name="Theme.Recycler" parent="Theme.AppCompat.Light.DarkActionBar">
+        <style name="Theme.Recycler" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="android:colorPrimary">@color/primary</item>
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
         <item name="android:colorAccent">@color/accent</item>

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import de.geithonline.abattlwp.R;
@@ -19,6 +20,8 @@ public class StyleListRecyclerActivity extends AppCompatActivity implements Recy
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.style_list_recycler_view);
+		final Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+		setSupportActionBar(myToolbar);
 
 		final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 		recyclerView.setHasFixedSize(true);

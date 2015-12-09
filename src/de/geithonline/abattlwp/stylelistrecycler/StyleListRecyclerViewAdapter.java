@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,18 +48,18 @@ public class StyleListRecyclerViewAdapter extends RecyclerView.Adapter<StyleView
 			final int normalColor, //
 			final int highlightColor, //
 			final boolean fullSpanForSelectedItem) {
-		final StaggeredGridLayoutManager.LayoutParams layoutParams = ((StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams());
+		// final StaggeredGridLayoutManager.LayoutParams layoutParams = ((StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams());
 		// is this the selected style
 		if (Settings.getStyle().equals(currentStyle)) {
 			holder.textview.setBackgroundResource(highlightColor);
-			if (fullSpanForSelectedItem) {
-				layoutParams.setFullSpan(true);
-			}
+			// if (fullSpanForSelectedItem) {
+			// layoutParams.setFullSpan(true);
+			// }
 		} else {
 			holder.textview.setBackgroundResource(normalColor);
-			if (fullSpanForSelectedItem) {
-				layoutParams.setFullSpan(false);
-			}
+			// if (fullSpanForSelectedItem) {
+			// layoutParams.setFullSpan(false);
+			// }
 		}
 	}
 

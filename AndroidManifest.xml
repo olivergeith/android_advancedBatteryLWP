@@ -54,6 +54,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        
+        <activity
+            android:name="de.geithonline.abattlwp.stylelistrecycler.StyleListRecyclerActivity"
+            android:exported="true"
+            android:label="@string/style_summary"
+            android:theme="@style/Theme.Recycler" 
+            >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        
         <activity
             android:name="de.geithonline.abattlwp.ImageReceiverActivity"
             android:exported="true"
@@ -66,15 +80,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="de.geithonline.abattlwp.stylelistrecycler.StyleListRecyclerActivity"
-            android:exported="true"
-            android:label="@string/style_summary"
-            android:theme="@style/Theme.Recycler" >
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         
         <receiver
             android:name="de.geithonline.abattlwp.widget.MyBatteryWidgetProvider"

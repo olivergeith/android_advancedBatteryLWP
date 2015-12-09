@@ -21,7 +21,13 @@ public class StyleListRecyclerActivity extends AppCompatActivity implements Recy
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.style_list_recycler_view);
 		final Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+		myToolbar.setBackgroundResource(R.color.primary);
 		setSupportActionBar(myToolbar);
+
+		// Get a support ActionBar corresponding to this toolbar
+		// Enable the Up button
+		// final ActionBar ab = getSupportActionBar();
+		// ab.setDisplayHomeAsUpEnabled(true);
 
 		final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 		recyclerView.setHasFixedSize(true);

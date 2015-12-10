@@ -4,23 +4,26 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.RectF;
+import android.graphics.Typeface;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
+import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaLinePart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaTextPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
+//import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaLinePart;
+//import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaTextPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.ZeigerPart;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.RectF;
 
 public class BitmapDrawerClockV1 extends AdvancedBitmapDrawer {
 
@@ -68,7 +71,6 @@ public class BitmapDrawerClockV1 extends AdvancedBitmapDrawer {
 	@Override
 	public Bitmap drawBitmap(final int level, final Bitmap bitmap) {
 		initPrivateMembers();
-
 		drawAll(level);
 		return bitmap;
 	}
@@ -86,29 +88,11 @@ public class BitmapDrawerClockV1 extends AdvancedBitmapDrawer {
 				.setMode(EZMode.Einer)//
 				.setStyle(EZStyle.sweep)//
 				.draw(bitmapCanvas);
-				// // Playing
-				// new LevelPart(center, maxRadius * 0.70f, maxRadius * 0.65f, level, -180, 180, EZColoring.LevelColors)//
-				// .configureSegemte(1f, strokeWidth / 3)//
-				// .setMode(EZMode.Zehner)//
-				// .setStyle(EZStyle.segmented_all)//
-				// .draw(bitmapCanvas);
-				// new ZeigerPart(center, level, maxRadius * 0.65f, maxRadius * 0.20f, strokeWidth * 1.5f, -180, 180, EZMode.Einer)//
-				// .setDropShadow(new DropShadow(3 * strokeWidth, Color.BLACK))//
-				// .setZeigerType(ZEIGER_TYP.needle)//
-				// .overrideColor(Color.RED)//
-				// .draw(bitmapCanvas);
 
-		// Skalatext
-		new SkalaLinePart(center, maxRadius * 0.90f, maxRadius * 0.84f, -90, 360)//
-				.set5erRadiusAussen(maxRadius * 0.90f)//
-				.set1erRadiusAussen(maxRadius * 0.90f)//
-				.set5erRadiusInnen(maxRadius * 0.86f)//
-				.set1erRadiusInnen(maxRadius * 0.88f)//
-				.setDicke(strokeWidth / 2)//
-				.setDicke10er(strokeWidth)//
-				.draw(bitmapCanvas);
-
-		new SkalaTextPart(center, maxRadius * 0.75f, fontSizeScala, -90, 360)//
+		Skala.getLevelScalaCircular(center, maxRadius * 0.90f, maxRadius * 0.84f, -90)//
+				.setDicke(strokeWidth * 0.75f)//
+				.setFontAttributesEbene1(new FontAttributes(Align.CENTER, Typeface.DEFAULT_BOLD, fontSizeScala))//
+				.setFontRadiusEbene1(maxRadius * 0.75f)//
 				.draw(bitmapCanvas);
 
 		// level Numbers
@@ -125,11 +109,6 @@ public class BitmapDrawerClockV1 extends AdvancedBitmapDrawer {
 				.setDropShadow(new DropShadow(2 * strokeWidth, Color.BLACK))//
 				.setZeigerType(ZEIGER_TYP.rect)//
 				.draw(bitmapCanvas);
-				// // zehner
-				// new ZeigerPart(center, level, maxRadius * 0.80f, maxRadius * 0.20f, strokeWidth, -90, 360, EZMode.zehner)//
-				// .setDropShadow(new DropShadow(2 * strokeWidth, Color.BLACK))//
-				// .setZeigerType(ZEIGER_TYP.rect)//
-				// .draw(bitmapCanvas);
 
 		// innere Fläche
 		new RingPart(center, maxRadius * 0.20f, maxRadius * 0f, new Paint())//

@@ -6,29 +6,28 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.RectF;
+import android.graphics.Typeface;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
-import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
+import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.MultimeterSkalaPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.MultimeterZeigerPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaLinePart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaTextPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnLinePart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.ZeigerPart;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.ColorHelper;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.RectF;
-import android.graphics.Typeface;
 
 public class BitmapDrawerClockV3 extends AdvancedBitmapDrawer {
 
@@ -147,15 +146,20 @@ public class BitmapDrawerClockV3 extends AdvancedBitmapDrawer {
 				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth))//
 				.draw(bitmapCanvas);
 
-		new SkalaLinePart(center, maxRadius * 0.88f, maxRadius * 0.82f, -90, 360)//
-				.set5erRadiusAussen(maxRadius * 0.86f)//
-				.set1erRadiusAussen(maxRadius * 0.83f)//
-				.setDicke(strokeWidth / 2)//
+		Skala.getLevelScalaCircular(center, maxRadius * 0.82f, maxRadius * 0.88f, -90)//
+				.setFontAttributesEbene1(new FontAttributes(Align.CENTER, Typeface.DEFAULT_BOLD, fontSizeScala))//
+				.setFontAttributesEbene2Default()//
+				.setDicke(strokeWidth * 0.75f)//
 				.draw(bitmapCanvas);
-
-		new SkalaTextPart(center, maxRadius * 0.90f, fontSizeScala, -90, 360)//
-				.setFontsize5er(fontSizeScala * 0.75f)//
-				.draw(bitmapCanvas);
+		// new SkalaLinePart(center, maxRadius * 0.88f, maxRadius * 0.82f, -90, 360)//
+		// .set5erRadiusAussen(maxRadius * 0.86f)//
+		// .set1erRadiusAussen(maxRadius * 0.83f)//
+		// .setDicke(strokeWidth / 2)//
+		// .draw(bitmapCanvas);
+		//
+		// new SkalaTextPart(center, maxRadius * 0.90f, fontSizeScala, -90, 360)//
+		// .setFontsize5er(fontSizeScala * 0.75f)//
+		// .draw(bitmapCanvas);
 		drawMeter();
 
 	}

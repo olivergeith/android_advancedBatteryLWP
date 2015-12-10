@@ -48,4 +48,9 @@ public class FontAttributes {
 		return paint;
 	}
 
+	@Override
+	public FontAttributes clone() {
+		return new FontAttributes(getAlign(), getTypeFace(), getFontSize());
+	}
+
 }

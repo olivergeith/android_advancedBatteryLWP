@@ -4,24 +4,24 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.RectF;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
-import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
+import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaLinePart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 import de.geithonline.abattlwp.bitmapdrawer.parts.ZeigerPart;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.RectF;
 
 public class BitmapDrawerClockV2 extends AdvancedBitmapDrawer {
 
@@ -103,10 +103,8 @@ public class BitmapDrawerClockV2 extends AdvancedBitmapDrawer {
 				.setOutline(new Outline(PaintProvider.getGray(96), strokeWidth))//
 				.draw(bitmapCanvas);
 
-		new SkalaLinePart(center, maxRadius * 0.67f, maxRadius * 0.63f, -90, 360)//
-				.set5erRadiusAussen(maxRadius * 0.65f)//
-				// .set1erRadius(maxRadius * 0.83f)//
-				.setDicke(strokeWidth / 2)//
+		Skala.getLevelScalaCircular(center, maxRadius * 0.63f, maxRadius * 0.67f, -90)//
+				.setDicke(strokeWidth * 0.75f)//
 				.draw(bitmapCanvas);
 
 		new RingPart(center, maxRadius * 0.58f, 0, PaintProvider.getBackgroundPaint())//

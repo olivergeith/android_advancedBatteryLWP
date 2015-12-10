@@ -7,7 +7,9 @@ import android.graphics.Paint.Align;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
+import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
@@ -16,8 +18,9 @@ import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaLinePart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaTextPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
+//import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaLinePart;
+//import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaTextPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.ZeigerPart;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
@@ -102,14 +105,13 @@ public class BitmapDrawerClockV4 extends AdvancedBitmapDrawer {
 				.setStyle(EZStyle.segmented_onlyactive)//
 				.draw(bitmapCanvas);
 
-		// Skalatext
-		new SkalaLinePart(center, maxRadius * 0.90f, maxRadius * 0.86f, -90, 360)//
-				.set5erRadiusAussen(maxRadius * 0.90f)//
-				.setDicke(strokeWidth / 2)//
-				.draw(bitmapCanvas);
-
-		new SkalaTextPart(center, maxRadius * 0.75f, fontSizeScala, -90, 360)//
-				.setFontsize5er(fontSizeScala * 0.75f)//
+		Skala.getLevelScalaCircular(center, maxRadius * 0.86f, maxRadius * 0.90f, -90)//
+				.setDicke(strokeWidth * 0.75f)//
+				.setFontAttributesEbene1(new FontAttributes(Align.CENTER, Typeface.DEFAULT_BOLD, fontSizeScala))//
+				.setFontRadiusEbene1(maxRadius * 0.75f)//
+				.setFontAttributesEbene2Default()//
+				.setupLineRadienAllTheSame()//
+				.setLinesEbene3(null)// keine einer Marken
 				.draw(bitmapCanvas);
 
 		// SkalaGlow

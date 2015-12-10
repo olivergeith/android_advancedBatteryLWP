@@ -14,7 +14,7 @@ import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
 
-public class MultimeterSkalaPartV2 {
+public class SkalaPart {
 
 	private final PointF c;
 	/**
@@ -29,7 +29,7 @@ public class MultimeterSkalaPartV2 {
 	private float dickeLineEbene1 = 2f;
 	private float dickeLineEbene2 = 2f;
 	private float dickeLineEbene3 = 2f;
-	private final float dickeBaseline = 2f;
+	private float dickeBaseline = 2f;
 
 	private Paint paint = null;
 
@@ -51,7 +51,7 @@ public class MultimeterSkalaPartV2 {
 	private final float minValue;
 	private final float maxValue;
 
-	public MultimeterSkalaPartV2(//
+	public SkalaPart(//
 			final PointF center, //
 			final float radiusLineStart, final float radiusLineEnd, //
 			final float startWinkel, final float sweep, //
@@ -67,12 +67,12 @@ public class MultimeterSkalaPartV2 {
 		this.maxValue = maxValue;
 		scalaSweep = sweep;
 		this.startWinkel = startWinkel;
-		fontRadiusEbene1 = radiusLineEnd * 1.1f;
+		fontRadiusEbene1 = radiusLineEnd * 1.01f;
 		fontRadiusEbene2 = 0f;
 	}
 
 	// ###############################################################################################
-	private MultimeterSkalaPartV2 setupDefaultPaint() {
+	private SkalaPart setupDefaultPaint() {
 		paint = PaintProvider.initScalePaint();
 		paint.setAntiAlias(true);
 		paint.setStyle(Style.FILL);
@@ -80,107 +80,125 @@ public class MultimeterSkalaPartV2 {
 	}
 
 	// ###############################################################################################
-	private MultimeterSkalaPartV2 setupLineRadien(final float radiusLineStart, final float radiusLineEnd) {
+	public SkalaPart setupLineRadien(final float radiusLineStart, final float radiusLineEnd) {
 		radiusMain = radiusLineStart;
 		radiusLineEbene1 = radiusLineEnd;
 		final float diffRad = radiusLineEbene1 - radiusMain;
-		radiusLineEbene2 = radiusMain + diffRad * 0.50f;
-		radiusLineEbene3 = radiusMain + diffRad * 0.25f;
+		radiusLineEbene2 = radiusMain + diffRad * 0.66f;
+		radiusLineEbene3 = radiusMain + diffRad * 0.33f;
+		return this;
+	}
+
+	public SkalaPart setupLineRadienAllTheSame() {
+		radiusLineEbene2 = radiusLineEbene1;
+		radiusLineEbene3 = radiusLineEbene1;
 		return this;
 	}
 
 	// ###############################################################################################
-	private MultimeterSkalaPartV2 setupBaseLineRadius(final float radiusMain) {
+	private SkalaPart setupBaseLineRadius(final float radiusMain) {
 		radiusBaseLine = radiusMain;
 		return this;
 	}
 
-	private MultimeterSkalaPartV2 setupDefaultBaseLineRadius() {
+	public SkalaPart setupDefaultBaseLineRadius() {
 		setupBaseLineRadius(radiusMain);
 		return this;
 	}
 
 	// ###############################################################################################
-	public MultimeterSkalaPartV2 setLinesEbene1(final float[] scala) {
+	public SkalaPart setLinesEbene1(final float[] scala) {
 		linesEbene1 = scala;
 		return this;
 	}
 
-	public MultimeterSkalaPartV2 setLinesEbene2(final float[] scala) {
+	public SkalaPart setLinesEbene2(final float[] scala) {
 		linesEbene2 = scala;
 		return this;
 	}
 
-	public MultimeterSkalaPartV2 setLinesEbene3(final float[] scala) {
+	public SkalaPart setLinesEbene3(final float[] scala) {
 		linesEbene3 = scala;
 		return this;
 	}
 
 	// ###############################################################################################
-	public MultimeterSkalaPartV2 setFontAttributesEbene1(final FontAttributes attr) {
+	public SkalaPart setFontAttributesEbene1(final FontAttributes attr) {
 		attrEbene1 = attr;
 		return this;
 	}
 
-	public MultimeterSkalaPartV2 setFontAttributesEbene2(final FontAttributes attr) {
+	public SkalaPart setFontAttributesEbene2(final FontAttributes attr) {
 		attrEbene2 = attr;
 		return this;
 	}
 
-	public MultimeterSkalaPartV2 setFontAttributesEbene2Default() {
-		attrEbene2 = attrEbene1;
+	public SkalaPart setFontAttributesEbene2Default() {
+		attrEbene2 = attrEbene1.clone();
 		// Fontsize anpassen (etwas kleiner)
-		attrEbene2.setFontSize(attrEbene1.getFontSize() * 0.9f);
+		attrEbene2.setFontSize(attrEbene1.getFontSize() * 0.8f);
+		// Radius setzen
+		setFontRadiusEbene2Default();
 		return this;
 	}
 
 	// ###############################################################################################
-	public MultimeterSkalaPartV2 setFontRadiusEbene1(final float radius) {
+	public SkalaPart setFontRadiusEbene1(final float radius) {
 		fontRadiusEbene1 = radius;
 		return this;
 	}
 
-	public MultimeterSkalaPartV2 setFontRadiusEbene2(final float radius) {
+	public SkalaPart setFontRadiusEbene2(final float radius) {
 		fontRadiusEbene2 = radius;
 		return this;
 	}
 
-	public MultimeterSkalaPartV2 setFontRadiusEbene2Default() {
+	public SkalaPart setFontRadiusEbene2Default() {
 		fontRadiusEbene2 = fontRadiusEbene1;
 		return this;
 	}
 
 	// ###############################################################################################
-	public MultimeterSkalaPartV2 setNumberFormat(final String format) {
+	public SkalaPart setNumberFormat(final String format) {
 		this.format = format;
 		return this;
 	}
 
-	public MultimeterSkalaPartV2 setNumberFormatNachkommaOhne() {
+	public SkalaPart setNumberFormatNachkommaOhne() {
 		format = "%.0f";
 		return this;
 	}
 
-	public MultimeterSkalaPartV2 setNumberFormatNachkomma1() {
+	public SkalaPart setNumberFormatNachkomma1() {
 		format = "%.1f";
 		return this;
 	}
 
-	public MultimeterSkalaPartV2 setNumberFormatNachkomma2() {
+	public SkalaPart setNumberFormatNachkomma2() {
 		format = "%.2f";
 		return this;
 	}
 
 	// ###############################################################################################
-	public MultimeterSkalaPartV2 setDicke(final float dicke) {
+	public SkalaPart setDicke(final float dicke) {
 		dickeLineEbene1 = dicke;
 		dickeLineEbene2 = dicke * 0.8f;
 		dickeLineEbene3 = dicke * 0.6f;
 		return this;
 	}
 
+	public SkalaPart setDickeBaseLine(final float dicke) {
+		dickeBaseline = dicke;
+		return this;
+	}
+
+	public SkalaPart setDickeBaseLineDefault() {
+		dickeBaseline = dickeLineEbene1;
+		return this;
+	}
+
 	// ###############################################################################################
-	public MultimeterSkalaPartV2 invertText(final boolean invert) {
+	public SkalaPart invertText(final boolean invert) {
 		this.invert = invert;
 		return this;
 	}
@@ -188,8 +206,8 @@ public class MultimeterSkalaPartV2 {
 	public void draw(final Canvas canvas) {
 
 		drawLinesForEbene(canvas, linesEbene1, radiusMain, radiusLineEbene1, fontRadiusEbene1, dickeLineEbene1, attrEbene1);
-		drawLinesForEbene(canvas, linesEbene1, radiusMain, radiusLineEbene2, fontRadiusEbene2, dickeLineEbene2, attrEbene2);
-		drawLinesForEbene(canvas, linesEbene1, radiusMain, radiusLineEbene3, 0f, dickeLineEbene3, null);
+		drawLinesForEbene(canvas, linesEbene2, radiusMain, radiusLineEbene2, fontRadiusEbene2, dickeLineEbene2, attrEbene2);
+		drawLinesForEbene(canvas, linesEbene3, radiusMain, radiusLineEbene3, 0f, dickeLineEbene3, null);
 
 		// ggf linie zeichnen
 		if (radiusBaseLine > 0) {
@@ -197,7 +215,7 @@ public class MultimeterSkalaPartV2 {
 			final Path mArc = new Path();
 			mArc.addArc(oval, startWinkel, scalaSweep);
 			paint.setStyle(Style.STROKE);
-			paint.setStrokeWidth(dickeLineEbene1);
+			paint.setStrokeWidth(dickeBaseline);
 			canvas.drawPath(mArc, paint);
 		}
 

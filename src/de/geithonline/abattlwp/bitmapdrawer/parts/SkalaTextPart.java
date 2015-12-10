@@ -3,12 +3,12 @@ package de.geithonline.abattlwp.bitmapdrawer.parts;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
-import de.geithonline.abattlwp.settings.PaintProvider;
-import de.geithonline.abattlwp.utils.GeometrieHelper;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
+import de.geithonline.abattlwp.settings.PaintProvider;
+import de.geithonline.abattlwp.utils.GeometrieHelper;
 
 public class SkalaTextPart {
 

@@ -3,11 +3,11 @@ package de.geithonline.abattlwp.bitmapdrawer.parts;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PointF;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
-import android.graphics.Path;
-import android.graphics.PointF;
 
 public class SkalaLinePart {
 

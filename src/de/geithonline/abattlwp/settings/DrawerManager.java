@@ -18,9 +18,11 @@ import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerFancyV1;
 import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerFancyV2;
 import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerNewSimpleCircleV1;
 import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerNewTachoV1;
+import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerNewTachoV2;
 import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerNewTachoV3;
 import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerRotatingV1;
 import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerRotatingV2;
+import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerRotatingV3;
 import de.geithonline.abattlwp.bitmapdrawer.IBitmapDrawer;
 
 public class DrawerManager {
@@ -29,6 +31,7 @@ public class DrawerManager {
 
 	static {
 		drawer.put("TachoV1", new BitmapDrawerNewTachoV1());
+		drawer.put("TachoV2", new BitmapDrawerNewTachoV2());
 		drawer.put("TachoV3", new BitmapDrawerNewTachoV3());
 		drawer.put("ClockV1", new BitmapDrawerClockV1());
 		drawer.put("ClockV2", new BitmapDrawerClockV2());
@@ -41,6 +44,7 @@ public class DrawerManager {
 		drawer.put("AsymetricV1", new BitmapDrawerAsymetricV1());
 		drawer.put("RotatingV1", new BitmapDrawerRotatingV1());
 		drawer.put("RotatingV2", new BitmapDrawerRotatingV2());
+		drawer.put("RotatingV3", new BitmapDrawerRotatingV3());
 		drawer.put("FancyV1", new BitmapDrawerFancyV1());
 		drawer.put("FancyV2", new BitmapDrawerFancyV2());
 	}

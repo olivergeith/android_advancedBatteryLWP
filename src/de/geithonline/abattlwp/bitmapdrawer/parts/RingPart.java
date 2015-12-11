@@ -5,38 +5,59 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
-import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
-import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
-import de.geithonline.abattlwp.bitmapdrawer.shapes.CirclePath;
-import de.geithonline.abattlwp.settings.PaintProvider;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RadialGradient;
 import android.graphics.Shader;
+import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
+import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
+import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.CirclePath;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.SquarePath;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.SquarePath.SQUARE_STYLE;
+import de.geithonline.abattlwp.settings.PaintProvider;
 
 public class RingPart {
 
-	private final PointF c;
-	private final float ra;
-	private final float ri;
-	private final Paint paint;
-	private final Path path;
+	public enum RingType {
+		Circle, SquareRoundet, Square
+	};
+
+	private PointF c;
+	private float ra;
+	private float ri;
+	private Paint paint;
+	private Path path;
 	private Outline outline = null;
 	private Gradient gradient;
 	private boolean erase = false;
 
 	public RingPart(final PointF center, final float radAussen, final float radInnen, final Paint paint) {
+		init(center, radAussen, radInnen, paint, RingType.Circle);
+	}
+
+	public RingPart(final PointF center, final float radAussen, final float radInnen, final Paint paint, final RingType type) {
+		init(center, radAussen, radInnen, paint, type);
+	}
+
+	private void init(final PointF center, final float radAussen, final float radInnen, final Paint paint, final RingType type) {
 		c = center;
 		ra = radAussen;
 		ri = radInnen;
 		this.paint = paint;
 		initPaint();
-		boolean filled = true;
-		if (radInnen > 0) {
-			filled = false;
+		switch (type) {
+			default:
+			case Circle:
+				path = new CirclePath(c, ra, ri);
+				break;
+			case SquareRoundet:
+				path = new SquarePath(c, ra, ri, SQUARE_STYLE.ROUNDED);
+				break;
+			case Square:
+				path = new SquarePath(c, ra, ri, SQUARE_STYLE.NORMAL);
+				break;
 		}
-		path = new CirclePath(c, ra, ri, filled);
 	}
 
 	private void initPaint() {
@@ -89,14 +110,14 @@ public class RingPart {
 		if (gradient != null) {
 			paint.setStyle(Style.FILL);
 			switch (gradient.getStyle()) {
-			default:
-			case top2bottom:
-				paint.setShader(new LinearGradient(c.x, c.y - ra, c.x, c.y + ra, gradient.getColor1(), gradient.getColor2(), Shader.TileMode.MIRROR));
-				break;
-			case radial:
-				final int[] colors = new int[] { gradient.getColor1(), gradient.getColor2() };
-				paint.setShader(new RadialGradient(c.x, c.y, ra, colors, getDistancesRadial(), Shader.TileMode.CLAMP));
-				break;
+				default:
+				case top2bottom:
+					paint.setShader(new LinearGradient(c.x, c.y - ra, c.x, c.y + ra, gradient.getColor1(), gradient.getColor2(), Shader.TileMode.MIRROR));
+					break;
+				case radial:
+					final int[] colors = new int[] { gradient.getColor1(), gradient.getColor2() };
+					paint.setShader(new RadialGradient(c.x, c.y, ra, colors, getDistancesRadial(), Shader.TileMode.CLAMP));
+					break;
 			}
 		}
 	}

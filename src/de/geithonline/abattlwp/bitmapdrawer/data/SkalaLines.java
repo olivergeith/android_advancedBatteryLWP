@@ -9,7 +9,7 @@ public class SkalaLines {
 	public float[] ebene3 = null;
 
 	public enum LevelLinesStyle {
-		ZehnerlFuenferEiner, ZehnerEiner, ZehnerFuenfer
+		ZehnerFuenferEiner, ZehnerEiner, ZehnerFuenfer
 	}
 
 	public enum VoltLinesStyle {
@@ -47,7 +47,7 @@ public class SkalaLines {
 	public static SkalaLines getLevelLines(final int start, final int stop, final LevelLinesStyle style) {
 		switch (style) {
 			default:
-			case ZehnerlFuenferEiner:
+			case ZehnerFuenferEiner:
 				return getLevelLinesZFE(start, stop);
 			case ZehnerFuenfer:
 				return getLevelLinesZF(start, stop);

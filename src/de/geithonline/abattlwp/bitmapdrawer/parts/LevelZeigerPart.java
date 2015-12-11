@@ -17,7 +17,7 @@ import android.graphics.PointF;
 import android.graphics.RadialGradient;
 import android.graphics.Shader;
 
-public class ZeigerPart {
+public class LevelZeigerPart {
 
 	private final PointF c;
 	private final float ra;
@@ -34,7 +34,7 @@ public class ZeigerPart {
 	private final int level;
 	private Gradient gradient;
 
-	public ZeigerPart(final PointF center, final int level, final float radAussen, final float radInnen, final float dicke, final float startWinkel,
+	public LevelZeigerPart(final PointF center, final int level, final float radAussen, final float radInnen, final float dicke, final float startWinkel,
 			final float maxWinkel, final EZMode modus) {
 		this.dicke = dicke;
 		this.modus = modus;
@@ -77,17 +77,17 @@ public class ZeigerPart {
 		paint.setStyle(Style.FILL);
 	}
 
-	public ZeigerPart setZeigerType(final ZEIGER_TYP zeigerType) {
+	public LevelZeigerPart setZeigerType(final ZEIGER_TYP zeigerType) {
 		this.zeigerType = zeigerType;
 		return this;
 	}
 
-	public ZeigerPart overrideColor(final int color) {
+	public LevelZeigerPart overrideColor(final int color) {
 		paint.setColor(color);
 		return this;
 	}
 
-	public ZeigerPart setGradient(final Gradient gradient) {
+	public LevelZeigerPart setGradient(final Gradient gradient) {
 		this.gradient = gradient;
 		setupGradient();
 		return this;
@@ -116,12 +116,12 @@ public class ZeigerPart {
 		return distances;
 	}
 
-	public ZeigerPart setOutline(final Outline outline) {
+	public LevelZeigerPart setOutline(final Outline outline) {
 		this.outline = outline;
 		return this;
 	}
 
-	public ZeigerPart setDropShadow(final DropShadow dropShadow) {
+	public LevelZeigerPart setDropShadow(final DropShadow dropShadow) {
 		if (dropShadow != null) {
 			dropShadow.setUpPaint(paint);
 		}

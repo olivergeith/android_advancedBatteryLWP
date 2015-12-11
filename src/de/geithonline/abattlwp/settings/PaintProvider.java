@@ -1,14 +1,11 @@
 package de.geithonline.abattlwp.settings;
 
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.RectF;
-import android.graphics.Shader;
 import android.graphics.Typeface;
 import de.geithonline.abattlwp.utils.ColorHelper;
 
@@ -21,31 +18,6 @@ public class PaintProvider {
 		battStatusPaint.setFakeBoldText(true);
 		battStatusPaint.setStyle(Style.FILL);
 		return battStatusPaint;
-	}
-
-	public static Paint initScalePaint() {
-		final Paint scalePaint = new Paint();
-		scalePaint.setAntiAlias(true);
-		scalePaint.setAlpha(255);
-		scalePaint.setFakeBoldText(true);
-		scalePaint.setStyle(Style.FILL);
-		scalePaint.setColor(Settings.getScaleColor());
-		return scalePaint;
-	}
-
-	private static Paint initBackgroundPaint() {
-		final Paint backgroundPaint = new Paint();
-		backgroundPaint.setAntiAlias(true);
-		backgroundPaint.setStyle(Style.FILL);
-		return backgroundPaint;
-	}
-
-	private static Paint initZeigerPaint() {
-		final Paint zeigerPaint = new Paint();
-		zeigerPaint.setAntiAlias(true);
-		zeigerPaint.setAlpha(255);
-		zeigerPaint.setStyle(Style.FILL);
-		return zeigerPaint;
 	}
 
 	private static Paint initErasurePaint() {
@@ -131,10 +103,6 @@ public class PaintProvider {
 		return getNumberPaint(level, fontSize, Align.CENTER, true, false);
 	}
 
-	public static Paint getNumberPaintAlignLeft(final int level, final float fontSize) {
-		return getNumberPaint(level, fontSize, Align.LEFT, true, false);
-	}
-
 	public static Paint getNumberPaint(final int level, final float fontSize, final Align align, final boolean bold, final boolean erase) {
 		final Paint numberPaint = initNumberPaint();
 		if (Settings.isColoredNumber()) {
@@ -161,13 +129,8 @@ public class PaintProvider {
 		return getTextPaint(level, fontSizeArc, Align.LEFT, true, false);
 	}
 
-	public static Paint getTextPaintAlignRight(final int level, final int fontSize) {
-		return getTextPaint(level, fontSize, Align.RIGHT, true, false);
-	}
-
-	public static Paint getTextPaint(final int level, final float fontSizeArc, final Align align, final boolean bold, final boolean erase) {
+	private static Paint getTextPaint(final int level, final float fontSizeArc, final Align align, final boolean bold, final boolean erase) {
 		final Paint textPaint = initTextPaint();
-		// TODO textPaint.setAlpha(Settings.getOpacity());
 		if (Settings.isColoredNumber()) {
 			textPaint.setColor(getColorForLevel(level));
 		} else {
@@ -199,58 +162,28 @@ public class PaintProvider {
 
 	public static Paint getBatteryPaint(final int level) {
 		final Paint battPaint = initBattPaint();
-		// battPaint.setAlpha(Settings.getOpacity());
 		battPaint.setColor(getColorForLevel(level));
-		// TODO battPaint.setAlpha(Settings.getOpacity());
 		return battPaint;
 	}
 
-	// TODO // public static Paint getBatteryPaintSourceIn(final int level) {
-	// final Paint paint = getBatteryPaint(level);
-	// final PorterDuffXfermode xfermode = new PorterDuffXfermode(Mode.SRC_IN);
-	// // because of SRC in the alphas of background and overpaint somhow "add"
-	// // so the SRC in must be mor opacid then normal
-	// int alpha = Settings.getOpacity() + Settings.getBackgroundOpacity();
-	// if (alpha > 255) {
-	// alpha = 255;
-	// }
-	// paint.setAlpha(alpha);
-	// paint.setXfermode(xfermode);
-	// return paint;
-	// }
-
 	public static Paint getZeigerPaint() {
-		final Paint zeigerPaint = initZeigerPaint();
+		final Paint zeigerPaint1 = new Paint();
+		zeigerPaint1.setAntiAlias(true);
+		zeigerPaint1.setAlpha(255);
+		zeigerPaint1.setStyle(Style.FILL);
+		final Paint zeigerPaint = zeigerPaint1;
 		zeigerPaint.setColor(Settings.getZeigerColor());
 		return zeigerPaint;
 	}
 
 	public static Paint getBackgroundPaint() {
-		final Paint backgrdPaint = initBackgroundPaint();
+		final Paint backgroundPaint = new Paint();
+		backgroundPaint.setAntiAlias(true);
+		backgroundPaint.setStyle(Style.FILL);
+		final Paint backgrdPaint = backgroundPaint;
 		backgrdPaint.setColor(Settings.getBackgroundColor());
 		backgrdPaint.setAlpha(Settings.getBackgroundOpacity());
 		return backgrdPaint;
-	}
-
-	public static Paint getTextScalePaint(final float fontSize, final Align align, final boolean bold) {
-		return getTextScalePaint((int) fontSize, align, bold);
-	}
-
-	public static Paint getTextScalePaint(final int fontSize, final Align align, final boolean bold) {
-		final Paint scalePaint = initScalePaint();
-		scalePaint.setColor(Settings.getScaleColor());
-		scalePaint.setTextSize(fontSize);
-		if (bold) {
-			scalePaint.setTypeface(Typeface.DEFAULT_BOLD);
-		} else {
-			scalePaint.setTypeface(Typeface.DEFAULT);
-		}
-		scalePaint.setTextAlign(align);
-		if (Settings.isScaleTransparent()) {
-			final PorterDuffXfermode xfermode = new PorterDuffXfermode(Mode.CLEAR);
-			scalePaint.setXfermode(xfermode);
-		}
-		return scalePaint;
 	}
 
 	public static Paint getTextBattStatusPaint(final float fontSizeArc, final Align align, final boolean bold) {
@@ -264,15 +197,6 @@ public class PaintProvider {
 		}
 		battStatusPaint.setTextAlign(align);
 		return battStatusPaint;
-	}
-
-	public static Paint getGradientRingPaint(final RectF rect, final int colorTop, final int colorBottom) {
-		final Paint paint = new Paint();
-		paint.setAlpha(255);
-		paint.setAntiAlias(true);
-		paint.setStyle(Style.FILL);
-		paint.setShader(new LinearGradient(0, rect.top, 1, rect.bottom, colorTop, colorBottom, Shader.TileMode.MIRROR));
-		return paint;
 	}
 
 	public static int getGray(final int level) {

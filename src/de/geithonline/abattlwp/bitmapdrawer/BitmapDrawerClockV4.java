@@ -21,7 +21,7 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 //import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaLinePart;
 //import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaTextPart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.ZeigerPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
@@ -105,7 +105,7 @@ public class BitmapDrawerClockV4 extends AdvancedBitmapDrawer {
 				.setStyle(EZStyle.segmented_onlyactive)//
 				.draw(bitmapCanvas);
 
-		Skala.getLevelScalaCircular(center, maxRadius * 0.86f, maxRadius * 0.90f, -90, LevelLinesStyle.ZehnerlFuenferEiner)//
+		Skala.getLevelScalaCircular(center, maxRadius * 0.86f, maxRadius * 0.90f, -90, LevelLinesStyle.ZehnerFuenferEiner)//
 				.setDicke(strokeWidth * 0.75f)//
 				.setFontAttributesEbene1(new FontAttributes(fontSizeScala))//
 				.setFontRadiusEbene1(maxRadius * 0.75f)//
@@ -139,7 +139,7 @@ public class BitmapDrawerClockV4 extends AdvancedBitmapDrawer {
 					.setMode(EZMode.Zehner)//
 					.setStyle(EZStyle.segmented_all)//
 					.draw(bitmapCanvas);
-			new ZeigerPart(center, level, ri, maxRadius * 0.20f, strokeWidth * 1.0f, -225, maxScala, EZMode.Zehner)//
+			new LevelZeigerPart(center, level, ri, maxRadius * 0.20f, strokeWidth * 1.0f, -225, maxScala, EZMode.Zehner)//
 					.setDropShadow(new DropShadow(1.5f * strokeWidth, 0, 1.5f * strokeWidth, Color.BLACK))//
 					.setZeigerType(ZEIGER_TYP.rect)//
 					.draw(bitmapCanvas);
@@ -150,13 +150,13 @@ public class BitmapDrawerClockV4 extends AdvancedBitmapDrawer {
 					.setMode(EZMode.EinerOnly10Segmente)//
 					.setStyle(EZStyle.segmented_all)//
 					.draw(bitmapCanvas);
-			new ZeigerPart(center, level, ri, maxRadius * 0.20f, strokeWidth * 1.0f, 45, -maxScala, EZMode.EinerOnly10Segmente)//
+			new LevelZeigerPart(center, level, ri, maxRadius * 0.20f, strokeWidth * 1.0f, 45, -maxScala, EZMode.EinerOnly10Segmente)//
 					.setDropShadow(new DropShadow(1.5f * strokeWidth, 0, 1.5f * strokeWidth, Color.BLACK))//
 					.setZeigerType(ZEIGER_TYP.rect)//
 					.draw(bitmapCanvas);
 		}
 		// Zeiger
-		new ZeigerPart(center, level, maxRadius * 0.78f, maxRadius * 0.20f, strokeWidth * 1.5f, -90, 360, EZMode.Einer)//
+		new LevelZeigerPart(center, level, maxRadius * 0.78f, maxRadius * 0.20f, strokeWidth * 1.5f, -90, 360, EZMode.Einer)//
 				.setDropShadow(new DropShadow(1.5f * strokeWidth, 0, 1.5f * strokeWidth, Color.BLACK))//
 				.setZeigerType(ZEIGER_TYP.rect)//
 				// .overrideColor(Color.RED)//

@@ -9,6 +9,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
+import de.geithonline.abattlwp.bitmapdrawer.data.SkalaData;
 import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
@@ -35,40 +36,44 @@ public class SkalaPart {
 	private Paint linePaint = null;
 	private Paint textPaint = null;
 
-	private final float scalaSweep;
-	private final float startWinkel;
+	private final SkalaData scala;
+
 	private final SkalaLines skalaLines;
 
 	private FontAttributes attrEbene1 = null;
 	private FontAttributes attrEbene2 = null;
-
 	private float fontRadiusEbene1 = 0f;
 	private float fontRadiusEbene2 = 0f;
 
+	private boolean dontWriteOuterNumbers = false;
+
 	private String format = "%.0f";
-
 	private boolean invert = false;
-	private final float minValue;
-	private final float maxValue;
 
-	public SkalaPart(//
+	protected SkalaPart(//
 			final PointF center, //
 			final float radiusLineStart, final float radiusLineEnd, //
-			final float startWinkel, final float scalaSweep, //
-			final float minValue, final float maxValue, //
+			final SkalaData scale, //
 			final SkalaLines skalaLines) {
 		c = center;
 		this.skalaLines = skalaLines;
-		this.minValue = minValue;
-		this.maxValue = maxValue;
-		this.scalaSweep = scalaSweep;
-		this.startWinkel = startWinkel;
-		fontRadiusEbene1 = radiusLineEnd * 1.01f;
+		scala = scale;
+		fontRadiusEbene1 = radiusLineEnd * 1.02f;
 		fontRadiusEbene2 = 0f;
 		// Radien berechnen
 		setupLineRadien(radiusLineStart, radiusLineEnd);
 		setupDefaultLinePaint();
 		setupDefaultTextPaint();
+	}
+
+	public SkalaData getScala() {
+		return scala;
+	}
+
+	// ###############################################################################################
+	public SkalaPart dontWriteOuterNumbers() {
+		dontWriteOuterNumbers = true;
+		return this;
 	}
 
 	// ###############################################################################################
@@ -200,7 +205,7 @@ public class SkalaPart {
 		return this;
 	}
 
-	public void draw(final Canvas canvas) {
+	public SkalaPart draw(final Canvas canvas) {
 
 		drawLinesForEbene(canvas, skalaLines.ebene1, radiusMain, radiusLineEbene1, fontRadiusEbene1, dickeLineEbene1, attrEbene1);
 		drawLinesForEbene(canvas, skalaLines.ebene2, radiusMain, radiusLineEbene2, fontRadiusEbene2, dickeLineEbene2, attrEbene2);
@@ -210,12 +215,12 @@ public class SkalaPart {
 		if (radiusBaseLine > 0) {
 			final RectF oval = GeometrieHelper.getCircle(c, radiusBaseLine);
 			final Path mArc = new Path();
-			mArc.addArc(oval, startWinkel, scalaSweep);
+			mArc.addArc(oval, scala.startWinkel, scala.scalaSweep);
 			linePaint.setStyle(Style.STROKE);
 			linePaint.setStrokeWidth(dickeBaseline);
 			canvas.drawPath(mArc, linePaint);
 		}
-
+		return this;
 	}
 
 	private void drawLinesForEbene(final Canvas canvas, final float[] lines, //
@@ -228,25 +233,30 @@ public class SkalaPart {
 		}
 		// Linien Zeichnen
 		if (lines != null && lines.length > 0) {
-			final float valueSweep = maxValue - minValue;
+			final float valueSweep = scala.maxValue - scala.minValue;
 			for (final float s : lines) {
-				final float valueDiff = s - minValue;
-				final float sweep = scalaSweep / valueSweep * valueDiff;
-				final float winkel = startWinkel + sweep;
+				final float valueDiff = s - scala.minValue;
+				final float sweep = scala.scalaSweep / valueSweep * valueDiff;
+				final float winkel = scala.startWinkel + sweep;
 				final Path path = new ZeigerShapePath(c, radiusStart, radiusEnd, dicke, winkel, ZEIGER_TYP.rect);
 				canvas.drawPath(path, linePaint);
 
 				// Nummern zeichnen
 				if (attr != null) {
-					int faktor = 1;
-					if (invert) {
-						faktor = -1;
+					if ((winkel == scala.startWinkel || winkel == scala.startWinkel + scala.scalaSweep) //
+							&& dontWriteOuterNumbers == true) {
+						// do nothing
+					} else {
+						int faktor = 1;
+						if (invert) {
+							faktor = -1;
+						}
+						final Path mArc = new Path();
+						final RectF oval = GeometrieHelper.getCircle(c, fontRadius);
+						mArc.addArc(oval, winkel - 18 * faktor, 36 * faktor);
+						final String nr = String.format(Locale.US, format, s);
+						canvas.drawTextOnPath(nr, mArc, 0, 0, textPaint);
 					}
-					final Path mArc = new Path();
-					final RectF oval = GeometrieHelper.getCircle(c, fontRadius);
-					mArc.addArc(oval, winkel - 18 * faktor, 36 * faktor);
-					final String nr = String.format(Locale.US, format, s);
-					canvas.drawTextOnPath(nr, mArc, 0, 0, textPaint);
 				}
 			}
 		}

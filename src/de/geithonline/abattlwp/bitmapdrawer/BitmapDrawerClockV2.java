@@ -18,7 +18,7 @@ import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
-import de.geithonline.abattlwp.bitmapdrawer.parts.ZeigerPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
@@ -104,7 +104,7 @@ public class BitmapDrawerClockV2 extends AdvancedBitmapDrawer {
 				.setOutline(new Outline(PaintProvider.getGray(96), strokeWidth))//
 				.draw(bitmapCanvas);
 
-		Skala.getLevelScalaCircular(center, maxRadius * 0.63f, maxRadius * 0.67f, -90, LevelLinesStyle.ZehnerlFuenferEiner)//
+		Skala.getLevelScalaCircular(center, maxRadius * 0.63f, maxRadius * 0.67f, -90, LevelLinesStyle.ZehnerFuenferEiner)//
 				.setDicke(strokeWidth * 0.75f)//
 				.draw(bitmapCanvas);
 
@@ -113,7 +113,7 @@ public class BitmapDrawerClockV2 extends AdvancedBitmapDrawer {
 				.draw(bitmapCanvas);
 
 		// Zeiger
-		new ZeigerPart(center, level, maxRadius * 0.87f, maxRadius * 0.73f, strokeWidth * 3, -90, 360, EZMode.Einer)//
+		new LevelZeigerPart(center, level, maxRadius * 0.87f, maxRadius * 0.73f, strokeWidth * 3, -90, 360, EZMode.Einer)//
 				.setDropShadow(new DropShadow(2 * strokeWidth, Color.BLACK))//
 				.setZeigerType(ZEIGER_TYP.raute)//
 				.draw(bitmapCanvas);

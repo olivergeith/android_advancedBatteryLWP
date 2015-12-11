@@ -41,17 +41,6 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 				return true;
 			}
 		});
-		// initializing Members
-		// stylePref = (ListPreference) findPreference(Settings.KEY_BATT_STYLE);
-		// // changelistener auf stylepicker
-		// stylePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-		//
-		// @Override
-		// public boolean onPreferenceChange(final Preference preference, final Object newStyle) {
-		// enableSettingsForStyle((String) newStyle);
-		// return true;
-		// }
-		// });
 		// initialize Properties
 		Log.i(this.getClass().getSimpleName(), "Initializing Style -> " + Settings.getStyle());
 		enableSettingsForStyle(Settings.getStyle());
@@ -61,7 +50,7 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 	public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		if (requestCode == REQUESTCODE_START_STYL_RECYCLER) {
 			Log.i("MENU", "Coming beack from Style Selection with recyclerview");
-			redrawPreview();
+			enableSettingsForStyle(Settings.getStyle());
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -126,6 +115,6 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 
 	@Override
 	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
-		redrawPreview();
+		enableSettingsForStyle(Settings.getStyle());
 	}
 }

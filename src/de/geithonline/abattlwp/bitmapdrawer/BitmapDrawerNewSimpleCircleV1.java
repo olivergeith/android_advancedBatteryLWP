@@ -12,7 +12,7 @@ import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.ZeigerPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
@@ -124,7 +124,7 @@ public class BitmapDrawerNewSimpleCircleV1 extends AdvancedBitmapDrawer {
 		}
 		if (Settings.isShowZeiger()) {
 			// Zeiger
-			new ZeigerPart(center, level, maxRadius * 1f, maxRadius * 0.70f, strokeWidth, -90, 360, EZMode.Einer)//
+			new LevelZeigerPart(center, level, maxRadius * 1f, maxRadius * 0.70f, strokeWidth, -90, 360, EZMode.Einer)//
 					.setDropShadow(new DropShadow(2 * strokeWidth, Color.BLACK))//
 					.draw(bitmapCanvas);
 		}

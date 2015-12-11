@@ -4,21 +4,22 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
-import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
-import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
-import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
-import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaLinePart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaTextPart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.ZeigerPart;
-import de.geithonline.abattlwp.settings.PaintProvider;
-import de.geithonline.abattlwp.settings.Settings;
-import de.geithonline.abattlwp.utils.GeometrieHelper;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
+import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
+import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
+import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.LevelLinesStyle;
+import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
+import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
+import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
+import de.geithonline.abattlwp.settings.PaintProvider;
+import de.geithonline.abattlwp.settings.Settings;
+import de.geithonline.abattlwp.utils.GeometrieHelper;
 
 public class BitmapDrawerNewTachoV3 extends AdvancedBitmapDrawer {
 
@@ -96,23 +97,19 @@ public class BitmapDrawerNewTachoV3 extends AdvancedBitmapDrawer {
 				.setMode(Settings.getLevelMode())//
 				.draw(bitmapCanvas);
 		// Skala
-		new SkalaLinePart(center, maxRadius * 0.65f, maxRadius * 0.6f, -90, 360)//
-				.set5erRadiusAussen(maxRadius * 0.63f)//
-				.setDicke10er(strokeWidth / 2)//
-				.setDicke5er(strokeWidth / 3)//
-				.setDraw100(true)//
+		Skala.getLevelScalaCircular(center, maxRadius * 0.60f, maxRadius * 0.65f, -90, LevelLinesStyle.ZehnerFuenferEiner)//
+				.setFontAttributesEbene1(new FontAttributes(fontSizeScala))//
+				// .setFontAttributesEbene2Default()//
+				.setDicke(strokeWidth * 0.75f)//
 				.draw(bitmapCanvas);
 
-		new SkalaTextPart(center, maxRadius * 0.67f, fontSizeScala, -90, 360)//
-				.setDraw0(true)//
-				.draw(bitmapCanvas);
 		// innere Fläche
 		new RingPart(center, maxRadius * 0.6f, maxRadius * 0, PaintProvider.getBackgroundPaint())//
-				.setOutline(new Outline(Color.WHITE, strokeWidth))//
+				.setOutline(new Outline(Color.WHITE, strokeWidth / 2))//
 				.draw(bitmapCanvas);
 		if (Settings.isShowZeiger()) {
 			// Zeiger
-			new ZeigerPart(center, level, maxRadius * 1f, maxRadius * 0.6f, strokeWidth, -90, 360, EZMode.Einer)//
+			new LevelZeigerPart(center, level, maxRadius * 1f, maxRadius * 0.6f, strokeWidth, -90, 360, EZMode.Einer)//
 					.setDropShadow(new DropShadow(2 * strokeWidth, Color.BLACK))//
 					.draw(bitmapCanvas);
 		}

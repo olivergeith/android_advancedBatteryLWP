@@ -4,23 +4,24 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
+import android.graphics.PointF;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
+import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
-import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
+import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
+import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.LevelLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
 import de.geithonline.abattlwp.bitmapdrawer.parts.ArchPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaLinePart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaTextPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.ZeigerPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
-import android.graphics.PointF;
 
 public class BitmapDrawerAsymetricV1 extends AdvancedBitmapDrawer {
 
@@ -95,15 +96,12 @@ public class BitmapDrawerAsymetricV1 extends AdvancedBitmapDrawer {
 				.setOutline(new Outline(Color.WHITE, strokeWidth / 2))//
 				.draw(bitmapCanvas);
 		// Skala
-		new SkalaLinePart(center2, maxRadius * 0.70f, maxRadius * 0.65f, -90, 360)//
-				.set5erRadiusAussen(maxRadius * 0.68f)//
-				.set1erRadiusAussen(maxRadius * 0.66f)//
-				.setDicke(strokeWidth / 2)//
+		Skala.getLevelScalaCircular(center2, maxRadius * 0.65f, maxRadius * 0.70f, -90, LevelLinesStyle.ZehnerFuenferEiner)//
+				.setFontAttributesEbene1(new FontAttributes(fontSizeScala))//
+				.setFontAttributesEbene2Default()//
+				.setDicke(strokeWidth * 0.75f)//
 				.draw(bitmapCanvas);
 
-		new SkalaTextPart(center2, maxRadius * 0.70f, fontSizeScala, -90, 360)//
-				.setFontsize5er(fontSizeScala * 0.75f)//
-				.draw(bitmapCanvas);
 		// phase
 		new RingPart(center2, maxRadius * 0.64f, maxRadius * 0.59f, new Paint())//
 				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(224), GRAD_STYLE.top2bottom))//
@@ -118,7 +116,7 @@ public class BitmapDrawerAsymetricV1 extends AdvancedBitmapDrawer {
 				.setMode(Settings.getLevelMode())//
 				.draw(bitmapCanvas);
 		// Zeiger
-		new ZeigerPart(center2, level, maxRadius * 0.64f, maxRadius * 0.0f, strokeWidth, -90, 360, EZMode.Einer)//
+		new LevelZeigerPart(center2, level, maxRadius * 0.64f, maxRadius * 0.0f, strokeWidth, -90, 360, EZMode.Einer)//
 				.setDropShadow(new DropShadow(1.5f * strokeWidth, 0, 1.5f * strokeWidth, Color.BLACK))//
 				.draw(bitmapCanvas);
 

@@ -9,9 +9,10 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
+import de.geithonline.abattlwp.bitmapdrawer.data.LevelLines;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
-import de.geithonline.abattlwp.settings.PaintProvider;
+import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
 
 public class SkalaPart {
@@ -31,13 +32,12 @@ public class SkalaPart {
 	private float dickeLineEbene3 = 2f;
 	private float dickeBaseline = 2f;
 
-	private Paint paint = null;
+	private Paint linePaint = null;
+	private Paint textPaint = null;
 
 	private final float scalaSweep;
 	private final float startWinkel;
-	private float[] linesEbene1;
-	private float[] linesEbene2 = null;
-	private float[] linesEbene3 = null;
+	private final LevelLines levelLines;
 
 	private FontAttributes attrEbene1 = null;
 	private FontAttributes attrEbene2 = null;
@@ -54,28 +54,41 @@ public class SkalaPart {
 	public SkalaPart(//
 			final PointF center, //
 			final float radiusLineStart, final float radiusLineEnd, //
-			final float startWinkel, final float sweep, //
+			final float startWinkel, final float scalaSweep, //
 			final float minValue, final float maxValue, //
-			final float[] linesEbene1) {
+			final LevelLines levelLines) {
 		c = center;
-		// Radien berechnen
-		setupLineRadien(radiusLineStart, radiusLineEnd);
-		setLinesEbene1(linesEbene1);
-		setupDefaultPaint();
-
+		this.levelLines = levelLines;
 		this.minValue = minValue;
 		this.maxValue = maxValue;
-		scalaSweep = sweep;
+		this.scalaSweep = scalaSweep;
 		this.startWinkel = startWinkel;
 		fontRadiusEbene1 = radiusLineEnd * 1.01f;
 		fontRadiusEbene2 = 0f;
+		// Radien berechnen
+		setupLineRadien(radiusLineStart, radiusLineEnd);
+		setupDefaultLinePaint();
+
 	}
 
 	// ###############################################################################################
-	private SkalaPart setupDefaultPaint() {
-		paint = PaintProvider.initScalePaint();
-		paint.setAntiAlias(true);
-		paint.setStyle(Style.FILL);
+	private SkalaPart setupDefaultLinePaint() {
+		linePaint = new Paint();
+		linePaint.setAlpha(255);
+		linePaint.setFakeBoldText(true);
+		linePaint.setAntiAlias(true);
+		linePaint.setStyle(Style.FILL);
+		linePaint.setColor(Settings.getScaleColor());
+		return this;
+	}
+
+	private SkalaPart setupDefaultTextPaint() {
+		textPaint = new Paint();
+		textPaint.setAlpha(255);
+		textPaint.setFakeBoldText(true);
+		textPaint.setAntiAlias(true);
+		textPaint.setStyle(Style.FILL);
+		textPaint.setColor(Settings.getScaleColor()); // TODO eigene Farbe
 		return this;
 	}
 
@@ -103,22 +116,6 @@ public class SkalaPart {
 
 	public SkalaPart setupDefaultBaseLineRadius() {
 		setupBaseLineRadius(radiusMain);
-		return this;
-	}
-
-	// ###############################################################################################
-	public SkalaPart setLinesEbene1(final float[] scala) {
-		linesEbene1 = scala;
-		return this;
-	}
-
-	public SkalaPart setLinesEbene2(final float[] scala) {
-		linesEbene2 = scala;
-		return this;
-	}
-
-	public SkalaPart setLinesEbene3(final float[] scala) {
-		linesEbene3 = scala;
 		return this;
 	}
 
@@ -205,18 +202,18 @@ public class SkalaPart {
 
 	public void draw(final Canvas canvas) {
 
-		drawLinesForEbene(canvas, linesEbene1, radiusMain, radiusLineEbene1, fontRadiusEbene1, dickeLineEbene1, attrEbene1);
-		drawLinesForEbene(canvas, linesEbene2, radiusMain, radiusLineEbene2, fontRadiusEbene2, dickeLineEbene2, attrEbene2);
-		drawLinesForEbene(canvas, linesEbene3, radiusMain, radiusLineEbene3, 0f, dickeLineEbene3, null);
+		drawLinesForEbene(canvas, levelLines.zehner, radiusMain, radiusLineEbene1, fontRadiusEbene1, dickeLineEbene1, attrEbene1);
+		drawLinesForEbene(canvas, levelLines.fuenfer, radiusMain, radiusLineEbene2, fontRadiusEbene2, dickeLineEbene2, attrEbene2);
+		drawLinesForEbene(canvas, levelLines.einer, radiusMain, radiusLineEbene3, 0f, dickeLineEbene3, null);
 
 		// ggf linie zeichnen
 		if (radiusBaseLine > 0) {
 			final RectF oval = GeometrieHelper.getCircle(c, radiusBaseLine);
 			final Path mArc = new Path();
 			mArc.addArc(oval, startWinkel, scalaSweep);
-			paint.setStyle(Style.STROKE);
-			paint.setStrokeWidth(dickeBaseline);
-			canvas.drawPath(mArc, paint);
+			linePaint.setStyle(Style.STROKE);
+			linePaint.setStrokeWidth(dickeBaseline);
+			canvas.drawPath(mArc, linePaint);
 		}
 
 	}
@@ -227,7 +224,7 @@ public class SkalaPart {
 			final FontAttributes attr) {
 		// Fontattribute setzen
 		if (attr != null) {
-			attr.setupPaint(paint);
+			attr.setupPaint(textPaint);
 		}
 		// Linien Zeichnen
 		if (lines != null && lines.length > 0) {
@@ -237,19 +234,19 @@ public class SkalaPart {
 				final float sweep = scalaSweep / valueSweep * valueDiff;
 				final float winkel = startWinkel + sweep;
 				final Path path = new ZeigerShapePath(c, radiusStart, radiusEnd, dicke, winkel, ZEIGER_TYP.rect);
-				canvas.drawPath(path, paint);
+				canvas.drawPath(path, linePaint);
+
 				// Nummern zeichnen
 				if (attr != null) {
 					int faktor = 1;
 					if (invert) {
 						faktor = -1;
 					}
-
 					final Path mArc = new Path();
 					final RectF oval = GeometrieHelper.getCircle(c, fontRadius);
 					mArc.addArc(oval, winkel - 18 * faktor, 36 * faktor);
 					final String nr = String.format(Locale.US, format, s);
-					canvas.drawTextOnPath(nr, mArc, 0, 0, paint);
+					canvas.drawTextOnPath(nr, mArc, 0, 0, textPaint);
 				}
 			}
 		}

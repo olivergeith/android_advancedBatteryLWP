@@ -10,6 +10,13 @@ public class FontAttributes {
 	private Typeface typeFace = Typeface.DEFAULT;
 	private float fontSize = 10f;
 
+	public FontAttributes(final float fontSize) {
+		super();
+		align = Align.CENTER;
+		typeFace = Typeface.DEFAULT_BOLD;
+		this.fontSize = fontSize;
+	}
+
 	public FontAttributes(final Align align, final Typeface typeFace, final float fontSize) {
 		super();
 		this.align = align;

@@ -12,6 +12,7 @@ import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
+import de.geithonline.abattlwp.bitmapdrawer.data.LevelLines.LevelLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
@@ -132,7 +133,7 @@ public class BitmapDrawerClockV5 extends AdvancedBitmapDrawer {
 				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth))//
 				.draw(bitmapCanvas);
 
-		Skala.getLevelScalaArch(center, maxRadius * 0.76f, maxRadius * 0.82f, startWinkel, sweep)//
+		Skala.getLevelScalaArch(center, maxRadius * 0.76f, maxRadius * 0.82f, startWinkel, sweep, LevelLinesStyle.ZehnerlFuenferEiner)//
 				.setDicke(strokeWidth * 0.75f)//
 				.setFontAttributesEbene1(new FontAttributes(Align.CENTER, Typeface.DEFAULT_BOLD, fontSizeScala))//
 				.setFontAttributesEbene2Default()//

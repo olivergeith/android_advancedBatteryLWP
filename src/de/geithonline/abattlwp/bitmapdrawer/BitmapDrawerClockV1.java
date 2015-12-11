@@ -7,9 +7,9 @@ import android.graphics.Paint.Align;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.graphics.Typeface;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
+import de.geithonline.abattlwp.bitmapdrawer.data.LevelLines.LevelLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
@@ -89,9 +89,9 @@ public class BitmapDrawerClockV1 extends AdvancedBitmapDrawer {
 				.setStyle(EZStyle.sweep)//
 				.draw(bitmapCanvas);
 
-		Skala.getLevelScalaCircular(center, maxRadius * 0.90f, maxRadius * 0.84f, -90)//
+		Skala.getLevelScalaCircular(center, maxRadius * 0.90f, maxRadius * 0.84f, -90, LevelLinesStyle.ZehnerlFuenferEiner)//
 				.setDicke(strokeWidth * 0.75f)//
-				.setFontAttributesEbene1(new FontAttributes(Align.CENTER, Typeface.DEFAULT_BOLD, fontSizeScala))//
+				.setFontAttributesEbene1(new FontAttributes(fontSizeScala))//
 				.setFontRadiusEbene1(maxRadius * 0.75f)//
 				.draw(bitmapCanvas);
 

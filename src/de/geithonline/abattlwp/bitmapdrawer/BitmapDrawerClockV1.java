@@ -9,7 +9,7 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
-import de.geithonline.abattlwp.bitmapdrawer.data.LevelLines.LevelLinesStyle;
+import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.LevelLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;

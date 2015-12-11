@@ -53,7 +53,6 @@ public class MultimeterSkalaPart {
 	public static MultimeterSkalaPart getDefaultVoltmeterPart(final PointF center, final float ra, final float ri, final float startWinkel, final float sweep) {
 		final float[] scala = new float[] { 3.5f, 4.0f, 4.5f };
 		final float[] deviderScala = new float[] { 3.6f, 3.7f, 3.8f, 3.9f, 4.1f, 4.2f, 4.3f, 4.4f };
-
 		final MultimeterSkalaPart voltmeter = new MultimeterSkalaPart(center, ra, ri, startWinkel, sweep, scala)//
 				.setDividerScala(deviderScala, ri + (ra - ri) / 2, ri);
 		return voltmeter;

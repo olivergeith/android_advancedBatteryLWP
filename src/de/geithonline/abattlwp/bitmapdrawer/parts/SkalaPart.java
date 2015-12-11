@@ -9,7 +9,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
-import de.geithonline.abattlwp.bitmapdrawer.data.LevelLines;
+import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.Settings;
@@ -37,7 +37,7 @@ public class SkalaPart {
 
 	private final float scalaSweep;
 	private final float startWinkel;
-	private final LevelLines levelLines;
+	private final SkalaLines skalaLines;
 
 	private FontAttributes attrEbene1 = null;
 	private FontAttributes attrEbene2 = null;
@@ -56,9 +56,9 @@ public class SkalaPart {
 			final float radiusLineStart, final float radiusLineEnd, //
 			final float startWinkel, final float scalaSweep, //
 			final float minValue, final float maxValue, //
-			final LevelLines levelLines) {
+			final SkalaLines skalaLines) {
 		c = center;
-		this.levelLines = levelLines;
+		this.skalaLines = skalaLines;
 		this.minValue = minValue;
 		this.maxValue = maxValue;
 		this.scalaSweep = scalaSweep;
@@ -68,7 +68,7 @@ public class SkalaPart {
 		// Radien berechnen
 		setupLineRadien(radiusLineStart, radiusLineEnd);
 		setupDefaultLinePaint();
-
+		setupDefaultTextPaint();
 	}
 
 	// ###############################################################################################
@@ -202,9 +202,9 @@ public class SkalaPart {
 
 	public void draw(final Canvas canvas) {
 
-		drawLinesForEbene(canvas, levelLines.zehner, radiusMain, radiusLineEbene1, fontRadiusEbene1, dickeLineEbene1, attrEbene1);
-		drawLinesForEbene(canvas, levelLines.fuenfer, radiusMain, radiusLineEbene2, fontRadiusEbene2, dickeLineEbene2, attrEbene2);
-		drawLinesForEbene(canvas, levelLines.einer, radiusMain, radiusLineEbene3, 0f, dickeLineEbene3, null);
+		drawLinesForEbene(canvas, skalaLines.ebene1, radiusMain, radiusLineEbene1, fontRadiusEbene1, dickeLineEbene1, attrEbene1);
+		drawLinesForEbene(canvas, skalaLines.ebene2, radiusMain, radiusLineEbene2, fontRadiusEbene2, dickeLineEbene2, attrEbene2);
+		drawLinesForEbene(canvas, skalaLines.ebene3, radiusMain, radiusLineEbene3, 0f, dickeLineEbene3, null);
 
 		// ggf linie zeichnen
 		if (radiusBaseLine > 0) {

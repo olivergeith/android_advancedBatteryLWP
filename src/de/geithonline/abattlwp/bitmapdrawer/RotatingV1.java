@@ -22,7 +22,7 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 
-public class BitmapDrawerRotatingV1 extends AdvancedBitmapDrawer {
+public class RotatingV1 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 
@@ -47,7 +47,7 @@ public class BitmapDrawerRotatingV1 extends AdvancedBitmapDrawer {
 		fontSizeLevel = maxRadius * 0.25f;
 	}
 
-	public BitmapDrawerRotatingV1() {
+	public RotatingV1() {
 	}
 
 	@Override
@@ -68,6 +68,11 @@ public class BitmapDrawerRotatingV1 extends AdvancedBitmapDrawer {
 	@Override
 	public boolean supportsExtraLevelBars() {
 		return true;
+	}
+
+	@Override
+	public boolean supportsLevelNumberFontSizeAdjustment() {
+		return false;
 	}
 
 	@Override
@@ -156,7 +161,7 @@ public class BitmapDrawerRotatingV1 extends AdvancedBitmapDrawer {
 	@Override
 	public void drawLevelNumber(final int level) {
 		final float winkel = -90 + level * 3.6f;
-		new TextOnCirclePart(center, maxRadius * 0.68f, winkel, fontSizeLevel, PaintProvider.getNumberPaint(level, fontSizeLevel))//
+		new TextOnCirclePart(center, maxRadius * 0.68f, winkel, fontSizeLevel, PaintProvider.getLevelNumberPaint(level, fontSizeLevel))//
 				.setAlign(Align.CENTER)//
 				.setDropShadow(new DropShadow(strokeWidth * 2, 0, strokeWidth / 2, Color.BLACK))//
 				.draw(bitmapCanvas, "" + level);

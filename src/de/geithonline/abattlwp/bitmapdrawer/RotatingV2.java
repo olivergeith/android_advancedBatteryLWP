@@ -27,7 +27,7 @@ import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 
-public class BitmapDrawerRotatingV2 extends AdvancedBitmapDrawer {
+public class RotatingV2 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 
@@ -52,7 +52,7 @@ public class BitmapDrawerRotatingV2 extends AdvancedBitmapDrawer {
 		fontSizeLevel = maxRadius * 0.15f;
 	}
 
-	public BitmapDrawerRotatingV2() {
+	public RotatingV2() {
 	}
 
 	@Override
@@ -88,6 +88,11 @@ public class BitmapDrawerRotatingV2 extends AdvancedBitmapDrawer {
 	@Override
 	public boolean supportsThermometer() {
 		return true;
+	}
+
+	@Override
+	public boolean supportsLevelNumberFontSizeAdjustment() {
+		return false;
 	}
 
 	@Override
@@ -240,7 +245,7 @@ public class BitmapDrawerRotatingV2 extends AdvancedBitmapDrawer {
 				.draw(bitmapCanvas);
 		// die nummer
 		final float winkel = -226 + level * 2.7f;
-		new TextOnCirclePart(center, maxRadius * 0.85f, winkel, fontSizeLevel, PaintProvider.getNumberPaint(level, fontSizeLevel))//
+		new TextOnCirclePart(center, maxRadius * 0.85f, winkel, fontSizeLevel, PaintProvider.getLevelNumberPaint(level, fontSizeLevel))//
 				.setAlign(Align.CENTER)//
 				.setDropShadow(new DropShadow(strokeWidth * 2, 0, strokeWidth / 2, Color.BLACK))//
 				.draw(bitmapCanvas, "" + level);

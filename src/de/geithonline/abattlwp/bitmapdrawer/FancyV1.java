@@ -29,7 +29,7 @@ import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.ColorHelper;
 
-public class BitmapDrawerFancyV1 extends AdvancedBitmapDrawer {
+public class FancyV1 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 
@@ -54,7 +54,7 @@ public class BitmapDrawerFancyV1 extends AdvancedBitmapDrawer {
 		fontSizeLevel = maxRadius * 0.2f;
 	}
 
-	public BitmapDrawerFancyV1() {
+	public FancyV1() {
 	}
 
 	@Override

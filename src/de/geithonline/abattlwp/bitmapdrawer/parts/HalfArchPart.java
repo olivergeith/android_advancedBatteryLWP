@@ -5,15 +5,15 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.RadialGradient;
+import android.graphics.Shader;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.HalfArcPath;
 import de.geithonline.abattlwp.settings.PaintProvider;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.RadialGradient;
-import android.graphics.Shader;
 
 public class HalfArchPart {
 
@@ -92,14 +92,14 @@ public class HalfArchPart {
 		if (gradient != null) {
 			paint.setStyle(Style.FILL);
 			switch (gradient.getStyle()) {
-			default:
-			case top2bottom:
-				paint.setShader(new LinearGradient(c.x, c.y - ra, c.x, c.y + ra, gradient.getColor1(), gradient.getColor2(), Shader.TileMode.MIRROR));
-				break;
-			case radial:
-				final int[] colors = new int[] { gradient.getColor1(), gradient.getColor2() };
-				paint.setShader(new RadialGradient(c.x, c.y, ra, colors, getDistancesRadial(), Shader.TileMode.CLAMP));
-				break;
+				default:
+				case top2bottom:
+					paint.setShader(new LinearGradient(c.x, c.y - ra, c.x, c.y, gradient.getColor1(), gradient.getColor2(), Shader.TileMode.MIRROR));
+					break;
+				case radial:
+					final int[] colors = new int[] { gradient.getColor1(), gradient.getColor2() };
+					paint.setShader(new RadialGradient(c.x, c.y, ra, colors, getDistancesRadial(), Shader.TileMode.CLAMP));
+					break;
 			}
 		}
 	}

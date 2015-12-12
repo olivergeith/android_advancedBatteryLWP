@@ -24,7 +24,7 @@ import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
 
-public class BitmapDrawerClockV1 extends AdvancedBitmapDrawer {
+public class ClockV1 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 
@@ -54,7 +54,7 @@ public class BitmapDrawerClockV1 extends AdvancedBitmapDrawer {
 		radiusBattStatus = maxRadius * 0.5f;
 	}
 
-	public BitmapDrawerClockV1() {
+	public ClockV1() {
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class BitmapDrawerClockV1 extends AdvancedBitmapDrawer {
 
 		// innere Fläche
 		new RingPart(center, maxRadius * 0.20f, maxRadius * 0f, new Paint())//
-				.setColor(Color.WHITE)//
+				.setColor(PaintProvider.getGray(192))//
 				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth))//
 				.draw(bitmapCanvas);
 

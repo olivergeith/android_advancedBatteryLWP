@@ -28,7 +28,7 @@ import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
 
-public class BitmapDrawerClockV4 extends AdvancedBitmapDrawer {
+public class ClockV4 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 
@@ -53,7 +53,7 @@ public class BitmapDrawerClockV4 extends AdvancedBitmapDrawer {
 
 	}
 
-	public BitmapDrawerClockV4() {
+	public ClockV4() {
 	}
 
 	@Override

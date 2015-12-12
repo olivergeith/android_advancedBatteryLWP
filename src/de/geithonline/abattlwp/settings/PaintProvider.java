@@ -99,7 +99,7 @@ public class PaintProvider {
 		return initErasurePaint();
 	}
 
-	public static Paint getNumberPaint(final int level, final float fontSize) {
+	public static Paint getLevelNumberPaint(final int level, final float fontSize) {
 		final Paint numberPaint = initNumberPaint();
 		if (Settings.isColoredNumber()) {
 			numberPaint.setColor(getColorForLevel(level));

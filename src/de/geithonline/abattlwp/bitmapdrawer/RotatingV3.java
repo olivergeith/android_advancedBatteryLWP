@@ -11,6 +11,7 @@ import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
+import de.geithonline.abattlwp.bitmapdrawer.data.RadiusData;
 import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.LevelLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.VoltLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
@@ -27,7 +28,7 @@ import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 
-public class BitmapDrawerRotatingV3 extends AdvancedBitmapDrawer {
+public class RotatingV3 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 	private float fontSizeLevel;
@@ -48,7 +49,7 @@ public class BitmapDrawerRotatingV3 extends AdvancedBitmapDrawer {
 		fontSizeLevel = maxRadius * 0.15f;
 	}
 
-	public BitmapDrawerRotatingV3() {
+	public RotatingV3() {
 	}
 
 	@Override
@@ -84,6 +85,11 @@ public class BitmapDrawerRotatingV3 extends AdvancedBitmapDrawer {
 	@Override
 	public boolean supportsThermometer() {
 		return true;
+	}
+
+	@Override
+	public boolean supportsLevelNumberFontSizeAdjustment() {
+		return false;
 	}
 
 	@Override
@@ -152,6 +158,17 @@ public class BitmapDrawerRotatingV3 extends AdvancedBitmapDrawer {
 			new LevelZeigerPart(center, level, maxRadius * 0.65f, maxRadius * 0.16f, strokeWidth, -180, 180, EZMode.Einer)//
 					.setDropShadow(new DropShadow(3 * strokeWidth, Color.BLACK))//
 					.draw(bitmapCanvas);
+			// // einer
+			// new LevelZeigerPart(center, level, maxRadius * 0.40f, maxRadius * 0.16f, strokeWidth, -180, 180, EZMode.EinerOnly10Segmente)//
+			// .setDropShadow(new DropShadow(2 * strokeWidth, Color.BLACK))//
+			// .setZeigerType(ZEIGER_TYP.rect)//
+			// .draw(bitmapCanvas);
+			// // zehner
+			// new LevelZeigerPart(center, level, maxRadius * 0.46f, maxRadius * 0.16f, strokeWidth, -180, 180, EZMode.Zehner)//
+			// .setDropShadow(new DropShadow(2 * strokeWidth, Color.BLACK))//
+			// .setZeigerType(ZEIGER_TYP.rect)//
+			// .draw(bitmapCanvas);
+
 		}
 		// Innen Fläche
 		new RingPart(center, maxRadius * 0.15f, maxRadius * 0.00f, new Paint())//
@@ -169,6 +186,7 @@ public class BitmapDrawerRotatingV3 extends AdvancedBitmapDrawer {
 					.draw(bitmapCanvas);
 			Skala.getDefaultVoltmeterZeigerPart(center, Settings.getBattVoltage(), maxRadius * 0.59f, 0f, s.getScala())//
 					.setDicke(strokeWidth)//
+					.setSweepRadiusData(new RadiusData(maxRadius * 0.60f, maxRadius * 0.56f))//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//
 					.draw(bitmapCanvas);
 
@@ -194,6 +212,7 @@ public class BitmapDrawerRotatingV3 extends AdvancedBitmapDrawer {
 					.draw(bitmapCanvas);
 			Skala.getDefaultThermometerZeigerPart(center, Settings.getBattTemperature(), maxRadius * 0.59f, 0f, s.getScala())//
 					.setDicke(strokeWidth)//
+					.setSweepRadiusData(new RadiusData(maxRadius * 0.60f, maxRadius * 0.56f))//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//
 					.draw(bitmapCanvas);
 
@@ -242,7 +261,7 @@ public class BitmapDrawerRotatingV3 extends AdvancedBitmapDrawer {
 				.draw(bitmapCanvas);
 		// die nummer
 		final float winkel = -180 + level * 1.8f;
-		new TextOnCirclePart(center, maxRadius * 0.85f, winkel, fontSizeLevel, PaintProvider.getNumberPaint(level, fontSizeLevel))//
+		new TextOnCirclePart(center, maxRadius * 0.85f, winkel, fontSizeLevel, PaintProvider.getLevelNumberPaint(level, fontSizeLevel))//
 				.setAlign(Align.CENTER)//
 				.setDropShadow(new DropShadow(strokeWidth * 2, 0, strokeWidth / 2, Color.BLACK))//
 				.draw(bitmapCanvas, "" + level);

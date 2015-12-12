@@ -6,9 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.RectF;
 import android.graphics.Typeface;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
@@ -19,60 +17,50 @@ import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.LevelLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.VoltLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
+import de.geithonline.abattlwp.bitmapdrawer.parts.ArchPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnLinePart;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.ColorHelper;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
 
-public class BitmapDrawerClockV3 extends AdvancedBitmapDrawer {
+public class FancyV2 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 
 	private float fontSizeLevel;
 	private float fontSizeArc;
 	private float fontSizeScala;
-
+	private Outline outline;
 	private float maxRadius;
-	private float radiusChangeText;
-	private float radiusBattStatus;
 
 	private final PointF center = new PointF();
 
 	private void initPrivateMembers() {
 		center.x = bmpWidth / 2;
-		center.y = bmpHeight / 2;
+		center.y = bmpHeight * 0.75f;
 
-		maxRadius = bmpWidth / 2;
+		maxRadius = bmpWidth * 0.5f;
 		// Strokes
 		strokeWidth = maxRadius * 0.02f;
 		// fontsizes
 		fontSizeArc = maxRadius * 0.08f;
 		fontSizeScala = maxRadius * 0.08f;
-		fontSizeLevel = maxRadius * 0.26f;
-		// Radiusses
-
-		radiusChangeText = maxRadius * 0.70f;// - fontSizeArc;
-		radiusBattStatus = maxRadius * 0.42f;
+		fontSizeLevel = maxRadius * 0.2f;
+		outline = new Outline(PaintProvider.getGray(32), strokeWidth * 0.7f);
 
 	}
 
-	public BitmapDrawerClockV3() {
+	public FancyV2() {
 	}
 
 	@Override
 	public boolean supportsPointerColor() {
-		return true;
-	}
-
-	@Override
-	public boolean supportsLevelStyle() {
 		return true;
 	}
 
@@ -82,12 +70,17 @@ public class BitmapDrawerClockV3 extends AdvancedBitmapDrawer {
 	}
 
 	@Override
-	public boolean supportsVoltmeter() {
+	public boolean supportsLevelStyle() {
 		return true;
 	}
 
 	@Override
 	public boolean supportsThermometer() {
+		return true;
+	}
+
+	@Override
+	public boolean supportsVoltmeter() {
 		return true;
 	}
 
@@ -98,132 +91,146 @@ public class BitmapDrawerClockV3 extends AdvancedBitmapDrawer {
 		return bitmap;
 	}
 
+	private final float halfWinkel = 110f;
+	private final float sweep = 2 * halfWinkel;
+	private final float startWinkel = -90 - halfWinkel;
+
 	private void drawAll(final int level) {
+		// SkalaBackground
+		new ArchPart(center, maxRadius * 0.75f, maxRadius * 0f, startWinkel - 7, sweep + 2 * 7, PaintProvider.getBackgroundPaint())//
+				.setOutline(outline)//
+				.draw(bitmapCanvas);
+		new ArchPart(center, maxRadius * 0.48f, maxRadius * 0f, startWinkel - 7, -(360 - sweep - 2 * 7), PaintProvider.getBackgroundPaint())//
+				.setOutline(outline)//
+				.draw(bitmapCanvas);
 
 		// Ausen Ring
-		new RingPart(center, maxRadius * 0.99f, maxRadius * 0.80f, new Paint())//
-				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(96), GRAD_STYLE.top2bottom))//
-				.setOutline(new Outline(PaintProvider.getGray(64), strokeWidth))//
-				.draw(bitmapCanvas);
-		// SkalaBackground
-		new RingPart(center, maxRadius * 0.79f, maxRadius * 0.0f, PaintProvider.getBackgroundPaint())//
+		new ArchPart(center, maxRadius * 0.95f, maxRadius * 0.75f, startWinkel - 7, sweep + 2 * 7, new Paint())//
+				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(160), GRAD_STYLE.top2bottom))//
+				.setOutline(outline)//
 				.draw(bitmapCanvas);
 
 		// Level
-		new LevelPart(center, maxRadius * 0.79f, maxRadius * 0.70f, level, -90, 360, EZColoring.LevelColors)//
+		new LevelPart(center, maxRadius * 0.71f, maxRadius * 0.60f, level, startWinkel, sweep, EZColoring.LevelColors)//
 				.setSegemteAbstand(1f)//
 				.setStrokeWidth(strokeWidth / 3)//
 				.setStyle(Settings.getLevelStyle())//
 				.setMode(Settings.getLevelMode())//
+				// .setDropShadow(new DropShadow(strokeWidth * 1, Color.BLACK))//
 				.draw(bitmapCanvas);
 
-		// Innen Phase (with white dropshadow)
+		// Innen Phase
 		if (Settings.isShowGlowScala()) {
-			new RingPart(center, maxRadius * 0.35f, maxRadius * 0.30f, new Paint())//
-					.setColor(Color.BLACK)//
-					.setDropShadow(new DropShadow(strokeWidth * 30, Settings.getGlowScalaColor()))//
-					.draw(bitmapCanvas);
-			new RingPart(center, maxRadius * 0.35f, maxRadius * 0.30f, new Paint())//
+			new RingPart(center, maxRadius * 0.25f, maxRadius * 0.0f, new Paint())//
 					.setColor(Color.BLACK)//
 					.setDropShadow(new DropShadow(strokeWidth * 10, Settings.getGlowScalaColor()))//
 					.draw(bitmapCanvas);
-			new RingPart(center, maxRadius * 0.35f, maxRadius * 0.30f, new Paint())//
+			new RingPart(center, maxRadius * 0.25f, maxRadius * 0.0f, new Paint())//
 					.setColor(Color.BLACK)//
-					.setDropShadow(new DropShadow(strokeWidth * 3, Settings.getGlowScalaColor()))//
+					.setDropShadow(new DropShadow(strokeWidth * 5, Settings.getGlowScalaColor()))//
 					.draw(bitmapCanvas);
 		}
-		new RingPart(center, maxRadius * 0.35f, maxRadius * 0.30f, new Paint())//
-				.setGradient(new Gradient(PaintProvider.getGray(160), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
-				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth / 2))//
-				.draw(bitmapCanvas);
-
 		// Zeiger
-		new LevelZeigerPart(center, level, maxRadius * 0.85f, maxRadius * 0.31f, strokeWidth, -90, 360, EZMode.Einer)//
-				.setDropShadow(new DropShadow(3 * strokeWidth, Color.BLACK))//
+		new LevelZeigerPart(center, level, maxRadius * 0.80f, maxRadius * 0.26f, strokeWidth, startWinkel, sweep, EZMode.Einer)//
+				.setDropShadow(new DropShadow(1.5f * strokeWidth, 0, 1.5f * strokeWidth, Color.BLACK))//
 				.draw(bitmapCanvas);
 
 		// Innen Fläche
-		new RingPart(center, maxRadius * 0.30f, maxRadius * 0.00f, new Paint())//
-				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(128), GRAD_STYLE.top2bottom))//
-				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth))//
+		new RingPart(center, maxRadius * 0.25f, maxRadius * 0.00f, new Paint())//
+				.setGradient(new Gradient(PaintProvider.getGray(160), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
+				.setOutline(outline)//
 				.draw(bitmapCanvas);
 
-		Skala.getLevelScalaCircular(center, maxRadius * 0.82f, maxRadius * 0.88f, -90, LevelLinesStyle.ZehnerFuenferEiner)//
+		Skala.getLevelScalaArch(center, maxRadius * 0.76f, maxRadius * 0.82f, startWinkel, sweep, LevelLinesStyle.ZehnerFuenferEiner)//
 				.setFontAttributesEbene1(new FontAttributes(fontSizeScala))//
 				.setFontAttributesEbene2Default()//
-				.setDicke(strokeWidth * 0.75f)//
+				.setDicke(strokeWidth * 0.5f)//
 				.draw(bitmapCanvas);
-		drawMeter();
+
+		drawVoltMeter();
+		drawThermoMeter();
 
 	}
 
-	private void drawMeter() {
+	private void drawVoltMeter() {
 		if (Settings.isShowVoltmeter()) {
-			final SkalaPart s = Skala.getDefaultVoltmeterPart(center, maxRadius * 0.50f, maxRadius * 0.55f, -135, 90, VoltLinesStyle.style_500_100_50)//
+			// SkalaBackground
+			new ArchPart(center, maxRadius * 1.2f, maxRadius * 0.95f, -90, -55, PaintProvider.getBackgroundPaint())//
+					.setOutline(outline)//
+					.draw(bitmapCanvas);
+			new ArchPart(center, maxRadius * 1.35f, maxRadius * 1.2f, -90, -55 / 2f, PaintProvider.getBackgroundPaint())//
+					.setOutline(outline)//
+					.draw(bitmapCanvas);
+
+			final SkalaPart s = Skala.getDefaultVoltmeterPart(center, maxRadius * 1.07f, maxRadius * 1.10f, -142, 49, VoltLinesStyle.style_500_100_50)//
 					.setFontAttributesEbene1(new FontAttributes(Align.CENTER, Typeface.DEFAULT, fontSizeScala * 0.85f))//
-					// .setFontAttributesEbene2Default()//
 					.setupDefaultBaseLineRadius()//
 					.setDicke(strokeWidth * 0.5f)//
 					.draw(bitmapCanvas);
-			Skala.getDefaultVoltmeterZeigerPart(center, Settings.getBattVoltage(), maxRadius * 0.52f, maxRadius * 0.31f, s.getScala())//
+			Skala.getDefaultVoltmeterZeigerPart(center, Settings.getBattVoltage(), maxRadius * 1.11f, maxRadius * 0.96f, s.getScala())//
 					.setDicke(strokeWidth)//
 					.overrideColor(ColorHelper.changeBrightness(Settings.getZeigerColor(), -32))//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//
 					.draw(bitmapCanvas);
 
-			new TextOnLinePart(center, maxRadius * 0.17f, -90, fontSizeArc, new Paint())//
+			// Innen Fläche
+			new TextOnCirclePart(center, maxRadius * 1.25f, -94, fontSizeArc * 1.2f, new Paint())//
 					.setColor(Settings.getBattStatusColor())//
-					.setAlign(Align.CENTER)//
+					.setAlign(Align.RIGHT)//
 					.setDropShadow(new DropShadow(strokeWidth * 2, Color.BLACK))//
 					.draw(bitmapCanvas, String.format(Locale.US, "%.2f V", Settings.getBattVoltage()));
 		}
+	}
+
+	private void drawThermoMeter() {
 		if (Settings.isShowThermometer()) {
-			final SkalaPart s = Skala.getDefaultThermometerPart(center, maxRadius * 0.50f, maxRadius * 0.55f, 135, -90, LevelLinesStyle.ZehnerFuenfer)//
+			// SkalaBackground
+			new ArchPart(center, maxRadius * 1.2f, maxRadius * 0.95f, -90, 55, PaintProvider.getBackgroundPaint())//
+					.setOutline(outline)//
+					.draw(bitmapCanvas);
+			new ArchPart(center, maxRadius * 1.35f, maxRadius * 1.2f, -90, +55 / 2f, PaintProvider.getBackgroundPaint())//
+					.setOutline(outline)//
+					.draw(bitmapCanvas);
+
+			final SkalaPart s = Skala.getDefaultThermometerPart(center, maxRadius * 1.07f, maxRadius * 1.10f, -87, 49, LevelLinesStyle.ZehnerFuenfer)//
 					.setFontAttributesEbene1(new FontAttributes(Align.CENTER, Typeface.DEFAULT, fontSizeScala * 0.85f))//
-					.setFontRadiusEbene1(maxRadius * 0.62f)//
-					.invertText(true)//
 					.setupDefaultBaseLineRadius()//
 					.setDicke(strokeWidth * 0.5f)//
 					.draw(bitmapCanvas);
 
-			Skala.getDefaultThermometerZeigerPart(center, Settings.getBattTemperature(), maxRadius * 0.52f, maxRadius * 0.31f, s.getScala())//
+			Skala.getDefaultThermometerZeigerPart(center, Settings.getBattTemperature(), maxRadius * 1.11f, maxRadius * 0.96f, s.getScala())//
 					.setDicke(strokeWidth)//
 					.overrideColor(ColorHelper.changeBrightness(Settings.getZeigerColor(), -32))//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//
 					.draw(bitmapCanvas);
 
-			new TextOnLinePart(center, maxRadius * 0.22f, 90, fontSizeArc, new Paint())//
+			// Innen Fläche
+			new TextOnCirclePart(center, maxRadius * 1.25f, -86, fontSizeArc * 1.2f, new Paint())//
 					.setColor(Settings.getBattStatusColor())//
-					.setDropShadow(new DropShadow(strokeWidth * 2, Color.BLACK))//
-					.setAlign(Align.CENTER)//
-					.invert(true)//
+					.setAlign(Align.LEFT)//
 					.draw(bitmapCanvas, Settings.getBattTemperature() + " °C");
 		}
-
 	}
 
 	@Override
 	public void drawLevelNumber(final int level) {
-		drawLevelNumberCentered(bitmapCanvas, level, fontSizeLevel);
+		drawLevelNumberCenteredInRect(bitmapCanvas, level, "" + level, fontSizeLevel, GeometrieHelper.getCircle(center, maxRadius * 0.25f));
 	}
 
 	@Override
 	public void drawChargeStatusText(final int level) {
-		final long winkel = 276 + Math.round(level * 3.6f);
-		new TextOnCirclePart(center, radiusChangeText, winkel, fontSizeArc, new Paint())//
+		new TextOnCirclePart(center, maxRadius * 0.50f, -90, fontSizeArc, new Paint())//
 				.setColor(Settings.getChargeStatusColor())//
-				.setAlign(Align.LEFT)//
+				.setAlign(Align.CENTER)//
 				.draw(bitmapCanvas, Settings.getChargingText());
 	}
 
 	@Override
 	public void drawBattStatusText() {
-		final Path mArc = new Path();
-		final RectF oval = GeometrieHelper.getCircle(center, radiusBattStatus);
-		mArc.addArc(oval, 180, 180);
-		final String text = Settings.getBattStatusCompleteShort();
-		final Paint p = PaintProvider.getTextBattStatusPaint(fontSizeArc, Align.CENTER, true);
-		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, p);
+		new TextOnCirclePart(center, maxRadius * 0.40f, -90, fontSizeArc, new Paint())//
+				.setColor(Settings.getBattStatusColor())//
+				.setAlign(Align.CENTER)//
+				.draw(bitmapCanvas, Settings.getBattStatusCompleteShort());
 	}
 
 }

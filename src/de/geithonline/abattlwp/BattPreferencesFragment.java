@@ -88,6 +88,9 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 		handleAvailability(findPreference("showVoltmeter"), drawer.supportsVoltmeter());
 		handleAvailability(findPreference("showThermometer"), drawer.supportsThermometer());
 
+		handleAvailability(findPreference("fontsizeInt"), drawer.supportsLevelNumberFontSizeAdjustment());
+		handleAvailability(findPreference("fontsize100Int"), drawer.supportsLevelNumberFontSizeAdjustment());
+
 		// pro Features
 		handlePremium(findPreference("levelMode"));
 		handlePremium(findPreference("levelStyles"));

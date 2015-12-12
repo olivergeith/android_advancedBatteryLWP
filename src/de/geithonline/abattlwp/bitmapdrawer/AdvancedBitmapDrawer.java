@@ -208,7 +208,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 
 	protected void drawLevelNumberCentered(final Canvas canvas, final int level, final float fontSize, final DropShadow dropShadow) {
 		final String text = "" + level;
-		final Paint p = PaintProvider.getNumberPaint(level, fontSize);
+		final Paint p = PaintProvider.getLevelNumberPaint(level, fontSize);
 		p.setTextAlign(Align.CENTER);
 		p.setTypeface(Typeface.DEFAULT_BOLD);
 		if (dropShadow != null) {
@@ -219,21 +219,21 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	}
 
 	protected void drawLevelNumberBottom(final Canvas canvas, final int level, final float fontSize) {
-		final Paint p = PaintProvider.getNumberPaint(level, fontSize);
+		final Paint p = PaintProvider.getLevelNumberPaint(level, fontSize);
 		p.setTextAlign(Align.CENTER);
 		p.setTypeface(Typeface.DEFAULT_BOLD);
 		canvas.drawText("" + level, bmpWidth / 2, bmpHeight - Math.round(bmpWidth * 0.01f), p);
 	}
 
 	protected void drawLevelNumber(final Canvas canvas, final int level, final float fontSize, final PointF position) {
-		final Paint p = PaintProvider.getNumberPaint(level, fontSize);
+		final Paint p = PaintProvider.getLevelNumberPaint(level, fontSize);
 		p.setTextAlign(Align.CENTER);
 		p.setTypeface(Typeface.DEFAULT_BOLD);
 		canvas.drawText("" + level, position.x, position.y, p);
 	}
 
 	protected void drawLevelNumberCenteredInRect(final Canvas canvas, final int level, final String txt, final float fontSize, final RectF rect) {
-		final Paint p = PaintProvider.getNumberPaint(level, fontSize);
+		final Paint p = PaintProvider.getLevelNumberPaint(level, fontSize);
 		p.setTextAlign(Align.CENTER);
 		p.setTypeface(Typeface.DEFAULT_BOLD);
 		final PointF position = getTextCenterToDraw(rect, p);
@@ -290,6 +290,11 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	@Override
 	public boolean supportsVoltmeter() {
 		return false;
+	}
+
+	@Override
+	public boolean supportsLevelNumberFontSizeAdjustment() {
+		return true;
 	}
 
 	/**

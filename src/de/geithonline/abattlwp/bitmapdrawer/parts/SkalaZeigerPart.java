@@ -12,16 +12,17 @@ import android.graphics.Shader;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
+import de.geithonline.abattlwp.bitmapdrawer.data.RadiusData;
 import de.geithonline.abattlwp.bitmapdrawer.data.SkalaData;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.LevelArcPath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
+import de.geithonline.abattlwp.settings.Settings;
 
 public class SkalaZeigerPart {
 
 	private final PointF c;
-	private final float ra;
-	private final float ri;
 	private final Paint paint;
 	private float dicke = 2f;
 	private Outline outline = null;
@@ -29,6 +30,8 @@ public class SkalaZeigerPart {
 	private float value;
 	private Gradient gradient;
 	private final SkalaData scale;
+	private RadiusData sweepRadiusData = null;
+	private RadiusData zeigerRadiusData = null;
 
 	protected SkalaZeigerPart(final PointF center, final float value, //
 			final float radAussen, final float radInnen, //
@@ -43,9 +46,7 @@ public class SkalaZeigerPart {
 		}
 
 		c = center;
-		ra = radAussen;
-		ri = radInnen;
-
+		zeigerRadiusData = new RadiusData(radAussen, radInnen);
 		paint = PaintProvider.getZeigerPaint();
 		initPaint();
 	}
@@ -82,18 +83,19 @@ public class SkalaZeigerPart {
 			switch (gradient.getStyle()) {
 				default:
 				case top2bottom:
-					paint.setShader(new LinearGradient(c.x, c.y - ra, c.x, c.y + ra, gradient.getColor1(), gradient.getColor2(), Shader.TileMode.MIRROR));
+					paint.setShader(new LinearGradient(c.x, c.y - zeigerRadiusData.ra, c.x, c.y + zeigerRadiusData.ra, gradient.getColor1(),
+							gradient.getColor2(), Shader.TileMode.MIRROR));
 					break;
 				case radial:
 					final int[] colors = new int[] { gradient.getColor1(), gradient.getColor2() };
-					paint.setShader(new RadialGradient(c.x, c.y, ra, colors, getDistancesRadial(), Shader.TileMode.CLAMP));
+					paint.setShader(new RadialGradient(c.x, c.y, zeigerRadiusData.ra, colors, getDistancesRadial(), Shader.TileMode.CLAMP));
 					break;
 			}
 		}
 	}
 
 	private float[] getDistancesRadial() {
-		final float di = ri / ra;
+		final float di = zeigerRadiusData.ri / zeigerRadiusData.ra;
 		final float da = 1.0f;
 		final float distances[] = new float[] { di, da };
 		return distances;
@@ -111,12 +113,17 @@ public class SkalaZeigerPart {
 		return this;
 	}
 
+	public SkalaZeigerPart setSweepRadiusData(final RadiusData rd) {
+		sweepRadiusData = rd;
+		return this;
+	}
+
 	public void draw(final Canvas canvas) {
 		final float scaleDiff = scale.maxValue - scale.minValue;
 		final float valueDiff = value - scale.minValue;
 		final float valueSweep = scale.scalaSweep / scaleDiff * valueDiff;
 		final float winkel = scale.startWinkel + valueSweep;
-		final Path path = new ZeigerShapePath(c, ra, ri, dicke, winkel, zeigerType);
+		final Path path = new ZeigerShapePath(c, zeigerRadiusData.ra, zeigerRadiusData.ri, dicke, winkel, zeigerType);
 		canvas.drawPath(path, paint);
 		if (outline != null) {
 			paint.setShader(null);
@@ -127,6 +134,20 @@ public class SkalaZeigerPart {
 			paint.setStyle(Style.STROKE);
 			canvas.drawPath(path, paint);
 		}
+		if (sweepRadiusData != null) {
+			drawSweep(canvas);
+		}
+	}
+
+	private void drawSweep(final Canvas canvas) {
+		final float scaleDiff = scale.maxValue - scale.minValue;
+		final float valueDiff = value - scale.minValue;
+		final float valueSweep = scale.scalaSweep / scaleDiff * valueDiff;
+		paint.setShadowLayer(0, 0, 0, Color.BLACK);
+		paint.setColor(Settings.getBattColor());
+		paint.setStyle(Style.FILL);
+		final Path path = new LevelArcPath(c, sweepRadiusData.ra, sweepRadiusData.ri, scale.startWinkel, valueSweep);
+		canvas.drawPath(path, paint);
 	}
 
 }

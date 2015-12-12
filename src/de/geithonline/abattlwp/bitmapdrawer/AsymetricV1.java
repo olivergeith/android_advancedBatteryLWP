@@ -23,7 +23,7 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 
-public class BitmapDrawerAsymetricV1 extends AdvancedBitmapDrawer {
+public class AsymetricV1 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 
@@ -54,7 +54,7 @@ public class BitmapDrawerAsymetricV1 extends AdvancedBitmapDrawer {
 
 	}
 
-	public BitmapDrawerAsymetricV1() {
+	public AsymetricV1() {
 	}
 
 	@Override
@@ -70,6 +70,11 @@ public class BitmapDrawerAsymetricV1 extends AdvancedBitmapDrawer {
 	@Override
 	public boolean supportsGlowScala() {
 		return true;
+	}
+
+	@Override
+	public boolean supportsLevelNumberFontSizeAdjustment() {
+		return false;
 	}
 
 	@Override
@@ -171,7 +176,7 @@ public class BitmapDrawerAsymetricV1 extends AdvancedBitmapDrawer {
 
 	@Override
 	public void drawLevelNumber(final int level) {
-		new TextOnCirclePart(center, maxRadius * 0.74f, -90, fontSizeLevel, PaintProvider.getNumberPaint(level, fontSizeLevel))//
+		new TextOnCirclePart(center, maxRadius * 0.74f, -90, fontSizeLevel, PaintProvider.getLevelNumberPaint(level, fontSizeLevel))//
 				.setAlign(Align.CENTER)//
 				.draw(bitmapCanvas, "" + level);
 	}

@@ -24,4 +24,5 @@ public interface IBitmapDrawer {
 
 	public boolean supportsThermometer();
 
+	public boolean supportsLevelNumberFontSizeAdjustment();
 }

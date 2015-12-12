@@ -7,46 +7,46 @@ import java.util.List;
 import java.util.Map;
 
 import android.graphics.Bitmap;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerAsymetricV1;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerClockV1;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerClockV2;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerClockV3;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerClockV4;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerClockV5;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerClockV6;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerFancyV1;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerFancyV2;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerNewSimpleCircleV1;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerNewTachoV1;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerNewTachoV2;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerNewTachoV3;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerRotatingV1;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerRotatingV2;
-import de.geithonline.abattlwp.bitmapdrawer.BitmapDrawerRotatingV3;
+import de.geithonline.abattlwp.bitmapdrawer.AsymetricV1;
+import de.geithonline.abattlwp.bitmapdrawer.ClockV1;
+import de.geithonline.abattlwp.bitmapdrawer.ClockV2;
+import de.geithonline.abattlwp.bitmapdrawer.ClockV3;
+import de.geithonline.abattlwp.bitmapdrawer.ClockV4;
+import de.geithonline.abattlwp.bitmapdrawer.ClockV5;
+import de.geithonline.abattlwp.bitmapdrawer.ClockV6;
+import de.geithonline.abattlwp.bitmapdrawer.FancyV1;
+import de.geithonline.abattlwp.bitmapdrawer.FancyV2;
 import de.geithonline.abattlwp.bitmapdrawer.IBitmapDrawer;
+import de.geithonline.abattlwp.bitmapdrawer.RotatingV1;
+import de.geithonline.abattlwp.bitmapdrawer.RotatingV2;
+import de.geithonline.abattlwp.bitmapdrawer.RotatingV3;
+import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV1;
+import de.geithonline.abattlwp.bitmapdrawer.TachoV1;
+import de.geithonline.abattlwp.bitmapdrawer.TachoV2;
+import de.geithonline.abattlwp.bitmapdrawer.TachoV3;
 
 public class DrawerManager {
 	private static Map<String, IBitmapDrawer> drawer = new HashMap<String, IBitmapDrawer>();
 	private static Map<String, Bitmap> iconCache = new HashMap<String, Bitmap>();
 
 	static {
-		drawer.put("TachoV1", new BitmapDrawerNewTachoV1());
-		drawer.put("TachoV2", new BitmapDrawerNewTachoV2());
-		drawer.put("TachoV3", new BitmapDrawerNewTachoV3());
-		drawer.put("ClockV1", new BitmapDrawerClockV1());
-		drawer.put("ClockV2", new BitmapDrawerClockV2());
-		drawer.put("ClockV3", new BitmapDrawerClockV3());
-		drawer.put("ClockV4", new BitmapDrawerClockV4());
-		drawer.put("ClockV5", new BitmapDrawerClockV5());
-		drawer.put("ClockV6", new BitmapDrawerClockV6());
-		drawer.put("NewSimpleCircleV1", new BitmapDrawerNewSimpleCircleV1());
-		drawer.put("NewSimpleCircleV1 (smaller)", new BitmapDrawerNewSimpleCircleV1(0.88f, 0.82f, 0.97f, 0.73f));
-		drawer.put("AsymetricV1", new BitmapDrawerAsymetricV1());
-		drawer.put("RotatingV1", new BitmapDrawerRotatingV1());
-		drawer.put("RotatingV2", new BitmapDrawerRotatingV2());
-		drawer.put("RotatingV3", new BitmapDrawerRotatingV3());
-		drawer.put("FancyV1", new BitmapDrawerFancyV1());
-		drawer.put("FancyV2", new BitmapDrawerFancyV2());
+		drawer.put("TachoV1", new TachoV1());
+		drawer.put("TachoV2", new TachoV2());
+		drawer.put("TachoV3", new TachoV3());
+		drawer.put("ClockV1", new ClockV1());
+		drawer.put("ClockV2", new ClockV2());
+		drawer.put("ClockV3", new ClockV3());
+		drawer.put("ClockV4", new ClockV4());
+		drawer.put("ClockV5", new ClockV5());
+		drawer.put("ClockV6", new ClockV6());
+		drawer.put("SimpleCircleV1", new SimpleCircleV1());
+		drawer.put("SimpleCircleV1 (smaller)", new SimpleCircleV1(0.88f, 0.82f, 0.97f, 0.73f));
+		drawer.put("AsymetricV1", new AsymetricV1());
+		drawer.put("RotatingV1", new RotatingV1());
+		drawer.put("RotatingV2", new RotatingV2());
+		drawer.put("RotatingV3", new RotatingV3());
+		drawer.put("FancyV1", new FancyV1());
+		drawer.put("FancyV2", new FancyV2());
 	}
 
 	public static IBitmapDrawer getDrawer(final String name) {

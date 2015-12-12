@@ -41,6 +41,11 @@ public class BitmapDrawerNewTachoV1 extends AdvancedBitmapDrawer {
 		return BitmapRatio.RECTANGULAR;
 	}
 
+	@Override
+	protected int getBitmapHightRectangular(final int width) {
+		return super.getBitmapHightRectangular(width);
+	}
+
 	private void initPrivateMembers() {
 		center.x = bmpWidth / 2;
 		center.y = bmpHeight;

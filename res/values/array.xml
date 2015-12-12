@@ -16,6 +16,22 @@
         <item >10</item>
     </string-array>
     
+    <string-array name="verticalPosition">
+        <item >Top</item>
+        <item >Center</item>
+        <item >Bottom</item>
+        <item >Custom</item>
+    </string-array>
+    <string-array name="horizontalPosition">
+        <item >Left</item>
+        <item >Center</item>
+        <item >Right</item>
+    </string-array>
+    <string-array name="bmpRotation">
+        <item >No Rotation</item>
+        <item >Left</item>
+        <item >Right</item>
+    </string-array>
     
     
     <string-array name="opacities">

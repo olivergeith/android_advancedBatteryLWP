@@ -14,6 +14,14 @@ import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.BitmapHelper;
 
+/**
+ * @author Oliver
+ *
+ */
+/**
+ * @author Oliver
+ *
+ */
 public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	private int displayHeight = 0;
 	private int displayWidth = 0;
@@ -32,55 +40,86 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 
 	public abstract void drawBattStatusText();
 
-	private final void drawOnCanvas(final Bitmap bitmap, final Canvas canvas) {
-		if (Settings.isCenteredBattery()) {
-			canvas.drawBitmap(bitmap, displayWidth / 2 - bmpWidth / 2, displayHeight / 2 - bmpHeight / 2, null);
-		} else {
-			canvas.drawBitmap(bitmap, displayWidth / 2 - bmpWidth / 2, displayHeight - bmpHeight - Settings.getVerticalPositionOffset(isPortrait()), null);
+	private final void drawOnCanvas(Bitmap bitmap, final Canvas canvas) {
+		switch (Settings.getBitmapRatation()) {
+			default:
+			case NoRotatation:
+				break;
+			case Left:
+				bitmap = BitmapHelper.rotate(bitmap, -90);
+				break;
+			case Right:
+				bitmap = BitmapHelper.rotate(bitmap, 90);
+				break;
 		}
+
+		final int bh = bitmap.getHeight();
+		final int bw = bitmap.getWidth();
+		int y = 0;
+		switch (Settings.getVerticalPosition()) {
+			default:
+			case Center:
+				y = displayHeight / 2 - bh / 2;
+				break;
+			case Top:
+				y = 0;
+				break;
+			case Bottom:
+				y = displayHeight - bh;
+				break;
+			case Custom: // offset von unten
+				y = displayHeight - bh - Settings.getVerticalPositionOffset(isPortrait());
+				break;
+		}
+		int x = 0;
+		switch (Settings.getHorizontalPosition()) {
+			default:
+			case Center:
+				x = displayWidth / 2 - bw / 2;
+				break;
+			case Left:
+				x = 0;
+				break;
+			case Right:
+				x = displayWidth - bw;
+				break;
+		}
+		canvas.drawBitmap(bitmap, x, y, null);
 	}
 
 	private final Bitmap initBitmap() {
-		switch (getBitmapRatio()) {
-		default:
-		case SQUARE:
-			return initSquareBitmap();
-		case RECTANGULAR:
-			return initRectangularBitmap();
-		}
-	}
-
-	private final Bitmap initSquareBitmap() {
 		// welche kante ist schmaler?
 		// wir orientieren uns an der schmalsten kante
 		// das heist, die Batterie ist immer gleich gross
 		if (isPortrait()) {
 			// hochkant
-			setBitmapSize(displayWidth, displayWidth, true);
+			setBitmapSize(displayWidth, getBitmapHight(displayWidth), true);
 		} else {
 			// quer
-			setBitmapSize(displayHeight, displayHeight, false);
+			setBitmapSize(displayHeight, getBitmapHight(displayHeight), false);
 		}
 		final Bitmap bitmap = Bitmap.createBitmap(bmpWidth, bmpHeight, Bitmap.Config.ARGB_8888);
 		return bitmap;
+	}
+
+	private final int getBitmapHight(final int width) {
+		switch (getBitmapRatio()) {
+			default:
+			case SQUARE:
+				return width;
+			case RECTANGULAR:
+				return getBitmapHightRectangular(width);
+		}
 	}
 
 	/**
-	 * @return für rectangular designs aka Bögen
+	 * this method should be overwritten if you want anoher Hight for a rectangular bitmap, other then width/2...that's default!
+	 * 
+	 * @param width
+	 * @return
 	 */
-	private final Bitmap initRectangularBitmap() {
-		// welche kante ist schmaler?
-		// wir orientieren uns an der schmalsten kante
-		// das heist, die Batterie ist immer gleich gross
-		if (isPortrait()) {
-			// hochkant
-			setBitmapSize(displayWidth, displayWidth / 2, true);
-		} else {
-			// quer
-			setBitmapSize(displayHeight, displayHeight / 2, false);
-		}
-		final Bitmap bitmap = Bitmap.createBitmap(bmpWidth, bmpHeight, Bitmap.Config.ARGB_8888);
-		return bitmap;
+	protected int getBitmapHightRectangular(final int width) {
+		return width / 2;
 	}
 
 	private final void setBitmapSize(final int w, final int h, final boolean isPortrait) {

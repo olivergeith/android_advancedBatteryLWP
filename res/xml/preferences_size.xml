@@ -27,16 +27,35 @@
         seekbarpreference:stepValue="1" />
 
     <PreferenceCategory android:title="Position" />
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:disableDependentsState="true"
-        android:key="centerBattery"
-        android:summary="@string/centerBattery_summary"
-        android:title="@string/centerBattery" />
 
+    <de.geithonline.android.basics.preferences.CoolListPreference
+            android:defaultValue="Center"
+            android:dialogTitle="Vertical Position"
+            android:entries="@array/verticalPosition"
+            android:entryValues="@array/verticalPosition"
+            android:key="verticalPosition"
+            android:summary=""
+            android:title="Vertical Position" />
+    <de.geithonline.android.basics.preferences.CoolListPreference
+            android:defaultValue="Center"
+            android:dialogTitle="Horizontal Position"
+            android:entries="@array/horizontalPosition"
+            android:entryValues="@array/horizontalPosition"
+            android:key="horizontalPosition"
+            android:summary=""
+            android:title="Horizontal Position" />
+
+    <de.geithonline.android.basics.preferences.CoolListPreference
+            android:defaultValue="No Rotation"
+            android:dialogTitle="Rotation"
+            android:entries="@array/bmpRotation"
+            android:entryValues="@array/bmpRotation"
+            android:key="bmpRotation"
+            android:summary=""
+            android:title="Rotation" />
+    
     <de.geithonline.android.basics.preferences.SeekBarPreference
         android:defaultValue="0"
-        android:dependency="centerBattery"
         android:dialogMessage="@string/vertical_position"
         android:key="vertical_positionInt"
         android:summary="%1$d pixel"
@@ -46,7 +65,6 @@
         seekbarpreference:stepValue="1" />
     <de.geithonline.android.basics.preferences.SeekBarPreference
         android:defaultValue="0"
-        android:dependency="centerBattery"
         android:dialogMessage="@string/vertical_position_landscape"
         android:key="vertical_position_landscapeInt"
         android:summary="%1$d pixel"

@@ -10,8 +10,11 @@ import android.view.WindowManager;
 import de.geithonline.abattlwp.BackgroundPreferencesFragment;
 import de.geithonline.abattlwp.R;
 import de.geithonline.abattlwp.bitmapdrawer.IBitmapDrawer;
+import de.geithonline.abattlwp.bitmapdrawer.enums.BitmapRotation;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
+import de.geithonline.abattlwp.bitmapdrawer.enums.PositionHorizontal;
+import de.geithonline.abattlwp.bitmapdrawer.enums.PositionVertical;
 
 public class Settings {
 	public static final String KEY_BATT_STYLE = "batt_style";
@@ -132,49 +135,45 @@ public class Settings {
 		return "Health is " + getHealthText(battHealth);
 	}
 
-	public static String getLevelStyleString() {
-		if (prefs == null) {
-			return "Normal";
-		}
-		return prefs.getString("levelStyles", "Normal");
-	}
-
-	public static String getLevelModeString() {
-		if (prefs == null) {
-			return "1";
-		}
-		return prefs.getString("levelMode", "1");
-	}
-
+	// ################################################
 	public static EZMode getLevelMode() {
-		switch (getLevelModeString()) {
-			default:
-			case "1":
-				return EZMode.Einer;
-			case "5":
-				return EZMode.Fuenfer;
-			case "10":
-				return EZMode.Zehner;
+		if (prefs == null) {
+			return EZMode.enumForName("");
 		}
+		return EZMode.enumForName(prefs.getString("levelMode", ""));
 	}
 
 	public static EZStyle getLevelStyle() {
-		switch (getLevelStyleString()) {
-			default:
-			case "Normal":
-				return EZStyle.sweep;
-			case "Normal (alpha)":
-				return EZStyle.sweep_withAplpah;
-			case "Normal (outline)":
-				return EZStyle.sweep_withOutline;
-			case "Only activ segments":
-				return EZStyle.segmented_onlyactive;
-			case "All segments (outline)":
-				return EZStyle.segmented_all;
-			case "All segments (alpha)":
-				return EZStyle.segmented_all_alpha;
+		if (prefs == null) {
+			return EZStyle.enumForName("");
 		}
+		return EZStyle.enumForName(prefs.getString("levelStyles", ""));
 	}
+
+	// ################################################
+
+	public static PositionVertical getVerticalPosition() {
+		if (prefs == null) {
+			return PositionVertical.enumForName("");
+		}
+		return PositionVertical.enumForName(prefs.getString("verticalPosition", ""));
+	}
+
+	public static PositionHorizontal getHorizontalPosition() {
+		if (prefs == null) {
+			return PositionHorizontal.enumForName("");
+		}
+		return PositionHorizontal.enumForName(prefs.getString("horizontalPosition", ""));
+	}
+
+	public static BitmapRotation getBitmapRatation() {
+		if (prefs == null) {
+			return BitmapRotation.enumForName("");
+		}
+		return BitmapRotation.enumForName(prefs.getString("bmpRotation", ""));
+	}
+
+	// ################################################
 
 	public static String getBattVoltageString() {
 		return "Voltage is " + (float) battVoltage / 1000 + "V";
@@ -333,13 +332,6 @@ public class Settings {
 		}
 		final int size = Integer.valueOf(prefs.getString("animationStyle", "1"));
 		return size;
-	}
-
-	public static boolean isCenteredBattery() {
-		if (prefs == null) {
-			return true;
-		}
-		return prefs.getBoolean("centerBattery", true);
 	}
 
 	public static int getFontSize() {

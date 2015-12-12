@@ -4,9 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.RectF;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
@@ -24,7 +22,6 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
-import de.geithonline.abattlwp.utils.GeometrieHelper;
 
 public class BitmapDrawerNewTachoV2 extends AdvancedBitmapDrawer {
 
@@ -134,23 +131,18 @@ public class BitmapDrawerNewTachoV2 extends AdvancedBitmapDrawer {
 	@Override
 	public void drawChargeStatusText(final int level) {
 		final long winkel = 182 + Math.round(level * 1.8f);
-
-		final Path mArc = new Path();
-		final RectF oval = GeometrieHelper.getCircle(center, maxRadius * 0.90f);
-		mArc.addArc(oval, winkel, 180);
-		final String text = Settings.getChargingText();
-		final Paint p = PaintProvider.getTextPaint(level, fontSizeArc);
-		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, p);
+		new TextOnCirclePart(center, maxRadius * 0.90f, winkel, fontSizeArc, new Paint())//
+				.setColor(Settings.getChargeStatusColor())//
+				.setAlign(Align.LEFT)//
+				.draw(bitmapCanvas, Settings.getChargingText());
 	}
 
 	@Override
 	public void drawBattStatusText() {
-		final Path mArc = new Path();
-		final RectF oval = GeometrieHelper.getCircle(center, maxRadius * 0.60f);
-		mArc.addArc(oval, 180, 180);
-		final String text = Settings.getBattStatusCompleteShort();
-		final Paint p = PaintProvider.getTextBattStatusPaint(fontSizeArc, Align.CENTER, true);
-		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, p);
+		final long winkel = -90;
+		new TextOnCirclePart(center, maxRadius * 0.90f, winkel, fontSizeArc, PaintProvider.getTextPaint(level, fontSizeArc))//
+				.setAlign(Align.CENTER)//
+				.draw(bitmapCanvas, Settings.getBattStatusCompleteShort());
 	}
 
 }

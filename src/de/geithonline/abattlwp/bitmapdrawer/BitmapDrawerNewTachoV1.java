@@ -19,6 +19,7 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
+import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
@@ -138,13 +139,10 @@ public class BitmapDrawerNewTachoV1 extends AdvancedBitmapDrawer {
 	@Override
 	public void drawChargeStatusText(final int level) {
 		final long winkel = 182 + Math.round(level * 1.8f);
-
-		final Path mArc = new Path();
-		final RectF oval = GeometrieHelper.getCircle(center, maxRadius * 0.87f);
-		mArc.addArc(oval, winkel, 180);
-		final String text = Settings.getChargingText();
-		final Paint p = PaintProvider.getTextPaint(level, fontSizeArc);
-		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, p);
+		new TextOnCirclePart(center, maxRadius * 0.87f, winkel, fontSizeArc, new Paint())//
+				.setColor(Settings.getChargeStatusColor())//
+				.setAlign(Align.LEFT)//
+				.draw(bitmapCanvas, Settings.getChargingText());
 	}
 
 	@Override

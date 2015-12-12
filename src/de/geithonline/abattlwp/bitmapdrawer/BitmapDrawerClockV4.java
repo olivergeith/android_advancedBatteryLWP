@@ -11,17 +11,18 @@ import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
-import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.LevelLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
+import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.LevelLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 //import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaLinePart;
 //import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaTextPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
+import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
@@ -177,13 +178,10 @@ public class BitmapDrawerClockV4 extends AdvancedBitmapDrawer {
 	@Override
 	public void drawChargeStatusText(final int level) {
 		final long winkel = 272 + Math.round(level * 3.6f);
-
-		final Path mArc = new Path();
-		final RectF oval = GeometrieHelper.getCircle(center, maxRadius * 0.91f);
-		mArc.addArc(oval, winkel, 180);
-		final String text = Settings.getChargingText();
-		final Paint p = PaintProvider.getTextPaint(level, fontSizeArc);
-		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, p);
+		new TextOnCirclePart(center, maxRadius * 0.91f, winkel, fontSizeArc, new Paint())//
+				.setColor(Settings.getChargeStatusColor())//
+				.setAlign(Align.LEFT)//
+				.draw(bitmapCanvas, Settings.getChargingText());
 	}
 
 	@Override

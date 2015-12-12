@@ -24,6 +24,7 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnLinePart;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
@@ -209,13 +210,10 @@ public class BitmapDrawerClockV3 extends AdvancedBitmapDrawer {
 	@Override
 	public void drawChargeStatusText(final int level) {
 		final long winkel = 276 + Math.round(level * 3.6f);
-
-		final Path mArc = new Path();
-		final RectF oval = GeometrieHelper.getCircle(center, radiusChangeText);
-		mArc.addArc(oval, winkel, 180);
-		final String text = Settings.getChargingText();
-		final Paint p = PaintProvider.getTextPaint(level, fontSizeArc);
-		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, p);
+		new TextOnCirclePart(center, radiusChangeText, winkel, fontSizeArc, new Paint())//
+				.setColor(Settings.getChargeStatusColor())//
+				.setAlign(Align.LEFT)//
+				.draw(bitmapCanvas, Settings.getChargingText());
 	}
 
 	@Override

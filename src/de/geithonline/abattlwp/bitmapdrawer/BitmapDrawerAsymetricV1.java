@@ -16,10 +16,10 @@ import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
 import de.geithonline.abattlwp.bitmapdrawer.parts.ArchPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 
@@ -179,7 +179,7 @@ public class BitmapDrawerAsymetricV1 extends AdvancedBitmapDrawer {
 	@Override
 	public void drawChargeStatusText(final int level) {
 		new TextOnCirclePart(center, maxRadius * 0.74f, -70, fontSizeArc, new Paint())//
-				.setColor(Settings.getBattStatusColor())//
+				.setColor(Settings.getChargeStatusColor())//
 				.setAlign(Align.LEFT)//
 				.draw(bitmapCanvas, Settings.getChargingText());
 	}

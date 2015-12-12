@@ -573,4 +573,9 @@ public class Settings {
 		return col;
 	}
 
+	public static int getChargeStatusColor() {
+		// TODO Auto-generated method stub
+		return getBattStatusColor();
+	}
+
 }

@@ -250,7 +250,7 @@ public class BitmapDrawerRotatingV2 extends AdvancedBitmapDrawer {
 	@Override
 	public void drawChargeStatusText(final int level) {
 		new TextOnCirclePart(center, maxRadius * 0.75f, -90, fontSizeArc, new Paint())//
-				.setColor(Settings.getBattStatusColor())//
+				.setColor(Settings.getChargeStatusColor())//
 				.setAlign(Align.CENTER)//
 				.draw(bitmapCanvas, Settings.getChargingText());
 	}

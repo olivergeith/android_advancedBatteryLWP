@@ -100,10 +100,6 @@ public class PaintProvider {
 	}
 
 	public static Paint getNumberPaint(final int level, final float fontSize) {
-		return getNumberPaint(level, fontSize, Align.CENTER, true, false);
-	}
-
-	public static Paint getNumberPaint(final int level, final float fontSize, final Align align, final boolean bold, final boolean erase) {
 		final Paint numberPaint = initNumberPaint();
 		if (Settings.isColoredNumber()) {
 			numberPaint.setColor(getColorForLevel(level));
@@ -112,31 +108,21 @@ public class PaintProvider {
 		}
 		final float fSize = adjustFontSize(level, fontSize);
 		numberPaint.setTextSize(fSize);
-		if (bold) {
-			numberPaint.setTypeface(Typeface.DEFAULT_BOLD);
-		} else {
-			numberPaint.setTypeface(Typeface.DEFAULT);
-		}
-		numberPaint.setTextAlign(align);
-		if (erase) {
-			final PorterDuffXfermode xfermode = new PorterDuffXfermode(Mode.CLEAR);
-			numberPaint.setXfermode(xfermode);
-		}
 		return numberPaint;
 	}
 
 	public static Paint getTextPaint(final int level, final float fontSizeArc) {
-		return getTextPaint(level, fontSizeArc, Align.LEFT, true, false);
+		return getTextPaint(level, fontSizeArc, Align.CENTER, true, false);
 	}
 
-	private static Paint getTextPaint(final int level, final float fontSizeArc, final Align align, final boolean bold, final boolean erase) {
+	private static Paint getTextPaint(final int level, final float fontSize, final Align align, final boolean bold, final boolean erase) {
 		final Paint textPaint = initTextPaint();
 		if (Settings.isColoredNumber()) {
 			textPaint.setColor(getColorForLevel(level));
 		} else {
 			textPaint.setColor(Settings.getBattColor());
 		}
-		textPaint.setTextSize(fontSizeArc);
+		textPaint.setTextSize(fontSize);
 		if (bold) {
 			textPaint.setTypeface(Typeface.DEFAULT_BOLD);
 		} else {

@@ -9,6 +9,8 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
+import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
+import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.LevelLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.enums.BitmapRatio;
@@ -17,6 +19,7 @@ import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.parts.HalfArchPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
 import de.geithonline.abattlwp.settings.PaintProvider;
@@ -43,7 +46,7 @@ public class BitmapDrawerNewTachoV2 extends AdvancedBitmapDrawer {
 
 	@Override
 	protected int getBitmapHightRectangular(final int width) {
-		return super.getBitmapHightRectangular(width);
+		return (width * 3) / 4;
 	}
 
 	private void initPrivateMembers() {
@@ -86,23 +89,28 @@ public class BitmapDrawerNewTachoV2 extends AdvancedBitmapDrawer {
 
 	private void drawAll(final int level) {
 
+		// Ausen Ring
+		new RingPart(center, maxRadius * 0.99f, maxRadius * 0.89f, new Paint())//
+				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(96), GRAD_STYLE.top2bottom))//
+				.setOutline(new Outline(PaintProvider.getGray(128), strokeWidth / 2))//
+				.draw(bitmapCanvas);
 		// SkalaBackground
-		new HalfArchPart(center, maxRadius * 0.99f, 0f, PaintProvider.getBackgroundPaint())//
-				.setOutline(new Outline(Color.WHITE, strokeWidth / 2))//
+		new HalfArchPart(center, maxRadius * 0.89f, 0f, PaintProvider.getBackgroundPaint())//
+				.setOutline(new Outline(PaintProvider.getGray(128), strokeWidth / 2))//
 				.setUndercut(5f)//
 				.draw(bitmapCanvas);
 
 		// Level
-		new LevelPart(center, maxRadius * 0.97f, maxRadius * 0.77f, level, -180, 180, EZColoring.LevelColors)//
+		new LevelPart(center, maxRadius * 0.87f, maxRadius * 0.77f, level, -180, 180, EZColoring.LevelColors)//
 				.setSegemteAbstand(0.9f)//
 				.setStrokeWidth(strokeWidth / 3)//
 				.setStyle(Settings.getLevelStyle())//
 				.setMode(Settings.getLevelMode())//
 				.draw(bitmapCanvas);
 
-		Skala.getLevelScalaArch(center, maxRadius * 0.75f, maxRadius * 0.70f, -180, 180, LevelLinesStyle.ZehnerFuenferEiner)//
+		Skala.getLevelScalaArch(center, maxRadius * 0.75f, maxRadius * 0.65f, -180, 180, LevelLinesStyle.ZehnerFuenferEiner)//
 				.setFontAttributesEbene1(new FontAttributes(fontSizeScala))//
-				.setFontRadiusEbene1(maxRadius * 0.60f)//
+				.setFontRadiusEbene1(maxRadius * 0.55f)//
 				.dontWriteOuterNumbers()//
 				.setDicke(strokeWidth * 0.5f)//
 				.draw(bitmapCanvas);
@@ -117,8 +125,10 @@ public class BitmapDrawerNewTachoV2 extends AdvancedBitmapDrawer {
 
 	@Override
 	public void drawLevelNumber(final int level) {
-		new TextOnCirclePart(center, maxRadius * 1f, -145, fontSizeLevel, PaintProvider.getNumberPaint(level, fontSizeLevel)).draw(bitmapCanvas, level + "%");
-		// drawLevelNumberCentered(bitmapCanvas, level, fontSizeLevel);
+		final float winkel = -90;// 180 + level * 1.5f;
+		new TextOnCirclePart(center, maxRadius * 1f, winkel, fontSizeLevel, PaintProvider.getNumberPaint(level, fontSizeLevel))//
+				.setAlign(Align.CENTER)//
+				.draw(bitmapCanvas, level + "%");
 	}
 
 	@Override
@@ -126,7 +136,7 @@ public class BitmapDrawerNewTachoV2 extends AdvancedBitmapDrawer {
 		final long winkel = 182 + Math.round(level * 1.8f);
 
 		final Path mArc = new Path();
-		final RectF oval = GeometrieHelper.getCircle(center, maxRadius * 0.87f);
+		final RectF oval = GeometrieHelper.getCircle(center, maxRadius * 0.90f);
 		mArc.addArc(oval, winkel, 180);
 		final String text = Settings.getChargingText();
 		final Paint p = PaintProvider.getTextPaint(level, fontSizeArc);

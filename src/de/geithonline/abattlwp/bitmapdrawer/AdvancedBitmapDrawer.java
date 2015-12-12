@@ -7,6 +7,7 @@ import android.graphics.Paint.Align;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import de.geithonline.abattlwp.PermissionRequester;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.enums.BitmapRatio;
@@ -207,7 +208,9 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 
 	protected void drawLevelNumberCentered(final Canvas canvas, final int level, final float fontSize, final DropShadow dropShadow) {
 		final String text = "" + level;
-		final Paint p = PaintProvider.getNumberPaint(level, fontSize, Align.CENTER, true, false);
+		final Paint p = PaintProvider.getNumberPaint(level, fontSize);
+		p.setTextAlign(Align.CENTER);
+		p.setTypeface(Typeface.DEFAULT_BOLD);
 		if (dropShadow != null) {
 			dropShadow.setUpPaint(p);
 		}
@@ -216,17 +219,23 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	}
 
 	protected void drawLevelNumberBottom(final Canvas canvas, final int level, final float fontSize) {
-		final Paint p = PaintProvider.getNumberPaint(level, fontSize, Align.CENTER, true, false);
+		final Paint p = PaintProvider.getNumberPaint(level, fontSize);
+		p.setTextAlign(Align.CENTER);
+		p.setTypeface(Typeface.DEFAULT_BOLD);
 		canvas.drawText("" + level, bmpWidth / 2, bmpHeight - Math.round(bmpWidth * 0.01f), p);
 	}
 
 	protected void drawLevelNumber(final Canvas canvas, final int level, final float fontSize, final PointF position) {
-		final Paint p = PaintProvider.getNumberPaint(level, fontSize, Align.CENTER, true, false);
+		final Paint p = PaintProvider.getNumberPaint(level, fontSize);
+		p.setTextAlign(Align.CENTER);
+		p.setTypeface(Typeface.DEFAULT_BOLD);
 		canvas.drawText("" + level, position.x, position.y, p);
 	}
 
 	protected void drawLevelNumberCenteredInRect(final Canvas canvas, final int level, final String txt, final float fontSize, final RectF rect) {
-		final Paint p = PaintProvider.getNumberPaint(level, fontSize, Align.CENTER, true, false);
+		final Paint p = PaintProvider.getNumberPaint(level, fontSize);
+		p.setTextAlign(Align.CENTER);
+		p.setTypeface(Typeface.DEFAULT_BOLD);
 		final PointF position = getTextCenterToDraw(rect, p);
 		canvas.drawText(txt, position.x, position.y, p);
 	}

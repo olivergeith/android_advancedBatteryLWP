@@ -17,5 +17,4 @@ public class Outline {
 	public float getStrokeWidth() {
 		return strokeWidth;
 	}
-
 }

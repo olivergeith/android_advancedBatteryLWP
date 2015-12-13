@@ -22,6 +22,7 @@ import de.geithonline.abattlwp.bitmapdrawer.RotatingV2;
 import de.geithonline.abattlwp.bitmapdrawer.RotatingV3;
 import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV1;
 import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV2;
+import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV3;
 import de.geithonline.abattlwp.bitmapdrawer.TachoV1;
 import de.geithonline.abattlwp.bitmapdrawer.TachoV2;
 import de.geithonline.abattlwp.bitmapdrawer.TachoV3;
@@ -42,6 +43,7 @@ public class DrawerManager {
 		drawer.put("ClockV6", new ClockV6());
 		drawer.put("SimpleCircleV1", new SimpleCircleV1());
 		drawer.put("SimpleCircleV2", new SimpleCircleV2());
+		drawer.put("SimpleCircleV3", new SimpleCircleV3());
 		drawer.put("AsymetricV1", new AsymetricV1());
 		drawer.put("RotatingV1", new RotatingV1());
 		drawer.put("RotatingV2", new RotatingV2());

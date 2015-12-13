@@ -93,7 +93,7 @@ public class SkalaPart {
 		textPaint.setFakeBoldText(true);
 		textPaint.setAntiAlias(true);
 		textPaint.setStyle(Style.FILL);
-		textPaint.setColor(Settings.getScaleColor()); // TODO eigene Farbe
+		textPaint.setColor(Settings.getScaleTextColor());
 		return this;
 	}
 

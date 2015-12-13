@@ -278,7 +278,7 @@ public class RotatingV3 extends AdvancedBitmapDrawer {
 
 	@Override
 	public void drawBattStatusText() {
-		new TextOnCirclePart(center, maxRadius * 0.62f, -90, fontSizeArc, new Paint())//
+		new TextOnCirclePart(center, maxRadius * 0.87f, -90, fontSizeArc, new Paint())//
 				.setColor(Settings.getBattStatusColor())//
 				.setAlign(Align.CENTER)//
 				.draw(bitmapCanvas, Settings.getBattStatusCompleteShort());

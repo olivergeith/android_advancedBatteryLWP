@@ -164,6 +164,13 @@
             android:key="showChargeStatus"
             android:summary="@string/showChargeStatus_summary"
             android:title="@string/showChargeStatus" />
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            android:defaultValue="@integer/COLOR_WHITE"
+            android:dependency="showChargeStatus"
+            android:key="chargeStatusTextColor"
+            android:summary="Color of Charge Status Text"
+            android:title="Color" />
+        
     </PreferenceScreen>
     <!-- ##################################################################################### -->
 
@@ -213,20 +220,17 @@
         android:title="Scale" >
         <PreferenceCategory android:title="Color of scale" />
 
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:disableDependentsState="true"
-            android:key="scale_numbers_transparent"
-            android:summary="@string/scale_numbers_transparent_summary"
-            android:title="@string/scale_numbers_transparent" />
-
         <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
             android:defaultValue="@integer/COLOR_WHITE"
-            android:dependency="scale_numbers_transparent"
             android:key="scale_color"
-            android:summary="@string/scale_color_summary"
-            android:title="@string/scale_color" />
+            android:title="Scale" />
+        
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            android:defaultValue="@integer/COLOR_WHITE"
+            android:key="scale_text_color"
+            android:title="Scale Numbers" />
 
+        
         <PreferenceCategory android:title="Scale Background" />
 
         <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference

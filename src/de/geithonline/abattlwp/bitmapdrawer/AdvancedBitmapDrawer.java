@@ -158,14 +158,14 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 			bitmap = initBitmap();
 			bitmapCanvas = new Canvas(bitmap);
 			bitmap = drawBitmap(level, bitmap);
-			if (Settings.isShowNumber()) {
-				drawLevelNumber(level);
-			}
 			if (Settings.isCharging && Settings.isShowChargeState()) {
 				drawChargeStatusText(level);
 			}
 			if (Settings.isShowStatus()) {
 				drawBattStatusText();
+			}
+			if (Settings.isShowNumber()) {
+				drawLevelNumber(level);
 			}
 		}
 		// den aktuellen level merken
@@ -190,14 +190,14 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 		bitmapCanvas = new Canvas(icon);
 		icon = drawBitmap(level, icon);
 		isDrawIcon = false;
-		if (Settings.isShowNumber()) {
-			drawLevelNumber(level);
-		}
 		if (Settings.isCharging && Settings.isShowChargeState()) {
 			drawChargeStatusText(level);
 		}
 		if (Settings.isShowStatus()) {
 			drawBattStatusText();
+		}
+		if (Settings.isShowNumber()) {
+			drawLevelNumber(level);
 		}
 		return icon;
 	}

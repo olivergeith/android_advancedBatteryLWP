@@ -9,6 +9,10 @@
 	<integer name="COLOR_DARKGRAY">0xff404040</integer>
 	<integer name="COLOR_ORANGE">0xffffc800</integer>
 	<integer name="COLOR_WHITE">0xffffffff</integer>
-	
+	<integer name="COLOR_GREEN_128">0x8000ff00</integer>
+		
+	<integer name="COLOR_PRIMARY_128">0x80005885</integer>
+	<integer name="COLOR_ACCENT">0xFF00AAFF</integer>
+		
 	
 </resources>

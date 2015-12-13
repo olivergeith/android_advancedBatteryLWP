@@ -67,18 +67,19 @@ public class Settings {
 		return prefs.getBoolean("keepAspectRatio", true);
 	}
 
-	public static boolean isScaleTransparent() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean("scale_numbers_transparent", false);
-	}
-
 	public static int getScaleColor() {
 		if (prefs == null) {
 			return R.integer.COLOR_WHITE;
 		}
 		final int col = prefs.getInt("scale_color", R.integer.COLOR_WHITE);
+		return col;
+	}
+
+	public static int getScaleTextColor() {
+		if (prefs == null) {
+			return R.integer.COLOR_WHITE;
+		}
+		final int col = prefs.getInt("scale_text_color", R.integer.COLOR_WHITE);
 		return col;
 	}
 
@@ -226,9 +227,9 @@ public class Settings {
 
 	public static int getChargeColor() {
 		if (prefs == null) {
-			return R.color.green_128;
+			return R.integer.COLOR_GREEN_128;
 		}
-		final int col = prefs.getInt("charge_color", R.color.green_128);
+		final int col = prefs.getInt("charge_color", R.integer.COLOR_GREEN_128);
 		return col;
 	}
 
@@ -393,9 +394,9 @@ public class Settings {
 
 	public static int getBackgroundColor() {
 		if (prefs == null) {
-			return R.color.primary_128;
+			return R.integer.COLOR_PRIMARY_128;
 		}
-		final int col = prefs.getInt("background_color", R.color.primary_128);
+		final int col = prefs.getInt("background_color", R.integer.COLOR_PRIMARY_128);
 		return col;
 	}
 
@@ -514,9 +515,9 @@ public class Settings {
 
 	public static int getGlowScalaColor() {
 		if (prefs == null) {
-			return R.color.accent;
+			return R.integer.COLOR_ACCENT;
 		}
-		final int col = prefs.getInt("glowScalaColor", R.color.accent);
+		final int col = prefs.getInt("glowScalaColor", R.integer.COLOR_ACCENT);
 		return col;
 	}
 
@@ -567,15 +568,18 @@ public class Settings {
 
 	public static int getNumberColor() {
 		if (prefs == null) {
-			return R.color.white;
+			return R.integer.COLOR_WHITE;
 		}
-		final int col = prefs.getInt("numberColor", R.color.white);
+		final int col = prefs.getInt("numberColor", R.integer.COLOR_WHITE);
 		return col;
 	}
 
 	public static int getChargeStatusColor() {
-		// TODO Auto-generated method stub
-		return getBattStatusColor();
+		if (prefs == null) {
+			return R.integer.COLOR_WHITE;
+		}
+		final int col = prefs.getInt("chargeStatusTextColor", R.integer.COLOR_WHITE);
+		return col;
 	}
 
 }

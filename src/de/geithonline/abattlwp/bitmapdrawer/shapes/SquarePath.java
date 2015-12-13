@@ -33,7 +33,7 @@ public class SquarePath extends Path {
 		if (!rounded) {
 			addRect(rect, dOuter);
 		} else {
-			final float cornerRad = ra * 0.3f;
+			final float cornerRad = ra * 0.15f;
 			addRoundRect(rect, cornerRad, cornerRad, dOuter);
 		}
 		if (ri > 0) {
@@ -44,7 +44,7 @@ public class SquarePath extends Path {
 			if (!rounded) {
 				addRect(rect, dInner);
 			} else {
-				final float cornerRad = ra * 0.3f;
+				final float cornerRad = ri * 0.15f;
 				addRoundRect(rect, cornerRad, cornerRad, dInner);
 			}
 		}

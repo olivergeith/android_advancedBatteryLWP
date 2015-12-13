@@ -58,14 +58,21 @@ public class Skala {
 	// #########################################################################
 	// Zeiger
 	// #########################################################################
-	public static SkalaZeigerPart getDefaultVoltmeterZeigerPart(//
-			final PointF center, final float value, //
-			final float radAussen, final float radInnen, //
-			final SkalaData scale) {
-		return new SkalaZeigerPart(center, value, radAussen, radInnen, scale);
-	}
+	// public static SkalaZeigerPart getDefaultVoltmeterZeigerPart(//
+	// final PointF center, final float value, //
+	// final float radAussen, final float radInnen, //
+	// final SkalaData scale) {
+	// return new SkalaZeigerPart(center, value, radAussen, radInnen, scale);
+	// }
+	//
+	// public static SkalaZeigerPart getDefaultThermometerZeigerPart(//
+	// final PointF center, final float value, //
+	// final float radAussen, final float radInnen, //
+	// final SkalaData scale) {
+	// return new SkalaZeigerPart(center, value, radAussen, radInnen, scale);
+	// }
 
-	public static SkalaZeigerPart getDefaultThermometerZeigerPart(//
+	public static SkalaZeigerPart getZeigerPart(//
 			final PointF center, final float value, //
 			final float radAussen, final float radInnen, //
 			final SkalaData scale) {

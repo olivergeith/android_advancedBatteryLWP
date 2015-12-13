@@ -23,6 +23,7 @@ import de.geithonline.abattlwp.bitmapdrawer.RotatingV2;
 import de.geithonline.abattlwp.bitmapdrawer.RotatingV3;
 import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV1;
 import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV2;
+import de.geithonline.abattlwp.bitmapdrawer.SquareV1;
 import de.geithonline.abattlwp.bitmapdrawer.TachoV1;
 import de.geithonline.abattlwp.bitmapdrawer.TachoV2;
 import de.geithonline.abattlwp.bitmapdrawer.TachoV3;
@@ -32,24 +33,25 @@ public class DrawerManager {
 	private static Map<String, Bitmap> iconCache = new HashMap<String, Bitmap>();
 
 	static {
-		drawer.put("TachoV1", new TachoV1());
-		drawer.put("TachoV2", new TachoV2());
-		drawer.put("TachoV3", new TachoV3());
+		drawer.put("AsymetricV1", new AsymetricV1());
 		drawer.put("ClockV1", new ClockV1());
 		drawer.put("ClockV2", new ClockV2());
 		drawer.put("ClockV3", new ClockV3());
 		drawer.put("ClockV4", new ClockV4());
 		drawer.put("ClockV5", new ClockV5());
 		drawer.put("ClockV6", new ClockV6());
-		drawer.put("SimpleCircleV1", new SimpleCircleV1());
-		drawer.put("SimpleCircleV2", new SimpleCircleV2());
+		drawer.put("FancyV1", new FancyV1());
+		drawer.put("FancyV2", new FancyV2());
 		drawer.put("LabyrinthV1", new LabyrinthV1());
-		drawer.put("AsymetricV1", new AsymetricV1());
+		drawer.put("TachoV1", new TachoV1());
+		drawer.put("TachoV2", new TachoV2());
+		drawer.put("TachoV3", new TachoV3());
 		drawer.put("RotatingV1", new RotatingV1());
 		drawer.put("RotatingV2", new RotatingV2());
 		drawer.put("RotatingV3", new RotatingV3());
-		drawer.put("FancyV1", new FancyV1());
-		drawer.put("FancyV2", new FancyV2());
+		drawer.put("SimpleCircleV1", new SimpleCircleV1());
+		drawer.put("SimpleCircleV2", new SimpleCircleV2());
+		drawer.put("SquareV1", new SquareV1());
 	}
 
 	public static IBitmapDrawer getDrawer(final String name) {

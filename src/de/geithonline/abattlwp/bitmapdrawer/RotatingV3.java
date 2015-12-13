@@ -184,7 +184,7 @@ public class RotatingV3 extends AdvancedBitmapDrawer {
 					.setupDefaultBaseLineRadius()//
 					.setDicke(strokeWidth * 0.75f)//
 					.draw(bitmapCanvas);
-			Skala.getDefaultVoltmeterZeigerPart(center, Settings.getBattVoltage(), maxRadius * 0.59f, 0f, s.getScala())//
+			Skala.getZeigerPart(center, Settings.getBattVoltage(), maxRadius * 0.59f, 0f, s.getScala())//
 					.setDicke(strokeWidth)//
 					.setSweepRadiusData(new RadiusData(maxRadius * 0.60f, maxRadius * 0.56f))//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//
@@ -210,7 +210,7 @@ public class RotatingV3 extends AdvancedBitmapDrawer {
 					.setupDefaultBaseLineRadius()//
 					.setDicke(strokeWidth * 0.75f)//
 					.draw(bitmapCanvas);
-			Skala.getDefaultThermometerZeigerPart(center, Settings.getBattTemperature(), maxRadius * 0.59f, 0f, s.getScala())//
+			Skala.getZeigerPart(center, Settings.getBattTemperature(), maxRadius * 0.59f, 0f, s.getScala())//
 					.setDicke(strokeWidth)//
 					.setSweepRadiusData(new RadiusData(maxRadius * 0.60f, maxRadius * 0.56f))//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//

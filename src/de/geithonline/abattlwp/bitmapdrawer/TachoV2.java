@@ -155,7 +155,7 @@ public class TachoV2 extends AdvancedBitmapDrawer {
 					.setupDefaultBaseLineRadius()//
 					.setDicke(strokeWidth * 0.5f)//
 					.draw(bitmapCanvas);
-			Skala.getDefaultVoltmeterZeigerPart(center, Settings.getBattVoltage(), maxRadius * 0.40f, maxRadius * 0.30f, s.getScala())//
+			Skala.getZeigerPart(center, Settings.getBattVoltage(), maxRadius * 0.40f, maxRadius * 0.30f, s.getScala())//
 					.setDicke(strokeWidth)//
 					.setSweepRadiusData(new RadiusData(maxRadius * 0.30f, maxRadius * 0.33f))//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//
@@ -183,7 +183,7 @@ public class TachoV2 extends AdvancedBitmapDrawer {
 					.setupDefaultBaseLineRadius()//
 					.setDicke(strokeWidth * 0.5f)//
 					.draw(bitmapCanvas);
-			Skala.getDefaultVoltmeterZeigerPart(center, Settings.getBattTemperature(), maxRadius * 0.65f, maxRadius * 0.55f, s.getScala())//
+			Skala.getZeigerPart(center, Settings.getBattTemperature(), maxRadius * 0.65f, maxRadius * 0.55f, s.getScala())//
 					.setDicke(strokeWidth)//
 					.setSweepRadiusData(new RadiusData(maxRadius * 0.55f, maxRadius * 0.58f))//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//

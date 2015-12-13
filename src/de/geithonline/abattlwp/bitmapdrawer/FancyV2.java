@@ -167,7 +167,7 @@ public class FancyV2 extends AdvancedBitmapDrawer {
 					.setupDefaultBaseLineRadius()//
 					.setDicke(strokeWidth * 0.5f)//
 					.draw(bitmapCanvas);
-			Skala.getDefaultVoltmeterZeigerPart(center, Settings.getBattVoltage(), maxRadius * 1.11f, maxRadius * 0.96f, s.getScala())//
+			Skala.getZeigerPart(center, Settings.getBattVoltage(), maxRadius * 1.11f, maxRadius * 0.96f, s.getScala())//
 					.setDicke(strokeWidth)//
 					.overrideColor(ColorHelper.changeBrightness(Settings.getZeigerColor(), -32))//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//
@@ -198,7 +198,7 @@ public class FancyV2 extends AdvancedBitmapDrawer {
 					.setDicke(strokeWidth * 0.5f)//
 					.draw(bitmapCanvas);
 
-			Skala.getDefaultThermometerZeigerPart(center, Settings.getBattTemperature(), maxRadius * 1.11f, maxRadius * 0.96f, s.getScala())//
+			Skala.getZeigerPart(center, Settings.getBattTemperature(), maxRadius * 1.11f, maxRadius * 0.96f, s.getScala())//
 					.setDicke(strokeWidth)//
 					.overrideColor(ColorHelper.changeBrightness(Settings.getZeigerColor(), -32))//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//

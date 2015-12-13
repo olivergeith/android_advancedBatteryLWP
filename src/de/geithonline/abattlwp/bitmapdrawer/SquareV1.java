@@ -18,10 +18,9 @@ import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.LevelLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.VoltLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
-import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
-import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
+import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart.RingType;
 import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
@@ -31,7 +30,7 @@ import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.ColorHelper;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
 
-public class ClockV3 extends AdvancedBitmapDrawer {
+public class SquareV1 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 
@@ -55,7 +54,7 @@ public class ClockV3 extends AdvancedBitmapDrawer {
 		// fontsizes
 		fontSizeArc = maxRadius * 0.08f;
 		fontSizeScala = maxRadius * 0.08f;
-		fontSizeLevel = maxRadius * 0.26f;
+		fontSizeLevel = maxRadius * 0.20f;
 		// Radiusses
 
 		radiusChangeText = maxRadius * 0.70f;// - fontSizeArc;
@@ -63,7 +62,7 @@ public class ClockV3 extends AdvancedBitmapDrawer {
 
 	}
 
-	public ClockV3() {
+	public SquareV1() {
 	}
 
 	@Override
@@ -98,19 +97,22 @@ public class ClockV3 extends AdvancedBitmapDrawer {
 		return bitmap;
 	}
 
+	private final float startWinkel = -90;
+	private final float sweep = 270;
+
 	private void drawAll(final int level) {
+		// SkalaBackground
+		new RingPart(center, maxRadius * 0.99f, maxRadius * 0.0f, PaintProvider.getBackgroundPaint(), RingType.SquareRoundet)//
+				.draw(bitmapCanvas);
 
 		// Ausen Ring
-		new RingPart(center, maxRadius * 0.99f, maxRadius * 0.80f, new Paint())//
+		new RingPart(center, maxRadius * 0.99f, maxRadius * 0.90f, new Paint(), RingType.SquareRoundet)//
 				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(96), GRAD_STYLE.top2bottom))//
-				.setOutline(new Outline(PaintProvider.getGray(64), strokeWidth))//
-				.draw(bitmapCanvas);
-		// SkalaBackground
-		new RingPart(center, maxRadius * 0.79f, maxRadius * 0.0f, PaintProvider.getBackgroundPaint())//
+				.setOutline(new Outline(PaintProvider.getGray(192), strokeWidth / 2))//
 				.draw(bitmapCanvas);
 
 		// Level
-		new LevelPart(center, maxRadius * 0.79f, maxRadius * 0.70f, level, -90, 360, EZColoring.LevelColors)//
+		new LevelPart(center, maxRadius * 0.79f, maxRadius * 0.70f, level, startWinkel, sweep, EZColoring.LevelColors)//
 				.setSegemteAbstand(1f)//
 				.setStrokeWidth(strokeWidth / 3)//
 				.setStyle(Settings.getLevelStyle())//
@@ -119,40 +121,40 @@ public class ClockV3 extends AdvancedBitmapDrawer {
 
 		// Innen Phase (with white dropshadow)
 		if (Settings.isShowGlowScala()) {
-			new RingPart(center, maxRadius * 0.35f, maxRadius * 0.30f, new Paint())//
+			new RingPart(center, maxRadius * 0.25f, maxRadius * 0.20f, new Paint())//
 					.setColor(Color.BLACK)//
 					.setDropShadow(new DropShadow(strokeWidth * 30, Settings.getGlowScalaColor()))//
 					.draw(bitmapCanvas);
-			new RingPart(center, maxRadius * 0.35f, maxRadius * 0.30f, new Paint())//
+			new RingPart(center, maxRadius * 0.25f, maxRadius * 0.20f, new Paint())//
 					.setColor(Color.BLACK)//
 					.setDropShadow(new DropShadow(strokeWidth * 10, Settings.getGlowScalaColor()))//
 					.draw(bitmapCanvas);
-			new RingPart(center, maxRadius * 0.35f, maxRadius * 0.30f, new Paint())//
+			new RingPart(center, maxRadius * 0.25f, maxRadius * 0.20f, new Paint())//
 					.setColor(Color.BLACK)//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Settings.getGlowScalaColor()))//
 					.draw(bitmapCanvas);
 		}
-		new RingPart(center, maxRadius * 0.35f, maxRadius * 0.30f, new Paint())//
+		new RingPart(center, maxRadius * 0.25f, maxRadius * 0.20f, new Paint())//
 				.setGradient(new Gradient(PaintProvider.getGray(160), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
 				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth / 2))//
 				.draw(bitmapCanvas);
 
-		// Zeiger
-		new LevelZeigerPart(center, level, maxRadius * 0.85f, maxRadius * 0.31f, strokeWidth, -90, 360, EZMode.Einer)//
-				.setDropShadow(new DropShadow(3 * strokeWidth, Color.BLACK))//
-				.draw(bitmapCanvas);
-
 		// Innen Fläche
-		new RingPart(center, maxRadius * 0.30f, maxRadius * 0.00f, new Paint())//
+		new RingPart(center, maxRadius * 0.20f, maxRadius * 0.00f, new Paint())//
 				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(128), GRAD_STYLE.top2bottom))//
 				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth))//
 				.draw(bitmapCanvas);
 
-		Skala.getLevelScalaCircular(center, maxRadius * 0.82f, maxRadius * 0.88f, -90, LevelLinesStyle.ZehnerFuenferEiner)//
+		final SkalaPart s = Skala.getLevelScalaArch(center, maxRadius * 0.69f, maxRadius * 0.64f, startWinkel, sweep, LevelLinesStyle.ZehnerFuenferEiner)//
 				.setFontAttributesEbene1(new FontAttributes(fontSizeScala))//
-				.setFontAttributesEbene2Default()//
+				.setFontRadiusEbene1(maxRadius * 0.54f)//
 				.setDicke(strokeWidth * 0.75f)//
 				.draw(bitmapCanvas);
+		Skala.getZeigerPart(center, level, maxRadius * 0.80f, maxRadius * 0.21f, s.getScala())//
+				.setDicke(strokeWidth)//
+				.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//
+				.draw(bitmapCanvas);
+
 		drawMeter();
 
 	}
@@ -209,8 +211,8 @@ public class ClockV3 extends AdvancedBitmapDrawer {
 
 	@Override
 	public void drawChargeStatusText(final int level) {
-		final long winkel = 276 + Math.round(level * 3.6f);
-		new TextOnCirclePart(center, radiusChangeText, winkel, fontSizeArc, new Paint())//
+		final long winkel = -88 + Math.round(level * 2.0f);
+		new TextOnCirclePart(center, maxRadius * 0.82f, winkel, fontSizeArc, new Paint())//
 				.setColor(Settings.getChargeStatusColor())//
 				.setAlign(Align.LEFT)//
 				.draw(bitmapCanvas, Settings.getChargingText());

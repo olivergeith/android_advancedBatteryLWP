@@ -8,8 +8,6 @@ import android.graphics.PointF;
 import android.graphics.Typeface;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
-import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
-import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.data.RadiusData;
 import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.LevelLinesStyle;
@@ -119,15 +117,15 @@ public class TachoV2 extends AdvancedBitmapDrawer {
 				.draw(bitmapCanvas);
 
 		// Ausen Ring
-		new HalfArchPart(center, maxRadius * 0.80f, maxRadius * 0.60f, new Paint())//
-				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(96), GRAD_STYLE.top2bottom))//
-				.setUndercut(5f)//
-				.setOutline(new Outline(PaintProvider.getGray(128), strokeWidth / 2))//
-				.draw(bitmapCanvas);
+		// new HalfArchPart(center, maxRadius * 0.80f, maxRadius * 0.60f, new Paint())//
+		// .setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(96), GRAD_STYLE.top2bottom))//
+		// .setUndercut(5f)//
+		// .setOutline(new Outline(PaintProvider.getGray(128), strokeWidth / 2))//
+		// .draw(bitmapCanvas);
 
-		Skala.getLevelScalaArch(center, maxRadius * 0.79f, maxRadius * 0.74f, -180, 180, LevelLinesStyle.ZehnerFuenferEiner)//
+		Skala.getLevelScalaArch(center, maxRadius * 0.79f, maxRadius * 0.85f, -180, 180, LevelLinesStyle.ZehnerFuenferEiner)//
 				.setFontAttributesEbene1(new FontAttributes(fontSizeScala))//
-				.setFontRadiusEbene1(maxRadius * 0.64f)//
+				// .setFontRadiusEbene1(maxRadius * 0.64f)//
 				.dontWriteOuterNumbers()//
 				.setDicke(strokeWidth * 0.5f)//
 				.draw(bitmapCanvas);
@@ -146,13 +144,13 @@ public class TachoV2 extends AdvancedBitmapDrawer {
 		if (Settings.isShowVoltmeter()) {
 
 			// Ausen Ring
-			new HalfArchPart(center, maxRadius * 0.45f, maxRadius * 0.30f, new Paint())//
-					.setGradient(new Gradient(PaintProvider.getGray(96), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
-					.setUndercut(5f)//
-					.setOutline(new Outline(PaintProvider.getGray(128), strokeWidth / 2))//
-					.draw(bitmapCanvas);
+			// new HalfArchPart(center, maxRadius * 0.45f, maxRadius * 0.30f, new Paint())//
+			// .setGradient(new Gradient(PaintProvider.getGray(96), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
+			// .setUndercut(5f)//
+			// .setOutline(new Outline(PaintProvider.getGray(128), strokeWidth / 2))//
+			// .draw(bitmapCanvas);
 
-			final SkalaPart s = Skala.getDefaultVoltmeterPart(center, maxRadius * 0.30f, maxRadius * 0.35f, -170, 160, VoltLinesStyle.style_500_100_50)//
+			final SkalaPart s = Skala.getDefaultVoltmeterPart(center, maxRadius * 0.30f, maxRadius * 0.35f, -170, 120, VoltLinesStyle.style_500_100_50)//
 					.setFontAttributesEbene1(new FontAttributes(Align.CENTER, Typeface.DEFAULT, fontSizeScala * 0.85f))//
 					.setupDefaultBaseLineRadius()//
 					.setDicke(strokeWidth * 0.5f)//
@@ -163,10 +161,10 @@ public class TachoV2 extends AdvancedBitmapDrawer {
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//
 					.draw(bitmapCanvas);
 
-			new TextOnCirclePart(center, maxRadius * 0.20f, -2, fontSizeArc * 0.85f, new Paint())//
+			new TextOnCirclePart(center, maxRadius * 0.32f, -2, fontSizeArc * 0.85f, new Paint())//
 					.setColor(Settings.getBattStatusColor())//
 					.setAlign(Align.RIGHT)//
-					.draw(bitmapCanvas, Settings.getBattVoltage() + " V");
+					.draw(bitmapCanvas, String.format("%.2f V", Settings.getBattVoltage()));
 		}
 	}
 
@@ -174,24 +172,24 @@ public class TachoV2 extends AdvancedBitmapDrawer {
 		if (Settings.isShowThermometer()) {
 
 			// Ausen Ring
-			new HalfArchPart(center, maxRadius * 0.60f, maxRadius * 0.45f, new Paint())//
-					.setGradient(new Gradient(PaintProvider.getGray(96), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
-					.setUndercut(5f)//
-					.setOutline(new Outline(PaintProvider.getGray(128), strokeWidth / 2))//
-					.draw(bitmapCanvas);
+			// new HalfArchPart(center, maxRadius * 0.60f, maxRadius * 0.45f, new Paint())//
+			// .setGradient(new Gradient(PaintProvider.getGray(96), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
+			// .setUndercut(5f)//
+			// .setOutline(new Outline(PaintProvider.getGray(128), strokeWidth / 2))//
+			// .draw(bitmapCanvas);
 
-			final SkalaPart s = Skala.getDefaultThermometerPart(center, maxRadius * 0.45f, maxRadius * 0.5f, -170, 120, LevelLinesStyle.ZehnerEiner)//
+			final SkalaPart s = Skala.getDefaultThermometerPart(center, maxRadius * 0.55f, maxRadius * 0.6f, -175, 140, LevelLinesStyle.ZehnerEiner)//
 					.setFontAttributesEbene1(new FontAttributes(Align.CENTER, Typeface.DEFAULT, fontSizeScala * 0.85f))//
 					.setupDefaultBaseLineRadius()//
 					.setDicke(strokeWidth * 0.5f)//
 					.draw(bitmapCanvas);
-			Skala.getDefaultVoltmeterZeigerPart(center, Settings.getBattTemperature(), maxRadius * 0.55f, maxRadius * 0.45f, s.getScala())//
+			Skala.getDefaultVoltmeterZeigerPart(center, Settings.getBattTemperature(), maxRadius * 0.65f, maxRadius * 0.55f, s.getScala())//
 					.setDicke(strokeWidth)//
-					.setSweepRadiusData(new RadiusData(maxRadius * 0.45f, maxRadius * 0.48f))//
+					.setSweepRadiusData(new RadiusData(maxRadius * 0.55f, maxRadius * 0.58f))//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//
 					.draw(bitmapCanvas);
 
-			new TextOnCirclePart(center, maxRadius * 0.49f, -2, fontSizeArc * 0.85f, new Paint())//
+			new TextOnCirclePart(center, maxRadius * 0.59f, -2, fontSizeArc * 0.85f, new Paint())//
 					.setColor(Settings.getBattStatusColor())//
 					.setAlign(Align.RIGHT)//
 					.draw(bitmapCanvas, Settings.getBattTemperature() + " °C");

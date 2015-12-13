@@ -82,7 +82,7 @@ public class ClockV4 extends AdvancedBitmapDrawer {
 	private void drawAll(final int level) {
 
 		new RingPart(center, maxRadius * 0.98f, maxRadius * 0.88f, new Paint())//
-				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(192), GRAD_STYLE.top2bottom))//
+				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(160), GRAD_STYLE.top2bottom))//
 				.setOutline(new Outline(PaintProvider.getGray(224), strokeWidth * 0.75f))//
 				.draw(bitmapCanvas);
 		// scala
@@ -164,8 +164,9 @@ public class ClockV4 extends AdvancedBitmapDrawer {
 				.draw(bitmapCanvas);
 		// innere fläche
 		new RingPart(center, maxRadius * 0.20f, 0f, new Paint())//
-				.setColor(Color.WHITE)//
-				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth))//
+				.setGradient(new Gradient(PaintProvider.getGray(160), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
+				// .setColor(Color.WHITE)//
+				.setOutline(new Outline(PaintProvider.getGray(224), strokeWidth * 0.75f))//
 				.draw(bitmapCanvas);
 
 	}

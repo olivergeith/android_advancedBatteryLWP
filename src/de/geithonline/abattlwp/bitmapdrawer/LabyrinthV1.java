@@ -18,7 +18,7 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 
-public class SimpleCircleV3 extends AdvancedBitmapDrawer {
+public class LabyrinthV1 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 
@@ -41,7 +41,7 @@ public class SimpleCircleV3 extends AdvancedBitmapDrawer {
 		fontSizeLevel = maxRadius * 0.3f;
 	}
 
-	public SimpleCircleV3() {
+	public LabyrinthV1() {
 	}
 
 	@Override

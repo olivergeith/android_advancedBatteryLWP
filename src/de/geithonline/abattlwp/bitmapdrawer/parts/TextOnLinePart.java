@@ -3,12 +3,12 @@ package de.geithonline.abattlwp.bitmapdrawer.parts;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
-import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
-import de.geithonline.abattlwp.utils.PathHelper;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Typeface;
+import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
+import de.geithonline.abattlwp.bitmapdrawer.data.FontAttributes;
+import de.geithonline.abattlwp.utils.PathHelper;
 
 public class TextOnLinePart {
 
@@ -77,19 +77,19 @@ public class TextOnLinePart {
 		}
 
 		switch (attr.getAlign()) {
-		default:
-		case LEFT:
-			p.moveTo(center.x + radius, center.y);
-			p.lineTo(center.x + radius, center.y + 200 * faktor);
-			break;
-		case CENTER:
-			p.moveTo(center.x + radius, center.y - 100 * faktor);
-			p.lineTo(center.x + radius, center.y + 100 * faktor);
-			break;
-		case RIGHT:
-			p.moveTo(center.x + radius, center.y);
-			p.lineTo(center.x + radius, center.y - 200 * faktor);
-			break;
+			default:
+			case LEFT:
+				p.moveTo(center.x + radius, center.y);
+				p.lineTo(center.x + radius, center.y + 400 * faktor);
+				break;
+			case CENTER:
+				p.moveTo(center.x + radius, center.y - 200 * faktor);
+				p.lineTo(center.x + radius, center.y + 200 * faktor);
+				break;
+			case RIGHT:
+				p.moveTo(center.x + radius, center.y);
+				p.lineTo(center.x + radius, center.y - 400 * faktor);
+				break;
 		}
 		PathHelper.rotatePath(center.x, center.y, p, winkel);
 		canvas.drawTextOnPath(text, p, 0, 0, paint);

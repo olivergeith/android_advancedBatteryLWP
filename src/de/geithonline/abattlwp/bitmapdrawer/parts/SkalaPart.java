@@ -42,8 +42,10 @@ public class SkalaPart {
 
 	private FontAttributes attrEbene1 = null;
 	private FontAttributes attrEbene2 = null;
+	private FontAttributes attrEbene3 = null;
 	private float fontRadiusEbene1 = 0f;
 	private float fontRadiusEbene2 = 0f;
+	private float fontRadiusEbene3 = 0f;
 
 	private boolean dontWriteOuterNumbers = false;
 
@@ -135,12 +137,26 @@ public class SkalaPart {
 		return this;
 	}
 
+	public SkalaPart setFontAttributesEbene3(final FontAttributes attr) {
+		attrEbene3 = attr;
+		return this;
+	}
+
 	public SkalaPart setFontAttributesEbene2Default() {
 		attrEbene2 = attrEbene1.clone();
 		// Fontsize anpassen (etwas kleiner)
 		attrEbene2.setFontSize(attrEbene1.getFontSize() * 0.8f);
 		// Radius setzen
 		setFontRadiusEbene2Default();
+		return this;
+	}
+
+	public SkalaPart setFontAttributesEbene3Default() {
+		attrEbene3 = attrEbene1.clone();
+		// Fontsize anpassen (etwas kleiner)
+		attrEbene3.setFontSize(attrEbene1.getFontSize() * 0.7f);
+		// Radius setzen
+		setFontRadiusEbene3Default();
 		return this;
 	}
 
@@ -155,8 +171,18 @@ public class SkalaPart {
 		return this;
 	}
 
+	public SkalaPart setFontRadiusEbene3(final float radius) {
+		fontRadiusEbene3 = radius;
+		return this;
+	}
+
 	public SkalaPart setFontRadiusEbene2Default() {
 		fontRadiusEbene2 = fontRadiusEbene1;
+		return this;
+	}
+
+	public SkalaPart setFontRadiusEbene3Default() {
+		fontRadiusEbene3 = fontRadiusEbene1;
 		return this;
 	}
 
@@ -209,7 +235,7 @@ public class SkalaPart {
 
 		drawLinesForEbene(canvas, skalaLines.ebene1, radiusMain, radiusLineEbene1, fontRadiusEbene1, dickeLineEbene1, attrEbene1);
 		drawLinesForEbene(canvas, skalaLines.ebene2, radiusMain, radiusLineEbene2, fontRadiusEbene2, dickeLineEbene2, attrEbene2);
-		drawLinesForEbene(canvas, skalaLines.ebene3, radiusMain, radiusLineEbene3, 0f, dickeLineEbene3, null);
+		drawLinesForEbene(canvas, skalaLines.ebene3, radiusMain, radiusLineEbene3, fontRadiusEbene3, dickeLineEbene3, attrEbene3);
 
 		// ggf linie zeichnen
 		if (radiusBaseLine > 0) {

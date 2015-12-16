@@ -9,6 +9,7 @@ import java.util.Map;
 import android.graphics.Bitmap;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV1;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV2;
+import de.geithonline.abattlwp.bitmapdrawer.AsymetricV3;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV1;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV2;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV3;
@@ -36,6 +37,7 @@ public class DrawerManager {
 	static {
 		drawer.put("AsymetricV1", new AsymetricV1());
 		drawer.put("AsymetricV2", new AsymetricV2());
+		drawer.put("AsymetricV3", new AsymetricV3());
 		drawer.put("ClockV1", new ClockV1());
 		drawer.put("ClockV2", new ClockV2());
 		drawer.put("ClockV3", new ClockV3());

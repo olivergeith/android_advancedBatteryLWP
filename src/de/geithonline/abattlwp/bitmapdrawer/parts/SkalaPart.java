@@ -60,7 +60,8 @@ public class SkalaPart {
 		c = center;
 		this.skalaLines = skalaLines;
 		scala = scale;
-		fontRadiusEbene1 = radiusLineEnd * 1.02f;
+		final float diffRadius = radiusLineEnd - radiusLineStart;
+		fontRadiusEbene1 = radiusLineStart + diffRadius * 1.3f;
 		fontRadiusEbene2 = 0f;
 		// Radien berechnen
 		setupLineRadien(radiusLineStart, radiusLineEnd);
@@ -156,6 +157,15 @@ public class SkalaPart {
 		// Fontsize anpassen (etwas kleiner)
 		attrEbene3.setFontSize(attrEbene1.getFontSize() * 0.7f);
 		// Radius setzen
+		setFontRadiusEbene3Default();
+		return this;
+	}
+
+	public SkalaPart setFontAttributesAllEbenenSameSize() {
+		attrEbene2 = attrEbene1.clone();
+		attrEbene3 = attrEbene1.clone();
+		// Radius setzen
+		setFontRadiusEbene2Default();
 		setFontRadiusEbene3Default();
 		return this;
 	}

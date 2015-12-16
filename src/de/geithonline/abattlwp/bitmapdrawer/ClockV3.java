@@ -217,7 +217,7 @@ public class ClockV3 extends AdvancedBitmapDrawer {
 	}
 
 	@Override
-	public void drawBattStatusText() {
+	public void drawBattStatusText(final int level) {
 		final Path mArc = new Path();
 		final RectF oval = GeometrieHelper.getCircle(center, radiusBattStatus);
 		mArc.addArc(oval, 180, 180);

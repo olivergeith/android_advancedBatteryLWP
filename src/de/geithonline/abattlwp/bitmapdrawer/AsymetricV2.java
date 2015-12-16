@@ -147,7 +147,7 @@ public class AsymetricV2 extends AdvancedBitmapDrawer {
 				.setGradient(new Gradient(PaintProvider.getGray(80), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
 				.setOutline(new Outline(PaintProvider.getGray(0), strokeWidth / 2))//
 				.draw(bitmapCanvas);
-		drawExtraLevels();
+		drawExtraLevels(level);
 		drawVoltMeter();
 		drawThermoMeter();
 	}
@@ -161,7 +161,7 @@ public class AsymetricV2 extends AdvancedBitmapDrawer {
 		return p;
 	}
 
-	private void drawExtraLevels() {
+	private void drawExtraLevels(final int level) {
 		if (Settings.isShowExtraLevelBars()) {
 			// Timer
 			new LevelPart(center3, maxRadius * 0.5f, maxRadius * 0.45f, level, 120, 90, EZColoring.ColorOf100)//
@@ -184,7 +184,7 @@ public class AsymetricV2 extends AdvancedBitmapDrawer {
 			final SkalaPart s = Skala.getDefaultVoltmeterPart(center, maxRadius * 0.60f, maxRadius * 0.66f, 100, 90, VoltLinesStyle.style_500_100_50)//
 					.setFontAttributesEbene1(new FontAttributes(Align.CENTER, Typeface.DEFAULT, fontSizeScala * 0.5f))//
 					.setupDefaultBaseLineRadius()//
-					.setDickeBaseLineDefault()//
+					.setDickeBaseLine(strokeWidth)//
 					.setDicke(strokeWidth)//
 					.draw(bitmapCanvas);
 			Skala.getZeigerPart(center, Settings.getBattVoltage(), maxRadius * 0.66f, maxRadius * 0.48f, s.getScala())//
@@ -211,7 +211,7 @@ public class AsymetricV2 extends AdvancedBitmapDrawer {
 			final SkalaPart s = Skala.getDefaultThermometerPart(center, maxRadius * 0.60f, maxRadius * 0.66f, 80, -90, LevelLinesStyle.ZehnerFuenfer)//
 					.setFontAttributesEbene1(new FontAttributes(Align.CENTER, Typeface.DEFAULT, fontSizeScala * 0.5f))//
 					.setupDefaultBaseLineRadius()//
-					.setDickeBaseLineDefault()//
+					.setDickeBaseLine(strokeWidth)//
 					.setDicke(strokeWidth)//
 					.draw(bitmapCanvas);
 			Skala.getZeigerPart(center, Settings.getBattTemperature(), maxRadius * 0.66f, maxRadius * 0.48f, s.getScala())//
@@ -252,7 +252,7 @@ public class AsymetricV2 extends AdvancedBitmapDrawer {
 	}
 
 	@Override
-	public void drawBattStatusText() {
+	public void drawBattStatusText(final int level) {
 		new TextOnCirclePart(center, maxRadius * 0.96f, 90, fontSizeArc, new Paint())//
 				.setColor(Settings.getBattStatusColor())//
 				.invert(true)//

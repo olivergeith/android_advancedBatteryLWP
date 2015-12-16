@@ -146,7 +146,7 @@ public class TachoV1 extends AdvancedBitmapDrawer {
 	}
 
 	@Override
-	public void drawBattStatusText() {
+	public void drawBattStatusText(final int level) {
 		final Path mArc = new Path();
 		final RectF oval = GeometrieHelper.getCircle(center, maxRadius * 0.60f);
 		mArc.addArc(oval, 180, 180);

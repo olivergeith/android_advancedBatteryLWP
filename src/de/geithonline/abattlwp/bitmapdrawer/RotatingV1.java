@@ -178,7 +178,7 @@ public class RotatingV1 extends AdvancedBitmapDrawer {
 	}
 
 	@Override
-	public void drawBattStatusText() {
+	public void drawBattStatusText(final int level) {
 		final float winkel = 90 + level * 3.6f;
 		new TextOnCirclePart(center, maxRadius * 0.80f, winkel, fontSizeArc, new Paint())//
 				.setColor(Settings.getBattStatusColor())//

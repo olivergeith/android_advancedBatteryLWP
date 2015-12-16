@@ -214,7 +214,7 @@ public class TachoV2 extends AdvancedBitmapDrawer {
 	}
 
 	@Override
-	public void drawBattStatusText() {
+	public void drawBattStatusText(final int level) {
 		final long winkel = -90;
 		new TextOnCirclePart(center, maxRadius * 0.90f, winkel, fontSizeArc, PaintProvider.getTextPaint(level, fontSizeArc))//
 				.setAlign(Align.CENTER)//

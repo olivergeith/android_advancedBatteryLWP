@@ -30,7 +30,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	protected Canvas bitmapCanvas;
 	protected int bmpHeight = 0;
 	protected int bmpWidth = 0;
-	protected int level = -99;
+	private int oldLevel = -99;
 	private boolean isDrawIcon = false;
 
 	public abstract Bitmap drawBitmap(final int level, Bitmap Bitmap);
@@ -39,7 +39,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 
 	public abstract void drawChargeStatusText(final int level);
 
-	public abstract void drawBattStatusText();
+	public abstract void drawBattStatusText(int level);
 
 	private final void drawOnCanvas(Bitmap bitmap, final Canvas canvas) {
 		switch (Settings.getBitmapRatation()) {
@@ -147,7 +147,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 		final int h = canvas.getHeight();
 		final int w = canvas.getWidth();
 		// Bitmap neu berechnen wenn Level sich Ändert oder Canvas dimensions
-		if (this.level != level || w != displayWidth || h != displayHeight || bitmap == null || forcedraw) {
+		if (this.oldLevel != level || w != displayWidth || h != displayHeight || bitmap == null || forcedraw) {
 			displayWidth = w;
 			displayHeight = h;
 			// Memory frei geben für altes bitmap
@@ -162,14 +162,14 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 				drawChargeStatusText(level);
 			}
 			if (Settings.isShowStatus()) {
-				drawBattStatusText();
+				drawBattStatusText(level);
 			}
 			if (Settings.isShowNumber()) {
 				drawLevelNumber(level);
 			}
 		}
 		// den aktuellen level merken
-		this.level = level;
+		this.oldLevel = level;
 		if (Settings.isDebugging()) {
 			if (PermissionRequester.isReadWritePermission()) {
 				BitmapHelper.saveBitmap(bitmap, getClass().getSimpleName(), level);
@@ -194,7 +194,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 			drawChargeStatusText(level);
 		}
 		if (Settings.isShowStatus()) {
-			drawBattStatusText();
+			drawBattStatusText(level);
 		}
 		if (Settings.isShowNumber()) {
 			drawLevelNumber(level);

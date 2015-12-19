@@ -22,7 +22,7 @@ import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
 
-public class TachoV3 extends AdvancedBitmapDrawer {
+public class SimpleCircleV3 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 
@@ -48,7 +48,7 @@ public class TachoV3 extends AdvancedBitmapDrawer {
 		fontSizeLevel = maxRadius * 0.54f;
 	}
 
-	public TachoV3() {
+	public SimpleCircleV3() {
 	}
 
 	@Override

@@ -9,7 +9,7 @@ public class SkalaLines {
 	public float[] ebene3 = null;
 
 	public enum LevelLinesStyle {
-		ZehnerFuenferEiner, ZehnerEiner, ZehnerFuenfer
+		ZehnerFuenferEiner, ZehnerEiner, ZehnerFuenfer, Zehner
 	}
 
 	public enum VoltLinesStyle {
@@ -53,6 +53,8 @@ public class SkalaLines {
 				return getLevelLinesZF(start, stop);
 			case ZehnerEiner:
 				return getLevelLinesZE(start, stop);
+			case Zehner:
+				return getLevelLinesZ(start, stop);
 		}
 	}
 
@@ -113,6 +115,21 @@ public class SkalaLines {
 		lines.ebene1 = integerToArry(list10);
 		lines.ebene2 = null;
 		lines.ebene3 = integerToArry(list1);
+		return lines;
+	}
+
+	private static SkalaLines getLevelLinesZ(final int start, final int stop) {
+		final List<Integer> list10 = new ArrayList<>();
+		for (int i = start; i <= stop; i++) {
+			if (i % 10 == 0) {
+				list10.add(i);
+			}
+		}
+
+		final SkalaLines lines = new SkalaLines();
+		lines.ebene1 = integerToArry(list10);
+		lines.ebene2 = null;
+		lines.ebene3 = null;
 		return lines;
 	}
 

@@ -101,8 +101,8 @@ public class SimpleCircleV1 extends AdvancedBitmapDrawer {
 	private void drawAll(final int level) {
 
 		// SkalaBackground
-		new RingPart(center, maxRadius * bgRa, maxRadius * bgRi, PaintProvider.getBackgroundPaint())//
-				.draw(bitmapCanvas);
+		// new RingPart(center, maxRadius * bgRa, maxRadius * bgRi, PaintProvider.getBackgroundPaint())//
+		// .draw(bitmapCanvas);
 
 		// Level
 		new LevelPart(center, maxRadius * levelRa, maxRadius * levelRi, level, -90, 360, EZColoring.LevelColors)//

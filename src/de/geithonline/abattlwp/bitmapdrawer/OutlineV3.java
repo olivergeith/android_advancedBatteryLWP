@@ -1,7 +1,6 @@
 package de.geithonline.abattlwp.bitmapdrawer;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Path;
@@ -21,11 +20,11 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.CirclePath;
-import de.geithonline.abattlwp.bitmapdrawer.shapes.StarPath;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.PillowPath;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 
-public class OutlineV1 extends AdvancedBitmapDrawer {
+public class OutlineV3 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 
@@ -54,7 +53,7 @@ public class OutlineV1 extends AdvancedBitmapDrawer {
 		outline = new Outline(PaintProvider.getGray(64), strokeWidth / 2);
 	}
 
-	public OutlineV1() {
+	public OutlineV3() {
 	}
 
 	@Override
@@ -110,16 +109,12 @@ public class OutlineV1 extends AdvancedBitmapDrawer {
 				.setStyle(Settings.getLevelStyle())//
 				.setMode(Settings.getLevelMode())//
 				.draw(bitmapCanvas);
-		final SkalaPart s = Skala.getLevelScalaCircular(center, maxRadius * 0.75f, maxRadius * 0.78f, startWinkel, LevelLinesStyle.Zehner)//
+		final SkalaPart s = Skala.getLevelScalaCircular(center, maxRadius * 0.75f, maxRadius * 0.78f, startWinkel, LevelLinesStyle.ZehnerFuenfer)//
 				// final SkalaPart s = Skala.getLevelScalaCircular(center, maxRadius * 0.41f, maxRadius * 0.43f, startWinkel, LevelLinesStyle.ZehnerFuenfer)//
 				.setFontAttributesEbene1(new FontAttributes(fontSizeScala))//
+				.setFontAttributesEbene2(new FontAttributes(fontSizeScala))//
+				.setFontRadiusEbene2Default()//
 				.setDicke(strokeWidth * 0.5f);
-		if (Settings.isShowZeiger()) {
-			Skala.getZeigerPart(center, level, maxRadius * 0.99f, maxRadius * 0.0f, s.getScala())//
-					.setDicke(strokeWidth)//
-					.setDropShadow(new DropShadow(strokeWidth * 2, PaintProvider.getGray(32)))//
-					.draw(bitmapCanvas);
-		}
 
 		// Ausen Ring
 		new RingPart(center, maxRadius * 0.99f, maxRadius * 0.90f, new Paint())//
@@ -128,10 +123,18 @@ public class OutlineV1 extends AdvancedBitmapDrawer {
 				.draw(bitmapCanvas);
 
 		new AnyPathPart(center, maxRadius * 0.89f, 0, new Paint(), createPath(level))//
-				.setDropShadow(new DropShadow(strokeWidth * 2, Color.BLACK))//
+				// .setDropShadow(new DropShadow(strokeWidth * 2, Color.BLACK))//
 				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(100), GRAD_STYLE.top2bottom))//
 				.setOutline(outline)//
 				.draw(bitmapCanvas);
+
+		if (Settings.isShowZeiger()) {
+			Skala.getZeigerPart(center, level, maxRadius * 0.75f, maxRadius * 0.0f, s.getScala())//
+					.setDicke(strokeWidth)//
+					.setDropShadow(new DropShadow(strokeWidth * 2, PaintProvider.getGray(32)))//
+					.draw(bitmapCanvas);
+		}
+
 		// Innen Fläche Ring
 		new RingPart(center, maxRadius * 0.40f, maxRadius * 0.00f, new Paint())//
 				.setGradient(new Gradient(PaintProvider.getGray(100), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
@@ -152,7 +155,7 @@ public class OutlineV1 extends AdvancedBitmapDrawer {
 		final Path p = new Path();
 
 		final Path circle1 = new CirclePath(center, maxRadius * 0.90f, maxRadius * 0.0f, Direction.CCW);
-		final Path star = new StarPath(20, center, maxRadius * 0.74f, maxRadius * 0.60f); // Direction.CW
+		final Path star = new PillowPath(20, center, maxRadius * 0.74f); // Direction.CW
 		final Path circle2 = new CirclePath(center, maxRadius * 0.40f, maxRadius * 0.0f, Direction.CCW);
 		p.addPath(circle1);
 		p.addPath(star);

@@ -1,5 +1,7 @@
 package de.geithonline.abattlwp.bitmapdrawer;
 
+import java.util.List;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
@@ -25,4 +27,8 @@ public interface IBitmapDrawer {
 	public boolean supportsThermometer();
 
 	public boolean supportsLevelNumberFontSizeAdjustment();
+
+	public boolean supportsVariants();
+
+	public List<String> getVariants();
 }

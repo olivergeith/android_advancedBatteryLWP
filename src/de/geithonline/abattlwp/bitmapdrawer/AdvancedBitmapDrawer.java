@@ -1,5 +1,7 @@
 package de.geithonline.abattlwp.bitmapdrawer;
 
+import java.util.List;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -147,7 +149,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 		final int h = canvas.getHeight();
 		final int w = canvas.getWidth();
 		// Bitmap neu berechnen wenn Level sich Ändert oder Canvas dimensions
-		if (this.oldLevel != level || w != displayWidth || h != displayHeight || bitmap == null || forcedraw) {
+		if (oldLevel != level || w != displayWidth || h != displayHeight || bitmap == null || forcedraw) {
 			displayWidth = w;
 			displayHeight = h;
 			// Memory frei geben für altes bitmap
@@ -169,7 +171,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 			}
 		}
 		// den aktuellen level merken
-		this.oldLevel = level;
+		oldLevel = level;
 		if (Settings.isDebugging()) {
 			if (PermissionRequester.isReadWritePermission()) {
 				BitmapHelper.saveBitmap(bitmap, getClass().getSimpleName(), level);
@@ -294,6 +296,23 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 
 	@Override
 	public boolean supportsLevelNumberFontSizeAdjustment() {
+		return true;
+	}
+
+	@Override
+	public List<String> getVariants() {
+		return null;
+	}
+
+	@Override
+	public boolean supportsVariants() {
+		final List<String> variants = getVariants();
+		if (variants == null) {
+			return false;
+		}
+		if (variants.isEmpty()) {
+			return false;
+		}
 		return true;
 	}
 

@@ -21,7 +21,11 @@ import de.geithonline.abattlwp.bitmapdrawer.FancyV1;
 import de.geithonline.abattlwp.bitmapdrawer.FancyV2;
 import de.geithonline.abattlwp.bitmapdrawer.IBitmapDrawer;
 import de.geithonline.abattlwp.bitmapdrawer.LabyrinthV1;
+import de.geithonline.abattlwp.bitmapdrawer.LabyrinthV2;
+import de.geithonline.abattlwp.bitmapdrawer.LabyrinthV3;
 import de.geithonline.abattlwp.bitmapdrawer.OutlineV1;
+import de.geithonline.abattlwp.bitmapdrawer.OutlineV2;
+import de.geithonline.abattlwp.bitmapdrawer.OutlineV3;
 import de.geithonline.abattlwp.bitmapdrawer.RotatingV1;
 import de.geithonline.abattlwp.bitmapdrawer.RotatingV2;
 import de.geithonline.abattlwp.bitmapdrawer.RotatingV3;
@@ -48,6 +52,8 @@ public class DrawerManager {
 		drawer.put("FancyV1", new FancyV1());
 		drawer.put("FancyV2", new FancyV2());
 		drawer.put("LabyrinthV1", new LabyrinthV1());
+		drawer.put("LabyrinthV2", new LabyrinthV2());
+		drawer.put("LabyrinthV3", new LabyrinthV3());
 		drawer.put("TachoV1", new TachoV1());
 		drawer.put("TachoV2", new TachoV2());
 		drawer.put("RotatingV1", new RotatingV1());
@@ -58,6 +64,8 @@ public class DrawerManager {
 		drawer.put("SimpleCircleV3", new SimpleCircleV3());
 		drawer.put("DarkV1", new DarkV1());
 		drawer.put("OutlineV1", new OutlineV1());
+		drawer.put("OutlineV2", new OutlineV2());
+		drawer.put("OutlineV3", new OutlineV3());
 	}
 
 	public static IBitmapDrawer getDrawer(final String name) {

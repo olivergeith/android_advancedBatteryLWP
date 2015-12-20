@@ -1,7 +1,6 @@
 package de.geithonline.abattlwp.bitmapdrawer;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Path;
@@ -14,6 +13,8 @@ import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.data.SkalaLines.LevelLinesStyle;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
+import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
+import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
 import de.geithonline.abattlwp.bitmapdrawer.parts.AnyPathPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.LevelPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
@@ -21,11 +22,12 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.CirclePath;
-import de.geithonline.abattlwp.bitmapdrawer.shapes.StarPath;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.RoatingPatternsPath;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.RoatingPatternsPath.SUN_TYPE;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 
-public class OutlineV1 extends AdvancedBitmapDrawer {
+public class OutlineV2 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 
@@ -54,7 +56,7 @@ public class OutlineV1 extends AdvancedBitmapDrawer {
 		outline = new Outline(PaintProvider.getGray(64), strokeWidth / 2);
 	}
 
-	public OutlineV1() {
+	public OutlineV2() {
 	}
 
 	@Override
@@ -104,22 +106,31 @@ public class OutlineV1 extends AdvancedBitmapDrawer {
 				.draw(bitmapCanvas);
 
 		// Level
-		new LevelPart(center, maxRadius * 0.99f, maxRadius * 0.0f, level, startWinkel, sweep, EZColoring.LevelColors)//
+		new LevelPart(center, maxRadius * 0.99f, maxRadius * 0.80f, level, startWinkel, sweep, EZColoring.LevelColors)//
+				.setSegemteAbstand(1f)//
+				.setStrokeWidth(strokeWidth / 3)//
+				.setStyle(EZStyle.segmented_onlyactive)//
+				.setMode(EZMode.Einer)//
+				.draw(bitmapCanvas);
+		new LevelPart(center, maxRadius * 0.80f, maxRadius * 0.0f, level, startWinkel, sweep, EZColoring.LevelColors)//
 				.setSegemteAbstand(1f)//
 				.setStrokeWidth(strokeWidth / 3)//
 				.setStyle(Settings.getLevelStyle())//
 				.setMode(Settings.getLevelMode())//
 				.draw(bitmapCanvas);
-		final SkalaPart s = Skala.getLevelScalaCircular(center, maxRadius * 0.75f, maxRadius * 0.78f, startWinkel, LevelLinesStyle.Zehner)//
-				// final SkalaPart s = Skala.getLevelScalaCircular(center, maxRadius * 0.41f, maxRadius * 0.43f, startWinkel, LevelLinesStyle.ZehnerFuenfer)//
+		final SkalaPart s = Skala.getLevelScalaCircular(center, maxRadius * 0.84f, maxRadius * 0.80f, startWinkel, LevelLinesStyle.ZehnerFuenferEiner)//
 				.setFontAttributesEbene1(new FontAttributes(fontSizeScala))//
-				.setDicke(strokeWidth * 0.5f);
-		if (Settings.isShowZeiger()) {
-			Skala.getZeigerPart(center, level, maxRadius * 0.99f, maxRadius * 0.0f, s.getScala())//
-					.setDicke(strokeWidth)//
-					.setDropShadow(new DropShadow(strokeWidth * 2, PaintProvider.getGray(32)))//
-					.draw(bitmapCanvas);
-		}
+				.setFontAttributesAllEbenenSameSize()//
+				.setFontAttributesEbene3(null)//
+				.setFontRadiusEbene1(maxRadius * 0.72f)//
+				.setFontRadiusEbene2(maxRadius * 0.72f)//
+				.setDicke(strokeWidth * 0.7f);
+				// if (Settings.isShowZeiger()) {
+				// Skala.getZeigerPart(center, level, maxRadius * 0.99f, maxRadius * 0.0f, s.getScala())//
+				// .setDicke(strokeWidth)//
+				// .setDropShadow(new DropShadow(strokeWidth * 2, PaintProvider.getGray(32)))//
+				// .draw(bitmapCanvas);
+				// }
 
 		// Ausen Ring
 		new RingPart(center, maxRadius * 0.99f, maxRadius * 0.90f, new Paint())//
@@ -128,17 +139,25 @@ public class OutlineV1 extends AdvancedBitmapDrawer {
 				.draw(bitmapCanvas);
 
 		new AnyPathPart(center, maxRadius * 0.89f, 0, new Paint(), createPath(level))//
-				.setDropShadow(new DropShadow(strokeWidth * 2, Color.BLACK))//
+				// .setDropShadow(new DropShadow(strokeWidth * 3, 0, strokeWidth, Color.BLACK))//
 				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(100), GRAD_STYLE.top2bottom))//
 				.setOutline(outline)//
 				.draw(bitmapCanvas);
+
+		if (Settings.isShowZeiger()) {
+			Skala.getZeigerPart(center, level, maxRadius * 0.70f, maxRadius * 0.0f, s.getScala())//
+					.setDicke(strokeWidth)//
+					.setDropShadow(new DropShadow(strokeWidth * 2, PaintProvider.getGray(32)))//
+					.draw(bitmapCanvas);
+		}
+
 		// Innen Fläche Ring
-		new RingPart(center, maxRadius * 0.40f, maxRadius * 0.00f, new Paint())//
+		new RingPart(center, maxRadius * 0.35f, maxRadius * 0.00f, new Paint())//
 				.setGradient(new Gradient(PaintProvider.getGray(100), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
 				.setOutline(outline)//
 				.draw(bitmapCanvas);
 		// Innen Fläche Ring
-		new RingPart(center, maxRadius * 0.35f, maxRadius * 0.00f, new Paint())//
+		new RingPart(center, maxRadius * 0.30f, maxRadius * 0.00f, new Paint())//
 				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(100), GRAD_STYLE.top2bottom))//
 				.setOutline(outline)//
 				.draw(bitmapCanvas);
@@ -151,12 +170,15 @@ public class OutlineV1 extends AdvancedBitmapDrawer {
 	private Path createPath(final int level) {
 		final Path p = new Path();
 
-		final Path circle1 = new CirclePath(center, maxRadius * 0.90f, maxRadius * 0.0f, Direction.CCW);
-		final Path star = new StarPath(20, center, maxRadius * 0.74f, maxRadius * 0.60f); // Direction.CW
-		final Path circle2 = new CirclePath(center, maxRadius * 0.40f, maxRadius * 0.0f, Direction.CCW);
+		final Path circle1 = new CirclePath(center, maxRadius * 0.85f, maxRadius * 0.0f, Direction.CCW);
+		final int arms = 20;
+		final float rotate = 360f / (2 * arms);
+		// final Path drop = new RoatingPatternsPath(arms, center, maxRadius * 0.7f, rotate, SUN_TYPE.DROP);
+		final Path c = new RoatingPatternsPath(arms, center, maxRadius * 0.7f, rotate, SUN_TYPE.CIRCLE);
+		// final Path sun = new RoatingPatternsPath(10, center, maxRadius * 0.74f, 0f, SUN_TYPE.TEN_CIRCLES);
 		p.addPath(circle1);
-		p.addPath(star);
-		p.addPath(circle2);
+		p.addPath(c);
+		// p.addPath(circle2);
 		return p;
 	}
 

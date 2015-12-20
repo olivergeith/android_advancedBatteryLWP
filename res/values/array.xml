@@ -4,10 +4,12 @@
     <string-array name="levelStyles">
         <item >Normal</item>
         <item >Normal (outline)</item>
-        <item >Normal (alpha)</item>
+        <item >Normal (outline)</item>
+        <item >Normal (backgroundpaint)</item>
         <item >Only activ segments</item>
         <item >All segments (outline)</item>
         <item >All segments (alpha)</item>
+        <item >All segments (backgroundpaint)</item>
         </string-array>
 
     <string-array name="levelMode">

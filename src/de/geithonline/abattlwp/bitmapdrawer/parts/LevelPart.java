@@ -3,14 +3,14 @@ package de.geithonline.abattlwp.bitmapdrawer.parts;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PointF;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZMode;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZStyle;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.LevelArcPath;
 import de.geithonline.abattlwp.settings.PaintProvider;
-import android.graphics.Path;
-import android.graphics.PointF;
 
 public class LevelPart {
 
@@ -19,7 +19,7 @@ public class LevelPart {
 	private final PointF c;
 	private final float ra;
 	private final float ri;
-	private final Paint paint;
+	private Paint paint;
 	private int levelIntern;
 	private final float maxWinkel;
 	private final float startWinkel;
@@ -41,15 +41,15 @@ public class LevelPart {
 		this.coloring = coloring;
 		setMode(modus);
 		switch (coloring) {
-		default:
-		case LevelColors:
-			paint = PaintProvider.getBatteryPaint(this.level);
-			break;
-		case Colorfull:
-		case Custom:
-		case ColorOf100:
-			paint = PaintProvider.getBatteryPaint(100);
-			break;
+			default:
+			case LevelColors:
+				paint = PaintProvider.getBatteryPaint(this.level);
+				break;
+			case Colorfull:
+			case Custom:
+			case ColorOf100:
+				paint = PaintProvider.getBatteryPaint(100);
+				break;
 		}
 		initPaint();
 	}
@@ -75,27 +75,27 @@ public class LevelPart {
 	public LevelPart setMode(final EZMode modus) {
 		this.modus = modus;
 		switch (this.modus) {
-		default:
-		case Einer:
-			levelIntern = level;
-			anzahlSegmente = 100;
-			break;
-		case EinerOnly9Segmente:
-			levelIntern = level % 10;
-			anzahlSegmente = 9;
-			break;
-		case EinerOnly10Segmente:
-			levelIntern = level % 10;
-			anzahlSegmente = 10;
-			break;
-		case Fuenfer:
-			levelIntern = level / 5;
-			anzahlSegmente = 20;
-			break;
-		case Zehner:
-			levelIntern = level / 10;
-			anzahlSegmente = 10;
-			break;
+			default:
+			case Einer:
+				levelIntern = level;
+				anzahlSegmente = 100;
+				break;
+			case EinerOnly9Segmente:
+				levelIntern = level % 10;
+				anzahlSegmente = 9;
+				break;
+			case EinerOnly10Segmente:
+				levelIntern = level % 10;
+				anzahlSegmente = 10;
+				break;
+			case Fuenfer:
+				levelIntern = level / 5;
+				anzahlSegmente = 20;
+				break;
+			case Zehner:
+				levelIntern = level / 10;
+				anzahlSegmente = 10;
+				break;
 		}
 		return this;
 	}
@@ -123,25 +123,31 @@ public class LevelPart {
 
 	public void draw(final Canvas canvas) {
 		switch (style) {
-		default:
-		case sweep:
-			drawSweep(canvas);
-			break;
-		case sweep_withAplpah:
-			drawSweepWithAlpha(canvas);
-			break;
-		case sweep_withOutline:
-			drawSweepWithOutline(canvas);
-			break;
-		case segmented_onlyactive:
-			drawSegemtedOnlyAct(canvas);
-			break;
-		case segmented_all:
-			drawSegemtedAll(canvas);
-			break;
-		case segmented_all_alpha:
-			drawSegemtedAllHalfAlpha(canvas);
-			break;
+			default:
+			case sweep:
+				drawSweep(canvas);
+				break;
+			case sweep_withAplpah:
+				drawSweepWithAlpha(canvas);
+				break;
+			case sweep_withBackgroundPaint:
+				drawSweepWithBackground(canvas);
+				break;
+			case sweep_withOutline:
+				drawSweepWithOutline(canvas);
+				break;
+			case segmented_onlyactive:
+				drawSegemtedOnlyAct(canvas);
+				break;
+			case segmented_all:
+				drawSegemtedAll(canvas);
+				break;
+			case segmented_all_alpha:
+				drawSegemtedAllHalfAlpha(canvas);
+				break;
+			case segmented_all_backgroundPaint:
+				drawSegemtedAllBackgroundPaint(canvas);
+				break;
 		}
 	}
 
@@ -157,19 +163,6 @@ public class LevelPart {
 
 	}
 
-	// private void drawSweepWithOutlineV2(final Canvas canvas) {
-	// final float winkelProSegment = maxWinkel / anzahlSegmente;
-	// final float sweep = winkelProSegment * levelIntern;
-	// final Path path = new LevelArcPath(c, ra, ri, startWinkel, sweep);
-	// final Path path2 = new LevelArcPath(c, ra, ri, startWinkel + sweep, maxWinkel - sweep);
-	// paint.setStyle(Style.FILL_AND_STROKE);
-	// canvas.drawPath(path, paint);
-	// // rest als stroke
-	// paint.setStyle(Style.STROKE);
-	// paint.setColor(PaintProvider.getColorForLevel(100));
-	// canvas.drawPath(path2, paint);
-	// }
-
 	private void drawSweepWithAlpha(final Canvas canvas) {
 		final float winkelProSegment = maxWinkel / anzahlSegmente;
 		final float sweep = winkelProSegment * levelIntern;
@@ -181,6 +174,18 @@ public class LevelPart {
 		// rest in ein drittel alpha malen
 		paint.setColor(PaintProvider.getColorForLevel(100));
 		paint.setAlpha(alpha / 3);
+		canvas.drawPath(path2, paint);
+	}
+
+	private void drawSweepWithBackground(final Canvas canvas) {
+		final float winkelProSegment = maxWinkel / anzahlSegmente;
+		final float sweep = winkelProSegment * levelIntern;
+		final Path path = new LevelArcPath(c, ra, ri, startWinkel, sweep);
+		final Path path2 = new LevelArcPath(c, ra, ri, startWinkel + sweep, maxWinkel - sweep);
+		paint.setStyle(Style.FILL);
+		canvas.drawPath(path, paint);
+		// rest in ein drittel alpha malen
+		paint.setColor(PaintProvider.getBackgroundPaint().getColor());
 		canvas.drawPath(path2, paint);
 	}
 
@@ -276,6 +281,38 @@ public class LevelPart {
 				paint.setAlpha(alpha);
 			} else {
 				paint.setAlpha(alpha / 3);
+			}
+
+			float winkel;
+			if (winkelProSegment < 0) {
+				winkel = startWinkel + i * winkelProSegment - abstandZwischenSegemten / 2;
+			} else {
+				winkel = startWinkel + i * winkelProSegment + abstandZwischenSegemten / 2;
+			}
+			final Path path = new LevelArcPath(c, ra, ri, winkel, sweepProSeg);
+			canvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawSegemtedAllBackgroundPaint(final Canvas canvas) {
+		final float winkelProSegment = maxWinkel / anzahlSegmente;
+		float sweepProSeg;
+		if (winkelProSegment < 0) {
+			sweepProSeg = winkelProSegment + abstandZwischenSegemten;
+		} else {
+			sweepProSeg = winkelProSegment - abstandZwischenSegemten;
+		}
+		for (int i = 0; i < anzahlSegmente; i = i + 1) {
+			paint.setStrokeWidth(strokeWidthSegmente);
+			if (levelIntern > i) {
+				if (coloring.equals(EZColoring.Colorfull)) {
+					final int faktor = (int) (100 / anzahlSegmente);
+					paint.setColor(PaintProvider.getColorForLevel(i * faktor));
+				} else {
+					paint.setColor(PaintProvider.getColorForLevel(level));
+				}
+			} else {
+				paint.setColor(PaintProvider.getBackgroundPaint().getColor());
 			}
 
 			float winkel;

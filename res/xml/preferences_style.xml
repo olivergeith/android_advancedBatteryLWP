@@ -208,7 +208,14 @@
             android:defaultValue="false"
             android:key="showExtraLevelBars"
             android:title="@string/showExtraLevelBars" />
-    </PreferenceScreen>
+        
+        <PreferenceCategory android:title="More..." />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="show_rand"
+            android:title="@string/show_rand" />
+        </PreferenceScreen>
     <!-- ##################################################################################### -->
     <!-- ##################################################################################### -->
     <!-- ##################################################################################### -->
@@ -254,12 +261,6 @@
             android:key="glowScalaColor"
             android:title="@string/glowScalaColor" />
 
-        <PreferenceCategory android:title="More..." />
-
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="show_rand"
-            android:title="@string/show_rand" />
     </PreferenceScreen>
     <!-- ##################################################################################### -->
     <PreferenceScreen

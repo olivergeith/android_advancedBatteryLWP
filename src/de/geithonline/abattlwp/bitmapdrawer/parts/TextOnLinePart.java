@@ -80,15 +80,15 @@ public class TextOnLinePart {
 			default:
 			case LEFT:
 				p.moveTo(center.x + radius, center.y);
-				p.lineTo(center.x + radius, center.y + 400 * faktor);
+				p.lineTo(center.x + radius, center.y + 1000 * faktor);
 				break;
 			case CENTER:
-				p.moveTo(center.x + radius, center.y - 200 * faktor);
-				p.lineTo(center.x + radius, center.y + 200 * faktor);
+				p.moveTo(center.x + radius, center.y - 500 * faktor);
+				p.lineTo(center.x + radius, center.y + 500 * faktor);
 				break;
 			case RIGHT:
 				p.moveTo(center.x + radius, center.y);
-				p.lineTo(center.x + radius, center.y - 400 * faktor);
+				p.lineTo(center.x + radius, center.y - 1000 * faktor);
 				break;
 		}
 		PathHelper.rotatePath(center.x, center.y, p, winkel);

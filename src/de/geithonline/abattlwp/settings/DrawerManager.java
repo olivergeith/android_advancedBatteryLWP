@@ -10,6 +10,8 @@ import android.graphics.Bitmap;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV1;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV2;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV3;
+import de.geithonline.abattlwp.bitmapdrawer.BrickMadnessV1;
+import de.geithonline.abattlwp.bitmapdrawer.BrickMadnessV1.BrickStyle;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV1;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV2;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV3;
@@ -40,38 +42,40 @@ public class DrawerManager {
 	private static Map<String, Bitmap> iconCache = new HashMap<String, Bitmap>();
 
 	static {
-		drawer.put("AsymetricV1", new AsymetricV1());
-		drawer.put("AsymetricV2", new AsymetricV2());
-		drawer.put("AsymetricV3", new AsymetricV3());
-		drawer.put("ClockV1", new ClockV1());
-		drawer.put("ClockV2", new ClockV2());
-		drawer.put("ClockV3", new ClockV3());
-		drawer.put("ClockV4", new ClockV4());
-		drawer.put("ClockV5", new ClockV5());
-		drawer.put("ClockV6", new ClockV6());
-		drawer.put("FancyV1", new FancyV1());
-		drawer.put("FancyV2", new FancyV2());
-		drawer.put("LabyrinthV1", new LabyrinthV1());
-		drawer.put("LabyrinthV2", new LabyrinthV2());
-		drawer.put("LabyrinthV3", new LabyrinthV3());
-		drawer.put("TachoV1", new TachoV1());
-		drawer.put("TachoV2", new TachoV2());
-		drawer.put("RotatingV1", new RotatingV1());
-		drawer.put("RotatingV2", new RotatingV2());
-		drawer.put("RotatingV3", new RotatingV3());
-		drawer.put("SimpleCircleV1", new SimpleCircleV1());
-		drawer.put("SimpleCircleV2", new SimpleCircleV2());
-		drawer.put("SimpleCircleV3", new SimpleCircleV3());
-		drawer.put("DarkV1", new DarkV1());
-		drawer.put("OutlineV1", new OutlineV1());
-		drawer.put("OutlineV2", new OutlineV2());
-		drawer.put("OutlineV3", new OutlineV3());
+		drawer.put("Asymetric V1", new AsymetricV1());
+		drawer.put("Asymetric V2", new AsymetricV2());
+		drawer.put("Asymetric V3", new AsymetricV3());
+		drawer.put("Clock V1", new ClockV1());
+		drawer.put("Clock V2", new ClockV2());
+		drawer.put("Clock V3", new ClockV3());
+		drawer.put("Clock V4", new ClockV4());
+		drawer.put("Clock V5", new ClockV5());
+		drawer.put("Clock V6", new ClockV6());
+		drawer.put("Fancy V1", new FancyV1());
+		drawer.put("Fancy V2", new FancyV2());
+		drawer.put("Labyrinth V1", new LabyrinthV1());
+		drawer.put("Labyrinth V2", new LabyrinthV2());
+		drawer.put("Labyrinth V3", new LabyrinthV3());
+		drawer.put("Tacho V1", new TachoV1());
+		drawer.put("Tacho V2", new TachoV2());
+		drawer.put("Rotating V1", new RotatingV1());
+		drawer.put("Rotating V2", new RotatingV2());
+		drawer.put("Rotating V3", new RotatingV3());
+		drawer.put("SimpleCircle V1", new SimpleCircleV1());
+		drawer.put("SimpleCircle V2", new SimpleCircleV2());
+		drawer.put("SimpleCircle V3", new SimpleCircleV3());
+		drawer.put("Dark V1", new DarkV1());
+		drawer.put("Outline V1", new OutlineV1());
+		drawer.put("Outline V2", new OutlineV2());
+		drawer.put("Outline V3", new OutlineV3());
+		drawer.put("Bricks V1", new BrickMadnessV1(BrickStyle.Normal));
+		drawer.put("Bricks V1 (random)", new BrickMadnessV1(BrickStyle.Random));
 	}
 
 	public static IBitmapDrawer getDrawer(final String name) {
 		IBitmapDrawer d = drawer.get(name);
 		if (d == null) {
-			d = drawer.get("ClockV3");
+			d = drawer.get("Clock V3");
 		}
 		return d;
 	}

@@ -1,6 +1,8 @@
 package de.geithonline.abattlwp.bitmapdrawer;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,18 +10,22 @@ import java.util.Map;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
+import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
+import de.geithonline.abattlwp.bitmapdrawer.parts.AnyPathPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart.RingType;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnLinePart;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.StarPath;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.utils.GeometrieHelper;
+import de.geithonline.abattlwp.utils.PathHelper;
 import de.geithonline.abattlwp.utils.Randomizer;
 
 public class BrickMadnessV1 extends AdvancedBitmapDrawer {
@@ -129,18 +135,30 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 		// Kästchen malen
 		final float raster = 2 * maxRadius * 0.85f / 10;
 		final float abstand = maxRadius * 0.01f;
+		// EasterEgg... On December we use stars!
+		final Calendar date = new GregorianCalendar();
+
 		for (int i = 1; i <= 100; i++) {
 			final Point p = positionMap.get(i);
 			final PointF centerSquare = new PointF();
 			centerSquare.x = randOffset + raster / 2 + p.x * raster;
 			centerSquare.y = randOffset + raster / 2 + p.y * raster;
 			if (i <= level) {
-				new RingPart(centerSquare, raster / 2 - abstand, 0.0f, PaintProvider.getBatteryPaint(level), RingType.Square)//
-						.draw(bitmapCanvas);
-			}
-			if (Settings.isShowRand()) {
-				final RectF rect = GeometrieHelper.getCircle(centerSquare, raster / 2);
-				drawLevelNumberCenteredInRect(bitmapCanvas, i, "" + i, fontSizeArc, rect);
+				if (date.get(Calendar.MONTH) == Calendar.DECEMBER) {
+					final Path star = new StarPath(5, centerSquare, raster / 2, raster / 4);
+					PathHelper.rotatePath(centerSquare.x, centerSquare.y, star, level * 7.2f);
+					new AnyPathPart(centerSquare, raster / 2 - abstand, 0.0f, PaintProvider.getBatteryPaint(level), star)//
+							.draw(bitmapCanvas);
+				} else {
+					new RingPart(centerSquare, raster / 2 - abstand, 0.0f, PaintProvider.getBatteryPaint(level), RingType.Square)//
+							.draw(bitmapCanvas);
+				}
+				// Zahlenzeichnenne
+				if (Settings.isShowRand()) {
+					final RectF rect = GeometrieHelper.getCircle(centerSquare, raster / 2);
+					drawLevelNumberCenteredInRect(bitmapCanvas, i, "" + i, fontSizeArc, rect);
+				}
+
 			}
 		}
 

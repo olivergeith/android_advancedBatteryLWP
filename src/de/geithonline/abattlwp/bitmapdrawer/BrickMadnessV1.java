@@ -145,6 +145,7 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 			centerSquare.y = randOffset + raster / 2 + p.y * raster;
 			if (i <= level) {
 				if (date.get(Calendar.MONTH) == Calendar.DECEMBER) {
+					// Easteregg : Rotating Stars in December
 					final Path star = new StarPath(5, centerSquare, raster / 2, raster / 4);
 					PathHelper.rotatePath(centerSquare.x, centerSquare.y, star, level * 7.2f);
 					new AnyPathPart(centerSquare, raster / 2 - abstand, 0.0f, PaintProvider.getBatteryPaint(level), star)//

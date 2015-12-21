@@ -3,11 +3,12 @@ package de.geithonline.abattlwp.bitmapdrawer.shapes;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.RectF;
+import de.geithonline.abattlwp.utils.Randomizer;
 
 public class PacmanPath extends Path {
 
 	public enum PACMAN_STYLE {
-		GHOST, PACMAN;
+		GHOST, PACMAN, GHOST_RANDOM_EYES;
 	}
 
 	public PacmanPath(final Point center, final float radius, final PACMAN_STYLE style) {
@@ -15,7 +16,10 @@ public class PacmanPath extends Path {
 		switch (style) {
 			default:
 			case GHOST:
-				drawGhost(center, radius);
+				drawGhost(center, radius, true);
+				break;
+			case GHOST_RANDOM_EYES:
+				drawGhost(center, radius, Randomizer.getRandomBoolean());
 				break;
 			case PACMAN:
 				drawPacman(center, radius);
@@ -23,7 +27,7 @@ public class PacmanPath extends Path {
 		}
 	}
 
-	public void drawGhost(final Point center, final float radius) {
+	public void drawGhost(final Point center, final float radius, final boolean eyeRight) {
 		final float sinradius = radius * 0.1f;
 		final float l = center.x - radius * 0.9f;
 		final float r = center.x + radius * 0.9f;
@@ -49,16 +53,28 @@ public class PacmanPath extends Path {
 		}
 		close();
 		// Augen
-		final float alx = center.x - radius * 0.25f;
-		final float arx = center.x + radius * 0.45f;
 		final float ay = center.y - radius * 0.20f;
-		final float alxi = center.x - radius * 0.15f;
-		final float arxi = center.x + radius * 0.55f;
-		addCircle(alx, ay, radius * 0.25f, Direction.CW);
-		addCircle(arx, ay, radius * 0.25f, Direction.CW);
-		// inneres der Augen
-		addCircle(alxi, ay, radius * 0.12f, Direction.CCW);
-		addCircle(arxi, ay, radius * 0.12f, Direction.CCW);
+		if (eyeRight) {
+			// inneres der Augen rechts
+			final float alx = center.x - radius * 0.25f;
+			final float arx = center.x + radius * 0.45f;
+			final float alxi = center.x - radius * 0.15f;
+			final float arxi = center.x + radius * 0.55f;
+			addCircle(alx, ay, radius * 0.25f, Direction.CW);
+			addCircle(arx, ay, radius * 0.25f, Direction.CW);
+			addCircle(alxi, ay, radius * 0.12f, Direction.CCW);
+			addCircle(arxi, ay, radius * 0.12f, Direction.CCW);
+		} else {
+			// inneres der Augen links
+			final float alx = center.x - radius * 0.45f;
+			final float arx = center.x + radius * 0.25f;
+			final float alxi = center.x - radius * 0.55f;
+			final float arxi = center.x + radius * 0.15f;
+			addCircle(alx, ay, radius * 0.25f, Direction.CW);
+			addCircle(arx, ay, radius * 0.25f, Direction.CW);
+			addCircle(alxi, ay, radius * 0.12f, Direction.CCW);
+			addCircle(arxi, ay, radius * 0.12f, Direction.CCW);
+		}
 	}
 
 	public void drawPacman(final Point center, final float radius) {

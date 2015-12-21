@@ -11,6 +11,7 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.LevelZeigerPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.ZeigerShapePath.ZEIGER_TYP;
 import de.geithonline.abattlwp.settings.PaintProvider;
+import de.geithonline.abattlwp.settings.Settings;
 
 public class AppIconDrawer extends AdvancedBitmapDrawer {
 
@@ -38,6 +39,11 @@ public class AppIconDrawer extends AdvancedBitmapDrawer {
 	}
 
 	@Override
+	public boolean supportsShowRand() {
+		return true;
+	}
+
+	@Override
 	public Bitmap drawBitmap(final int level, final Bitmap bitmap) {
 		initPrivateMembers();
 		drawAll(level);
@@ -46,10 +52,11 @@ public class AppIconDrawer extends AdvancedBitmapDrawer {
 
 	private void drawAll(final int level) {
 		// Hintergrund
-		new RingPart(center, maxRadius * 0.99f, 0, PaintProvider.getBackgroundPaint())//
-				.setColor(Color.argb(255, 0, 88, 133)) // Primary Color
-				.draw(bitmapCanvas);
-
+		if (Settings.isShowRand()) {
+			new RingPart(center, maxRadius * 0.99f, 0, PaintProvider.getBackgroundPaint())//
+					.setColor(Color.argb(255, 0, 88, 133)) // Primary Color
+					.draw(bitmapCanvas);
+		}
 		// level ring
 		new LevelPart(center, maxRadius * 0.80f, maxRadius * 0.60f, level, -90, 360, EZColoring.LevelColors)//
 				.setColor(Color.WHITE)//

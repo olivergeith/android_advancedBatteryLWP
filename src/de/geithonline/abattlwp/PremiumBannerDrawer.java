@@ -27,7 +27,7 @@ public class PremiumBannerDrawer {
 		w = canvas.getWidth();
 		h = canvas.getHeight();
 		strokeWidth = w * 0.02f;
-		dropShadow = new DropShadow(strokeWidth, Color.BLACK);
+		dropShadow = new DropShadow(strokeWidth * 2, strokeWidth, strokeWidth, Color.BLACK);
 		// final IBitmapDrawer drawer = DrawerManager.getDrawer(DrawerManager.APP_ICON_DRAWER_NAME);
 		// icon = drawer.drawIcon(66, (int) (w * 0.1f));
 

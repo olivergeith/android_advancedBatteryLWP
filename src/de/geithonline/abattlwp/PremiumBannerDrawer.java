@@ -52,12 +52,15 @@ public class PremiumBannerDrawer {
 		final PointF uR = new PointF(w - off, h - rand);
 		final PointF cpO = new PointF(w / 2, rand - hightBanner); // controllpoint oben
 		final PointF cpU = new PointF(w / 2, h - rand - hightBanner); // controllpoint unten
+		final PointF cpL = new PointF(10 * off, h / 2); // controllpoint links
+		final PointF cpR = new PointF(w - 10 * off, h / 2); // controllpoint rechts
 
 		final Path bow = new Path();
 		bow.moveTo(uL.x, uL.y);
 		bow.quadTo(cpU.x, cpU.y, uR.x, uR.y);
-		bow.lineTo(oR.x, oR.y);
+		bow.quadTo(cpR.x, cpR.y, oR.x, oR.y);
 		bow.quadTo(cpO.x, cpO.y, oL.x, oL.y);
+		bow.quadTo(cpL.x, cpL.y, uL.x, uL.y);
 		bow.close();
 
 		final Path line = new Path();
@@ -65,7 +68,7 @@ public class PremiumBannerDrawer {
 		line.quadTo(cpU.x, cpU.y, uR.x, uR.y);
 
 		paint.setStyle(Style.FILL);
-		paint.setColor(PaintProvider.getGray(128, 128));
+		paint.setColor(PaintProvider.getGray(96, 128));
 		canvas.drawPath(bow, paint);
 		paint.setStyle(Style.STROKE);
 		paint.setColor(PaintProvider.getGray(255, 128));

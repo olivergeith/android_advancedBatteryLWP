@@ -92,20 +92,20 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 		handleAvailability(findPreference("fontsize100Int"), drawer.supportsLevelNumberFontSizeAdjustment());
 
 		// pro Features
-		handlePremium(findPreference("levelMode"));
-		handlePremium(findPreference("levelStyles"));
-		handlePremium(findPreference("showVoltmeter"));
-		handlePremium(findPreference("showThermometer"));
+		// handlePremium(findPreference("levelMode"));
+		// handlePremium(findPreference("levelStyles"));
+		// handlePremium(findPreference("showVoltmeter"));
+		// handlePremium(findPreference("showThermometer"));
 	}
 
-	private static void handlePremium(final Preference preference) {
-		if (Settings.isPremium()) {
-			// preference.setSummary("");
-		} else {
-			preference.setSummary(R.string.premiumOnly);
-			preference.setEnabled(false);
-		}
-	}
+	// private static void handlePremium(final Preference preference) {
+	// if (Settings.isPremium()) {
+	// // preference.setSummary("");
+	// } else {
+	// preference.setSummary(R.string.premiumOnly);
+	// preference.setEnabled(false);
+	// }
+	// }
 
 	private static void handleAvailability(final Preference preference, final boolean available) {
 		if (available) {

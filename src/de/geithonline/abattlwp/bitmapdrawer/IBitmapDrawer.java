@@ -31,4 +31,6 @@ public interface IBitmapDrawer {
 	public boolean supportsVariants();
 
 	public List<String> getVariants();
+
+	public boolean isPremiumDrawer();
 }

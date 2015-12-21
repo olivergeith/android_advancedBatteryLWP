@@ -33,7 +33,6 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	protected int bmpHeight = 0;
 	protected int bmpWidth = 0;
 	private int oldLevel = -99;
-	private boolean isDrawIcon = false;
 
 	public abstract Bitmap drawBitmap(final int level, Bitmap Bitmap);
 
@@ -90,16 +89,16 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 		canvas.drawBitmap(bitmap, x, y, null);
 	}
 
-	private final Bitmap initBitmap() {
+	private final Bitmap initBitmap(final boolean isDrawIcon) {
 		// welche kante ist schmaler?
 		// wir orientieren uns an der schmalsten kante
 		// das heist, die Batterie ist immer gleich gross
 		if (isPortrait()) {
 			// hochkant
-			setBitmapSize(displayWidth, getBitmapHight(displayWidth), true);
+			setBitmapSize(displayWidth, getBitmapHight(displayWidth), true, isDrawIcon);
 		} else {
 			// quer
-			setBitmapSize(displayHeight, getBitmapHight(displayHeight), false);
+			setBitmapSize(displayHeight, getBitmapHight(displayHeight), false, isDrawIcon);
 		}
 		final Bitmap bitmap = Bitmap.createBitmap(bmpWidth, bmpHeight, Bitmap.Config.ARGB_8888);
 		return bitmap;
@@ -125,7 +124,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 		return width / 2;
 	}
 
-	private final void setBitmapSize(final int w, final int h, final boolean isPortrait) {
+	private final void setBitmapSize(final int w, final int h, final boolean isPortrait, final boolean isDrawIcon) {
 		// kein resizen wenn ein icon gemalt wird!
 		if (isDrawIcon) {
 			bmpHeight = h;
@@ -157,7 +156,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 				bitmap.recycle();
 			}
 			// Bitnmap neu berechnen
-			bitmap = initBitmap();
+			bitmap = initBitmap(false);
 			bitmapCanvas = new Canvas(bitmap);
 			bitmap = drawBitmap(level, bitmap);
 			if (Settings.isCharging && Settings.isShowChargeState()) {
@@ -169,6 +168,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 			if (Settings.isShowNumber()) {
 				drawLevelNumber(level);
 			}
+			drawNonPremiumBanner(bitmapCanvas);
 		}
 		// den aktuellen level merken
 		oldLevel = level;
@@ -187,11 +187,9 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 		// Bitmap neu berechnen wenn Level sich Ändert oder Canvas dimensions
 		displayWidth = w;
 		displayHeight = h;
-		isDrawIcon = true;
-		Bitmap icon = initBitmap();
+		Bitmap icon = initBitmap(true);
 		bitmapCanvas = new Canvas(icon);
 		icon = drawBitmap(level, icon);
-		isDrawIcon = false;
 		if (Settings.isCharging && Settings.isShowChargeState()) {
 			drawChargeStatusText(level);
 		}
@@ -201,7 +199,17 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 		if (Settings.isShowNumber()) {
 			drawLevelNumber(level);
 		}
+		drawNonPremiumBanner(bitmapCanvas);
 		return icon;
+	}
+
+	private void drawNonPremiumBanner(final Canvas canvas) {
+		// Wenn die APP nicht Premium ist UND dieser Drawer nur für Premium
+		if (!Settings.isPremium() && isPremiumDrawer()) {
+			// dann malen wir den Banner Quer über die Batterie
+
+		}
+
 	}
 
 	protected void drawLevelNumberCentered(final Canvas canvas, final int level, final float fontSize) {
@@ -323,6 +331,11 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	 */
 	protected BitmapRatio getBitmapRatio() {
 		return BitmapRatio.SQUARE;
+	}
+
+	@Override
+	public boolean isPremiumDrawer() {
+		return false;
 	}
 
 }

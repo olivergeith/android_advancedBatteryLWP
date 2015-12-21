@@ -12,7 +12,7 @@
 	    </Preference>
 
 	    <Preference 
-	        android:title="The BatteryLWP on Google+" 
+	        android:title="The BatteryLWP(s) on Google+" 
 	        android:icon="@drawable/googleplus"
 	        >
             <intent android:action="android.intent.action.VIEW"

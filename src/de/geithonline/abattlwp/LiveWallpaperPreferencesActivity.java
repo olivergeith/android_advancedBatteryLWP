@@ -106,6 +106,7 @@ public class LiveWallpaperPreferencesActivity extends PreferenceActivity {
 		// Add a button to the header list.
 		if (!isPremium) {
 			final Button button = billingManager.getButton();
+			button.setBackgroundResource(R.color.accent);
 			ll.addView(button);
 		}
 		// set view with buttons to the list footer

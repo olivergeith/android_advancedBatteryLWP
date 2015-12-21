@@ -12,6 +12,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.settings.PaintProvider;
+import de.geithonline.abattlwp.utils.GeometrieHelper;
 
 public class PremiumBannerDrawer {
 
@@ -26,7 +27,7 @@ public class PremiumBannerDrawer {
 		this.canvas = canvas;
 		w = canvas.getWidth();
 		h = canvas.getHeight();
-		strokeWidth = w * 0.02f;
+		strokeWidth = w * 0.01f;
 		dropShadow = new DropShadow(strokeWidth * 2, strokeWidth, strokeWidth, Color.BLACK);
 		// final IBitmapDrawer drawer = DrawerManager.getDrawer(DrawerManager.APP_ICON_DRAWER_NAME);
 		// icon = drawer.drawIcon(66, (int) (w * 0.1f));
@@ -121,6 +122,96 @@ public class PremiumBannerDrawer {
 		paint.setTextSize(textsize);
 		paint.setColor(PaintProvider.getGray(255, 255));
 		canvas.drawTextOnPath("... to remove this banner ...", line, 0, -1f * textsize, paint);
+
+		// canvas.drawBitmap(icon, 2 * strokeWidth, 2 * strokeWidth, paint);
+
+	}
+
+	public void drawDiagonalBanner() {
+		final Paint paint = getPaint();
+		final float off = strokeWidth / 2;
+		final PointF lU = new PointF(off, w * 0.6f);
+		final PointF lO = new PointF(off, off);
+		final PointF rO = new PointF(w * 0.6f, off);
+		final PointF cp = new PointF(w * 0.2f, w * 0.2f);
+		final float textsize = w * 0.04f;
+
+		final Path dreieck = new Path();
+		dreieck.moveTo(lO.x, lO.y);
+		dreieck.lineTo(rO.x, rO.y);
+		dreieck.quadTo(cp.x, cp.y, lU.x, lU.y);
+		dreieck.close();
+		// Dreieck malen
+		paint.setColor(PaintProvider.getGray(128, 128));
+		canvas.drawPath(dreieck, paint);
+		// Outline um rechteck
+		paint.setStyle(Style.STROKE);
+		paint.setColor(PaintProvider.getGray(255, 128));
+		canvas.drawPath(dreieck, paint);
+
+		// Text schreiben
+		paint.setStyle(Style.FILL);
+		final Path line = new Path();
+		line.moveTo(lU.x, lU.y);
+		// line.lineTo(rO.x, rO.y);
+		line.quadTo(cp.x, cp.y, rO.x, rO.y);
+
+		paint.setTextSize(textsize);
+		paint.setColor(PaintProvider.getGray(255, 255));
+		canvas.drawTextOnPath("Get the", line, 0, -2.7f * textsize, paint);
+
+		paint.setColor(Color.argb(255, 0, 170, 255));
+		paint.setTextSize(textsize * 1.3f);
+		canvas.drawTextOnPath("Premium Version", line, 0, -1.5f * textsize, paint);
+
+		paint.setTextSize(textsize);
+		paint.setColor(PaintProvider.getGray(255, 255));
+		canvas.drawTextOnPath("... to remove this banner ...", line, 0, -0.5f * textsize, paint);
+
+		// canvas.drawBitmap(icon, 2 * strokeWidth, 2 * strokeWidth, paint);
+
+	}
+
+	public void drawHalfCircleBanner() {
+		final float off = strokeWidth / 2;
+		final float ra = w * 0.48f;
+		final float ri = w * 0.33f;
+		final RectF rectA = GeometrieHelper.getCircle(new PointF(0, 0), ra);
+		final RectF rectI = GeometrieHelper.getCircle(new PointF(0, 0), ri);
+		final Paint paint = getPaint();
+		final float textsize = w * 0.04f;
+
+		final Path dreieck = new Path();
+		// dreieck.moveTo(off, ra);
+		dreieck.arcTo(rectA, 100, -110);
+		// dreieck.lineTo(ri, off);
+		dreieck.arcTo(rectI, -10, 110);
+		dreieck.close();
+		// Dreieck malen
+		paint.setColor(PaintProvider.getGray(128, 128));
+		canvas.drawPath(dreieck, paint);
+		// Outline um rechteck
+		paint.setStyle(Style.STROKE);
+		paint.setColor(PaintProvider.getGray(255, 128));
+		canvas.drawPath(dreieck, paint);
+
+		// Text schreiben
+		paint.setStyle(Style.FILL);
+		final Path line = new Path();
+		line.moveTo(off, ra);
+		line.arcTo(rectA, 90, -90);
+
+		paint.setTextSize(textsize);
+		paint.setColor(PaintProvider.getGray(255, 255));
+		canvas.drawTextOnPath("Get the", line, 0, -2.7f * textsize, paint);
+
+		paint.setColor(Color.argb(255, 0, 170, 255));
+		paint.setTextSize(textsize * 1.3f);
+		canvas.drawTextOnPath("Premium Version", line, 0, -1.5f * textsize, paint);
+
+		paint.setTextSize(textsize);
+		paint.setColor(PaintProvider.getGray(255, 255));
+		canvas.drawTextOnPath("... to remove this banner ...", line, 0, -0.5f * textsize, paint);
 
 		// canvas.drawBitmap(icon, 2 * strokeWidth, 2 * strokeWidth, paint);
 

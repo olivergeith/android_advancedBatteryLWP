@@ -347,7 +347,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 
 	@Override
 	public boolean isPremiumDrawer() {
-		return false;
+		return true;
 	}
 
 }

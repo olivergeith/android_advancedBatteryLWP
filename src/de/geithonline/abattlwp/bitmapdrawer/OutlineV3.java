@@ -71,21 +71,6 @@ public class OutlineV3 extends AdvancedBitmapDrawer {
 		return true;
 	}
 
-	// @Override
-	// public boolean supportsGlowScala() {
-	// return true;
-	// }
-
-	@Override
-	public boolean supportsVoltmeter() {
-		return true;
-	}
-
-	// @Override
-	// public boolean supportsThermometer() {
-	// return true;
-	// }
-
 	@Override
 	public Bitmap drawBitmap(final int level, final Bitmap bitmap) {
 		initPrivateMembers();

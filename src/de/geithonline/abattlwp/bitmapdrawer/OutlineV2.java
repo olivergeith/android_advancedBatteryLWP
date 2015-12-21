@@ -74,21 +74,6 @@ public class OutlineV2 extends AdvancedBitmapDrawer {
 		return true;
 	}
 
-	// @Override
-	// public boolean supportsGlowScala() {
-	// return true;
-	// }
-
-	@Override
-	public boolean supportsVoltmeter() {
-		return true;
-	}
-
-	// @Override
-	// public boolean supportsThermometer() {
-	// return true;
-	// }
-
 	@Override
 	public Bitmap drawBitmap(final int level, final Bitmap bitmap) {
 		initPrivateMembers();
@@ -125,12 +110,6 @@ public class OutlineV2 extends AdvancedBitmapDrawer {
 				.setFontRadiusEbene1(maxRadius * 0.72f)//
 				.setFontRadiusEbene2(maxRadius * 0.72f)//
 				.setDicke(strokeWidth * 0.7f);
-				// if (Settings.isShowZeiger()) {
-				// Skala.getZeigerPart(center, level, maxRadius * 0.99f, maxRadius * 0.0f, s.getScala())//
-				// .setDicke(strokeWidth)//
-				// .setDropShadow(new DropShadow(strokeWidth * 2, PaintProvider.getGray(32)))//
-				// .draw(bitmapCanvas);
-				// }
 
 		// Ausen Ring
 		new RingPart(center, maxRadius * 0.99f, maxRadius * 0.90f, new Paint())//

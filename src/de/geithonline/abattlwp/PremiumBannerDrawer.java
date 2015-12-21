@@ -97,7 +97,7 @@ public class PremiumBannerDrawer {
 		dreieck.lineTo(lU.x, lU.y);
 		dreieck.close();
 		// Dreieck malen
-		paint.setColor(PaintProvider.getGray(128, 96));
+		paint.setColor(PaintProvider.getGray(128, 128));
 		canvas.drawPath(dreieck, paint);
 		// Outline um rechteck
 		paint.setStyle(Style.STROKE);

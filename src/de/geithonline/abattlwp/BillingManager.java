@@ -29,7 +29,7 @@ public class BillingManager {
 	 * example, XOR with some other string) to hide the actual key. The key itself is not secret information, but we don't want to make it easy for an attacker
 	 * to replace the public key with one of their own and then fake messages from the server.
 	 */
-	private final String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnPZVeL8OkQIVc6mi0hdXPySB7yDkdovB8rKHAeGg3/IlE9i56N2WFFIovtXh3y5VSC76jpOXSCzHjdY7MJOy1eVu0Q41U1ppTF6Hd1EYel4KJlvlbjn1KlGQgZr9sVM65/nzgMcKFgn9X570NJJMHiIpwEPBDVJ5bMJQxmYsn1KE3WNu+57Rb01TcEEa1plhMkqmDeui4zTrZUKRXfyk0AveDEN4ZzQoRdcz4fhueEZH0XyBkiDpYPcQuO6m/d8oQm1a1Q4e13Im0oPoQ9xFgueZ7RW/mTKGeEaLbUS0MMIS+WG/lR1fJ+R6ZvwfNt8HlK2zXibLo2xY+zs7ZC+5rQIDAQAB";
+	private final String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo57E5qlVRLGXXnPR3ZQu1Fy2FWl+d/WTLiFXmhAtqmsP0DaHk4ViP8RrNySNI9xJ6tZY+udnIdiaUrV00fKsuDfhuO81TDwTUmqoDYMk9bEOCwJF8/FLODKB3i2qurNKZiBk7K5QriJPvXDwcoYfa8CUhkJ80LG3i1JBiy8NozPsFOcaJtCQdTTRAt1P3xT1PA2Vhxw8V44HhVNiqQsO/FZv6+IGiZwUTVMtgFbDOMhJfDQ92usHbgRFQ6QclSAUCNIs8yYy59brdyg5Fn5u57ohs2GXP9kxxdIB1dx/K1CBiwY+lMO4Bm/Zgov2d2iJB1G37AAArseE2gheQ8m7EQIDAQAB";
 	// The helper object
 	private IabHelper mHelper;
 	private final String TAG = "Billing";

@@ -207,7 +207,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	private void drawNonPremiumBanner(final Canvas canvas) {
 		// Wenn die APP nicht Premium ist UND dieser Drawer nur für Premium
 		if (!Settings.isPremium() && isPremiumDrawer()) {
-			new PremiumBannerDrawer(bitmapCanvas).drawHalfCircleBanner();
+			new PremiumBannerDrawer(bitmapCanvas).drawDiagonalBanner();
 		}
 
 	}

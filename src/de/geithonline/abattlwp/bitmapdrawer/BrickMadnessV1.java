@@ -148,7 +148,7 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 					// Easteregg : Rotating Stars in December
 					final Path star = new StarPath(5, centerSquare, raster / 2, raster / 4);
 					PathHelper.rotatePath(centerSquare.x, centerSquare.y, star, level * 7.2f);
-					new AnyPathPart(centerSquare, raster / 2 - abstand, 0.0f, PaintProvider.getBatteryPaint(level), star)//
+					new AnyPathPart(centerSquare, PaintProvider.getBatteryPaint(level), star)//
 							.draw(bitmapCanvas);
 				} else {
 					new RingPart(centerSquare, raster / 2 - abstand, 0.0f, PaintProvider.getBatteryPaint(level), RingType.Square)//

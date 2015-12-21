@@ -17,18 +17,16 @@ import de.geithonline.abattlwp.settings.PaintProvider;
 public class AnyPathPart {
 
 	private final PointF c;
-	private final float ra;
-	private final float ri;
+	private float ra;
+	private float ri;
 	private final Paint paint;
 	private final Path path;
 	private Outline outline = null;
 	private Gradient gradient;
 	private boolean erase = false;
 
-	public AnyPathPart(final PointF center, final float radAussen, final float radInnen, final Paint paint, final Path path) {
+	public AnyPathPart(final PointF center, final Paint paint, final Path path) {
 		c = center;
-		ra = radAussen;
-		ri = radInnen;
 		this.path = path;
 		this.paint = paint;
 		initPaint();
@@ -67,7 +65,9 @@ public class AnyPathPart {
 		return this;
 	}
 
-	public AnyPathPart setGradient(final Gradient gradient) {
+	public AnyPathPart setGradient(final Gradient gradient, final float radAussen, final float radInnen) {
+		ra = radAussen;
+		ri = radInnen;
 		this.gradient = gradient;
 		setupGradient();
 		return this;

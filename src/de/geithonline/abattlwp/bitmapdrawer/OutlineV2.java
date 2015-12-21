@@ -138,9 +138,9 @@ public class OutlineV2 extends AdvancedBitmapDrawer {
 				.setOutline(outline)//
 				.draw(bitmapCanvas);
 
-		new AnyPathPart(center, maxRadius * 0.89f, 0, new Paint(), createPath(level))//
+		new AnyPathPart(center, new Paint(), createPath(level))//
 				// .setDropShadow(new DropShadow(strokeWidth * 3, 0, strokeWidth, Color.BLACK))//
-				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(100), GRAD_STYLE.top2bottom))//
+				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(100), GRAD_STYLE.top2bottom), maxRadius * 0.89f, 0)//
 				.setOutline(outline)//
 				.draw(bitmapCanvas);
 

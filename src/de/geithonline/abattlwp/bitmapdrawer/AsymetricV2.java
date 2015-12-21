@@ -138,9 +138,9 @@ public class AsymetricV2 extends AdvancedBitmapDrawer {
 				.setGradient(new Gradient(PaintProvider.getGray(80), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
 				.setOutline(new Outline(PaintProvider.getGray(0), strokeWidth / 2))//
 				.draw(bitmapCanvas);
-		new AnyPathPart(center, maxRadius * 0.89f, 0, new Paint(), getCenterPath())//
+		new AnyPathPart(center, new Paint(), getCenterPath())//
 				.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//
-				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(100), GRAD_STYLE.top2bottom))//
+				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(100), GRAD_STYLE.top2bottom), maxRadius * 0.89f, 0)//
 				.setOutline(new Outline(PaintProvider.getGray(0), strokeWidth / 2))//
 				.draw(bitmapCanvas);
 		new RingPart(center3, maxRadius * 0.39f, maxRadius * 0.3f, new Paint())//

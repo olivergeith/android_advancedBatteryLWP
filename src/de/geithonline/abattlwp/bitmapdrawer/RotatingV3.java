@@ -88,6 +88,11 @@ public class RotatingV3 extends AdvancedBitmapDrawer {
 	}
 
 	@Override
+	public boolean isPremiumDrawer() {
+		return true;
+	}
+
+	@Override
 	public boolean supportsLevelNumberFontSizeAdjustment() {
 		return false;
 	}

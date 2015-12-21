@@ -21,6 +21,8 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.AnyPathPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart.RingType;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnLinePart;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.PacmanPath;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.PacmanPath.PACMAN_STYLE;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.StarPath;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
@@ -153,6 +155,11 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 					// Easteregg : Rotating Stars in December
 					final Path star = new StarPath(5, centerSquare, raster / 2, raster / 4);
 					PathHelper.rotatePath(centerSquare.x, centerSquare.y, star, level * 7.2f);
+					new AnyPathPart(centerSquare, PaintProvider.getBatteryPaint(level), star)//
+							.draw(bitmapCanvas);
+				} else if (date.get(Calendar.MONTH) == Calendar.OCTOBER) {
+					// Easteregg : Pacmans in Oktober (Halloween)
+					final Path star = new PacmanPath(centerSquare, raster / 2, PACMAN_STYLE.GHOST_RANDOM_EYES);
 					new AnyPathPart(centerSquare, PaintProvider.getBatteryPaint(level), star)//
 							.draw(bitmapCanvas);
 				} else {

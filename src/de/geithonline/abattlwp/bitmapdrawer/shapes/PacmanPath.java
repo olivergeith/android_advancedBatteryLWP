@@ -1,7 +1,7 @@
 package de.geithonline.abattlwp.bitmapdrawer.shapes;
 
 import android.graphics.Path;
-import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import de.geithonline.abattlwp.utils.Randomizer;
 
@@ -11,7 +11,7 @@ public class PacmanPath extends Path {
 		GHOST, PACMAN, GHOST_RANDOM_EYES;
 	}
 
-	public PacmanPath(final Point center, final float radius, final PACMAN_STYLE style) {
+	public PacmanPath(final PointF center, final float radius, final PACMAN_STYLE style) {
 		super();
 		switch (style) {
 			default:
@@ -27,7 +27,7 @@ public class PacmanPath extends Path {
 		}
 	}
 
-	public void drawGhost(final Point center, final float radius, final boolean eyeRight) {
+	public void drawGhost(final PointF center, final float radius, final boolean eyeRight) {
 		final float sinradius = radius * 0.1f;
 		final float l = center.x - radius * 0.9f;
 		final float r = center.x + radius * 0.9f;
@@ -77,7 +77,7 @@ public class PacmanPath extends Path {
 		}
 	}
 
-	public void drawPacman(final Point center, final float radius) {
+	public void drawPacman(final PointF center, final float radius) {
 		final float l = center.x - radius;
 		final float r = center.x + radius;
 		final float u = center.y + radius;

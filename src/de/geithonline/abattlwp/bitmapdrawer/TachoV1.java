@@ -64,11 +64,6 @@ public class TachoV1 extends AdvancedBitmapDrawer {
 	}
 
 	@Override
-	public boolean isPremiumDrawer() {
-		return true;
-	}
-
-	@Override
 	public boolean supportsPointerColor() {
 		return true;
 	}

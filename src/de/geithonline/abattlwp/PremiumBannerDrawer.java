@@ -176,16 +176,16 @@ public class PremiumBannerDrawer {
 		final float off = strokeWidth / 2;
 		final float ra = w * 0.48f;
 		final float ri = w * 0.33f;
-		final RectF rectA = GeometrieHelper.getCircle(new PointF(0, 0), ra);
-		final RectF rectI = GeometrieHelper.getCircle(new PointF(0, 0), ri);
+		final RectF rectA = GeometrieHelper.getCircle(new PointF(off, off), ra);
+		final RectF rectI = GeometrieHelper.getCircle(new PointF(off, off), ri);
 		final Paint paint = getPaint();
 		final float textsize = w * 0.04f;
 
 		final Path dreieck = new Path();
 		// dreieck.moveTo(off, ra);
-		dreieck.arcTo(rectA, 100, -110);
+		dreieck.arcTo(rectA, 90, -90);
 		// dreieck.lineTo(ri, off);
-		dreieck.arcTo(rectI, -10, 110);
+		dreieck.arcTo(rectI, 0, 90);
 		dreieck.close();
 		// Dreieck malen
 		paint.setColor(PaintProvider.getGray(128, 128));

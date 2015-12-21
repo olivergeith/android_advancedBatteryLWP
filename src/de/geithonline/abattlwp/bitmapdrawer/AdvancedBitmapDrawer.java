@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import de.geithonline.abattlwp.PermissionRequester;
+import de.geithonline.abattlwp.PremiumBannerDrawer;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.enums.BitmapRatio;
 import de.geithonline.abattlwp.settings.PaintProvider;
@@ -206,19 +207,30 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	private void drawNonPremiumBanner(final Canvas canvas) {
 		// Wenn die APP nicht Premium ist UND dieser Drawer nur für Premium
 		if (!Settings.isPremium() && isPremiumDrawer()) {
-			// dann malen wir den Banner Quer über die Batterie
-
+			new PremiumBannerDrawer(bitmapCanvas).drawTopLeftDiagonalBanner();
 		}
 
 	}
 
 	protected void drawLevelNumberCentered(final Canvas canvas, final int level, final float fontSize) {
-		drawLevelNumberCentered(canvas, level, fontSize, null);
+		drawLevelNumberCentered(canvas, level, fontSize, null, 0);
 	}
 
-	protected void drawLevelNumberCentered(final Canvas canvas, final int level, final float fontSize, final DropShadow dropShadow) {
+	protected void drawLevelNumberCentered(final Canvas canvas, final int level, final float fontSize, final DropShadow drop) {
+		drawLevelNumberCentered(canvas, level, fontSize, drop, 0);
+	}
+
+	protected void drawLevelNumberCentered(final Canvas canvas, final int level, final float fontSize, final int color) {
+		drawLevelNumberCentered(canvas, level, fontSize, null, color);
+	}
+
+	protected void drawLevelNumberCentered(final Canvas canvas, final int level, final float fontSize, final DropShadow dropShadow, final int color) {
 		final String text = "" + level;
 		final Paint p = PaintProvider.getLevelNumberPaint(level, fontSize);
+		if (color != 0) {
+			p.setColor(color);
+			p.setAlpha(255);
+		}
 		p.setTextAlign(Align.CENTER);
 		p.setTypeface(Typeface.DEFAULT_BOLD);
 		if (dropShadow != null) {

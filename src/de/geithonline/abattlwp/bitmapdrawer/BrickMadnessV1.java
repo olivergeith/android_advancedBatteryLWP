@@ -115,6 +115,11 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 	}
 
 	@Override
+	public boolean isPremiumDrawer() {
+		return true;
+	}
+
+	@Override
 	public Bitmap drawBitmap(final int level, final Bitmap bitmap) {
 		initPrivateMembers();
 		drawAll(level);

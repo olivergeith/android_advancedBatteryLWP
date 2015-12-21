@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.graphics.Bitmap;
+import de.geithonline.abattlwp.bitmapdrawer.AppIconDrawer;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV1;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV2;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV3;
@@ -38,10 +39,12 @@ import de.geithonline.abattlwp.bitmapdrawer.TachoV1;
 import de.geithonline.abattlwp.bitmapdrawer.TachoV2;
 
 public class DrawerManager {
+	public static final String APP_ICON_DRAWER_NAME = "App Icon";
 	private static Map<String, IBitmapDrawer> drawer = new HashMap<String, IBitmapDrawer>();
 	private static Map<String, Bitmap> iconCache = new HashMap<String, Bitmap>();
 
 	static {
+		drawer.put(APP_ICON_DRAWER_NAME, new AppIconDrawer());
 		drawer.put("Asymetric V1", new AsymetricV1());
 		drawer.put("Asymetric V2", new AsymetricV2());
 		drawer.put("Asymetric V3", new AsymetricV3());

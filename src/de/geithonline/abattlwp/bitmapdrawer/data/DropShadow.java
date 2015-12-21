@@ -1,5 +1,6 @@
 package de.geithonline.abattlwp.bitmapdrawer.data;
 
+import android.graphics.Color;
 import android.graphics.Paint;
 
 public class DropShadow {
@@ -18,6 +19,13 @@ public class DropShadow {
 	public DropShadow(final float radius, final int color) {
 		this.radius = radius;
 		this.color = color;
+		offsetX = 0;
+		offsetY = 0;
+	}
+
+	public DropShadow(final float radius) {
+		this.radius = radius;
+		color = Color.BLACK;
 		offsetX = 0;
 		offsetY = 0;
 	}

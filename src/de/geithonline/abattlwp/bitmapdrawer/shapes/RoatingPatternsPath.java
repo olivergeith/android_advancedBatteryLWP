@@ -2,6 +2,8 @@ package de.geithonline.abattlwp.bitmapdrawer.shapes;
 
 import android.graphics.Path;
 import android.graphics.PointF;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.PacmanPath.PACMAN_STYLE;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.SquarePath.SQUARE_STYLE;
 import de.geithonline.abattlwp.utils.PathHelper;
 
 /**
@@ -51,7 +53,25 @@ public class RoatingPatternsPath extends Path {
 					path = new DropPath(p, flameSize);
 					break;
 				case "Heart":
-					path = new HeartPath(p, flameSize);
+					path = new HeartPath(p, flameSize * 1.1f);
+					break;
+				case "Star":
+					path = new StarPath(5, p, flameSize * 1.2f, flameSize * 1.2f * 0.5f);
+					break;
+				case "Pacman":
+					path = new PacmanPath(p, flameSize, PACMAN_STYLE.PACMAN);
+					PathHelper.mirrorPathLeftRight(p.x, p.y, path);
+					break;
+				case "Pacman-Ghost":
+					path = new PacmanPath(p, flameSize, PACMAN_STYLE.GHOST);
+					PathHelper.mirrorPathLeftRight(p.x, p.y, path);
+					break;
+				case "Pacman-Random":
+					path = new PacmanPath(p, flameSize, PACMAN_STYLE.RANDOM);
+					PathHelper.mirrorPathLeftRight(p.x, p.y, path);
+					break;
+				case "Square":
+					path = new SquarePath(p, flameSize, 0, SQUARE_STYLE.ROUNDED);
 					break;
 			}
 			PathHelper.rotatePath(p.x, p.y, path, winkelInGrad + 90);

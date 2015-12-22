@@ -82,7 +82,12 @@ public class OutlineV2 extends AdvancedBitmapDrawer {
 		list.add("Circle");
 		list.add("Drop");
 		list.add("Heart");
+		list.add("Star");
 		list.add("10 Circles");
+		list.add("Pacman");
+		list.add("Pacman-Ghost");
+		list.add("Square");
+		// list.add("Pacman-Random");
 		return list;
 	}
 

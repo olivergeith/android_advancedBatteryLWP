@@ -8,7 +8,7 @@ import de.geithonline.abattlwp.utils.Randomizer;
 public class PacmanPath extends Path {
 
 	public enum PACMAN_STYLE {
-		GHOST, PACMAN, GHOST_RANDOM_EYES;
+		GHOST, PACMAN, GHOST_RANDOM_EYES, RANDOM;
 	}
 
 	public PacmanPath(final PointF center, final float radius, final PACMAN_STYLE style) {
@@ -24,6 +24,13 @@ public class PacmanPath extends Path {
 			case PACMAN:
 				drawPacman(center, radius);
 				break;
+			case RANDOM:
+				if (Randomizer.getRandomBoolean()) {
+					drawPacman(center, radius);
+				} else {
+					drawGhost(center, radius, true);
+				}
+
 		}
 	}
 

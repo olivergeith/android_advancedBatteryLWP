@@ -28,7 +28,6 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 	private int level = 66;
 	// private SharedPreferences prefs;
 	private CoolListPreference styleVariante;
-	private final String oldStyle = "";
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {

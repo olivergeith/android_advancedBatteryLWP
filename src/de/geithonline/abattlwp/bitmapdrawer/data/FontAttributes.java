@@ -52,6 +52,7 @@ public class FontAttributes {
 		paint.setTextSize(fontSize);
 		paint.setTypeface(typeFace);
 		paint.setTextAlign(align);
+		paint.setAntiAlias(true);
 		return paint;
 	}
 

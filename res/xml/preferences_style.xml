@@ -25,7 +25,7 @@
         android:entries="@array/styleVariante"
         android:entryValues="@array/styleVariante"
         android:key="styleVariante"
-        android:title="Style Variante" />
+        android:title="Variante" />
 
     <!-- ##################################################################################### -->
     <!-- ##################################################################################### -->

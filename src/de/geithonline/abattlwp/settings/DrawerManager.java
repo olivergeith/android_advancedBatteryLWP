@@ -28,7 +28,6 @@ import de.geithonline.abattlwp.bitmapdrawer.LabyrinthV2;
 import de.geithonline.abattlwp.bitmapdrawer.LabyrinthV3;
 import de.geithonline.abattlwp.bitmapdrawer.OutlineV1;
 import de.geithonline.abattlwp.bitmapdrawer.OutlineV2;
-import de.geithonline.abattlwp.bitmapdrawer.OutlineV3;
 import de.geithonline.abattlwp.bitmapdrawer.RotatingV1;
 import de.geithonline.abattlwp.bitmapdrawer.RotatingV2;
 import de.geithonline.abattlwp.bitmapdrawer.RotatingV3;
@@ -71,7 +70,7 @@ public class DrawerManager {
 		drawer.put("Dark V1", new DarkV1());
 		drawer.put("Outline V1", new OutlineV1());
 		drawer.put("Outline V2", new OutlineV2());
-		drawer.put("Outline V3", new OutlineV3());
+		// drawer.put("Outline V3", new OutlineV3());
 		drawer.put("Bricks V1", new BrickMadnessV1(BrickStyle.Normal));
 		drawer.put("Bricks V1 (random)", new BrickMadnessV1(BrickStyle.Random));
 		// drawer.put("BrickClock V1", new BrickClockV1()); // is häßlich, aber als Pattern für einen andere Klasse vielleicht irgendwann mal interessant!

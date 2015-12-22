@@ -1,5 +1,8 @@
 package de.geithonline.abattlwp.bitmapdrawer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
@@ -23,7 +26,6 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.CirclePath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.RoatingPatternsPath;
-import de.geithonline.abattlwp.bitmapdrawer.shapes.RoatingPatternsPath.SUN_TYPE;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
 
@@ -72,6 +74,16 @@ public class OutlineV2 extends AdvancedBitmapDrawer {
 	@Override
 	public boolean supportsLevelStyle() {
 		return true;
+	}
+
+	@Override
+	public List<String> getVariants() {
+		final List<String> list = new ArrayList<>();
+		list.add("Circle");
+		list.add("Drop");
+		list.add("Heart");
+		list.add("10 Circles");
+		return list;
 	}
 
 	@Override
@@ -152,12 +164,9 @@ public class OutlineV2 extends AdvancedBitmapDrawer {
 		final Path circle1 = new CirclePath(center, maxRadius * 0.85f, maxRadius * 0.0f, Direction.CCW);
 		final int arms = 20;
 		final float rotate = 360f / (2 * arms);
-		// final Path drop = new RoatingPatternsPath(arms, center, maxRadius * 0.7f, rotate, SUN_TYPE.DROP);
-		final Path c = new RoatingPatternsPath(arms, center, maxRadius * 0.7f, rotate, SUN_TYPE.CIRCLE);
-		// final Path sun = new RoatingPatternsPath(10, center, maxRadius * 0.74f, 0f, SUN_TYPE.TEN_CIRCLES);
+		final Path patterns = new RoatingPatternsPath(arms, center, maxRadius * 0.7f, rotate, Settings.getStyleVariante(this.getClass().getSimpleName()));
 		p.addPath(circle1);
-		p.addPath(c);
-		// p.addPath(circle2);
+		p.addPath(patterns);
 		return p;
 	}
 

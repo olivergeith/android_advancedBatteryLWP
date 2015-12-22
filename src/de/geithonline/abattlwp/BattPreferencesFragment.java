@@ -1,33 +1,50 @@
 package de.geithonline.abattlwp;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 import de.geithonline.abattlwp.bitmapdrawer.IBitmapDrawer;
 import de.geithonline.abattlwp.settings.DrawerManager;
 import de.geithonline.abattlwp.settings.Settings;
 import de.geithonline.abattlwp.stylelistrecycler.StyleListRecyclerActivity;
+import de.geithonline.android.basics.preferences.CoolListPreference;
 import de.geithonline.android.basics.preferences.IconOnlyPreference;
 
 /**
  * This fragment shows the preferences for the first header.
  */
 public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
+	private static final String NOT_AVAILABLE_FOR_THIS_BATTERY_STYLE = "Not available for this battery-style";
 	private static final int REQUESTCODE_START_STYL_RECYCLER = 987;
 	// private ListPreference stylePref;
 	private IconOnlyPreference stylePreview;
 	private int level = 66;
 	// private SharedPreferences prefs;
+	private CoolListPreference styleVariante;
+	private final String oldStyle = "";
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		addPreferencesFromResource(R.xml.preferences_style);
+
+		styleVariante = (CoolListPreference) findPreference(Settings.KEY_BATT_STYLE_VARIANTE);
+		styleVariante.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				// TODO ?
+				return true;
+			}
+		});
 
 		// adding an additional imageview
 		stylePreview = (IconOnlyPreference) findPreference("stylePreview");
@@ -43,14 +60,14 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 		});
 		// initialize Properties
 		Log.i(this.getClass().getSimpleName(), "Initializing Style -> " + Settings.getStyle());
-		enableSettingsForStyle(Settings.getStyle());
+		enableSettingsForStyle(Settings.getStyle(), Settings.KEY_BATT_STYLE);
 	}
 
 	@Override
 	public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		if (requestCode == REQUESTCODE_START_STYL_RECYCLER) {
 			Log.i("MENU", "Coming beack from Style Selection with recyclerview");
-			enableSettingsForStyle(Settings.getStyle());
+			enableSettingsForStyle(Settings.getStyle(), Settings.KEY_BATT_STYLE);
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -63,13 +80,12 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 		}
 		final Bitmap b = DrawerManager.getIconForDrawerForceDrawNew(style, Settings.getIconSize(), level);
 		if (b != null) {
-			// stylePref.setIcon(BitmapHelper.bitmapToIcon(b));
 			stylePreview.setImage(b);
-			stylePreview.setTitle(style + "    (click image to choose)");
+			stylePreview.setTitle(style);
 		}
 	}
 
-	private void enableSettingsForStyle(final String style) {
+	private void enableSettingsForStyle(final String style, final String key) {
 		// Ausgewählte Batterie zeichnen
 		redrawPreview();
 
@@ -91,33 +107,64 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 		handleAvailability(findPreference("fontsizeInt"), drawer.supportsLevelNumberFontSizeAdjustment());
 		handleAvailability(findPreference("fontsize100Int"), drawer.supportsLevelNumberFontSizeAdjustment());
 
-		// pro Features
-		// handlePremium(findPreference("levelMode"));
-		// handlePremium(findPreference("levelStyles"));
-		// handlePremium(findPreference("showVoltmeter"));
-		// handlePremium(findPreference("showThermometer"));
+		if (key.equals(Settings.KEY_BATT_STYLE_VARIANTE)) {
+			handleStyleVariante(style, Settings.getStyleVariante());
+		} else {
+			handleStyleVariante(style, null);
+		}
 	}
 
-	// private static void handlePremium(final Preference preference) {
-	// if (Settings.isPremium()) {
-	// // preference.setSummary("");
-	// } else {
-	// preference.setSummary(R.string.premiumOnly);
-	// preference.setEnabled(false);
-	// }
-	// }
+	private void handleStyleVariante(final String style, final String newVariante) {
+		final IBitmapDrawer drawer = DrawerManager.getDrawer(style);
+		if (drawer.supportsVariants()) {
+			// Erstmal die Variantenbox füllen
+			final List<String> list = drawer.getVariants();
+			styleVariante.setEntries(getVariantsArray(list));
+			styleVariante.setEntryValues(getVariantsArray(list));
+			styleVariante.setEnabled(true);
+			// übergbebene Variante null?
+			if (newVariante == null) {
+				// dann schauen wir, ob wir für diesen Drawer schon eine Variante gespeichert haben
+				final String currentVarianteInSettings = Settings.getStyleVariante(drawer.getClass().getSimpleName());
+				if (list.contains(currentVarianteInSettings)) {
+					styleVariante.setValue(currentVarianteInSettings);
+				} else {
+					styleVariante.setValueIndex(0);
+				}
+			} else {
+				// eine neue Variante wurde selektiert...die speichern wir unter dem Key für den Drawer
+				Settings.saveStyleVariante(drawer.getClass().getSimpleName(), newVariante);
+				// styleVariante.setValue(newVariante);
+			}
+		} else {
+			styleVariante.setEntries(new CharSequence[] { NOT_AVAILABLE_FOR_THIS_BATTERY_STYLE });
+			styleVariante.setEntryValues(new CharSequence[] { NOT_AVAILABLE_FOR_THIS_BATTERY_STYLE });
+			styleVariante.setValueIndex(0);
+			styleVariante.setEnabled(false);
+		}
+	}
 
 	private static void handleAvailability(final Preference preference, final boolean available) {
 		if (available) {
 			// Nothing so far ---- preference.setSummary("");
 		} else {
-			preference.setSummary("Not available for this battery-style");
+			preference.setSummary(NOT_AVAILABLE_FOR_THIS_BATTERY_STYLE);
 		}
 		preference.setEnabled(available);
 	}
 
 	@Override
 	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
-		enableSettingsForStyle(Settings.getStyle());
+		enableSettingsForStyle(Settings.getStyle(), key);
 	}
+
+	private CharSequence[] getVariantsArray(final List<String> list) {
+		final CharSequence[] array = new CharSequence[list.size()];
+		int i = 0;
+		for (final String l : list) {
+			array[i++] = l;
+		}
+		return array;
+	}
+
 }

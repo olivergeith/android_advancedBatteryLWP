@@ -32,7 +32,6 @@ public abstract class MyAbstractPreferenceFragment extends PreferenceFragment im
 		// // default Preferences
 		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 		// }
-
 	}
 
 	@Override

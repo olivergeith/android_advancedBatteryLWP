@@ -18,7 +18,15 @@
  -->
     <de.geithonline.android.basics.preferences.IconOnlyPreference 
         android:key="stylePreview" />
-  
+
+    <de.geithonline.android.basics.preferences.CoolListPreference
+        android:defaultValue="None"
+        android:dialogTitle="Variant"
+        android:entries="@array/styleVariante"
+        android:entryValues="@array/styleVariante"
+        android:key="styleVariante"
+        android:title="Style Variante" />
+
     <!-- ##################################################################################### -->
     <!-- ##################################################################################### -->
     <!-- ##################################################################################### -->

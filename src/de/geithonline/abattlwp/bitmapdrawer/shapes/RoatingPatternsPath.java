@@ -10,10 +10,6 @@ import de.geithonline.abattlwp.utils.PathHelper;
  */
 public class RoatingPatternsPath extends Path {
 
-	public enum SUN_TYPE {
-		DROP, CIRCLE, TEN_CIRCLES
-	}
-
 	/**
 	 * @param arms
 	 * @param center
@@ -22,23 +18,18 @@ public class RoatingPatternsPath extends Path {
 	 *            in grad
 	 * @param type
 	 */
-	public RoatingPatternsPath(final int arms, final PointF center, final float ra, final float rotate, final SUN_TYPE type) {
+	public RoatingPatternsPath(final int arms, final PointF center, final float ra, final float rotate, final String type) {
 		switch (type) {
 			default:
-			case DROP:
-				drawSunDropFlames(arms, center, ra, rotate);
+				drawRotatingPattern(arms, center, ra, rotate, type);
 				break;
-			case CIRCLE:
-				drawSunCircleFlames(arms, center, ra, rotate);
-				break;
-			case TEN_CIRCLES:
+			case "10 Circles":
 				draw10Circles(center, ra, rotate);
 				break;
 		}
-
 	}
 
-	private void drawSunDropFlames(final int arms, final PointF center, final float ra, final float rotate) {
+	private void drawRotatingPattern(final int arms, final PointF center, final float ra, final float rotate, final String type) {
 		final float rotateWinkel = (float) (rotate / 360 * 2 * Math.PI);
 		final float winkelProArm = (float) (2 * Math.PI / (arms));
 		final float da = 2 * ra;
@@ -50,29 +41,21 @@ public class RoatingPatternsPath extends Path {
 			final PointF p = new PointF();
 			p.x = (int) (center.x + Math.cos((i) * winkelProArm + rotateWinkel) * flameCenterRadius);
 			p.y = (int) (center.y + Math.sin((i) * winkelProArm + rotateWinkel) * flameCenterRadius);
-			final Path flame = new DropPath(p, flameSize);
-			PathHelper.rotatePath(p.x, p.y, flame, winkelInGrad + 90);
-			addPath(flame);
-		}
-	}
-
-	private void drawSunCircleFlames(final int arms, final PointF center, final float ra, final float rotate) {
-		final float rotateWinkel = (float) (rotate / 360 * 2 * Math.PI);
-		final float winkelProArm = (float) (2 * Math.PI / (arms));
-
-		final float da = 2 * ra;
-		final float dCircle = (float) ((Math.PI * da) / (arms + 2 * Math.PI));
-
-		final float flameCenterRadius = ra - dCircle / 2; // ra * 0.78f;
-		final float flameSize = dCircle / 2; // ra * 0.23f;
-		for (int i = 0; i < arms; i++) {
-			final int winkelInGrad = (int) ((i * winkelProArm + rotateWinkel) * 360 / (2 * Math.PI));
-			final PointF p = new PointF();
-			p.x = (int) (center.x + Math.cos((i) * winkelProArm + rotateWinkel) * flameCenterRadius);
-			p.y = (int) (center.y + Math.sin((i) * winkelProArm + rotateWinkel) * flameCenterRadius);
-			final Path flame = new CirclePath(p, flameSize, 0f);
-			PathHelper.rotatePath(p.x, p.y, flame, winkelInGrad + 90);
-			addPath(flame);
+			final Path path;
+			switch (type) {
+				default:
+				case "Circle":
+					path = new CirclePath(p, flameSize, 0f);
+					break;
+				case "Drop":
+					path = new DropPath(p, flameSize);
+					break;
+				case "Heart":
+					path = new HeartPath(p, flameSize);
+					break;
+			}
+			PathHelper.rotatePath(p.x, p.y, path, winkelInGrad + 90);
+			addPath(path);
 		}
 	}
 

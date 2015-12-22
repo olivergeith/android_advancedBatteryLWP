@@ -1,5 +1,8 @@
 package de.geithonline.abattlwp.bitmapdrawer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -21,6 +24,7 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.CirclePath;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.PillowPath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.StarPath;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
@@ -55,6 +59,15 @@ public class OutlineV1 extends AdvancedBitmapDrawer {
 	}
 
 	public OutlineV1() {
+	}
+
+	@Override
+	public List<String> getVariants() {
+		final List<String> list = new ArrayList<>();
+		list.add("Star");
+		list.add("Star (spiky)");
+		list.add("Sun");
+		return list;
 	}
 
 	@Override
@@ -135,10 +148,21 @@ public class OutlineV1 extends AdvancedBitmapDrawer {
 
 	private Path createPath(final int level) {
 		final Path p = new Path();
-
 		final Path circle1 = new CirclePath(center, maxRadius * 0.90f, maxRadius * 0.0f, Direction.CCW);
-		final Path star = new StarPath(20, center, maxRadius * 0.74f, maxRadius * 0.60f); // Direction.CW
 		final Path circle2 = new CirclePath(center, maxRadius * 0.40f, maxRadius * 0.0f, Direction.CCW);
+		Path star;
+		switch (Settings.getStyleVariante(this.getClass().getSimpleName())) {
+			default:
+			case "Star":
+				star = new StarPath(20, center, maxRadius * 0.74f, maxRadius * 0.60f); // Direction.CW
+				break;
+			case "Star (spiky)":
+				star = new StarPath(20, center, maxRadius * 0.74f, maxRadius * 0.50f); // Direction.CW
+				break;
+			case "Sun":
+				star = new PillowPath(20, center, maxRadius * 0.74f); // Direction.CW
+				break;
+		}
 		p.addPath(circle1);
 		p.addPath(star);
 		p.addPath(circle2);

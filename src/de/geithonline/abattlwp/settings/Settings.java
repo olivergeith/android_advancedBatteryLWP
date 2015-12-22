@@ -18,6 +18,7 @@ import de.geithonline.abattlwp.bitmapdrawer.enums.PositionVertical;
 
 public class Settings {
 	public static final String KEY_BATT_STYLE = "batt_style";
+	public static final String KEY_BATT_STYLE_VARIANTE = "styleVariante";
 	// public static final String LWP_PREFERENCE_FILE = "LWP";
 	// public static final String WIDGET_PREFERENCE_FILE = "WIDGET";
 
@@ -459,6 +460,24 @@ public class Settings {
 			return DrawerManager.DEFAULT_DRAWER_NAME_CLOCK_V3;
 		}
 		return prefs.getString(KEY_BATT_STYLE, DrawerManager.DEFAULT_DRAWER_NAME_CLOCK_V3);
+	}
+
+	public static String getStyleVariante() {
+		if (prefs == null) {
+			return "";
+		}
+		return prefs.getString(KEY_BATT_STYLE_VARIANTE, "");
+	}
+
+	public static String getStyleVariante(final String drawerSimplename) {
+		if (prefs == null) {
+			return "";
+		}
+		return prefs.getString(drawerSimplename + ".currentVariante", "");
+	}
+
+	public static void saveStyleVariante(final String drawerSimplename, final String value) {
+		saveAnyString(drawerSimplename + ".currentVariante", value);
 	}
 
 	// #####################################################################################

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_version">V.2</string>
-    <string name="app_name">ABatteryLWP V.2</string>
-    <string name="wallpaper_description">AdvancedBatteryLWP V.2</string>
+    <string name="app_version">V3</string>
+    <string name="app_name">ABatteryLWP V3</string>
+    <string name="wallpaper_description">AdvancedBatteryLWP V3</string>
     <string name="about">About</string>
     <string name="settings">Settings</string>
     <string name="Copyright">Copyright by Oliver Geith</string>

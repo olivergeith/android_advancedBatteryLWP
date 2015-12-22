@@ -212,7 +212,7 @@
         <PreferenceCategory android:title="More..." />
 
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="show_rand"
             android:title="@string/show_rand" />
         </PreferenceScreen>

@@ -46,7 +46,13 @@
 		    android:title="DebuggingMessages" 
 		    android:summary="Enables DebuggMessages"
             />
-	    
+        <CheckBoxPreference 
+		    android:key="easterEggs"
+    		android:defaultValue="true"
+		    android:title="Easter Eggs" 
+		    android:summary="Enables Easter Eggs within the App! For Example the Brick V1 Style will change on Halloween ... and more to come!"
+            />
+	    	    
     </PreferenceCategory>
 
     

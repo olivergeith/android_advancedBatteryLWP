@@ -202,9 +202,9 @@ public class Settings {
 
 	public static boolean isShowRand() {
 		if (prefs == null) {
-			return true;
+			return false;
 		}
-		return prefs.getBoolean("show_rand", true);
+		return prefs.getBoolean("show_rand", false);
 	}
 
 	public static boolean isShowNumber() {
@@ -212,6 +212,13 @@ public class Settings {
 			return true;
 		}
 		return prefs.getBoolean("show_number", true);
+	}
+
+	public static boolean isShowEasterEggs() {
+		if (prefs == null) {
+			return true;
+		}
+		return prefs.getBoolean("easterEggs", true);
 	}
 
 	public static boolean isPremium() {

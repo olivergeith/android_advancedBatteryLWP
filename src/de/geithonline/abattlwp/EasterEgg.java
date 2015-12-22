@@ -3,31 +3,35 @@ package de.geithonline.abattlwp;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import de.geithonline.abattlwp.settings.Settings;
+
 public class EasterEgg {
 	private final Calendar date;
+	private final boolean enabled;
 
 	public EasterEgg() {
 		date = new GregorianCalendar();
+		enabled = Settings.isShowEasterEggs();
 	}
 
 	public boolean isSilviasBirthday() {
-		return (date.get(Calendar.MONTH) == Calendar.FEBRUARY && date.get(Calendar.DAY_OF_MONTH) == 2);
+		return (enabled && date.get(Calendar.MONTH) == Calendar.FEBRUARY && date.get(Calendar.DAY_OF_MONTH) == 2);
 	}
 
 	public boolean isOliversBirthday() {
-		return (date.get(Calendar.MONTH) == Calendar.JANUARY && date.get(Calendar.DAY_OF_MONTH) == 24);
+		return (enabled && date.get(Calendar.MONTH) == Calendar.JANUARY && date.get(Calendar.DAY_OF_MONTH) == 24);
 	}
 
 	public boolean isEikesBirthday() {
-		return (date.get(Calendar.MONTH) == Calendar.MARCH && date.get(Calendar.DAY_OF_MONTH) == 29);
+		return (enabled && date.get(Calendar.MONTH) == Calendar.MARCH && date.get(Calendar.DAY_OF_MONTH) == 29);
 	}
 
 	public boolean isAaronsBirthday() {
-		return (date.get(Calendar.MONTH) == Calendar.FEBRUARY && date.get(Calendar.DAY_OF_MONTH) == 6);
+		return (enabled && date.get(Calendar.MONTH) == Calendar.FEBRUARY && date.get(Calendar.DAY_OF_MONTH) == 6);
 	}
 
 	public boolean isEmmysBirthday() {
-		return (date.get(Calendar.MONTH) == Calendar.JUNE && date.get(Calendar.DAY_OF_MONTH) == 29);
+		return (enabled && date.get(Calendar.MONTH) == Calendar.JUNE && date.get(Calendar.DAY_OF_MONTH) == 29);
 	}
 
 	public boolean isSomebodiesBirthday() {
@@ -39,11 +43,14 @@ public class EasterEgg {
 	}
 
 	public boolean isDecember() {
-		return (date.get(Calendar.MONTH) == Calendar.DECEMBER);
+		return (enabled && date.get(Calendar.MONTH) == Calendar.DECEMBER);
+	}
+
+	public boolean isXMas() {
+		return (enabled && date.get(Calendar.MONTH) == Calendar.DECEMBER && date.get(Calendar.DAY_OF_MONTH) >= 24 && date.get(Calendar.DAY_OF_MONTH) <= 26);
 	}
 
 	public boolean isHalloween() {
-		return (date.get(Calendar.MONTH) == Calendar.OCTOBER && date.get(Calendar.DAY_OF_MONTH) == 31);
+		return (enabled && date.get(Calendar.MONTH) == Calendar.OCTOBER && date.get(Calendar.DAY_OF_MONTH) == 31);
 	}
-
 }

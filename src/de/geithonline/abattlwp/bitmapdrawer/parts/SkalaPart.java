@@ -242,12 +242,14 @@ public class SkalaPart {
 	}
 
 	public SkalaPart draw(final Canvas canvas) {
-
 		drawLinesForEbene(canvas, skalaLines.ebene1, radiusMain, radiusLineEbene1, fontRadiusEbene1, dickeLineEbene1, attrEbene1);
 		drawLinesForEbene(canvas, skalaLines.ebene2, radiusMain, radiusLineEbene2, fontRadiusEbene2, dickeLineEbene2, attrEbene2);
 		drawLinesForEbene(canvas, skalaLines.ebene3, radiusMain, radiusLineEbene3, fontRadiusEbene3, dickeLineEbene3, attrEbene3);
+		drawBaseLine(canvas);
+		return this;
+	}
 
-		// ggf linie zeichnen
+	private void drawBaseLine(final Canvas canvas) {
 		if (radiusBaseLine > 0) {
 			final RectF oval = GeometrieHelper.getCircle(c, radiusBaseLine);
 			final Path mArc = new Path();
@@ -256,7 +258,6 @@ public class SkalaPart {
 			linePaint.setStrokeWidth(dickeBaseline);
 			canvas.drawPath(mArc, linePaint);
 		}
-		return this;
 	}
 
 	private void drawLinesForEbene(final Canvas canvas, final float[] lines, //

@@ -11,7 +11,6 @@ import de.geithonline.abattlwp.bitmapdrawer.AppIconDrawer;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV1;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV2;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV3;
-import de.geithonline.abattlwp.bitmapdrawer.BrickClockV1;
 import de.geithonline.abattlwp.bitmapdrawer.BrickMadnessV1;
 import de.geithonline.abattlwp.bitmapdrawer.BrickMadnessV1.BrickStyle;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV1;
@@ -75,7 +74,7 @@ public class DrawerManager {
 		drawer.put("Outline V3", new OutlineV3());
 		drawer.put("Bricks V1", new BrickMadnessV1(BrickStyle.Normal));
 		drawer.put("Bricks V1 (random)", new BrickMadnessV1(BrickStyle.Random));
-		drawer.put("BrickClock V1", new BrickClockV1());
+		// drawer.put("BrickClock V1", new BrickClockV1()); // is häßlich, aber als Pattern für einen andere Klasse vielleicht irgendwann mal interessant!
 	}
 
 	public static IBitmapDrawer getDrawer(final String name) {

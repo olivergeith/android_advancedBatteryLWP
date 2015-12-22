@@ -1,8 +1,6 @@
 package de.geithonline.abattlwp.bitmapdrawer;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +12,7 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import de.geithonline.abattlwp.EasterEgg;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
@@ -21,6 +20,7 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.AnyPathPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.RingPart.RingType;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnLinePart;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.HeartPath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.PacmanPath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.PacmanPath.PACMAN_STYLE;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.StarPath;
@@ -143,7 +143,7 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 		final float raster = 2 * maxRadius * 0.85f / 10;
 		final float abstand = maxRadius * 0.01f;
 		// EasterEgg... On December we use stars!
-		final Calendar date = new GregorianCalendar();
+		final EasterEgg easterEgg = new EasterEgg();
 
 		for (int i = 1; i <= 100; i++) {
 			final Point p = positionMap.get(i);
@@ -151,13 +151,18 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 			centerSquare.x = randOffset + raster / 2 + p.x * raster;
 			centerSquare.y = randOffset + raster / 2 + p.y * raster;
 			if (i <= level) {
-				if (date.get(Calendar.MONTH) == Calendar.DECEMBER) {
+				if (easterEgg.isSomebodiesBirthday()) {
+					final float size = raster / 4 + Randomizer.getRandomFloat(0, raster / 4);
+					final Path heart = new HeartPath(centerSquare, size);
+					new AnyPathPart(centerSquare, PaintProvider.getBatteryPaint(level), heart)//
+							.draw(bitmapCanvas);
+				} else if (easterEgg.isDecember()) {
 					// Easteregg : Rotating Stars in December
 					final Path star = new StarPath(5, centerSquare, raster / 2, raster / 4);
 					PathHelper.rotatePath(centerSquare.x, centerSquare.y, star, level * 7.2f);
 					new AnyPathPart(centerSquare, PaintProvider.getBatteryPaint(level), star)//
 							.draw(bitmapCanvas);
-				} else if (date.get(Calendar.MONTH) == Calendar.OCTOBER) {
+				} else if (easterEgg.isHalloween()) {
 					// Easteregg : Pacmans in Oktober (Halloween)
 					final Path star = new PacmanPath(centerSquare, raster / 2, PACMAN_STYLE.GHOST_RANDOM_EYES);
 					new AnyPathPart(centerSquare, PaintProvider.getBatteryPaint(level), star)//

@@ -449,9 +449,9 @@ public class Settings {
 
 	public static String getStyle() {
 		if (prefs == null) {
-			return "ClockV3";
+			return DrawerManager.DEFAULT_DRAWER_NAME_CLOCK_V3;
 		}
-		return prefs.getString(KEY_BATT_STYLE, "ClockV3");
+		return prefs.getString(KEY_BATT_STYLE, DrawerManager.DEFAULT_DRAWER_NAME_CLOCK_V3);
 	}
 
 	// #####################################################################################

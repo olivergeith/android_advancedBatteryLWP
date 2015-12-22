@@ -11,6 +11,7 @@ import de.geithonline.abattlwp.bitmapdrawer.AppIconDrawer;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV1;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV2;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV3;
+import de.geithonline.abattlwp.bitmapdrawer.BrickClockV1;
 import de.geithonline.abattlwp.bitmapdrawer.BrickMadnessV1;
 import de.geithonline.abattlwp.bitmapdrawer.BrickMadnessV1.BrickStyle;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV1;
@@ -39,6 +40,7 @@ import de.geithonline.abattlwp.bitmapdrawer.TachoV1;
 import de.geithonline.abattlwp.bitmapdrawer.TachoV2;
 
 public class DrawerManager {
+	public static final String DEFAULT_DRAWER_NAME_CLOCK_V3 = "Clock V3";
 	public static final String APP_ICON_DRAWER_NAME = "App Icon";
 	private static Map<String, IBitmapDrawer> drawer = new HashMap<String, IBitmapDrawer>();
 	private static Map<String, Bitmap> iconCache = new HashMap<String, Bitmap>();
@@ -50,7 +52,7 @@ public class DrawerManager {
 		drawer.put("Asymetric V3", new AsymetricV3());
 		drawer.put("Clock V1", new ClockV1());
 		drawer.put("Clock V2", new ClockV2());
-		drawer.put("Clock V3", new ClockV3());
+		drawer.put(DEFAULT_DRAWER_NAME_CLOCK_V3, new ClockV3());
 		drawer.put("Clock V4", new ClockV4());
 		drawer.put("Clock V5", new ClockV5());
 		drawer.put("Clock V6", new ClockV6());
@@ -73,12 +75,13 @@ public class DrawerManager {
 		drawer.put("Outline V3", new OutlineV3());
 		drawer.put("Bricks V1", new BrickMadnessV1(BrickStyle.Normal));
 		drawer.put("Bricks V1 (random)", new BrickMadnessV1(BrickStyle.Random));
+		drawer.put("BrickClock V1", new BrickClockV1());
 	}
 
 	public static IBitmapDrawer getDrawer(final String name) {
 		IBitmapDrawer d = drawer.get(name);
 		if (d == null) {
-			d = drawer.get("Clock V3");
+			d = drawer.get(DEFAULT_DRAWER_NAME_CLOCK_V3);
 		}
 		return d;
 	}

@@ -121,6 +121,7 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 			styleVariante.setEntries(getVariantsArray(list));
 			styleVariante.setEntryValues(getVariantsArray(list));
 			styleVariante.setEnabled(true);
+			getPreferenceScreen().addPreference(styleVariante);
 			// übergbebene Variante null?
 			if (newVariante == null) {
 				// dann schauen wir, ob wir für diesen Drawer schon eine Variante gespeichert haben
@@ -140,6 +141,7 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 			styleVariante.setEntryValues(new CharSequence[] { NOT_AVAILABLE_FOR_THIS_BATTERY_STYLE });
 			styleVariante.setValueIndex(0);
 			styleVariante.setEnabled(false);
+			getPreferenceScreen().removePreference(styleVariante);
 		}
 	}
 

@@ -28,12 +28,17 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 	private int level = 66;
 	// private SharedPreferences prefs;
 	private CoolListPreference styleVariante;
+	private Preference levelMode;
+	private Preference levelStyles;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		addPreferencesFromResource(R.xml.preferences_style);
+
+		levelStyles = findPreference("levelStyles");
+		levelMode = findPreference("levelMode");
 
 		styleVariante = (CoolListPreference) findPreference(Settings.KEY_BATT_STYLE_VARIANTE);
 		styleVariante.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -93,8 +98,11 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 		handleAvailability(findPreference("show_zeiger"), drawer.supportsShowPointer());
 		handleAvailability(findPreference("color_zeiger"), drawer.supportsPointerColor());
 
-		handleAvailability(findPreference("levelStyles"), drawer.supportsLevelStyle());
-		handleAvailability(findPreference("levelMode"), drawer.supportsLevelStyle());
+		handleAvailability(levelStyles, drawer.supportsLevelStyle());
+		handleAvailability(levelMode, drawer.supportsLevelStyle());
+		handleVisibility(levelStyles, drawer.supportsLevelStyle());
+		handleVisibility(levelMode, drawer.supportsLevelStyle());
+
 		handleAvailability(findPreference("showExtraLevelBars"), drawer.supportsExtraLevelBars());
 
 		handleAvailability(findPreference("show_rand"), drawer.supportsShowRand());
@@ -145,13 +153,24 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 		}
 	}
 
-	private static void handleAvailability(final Preference preference, final boolean available) {
+	private void handleAvailability(final Preference preference, final boolean available) {
+		if (preference != null) {
+			if (available) {
+				// Nothing so far ---- preference.setSummary("");
+			} else {
+				preference.setSummary(NOT_AVAILABLE_FOR_THIS_BATTERY_STYLE);
+			}
+			preference.setEnabled(available);
+		}
+	}
+
+	private void handleVisibility(final Preference preference, final boolean available) {
 		if (available) {
+			getPreferenceScreen().addPreference(preference);
 			// Nothing so far ---- preference.setSummary("");
 		} else {
-			preference.setSummary(NOT_AVAILABLE_FOR_THIS_BATTERY_STYLE);
+			getPreferenceScreen().removePreference(preference);
 		}
-		preference.setEnabled(available);
 	}
 
 	@Override

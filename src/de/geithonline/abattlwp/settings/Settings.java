@@ -549,23 +549,23 @@ public class Settings {
 
 	public static boolean isShowExtraLevelBars() {
 		if (prefs == null) {
-			return false;
+			return true;
 		}
-		return prefs.getBoolean("showExtraLevelBars", false);
+		return prefs.getBoolean("showExtraLevelBars", true);
 	}
 
 	public static boolean isShowVoltmeter() {
 		if (prefs == null) {
-			return false;
+			return true;
 		}
-		return prefs.getBoolean("showVoltmeter", false);
+		return prefs.getBoolean("showVoltmeter", true);
 	}
 
 	public static boolean isShowThermometer() {
 		if (prefs == null) {
-			return false;
+			return true;
 		}
-		return prefs.getBoolean("showThermometer", false);
+		return prefs.getBoolean("showThermometer", true);
 	}
 
 	public static void setReadWritePermission(final boolean b) {

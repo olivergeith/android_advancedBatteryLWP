@@ -8,14 +8,6 @@
     <!-- ##################################################################################### -->
     <!-- ##################################################################################### -->
     <PreferenceCategory android:title="Battery Design" />
- <!-- 
-    <de.geithonline.abattlwp.stylelistpreference.StyleListPreference
-        android:defaultValue="ClockV3"
-        android:dialogTitle="Choose a battery style"
-        android:key="batt_style"
-        android:summary="@string/style_summary"
-        android:title="@string/style" />
- -->
     <de.geithonline.android.basics.preferences.IconOnlyPreference 
         android:key="stylePreview" />
 
@@ -26,6 +18,21 @@
         android:entryValues="@array/styleVariante"
         android:key="styleVariante"
         android:title="Variante" />
+    <de.geithonline.android.basics.preferences.CoolListPreference
+        android:defaultValue="Normal"
+        android:dialogTitle="@string/levelStyles"
+        android:entries="@array/levelStyles"
+        android:entryValues="@array/levelStyles"
+        android:key="levelStyles"
+        android:title="@string/levelStyles" />
+    <de.geithonline.android.basics.preferences.CoolListPreference
+        android:defaultValue="1"
+        android:dialogTitle="@string/levelMode"
+        android:entries="@array/levelMode"
+        android:entryValues="@array/levelMode"
+        android:key="levelMode"
+        android:title="@string/levelMode" />
+    
 
     <!-- ##################################################################################### -->
     <!-- ##################################################################################### -->
@@ -184,9 +191,9 @@
 
     <PreferenceScreen
         android:icon="@drawable/options_level"
-        android:title="Style + Extras" >
+        android:title="Extras" >
+<!-- 
         <PreferenceCategory android:title="Style" />
-
         <de.geithonline.android.basics.preferences.CoolListPreference
             android:defaultValue="Normal"
             android:dialogTitle="@string/levelStyles"
@@ -201,19 +208,19 @@
             android:entryValues="@array/levelMode"
             android:key="levelMode"
             android:title="@string/levelMode" />
-
+-->
         <PreferenceCategory android:title="Extra &apos;Levelbars&apos;" />
 
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="showVoltmeter"
             android:title="@string/showVoltmeter" />
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="showThermometer"
             android:title="@string/showThermometer" />
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="showExtraLevelBars"
             android:title="@string/showExtraLevelBars" />
         

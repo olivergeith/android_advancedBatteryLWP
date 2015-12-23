@@ -11,6 +11,7 @@ import de.geithonline.abattlwp.bitmapdrawer.AppIconDrawer;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV1;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV2;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV3;
+import de.geithonline.abattlwp.bitmapdrawer.BinaryBarsV1;
 import de.geithonline.abattlwp.bitmapdrawer.BrickMadnessV1;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV1;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV2;
@@ -19,6 +20,7 @@ import de.geithonline.abattlwp.bitmapdrawer.ClockV4;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV5;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV6;
 import de.geithonline.abattlwp.bitmapdrawer.DarkV1;
+import de.geithonline.abattlwp.bitmapdrawer.DarkV2;
 import de.geithonline.abattlwp.bitmapdrawer.FancyV1;
 import de.geithonline.abattlwp.bitmapdrawer.FancyV2;
 import de.geithonline.abattlwp.bitmapdrawer.IBitmapDrawer;
@@ -53,6 +55,8 @@ public class DrawerManager {
 		drawer.put("Clock V4", new ClockV4());
 		drawer.put("Clock V5", new ClockV5());
 		drawer.put("Clock V6", new ClockV6());
+		drawer.put("Dark V1", new DarkV1());
+		drawer.put("Dark V2", new DarkV2());
 		drawer.put("Fancy V1", new FancyV1());
 		drawer.put("Fancy V2", new FancyV2());
 		drawer.put("Labyrinth V1", new LabyrinthV1());
@@ -66,10 +70,10 @@ public class DrawerManager {
 		drawer.put("SimpleCircle V1", new SimpleCircleV1());
 		drawer.put("SimpleCircle V2", new SimpleCircleV2());
 		drawer.put("SimpleCircle V3", new SimpleCircleV3());
-		drawer.put("Dark V1", new DarkV1());
 		drawer.put("Outline V1", new OutlineV1());
 		drawer.put("Outline V2", new OutlineV2());
 		drawer.put("Bricks V1", new BrickMadnessV1());
+		drawer.put("Binary Bars V1", new BinaryBarsV1());
 		// drawer.put("BrickClock V1", new BrickClockV1()); // is häßlich, aber als Pattern für einen andere Klasse vielleicht irgendwann mal interessant!
 	}
 

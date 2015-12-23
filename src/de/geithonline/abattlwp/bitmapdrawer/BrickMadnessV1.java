@@ -53,14 +53,9 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 	}
 
 	private final Map<Integer, Point> positionMap = new HashMap<>();
+	private final Map<Integer, Point> positionMapRandom = new HashMap<>();
 
-	private final List<Point> positions = new ArrayList<>();
-
-	public enum BrickStyle {
-		Normal, Random;
-	}
-
-	protected Point drawRandomPoint() {
+	private Point drawRandomPoint(final List<Point> positions) {
 		final int size = positions.size();
 		if (size == 0) {
 			return new Point(0, 0);
@@ -70,7 +65,7 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 		return p;
 	}
 
-	protected Point drawFirstPoint() {
+	private Point drawFirstPoint(final List<Point> positions) {
 		final int size = positions.size();
 		if (size == 0) {
 			return new Point(0, 0);
@@ -80,45 +75,36 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 		return p;
 	}
 
-	protected Point drawLastPoint() {
-		final int size = positions.size();
-		if (size == 0) {
-			return new Point(0, 0);
-		}
-		final int location = size - 1;
-		final Point p = positions.remove(location);
-		return p;
-	}
-
-	public BrickMadnessV1(final BrickStyle style) {
+	public BrickMadnessV1() {
+		final List<Point> positions = new ArrayList<>();
+		final List<Point> positionsRandom = new ArrayList<>();
 		// Liste mit Positionen bauen
 		for (int y = 0; y < 10; y++) {
 			for (int x = 0; x < 10; x++) {
 				positions.add(new Point(x, y));
+				positionsRandom.add(new Point(x, y));
 			}
 		}
 		// alle level durchgehen und ein zufälligen Punkt ziehen
 		for (int i = 1; i <= 100; i++) {
-			switch (style) {
-				default:
-				case Normal:
-					positionMap.put(i, drawFirstPoint());
-					break;
-				case Random:
-					positionMap.put(i, drawRandomPoint());
-					break;
-			}
+			positionMap.put(i, drawFirstPoint(positions));
+			positionMapRandom.put(i, drawRandomPoint(positionsRandom));
 		}
-	}
-
-	@Override
-	public boolean supportsShowRand() {
-		return true;
 	}
 
 	@Override
 	public boolean isPremiumDrawer() {
 		return true;
+	}
+
+	@Override
+	public List<String> getVariants() {
+		final List<String> list = new ArrayList<>();
+		list.add("Normal");
+		list.add("Random");
+		list.add("Normal with numbers");
+		list.add("Random with numbers");
+		return list;
 	}
 
 	@Override
@@ -146,7 +132,18 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 		final EasterEgg easterEgg = new EasterEgg();
 
 		for (int i = 1; i <= 100; i++) {
-			final Point p = positionMap.get(i);
+			final Point p;
+			switch (Settings.getStyleVariante(this.getClass().getSimpleName())) {
+				default:
+				case "Normal":
+				case "Normal with numbers":
+					p = positionMap.get(i);
+					break;
+				case "Random":
+				case "Random with numbers":
+					p = positionMapRandom.get(i);
+					break;
+			}
 			final PointF centerSquare = new PointF();
 			centerSquare.x = randOffset + raster / 2 + p.x * raster;
 			centerSquare.y = randOffset + raster / 2 + p.y * raster;
@@ -172,11 +169,15 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 							.draw(bitmapCanvas);
 				}
 				// Zahlenzeichnenne
-				if (Settings.isShowRand()) {
-					final RectF rect = GeometrieHelper.getCircle(centerSquare, raster / 2);
-					drawLevelNumberCenteredInRect(bitmapCanvas, i, "" + i, fontSizeArc, rect);
+				switch (Settings.getStyleVariante(this.getClass().getSimpleName())) {
+					default:
+						break;
+					case "Normal with numbers":
+					case "Random with numbers":
+						final RectF rect = GeometrieHelper.getCircle(centerSquare, raster / 2);
+						drawLevelNumberCenteredInRect(bitmapCanvas, i, "" + i, fontSizeArc, rect);
+						break;
 				}
-
 			}
 		}
 

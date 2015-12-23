@@ -68,6 +68,11 @@ public class ClockV1 extends AdvancedBitmapDrawer {
 	}
 
 	@Override
+	public boolean supportsLevelStyle() {
+		return true;
+	}
+
+	@Override
 	public Bitmap drawBitmap(final int level, final Bitmap bitmap) {
 		initPrivateMembers();
 		drawAll(level);
@@ -84,8 +89,8 @@ public class ClockV1 extends AdvancedBitmapDrawer {
 		new LevelPart(center, maxRadius * 0.86f, maxRadius * 0.72f, level, -90, 360, EZColoring.LevelColors)//
 				.setSegemteAbstand(1f)//
 				.setStrokeWidth(strokeWidth / 3)//
-				.setMode(EZMode.Einer)//
-				.setStyle(EZStyle.sweep)//
+				.setMode(Settings.getLevelMode())//
+				.setStyle(Settings.getLevelStyle())//
 				.draw(bitmapCanvas);
 
 		Skala.getLevelScalaCircular(center, maxRadius * 0.90f, maxRadius * 0.84f, -90, LevelLinesStyle.ZehnerFuenferEiner)//

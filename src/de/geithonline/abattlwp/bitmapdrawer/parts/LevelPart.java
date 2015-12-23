@@ -88,9 +88,25 @@ public class LevelPart {
 				levelIntern = level % 10;
 				anzahlSegmente = 10;
 				break;
+			case Zweier:
+				levelIntern = level / 2;
+				anzahlSegmente = 50;
+				break;
+			case Vierer:
+				levelIntern = level / 4;
+				anzahlSegmente = 25;
+				break;
 			case Fuenfer:
 				levelIntern = level / 5;
 				anzahlSegmente = 20;
+				break;
+			case FuenfUndZwanziger:
+				levelIntern = level / 25;
+				anzahlSegmente = 4;
+				break;
+			case Zwanziger:
+				levelIntern = level / 20;
+				anzahlSegmente = 5;
 				break;
 			case Zehner:
 				levelIntern = level / 10;

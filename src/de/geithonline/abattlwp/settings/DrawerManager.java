@@ -13,6 +13,7 @@ import de.geithonline.abattlwp.bitmapdrawer.AsymetricV2;
 import de.geithonline.abattlwp.bitmapdrawer.AsymetricV3;
 import de.geithonline.abattlwp.bitmapdrawer.BinaryBarsV1;
 import de.geithonline.abattlwp.bitmapdrawer.BrickMadnessV1;
+import de.geithonline.abattlwp.bitmapdrawer.BrickV2;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV1;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV2;
 import de.geithonline.abattlwp.bitmapdrawer.ClockV3;
@@ -73,6 +74,7 @@ public class DrawerManager {
 		drawer.put("Outline V1", new OutlineV1());
 		drawer.put("Outline V2", new OutlineV2());
 		drawer.put("Bricks V1", new BrickMadnessV1());
+		drawer.put("Bricks V2", new BrickV2());
 		drawer.put("Binary Bars V1", new BinaryBarsV1());
 		// drawer.put("BrickClock V1", new BrickClockV1()); // is häßlich, aber als Pattern für einen andere Klasse vielleicht irgendwann mal interessant!
 	}

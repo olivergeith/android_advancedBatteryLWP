@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
-import android.graphics.PointF;
 import android.graphics.RectF;
 import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.enums.EZColoring;
@@ -17,7 +16,6 @@ public class LevelPartRectangular {
 
 	private EZStyle style = EZStyle.sweep;
 	private EZMode modus = EZMode.Einer;
-	private final PointF c;
 	private Paint paint;
 	private int levelIntern;
 	private float abstandZwischenSegemten = 1.5f;
@@ -29,9 +27,8 @@ public class LevelPartRectangular {
 	private final RectF rect;
 	private final float maxHight;
 
-	public LevelPartRectangular(final PointF center, final RectF rect, //
+	public LevelPartRectangular(final RectF rect, //
 			final int level, final EZColoring coloring) {
-		c = center;
 		this.rect = rect;
 		maxHight = rect.bottom - rect.top;
 		this.level = level;

@@ -31,6 +31,7 @@ public class RingPart {
 	private Outline outline = null;
 	private Gradient gradient;
 	private boolean erase = false;
+	private BubbleDrawer bubble = null;
 
 	public RingPart(final PointF center, final float radAussen, final float radInnen, final Paint paint) {
 		init(center, radAussen, radInnen, paint, RingType.Circle);
@@ -67,6 +68,11 @@ public class RingPart {
 
 	public RingPart setOutline(final Outline outline) {
 		this.outline = outline;
+		return this;
+	}
+
+	public RingPart setGlossyBubble() {
+		bubble = new BubbleDrawer();
 		return this;
 	}
 
@@ -126,7 +132,11 @@ public class RingPart {
 		if (erase) {
 			canvas.drawPath(path, PaintProvider.getErasurePaint());
 		}
-		canvas.drawPath(path, paint);
+		if (bubble != null) {
+			bubble.drawBubbleGlow(canvas, c, paint, ra, path);
+		} else {
+			canvas.drawPath(path, paint);
+		}
 		// Outline?
 		if (outline != null) {
 			// aufräumen für Outline

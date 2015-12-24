@@ -123,4 +123,20 @@ public class ColorHelper {
 		return Color.argb(a, r, g, b);
 	}
 
+	public static int changeAlpha(final int color, final int amount) {
+		int a = Color.alpha(color);
+		final int r = Color.red(color);
+		final int g = Color.green(color);
+		final int b = Color.blue(color);
+
+		a += amount;
+		if (a > 255) {
+			a = 255;
+		}
+		if (a < 0) {
+			a = 0;
+		}
+		return Color.argb(a, r, g, b);
+	}
+
 }

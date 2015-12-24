@@ -80,10 +80,18 @@ public class BrickV2 extends AdvancedBitmapDrawer {
 				.draw(bitmapCanvas);
 
 		final RectF levelrect = GeometrieHelper.getOval(center, maxRadius - 2 * randOffset, maxRadius - 2 * randOffset);
-		new LevelPartRectangular(center, levelrect, level, EZColoring.LevelColors)//
+		new LevelPartRectangular(levelrect, level, EZColoring.LevelColors)//
 				.setStyle(Settings.getLevelStyle())//
 				.setMode(Settings.getLevelMode())//
 				.draw(bitmapCanvas);
+
+		// // aussen alles weg radieren
+		// new EraserPart(new CirclePath(center, maxRadius * 1.99f, levelrect.width() / 2)).draw(bitmapCanvas);
+		//
+		// new RingPart(center, levelrect.width() / 2, 0, PaintProvider.getBatteryPaint(level))//
+		// .setOutline(new Outline(PaintProvider.getGray(128), strokeWidth / 2))//
+		// .setGlossyBubble()//
+		// .draw(bitmapCanvas);
 
 	}
 
@@ -96,6 +104,9 @@ public class BrickV2 extends AdvancedBitmapDrawer {
 		rect.right = bmpWidth - randOffset;
 		rect.top = randOffset; // todo ?
 		drawLevelNumberCenteredInRect(bitmapCanvas, level, "" + level, fontSizeLevel, rect);
+
+		final PointF c = new PointF(rect.centerX(), rect.centerY());
+
 	}
 
 	@Override

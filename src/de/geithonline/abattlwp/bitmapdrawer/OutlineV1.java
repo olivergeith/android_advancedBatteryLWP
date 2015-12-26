@@ -24,6 +24,8 @@ import de.geithonline.abattlwp.bitmapdrawer.parts.Skala;
 import de.geithonline.abattlwp.bitmapdrawer.parts.SkalaPart;
 import de.geithonline.abattlwp.bitmapdrawer.parts.TextOnCirclePart;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.CirclePath;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.FlowerPath;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.GearPath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.PillowPath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.StarPath;
 import de.geithonline.abattlwp.settings.PaintProvider;
@@ -67,6 +69,8 @@ public class OutlineV1 extends AdvancedBitmapDrawer {
 		list.add("Star");
 		list.add("Star (spiky)");
 		list.add("Sun");
+		list.add("Gear");
+		list.add("Flower");
 		return list;
 	}
 
@@ -161,6 +165,12 @@ public class OutlineV1 extends AdvancedBitmapDrawer {
 				break;
 			case "Sun":
 				star = new PillowPath(20, center, maxRadius * 0.74f); // Direction.CW
+				break;
+			case "Gear":
+				star = new GearPath(20, center, maxRadius * 0.74f, 0f); // Direction.CW
+				break;
+			case "Flower":
+				star = new FlowerPath(20, center, maxRadius * 0.74f, maxRadius * 0.45f); // Direction.CW
 				break;
 		}
 		p.addPath(circle1);

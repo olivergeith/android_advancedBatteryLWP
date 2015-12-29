@@ -24,6 +24,7 @@ import de.geithonline.abattlwp.bitmapdrawer.ClockV7;
 import de.geithonline.abattlwp.bitmapdrawer.DarkV1;
 import de.geithonline.abattlwp.bitmapdrawer.DarkV2;
 import de.geithonline.abattlwp.bitmapdrawer.DarkV3;
+import de.geithonline.abattlwp.bitmapdrawer.DarkV4;
 import de.geithonline.abattlwp.bitmapdrawer.FancyV1;
 import de.geithonline.abattlwp.bitmapdrawer.FancyV2;
 import de.geithonline.abattlwp.bitmapdrawer.IBitmapDrawer;
@@ -62,6 +63,7 @@ public class DrawerManager {
 		drawer.put("Dark V1", new DarkV1());
 		drawer.put("Dark V2", new DarkV2());
 		drawer.put("Dark V3", new DarkV3());
+		drawer.put("Dark V4", new DarkV4());
 		drawer.put("Fancy V1", new FancyV1());
 		drawer.put("Fancy V2", new FancyV2());
 		drawer.put("Labyrinth V1", new LabyrinthV1());

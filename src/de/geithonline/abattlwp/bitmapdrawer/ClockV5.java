@@ -93,7 +93,7 @@ public class ClockV5 extends AdvancedBitmapDrawer {
 		final float startWinkel = -225;
 		// Ausen Ring
 		new RingPart(center, maxRadius * 0.99f, maxRadius * 0.75f, new Paint())//
-				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(160), GRAD_STYLE.top2bottom))//
+				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(64), GRAD_STYLE.top2bottom))//
 				.setOutline(new Outline(PaintProvider.getGray(128), strokeWidth))//
 				.draw(bitmapCanvas);
 		// SkalaBackground
@@ -123,10 +123,6 @@ public class ClockV5 extends AdvancedBitmapDrawer {
 		new RingPart(center, maxRadius * 0.31f, maxRadius * 0.25f, new Paint())//
 				.setGradient(new Gradient(PaintProvider.getGray(224), PaintProvider.getGray(48), GRAD_STYLE.top2bottom))//
 				.draw(bitmapCanvas);
-		// Zeiger
-		new LevelZeigerPart(center, level, maxRadius * 0.80f, maxRadius * 0.26f, strokeWidth, startWinkel, sweep, EZMode.Einer)//
-				.setDropShadow(new DropShadow(1.5f * strokeWidth, 0, 1.5f * strokeWidth, Color.BLACK))//
-				.draw(bitmapCanvas);
 
 		// Innen Fläche
 		new RingPart(center, maxRadius * 0.25f, maxRadius * 0.00f, new Paint())//
@@ -138,6 +134,10 @@ public class ClockV5 extends AdvancedBitmapDrawer {
 				.setDicke(strokeWidth * 0.75f)//
 				.setFontAttributesEbene1(new FontAttributes(Align.CENTER, Typeface.DEFAULT_BOLD, fontSizeScala))//
 				.setFontAttributesEbene2Default()//
+				.draw(bitmapCanvas);
+		// Zeiger
+		new LevelZeigerPart(center, level, maxRadius * 0.80f, maxRadius * 0.26f, strokeWidth, startWinkel, sweep, EZMode.Einer)//
+				.setDropShadow(new DropShadow(1.5f * strokeWidth, 0, 1.5f * strokeWidth, Color.BLACK))//
 				.draw(bitmapCanvas);
 
 		if (Settings.isShowExtraLevelBars()) {

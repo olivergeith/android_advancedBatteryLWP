@@ -77,12 +77,11 @@ public class ClockV6 extends AdvancedBitmapDrawer {
 	}
 
 	private void drawAll(final int level) {
-		final int op = 224;
 
 		// Ausen Ring
 		new RingPart(center, maxRadius * 0.99f, maxRadius * 0.80f, new Paint())//
-				.setGradient(new Gradient(PaintProvider.getGray(32, op), PaintProvider.getGray(160, op), GRAD_STYLE.top2bottom))//
-				.setOutline(new Outline(PaintProvider.getGray(192, op), strokeWidth / 2))//
+				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(80), GRAD_STYLE.top2bottom))//
+				.setOutline(new Outline(PaintProvider.getGray(192), strokeWidth / 2))//
 				.draw(bitmapCanvas);
 		// SkalaBackground
 		new RingPart(center, maxRadius * 0.79f, maxRadius * 0.32f, PaintProvider.getBackgroundPaint())//
@@ -115,10 +114,10 @@ public class ClockV6 extends AdvancedBitmapDrawer {
 					.draw(bitmapCanvas);
 		}
 		new RingPart(center, maxRadius * 0.31f, maxRadius * 0.25f, new Paint())//
-				.setGradient(new Gradient(PaintProvider.getGray(224, op), PaintProvider.getGray(48, op), GRAD_STYLE.top2bottom))//
+				.setGradient(new Gradient(PaintProvider.getGray(224), PaintProvider.getGray(48), GRAD_STYLE.top2bottom))//
 				.draw(bitmapCanvas);
 		new RingPart(center, maxRadius * 0.31f, maxRadius * 0.25f, new Paint())//
-				.setGradient(new Gradient(PaintProvider.getGray(224, op), PaintProvider.getGray(48, op), GRAD_STYLE.top2bottom))//
+				.setGradient(new Gradient(PaintProvider.getGray(224), PaintProvider.getGray(48), GRAD_STYLE.top2bottom))//
 				.draw(bitmapCanvas);
 		// Zeiger
 		new LevelZeigerPart(center, level, maxRadius * 0.80f, maxRadius * 0.26f, strokeWidth, -90, 360, EZMode.Einer)//
@@ -127,8 +126,8 @@ public class ClockV6 extends AdvancedBitmapDrawer {
 
 		// Innen Fläche
 		new RingPart(center, maxRadius * 0.25f, maxRadius * 0.00f, new Paint())//
-				.setGradient(new Gradient(PaintProvider.getGray(32, op), PaintProvider.getGray(224, op), GRAD_STYLE.top2bottom))//
-				.setOutline(new Outline(PaintProvider.getGray(32, op), strokeWidth))//
+				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(224), GRAD_STYLE.top2bottom))//
+				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth))//
 				.draw(bitmapCanvas);
 
 		Skala.getLevelScalaCircular(center, maxRadius * 0.82f, maxRadius * 0.88f, -90, LevelLinesStyle.ZehnerFuenferEiner)//

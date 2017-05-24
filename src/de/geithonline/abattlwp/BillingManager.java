@@ -14,6 +14,7 @@ import de.geithonline.abattlwp.billinghelper.IabResult;
 import de.geithonline.abattlwp.billinghelper.Inventory;
 import de.geithonline.abattlwp.billinghelper.Purchase;
 import de.geithonline.abattlwp.settings.Settings;
+import de.geithonline.abattlwp.utils.StorageHelper;
 import de.geithonline.abattlwp.utils.Toaster;
 
 /**
@@ -256,7 +257,7 @@ public class BillingManager {
 
 	private boolean readProStatus() {
 		final File file = new File(activity.getFilesDir(), "muimerp.txt");
-		return file.exists();
+		return file.exists() || StorageHelper.muimerpExists();
 	}
 
 	private void saveBillingError(final boolean isError) {

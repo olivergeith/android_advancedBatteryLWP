@@ -85,7 +85,7 @@
             android:summary="@string/gradient_colors_summary"
             android:title="@string/gradient_colors_mid" />
 
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="30"
             android:dialogMessage="@string/threshold_mid"
             android:key="threshold_mid_Int"
@@ -103,7 +103,7 @@
             android:key="battery_color_low"
             android:title="Color" />
 
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="10"
             android:dialogMessage="@string/threshold_low"
             android:key="threshold_low_Int"
@@ -151,7 +151,7 @@
             android:summary="@string/animation_style_summary"
             android:title="@string/animation_style" />
 
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="50"
             android:dialogMessage="@string/animation_delay"
             android:key="animation_delayInt"
@@ -161,7 +161,7 @@
             seekbarpreference:maxValue="500"
             seekbarpreference:minValue="50"
             seekbarpreference:stepValue="50" />
-         <de.geithonline.android.basics.preferences.SeekBarPreference
+         <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="2500"
             android:dialogMessage="@string/animation_delay_level"
             android:key="animation_delay_levelInt"
@@ -301,7 +301,7 @@
             android:title="@string/color" />
         
         
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="100"
             android:dependency="show_number"
             android:dialogMessage="@string/fontsize"
@@ -311,7 +311,7 @@
             seekbarpreference:maxValue="150"
             seekbarpreference:minValue="50"
             seekbarpreference:stepValue="1" />
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="100"
             android:dependency="show_number"
             android:dialogMessage="@string/fontsize100"

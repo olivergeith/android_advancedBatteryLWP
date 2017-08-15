@@ -5,7 +5,7 @@
 
     <PreferenceCategory android:title="Battery Size" />
 
-    <de.geithonline.android.basics.preferences.SeekBarPreference
+    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
         android:defaultValue="75"
         android:dialogMessage="@string/resizePortrait"
         android:icon="@drawable/portrait"
@@ -15,7 +15,7 @@
         seekbarpreference:maxValue="100"
         seekbarpreference:minValue="25"
         seekbarpreference:stepValue="1" />
-    <de.geithonline.android.basics.preferences.SeekBarPreference
+    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
         android:defaultValue="75"
         android:dialogMessage="@string/resizeLandscape"
         android:icon="@drawable/landscape"
@@ -54,7 +54,7 @@
             android:summary=""
             android:title="Rotation" />
     
-    <de.geithonline.android.basics.preferences.SeekBarPreference
+    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
         android:defaultValue="0"
         android:dialogMessage="@string/vertical_position"
         android:key="vertical_positionInt"
@@ -63,7 +63,7 @@
         seekbarpreference:maxValue="1000"
         seekbarpreference:minValue="0"
         seekbarpreference:stepValue="1" />
-    <de.geithonline.android.basics.preferences.SeekBarPreference
+    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
         android:defaultValue="0"
         android:dialogMessage="@string/vertical_position_landscape"
         android:key="vertical_position_landscapeInt"

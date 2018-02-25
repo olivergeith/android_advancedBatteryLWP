@@ -24,7 +24,7 @@
 	        android:icon="@drawable/email"
 	        >
             <intent android:action="android.intent.action.VIEW"
-                android:data="mailto:oliver.geith@gmail.com?subject=BatteryLWP-Mail" />
+                android:data="mailto:oliver.geith@gmail.com?subject=A-BatteryLWP-Mail" />
         </Preference>
 	    </PreferenceCategory>
 	    

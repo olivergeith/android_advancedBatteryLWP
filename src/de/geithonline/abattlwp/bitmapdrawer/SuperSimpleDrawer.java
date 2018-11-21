@@ -1,5 +1,8 @@
 package de.geithonline.abattlwp.bitmapdrawer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -32,8 +35,8 @@ public class SuperSimpleDrawer extends AdvancedBitmapDrawer {
 		// Strokes
 		strokeWidth = maxRadius * 0.02f;
 		// fontsizes
-		fontSizeLevel = maxRadius * 0.7f;
-		fontSizeArc = maxRadius * 0.08f;
+		fontSizeLevel = maxRadius * 0.6f;
+		fontSizeArc = maxRadius * 0.1f;
 		// Radiusses
 
 	}
@@ -63,9 +66,36 @@ public class SuperSimpleDrawer extends AdvancedBitmapDrawer {
 		return bitmap;
 	}
 
+	@Override
+	public List<String> getVariants() {
+		final List<String> list = new ArrayList<>();
+		list.add("Super Slim");
+		list.add("Slim");
+		list.add("Normal");
+		list.add("Wide");
+		return list;
+	}
+
 	private void drawAll(final int level) {
+		float innerRadius = 0.75f;
+		switch (Settings.getStyleVariante(this.getClass().getSimpleName())) {
+			case "Super Slim":
+				innerRadius = 0.88f;
+				break;
+			case "Slim":
+				innerRadius = 0.85f;
+				break;
+			default:
+			case "Normal":
+				innerRadius = 0.75f;
+				break;
+			case "Wide":
+				innerRadius = 0.65f;
+				break;
+		}
+
 		// Hintergrund
-		new LevelPart(center, maxRadius * 0.9f, maxRadius * 0.75f, level, -90, 360, EZColoring.LevelColors)//
+		new LevelPart(center, maxRadius * 0.9f, maxRadius * innerRadius, level, -90, 360, EZColoring.LevelColors)//
 				// .setColor(Color.WHITE)//
 				.setSegemteAbstand(1f)//
 				.setStrokeWidth(strokeWidth / 3)//
@@ -75,7 +105,7 @@ public class SuperSimpleDrawer extends AdvancedBitmapDrawer {
 
 		if (Settings.isShowZeiger()) {
 			// Zeiger
-			new LevelZeigerPart(center, level, maxRadius * 0.75f, maxRadius * 0.65f, strokeWidth * 3f, -90, 360, EZMode.Einer)//
+			new LevelZeigerPart(center, level, maxRadius * innerRadius, maxRadius * (innerRadius - 0.15f), strokeWidth * 3f, -90, 360, EZMode.Einer)//
 					.setZeigerType(ZEIGER_TYP.triangle)//
 					.draw(bitmapCanvas);
 		}

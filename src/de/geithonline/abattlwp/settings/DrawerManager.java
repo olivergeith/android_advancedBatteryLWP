@@ -31,6 +31,7 @@ import de.geithonline.abattlwp.bitmapdrawer.IBitmapDrawer;
 import de.geithonline.abattlwp.bitmapdrawer.LabyrinthV1;
 import de.geithonline.abattlwp.bitmapdrawer.LabyrinthV2;
 import de.geithonline.abattlwp.bitmapdrawer.LabyrinthV3;
+import de.geithonline.abattlwp.bitmapdrawer.LevelBar;
 import de.geithonline.abattlwp.bitmapdrawer.OutlineV1;
 import de.geithonline.abattlwp.bitmapdrawer.OutlineV2;
 import de.geithonline.abattlwp.bitmapdrawer.RotatingV1;
@@ -84,6 +85,7 @@ public class DrawerManager {
 		drawer.put("Bricks V2", new BrickV2());
 		drawer.put("Binary Bars V1", new BinaryBarsV1());
 		drawer.put("SuperSimple V1", new SuperSimpleDrawer());
+		drawer.put("LevelBar V1", new LevelBar());
 		// drawer.put("BrickClock V1", new BrickClockV1()); // is h��lich, aber als Pattern f�r einen andere Klasse vielleicht irgendwann mal interessant!
 	}
 

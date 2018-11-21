@@ -39,14 +39,15 @@ import de.geithonline.abattlwp.bitmapdrawer.RotatingV3;
 import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV1;
 import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV2;
 import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV3;
+import de.geithonline.abattlwp.bitmapdrawer.SuperSimpleDrawer;
 import de.geithonline.abattlwp.bitmapdrawer.TachoV1;
 import de.geithonline.abattlwp.bitmapdrawer.TachoV2;
 
 public class DrawerManager {
 	public static final String DEFAULT_DRAWER_NAME_CLOCK_V3 = "Clock V3";
 	public static final String APP_ICON_DRAWER_NAME = "App Icon";
-	private static Map<String, IBitmapDrawer> drawer = new HashMap<String, IBitmapDrawer>();
-	private static Map<String, Bitmap> iconCache = new HashMap<String, Bitmap>();
+	private static Map<String, IBitmapDrawer> drawer = new HashMap<>();
+	private static Map<String, Bitmap> iconCache = new HashMap<>();
 
 	static {
 		drawer.put(APP_ICON_DRAWER_NAME, new AppIconDrawer());
@@ -82,7 +83,8 @@ public class DrawerManager {
 		drawer.put("Bricks V1", new BrickMadnessV1());
 		drawer.put("Bricks V2", new BrickV2());
 		drawer.put("Binary Bars V1", new BinaryBarsV1());
-		// drawer.put("BrickClock V1", new BrickClockV1()); // is häßlich, aber als Pattern für einen andere Klasse vielleicht irgendwann mal interessant!
+		drawer.put("SuperSimple V1", new SuperSimpleDrawer());
+		// drawer.put("BrickClock V1", new BrickClockV1()); // is hï¿½ï¿½lich, aber als Pattern fï¿½r einen andere Klasse vielleicht irgendwann mal interessant!
 	}
 
 	public static IBitmapDrawer getDrawer(final String name) {
@@ -114,7 +116,7 @@ public class DrawerManager {
 	}
 
 	public static List<String> getStyleNames() {
-		final List<String> keySet = new ArrayList<String>(drawer.keySet());
+		final List<String> keySet = new ArrayList<>(drawer.keySet());
 		Collections.sort(keySet);
 		return keySet;
 	}
@@ -125,7 +127,7 @@ public class DrawerManager {
 	}
 
 	public static String[] getDrawerNames() {
-		final List<String> keySet = new ArrayList<String>(drawer.keySet());
+		final List<String> keySet = new ArrayList<>(drawer.keySet());
 		Collections.sort(keySet);
 		final String[] array = new String[keySet.size()];
 		int i = 0;

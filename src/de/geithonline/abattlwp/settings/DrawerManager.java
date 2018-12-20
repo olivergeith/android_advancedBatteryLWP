@@ -40,9 +40,12 @@ import de.geithonline.abattlwp.bitmapdrawer.RotatingV3;
 import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV1;
 import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV2;
 import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV3;
+import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV4;
+import de.geithonline.abattlwp.bitmapdrawer.SimpleCircleV5;
 import de.geithonline.abattlwp.bitmapdrawer.SuperSimpleDrawer;
 import de.geithonline.abattlwp.bitmapdrawer.TachoV1;
 import de.geithonline.abattlwp.bitmapdrawer.TachoV2;
+import de.geithonline.abattlwp.bitmapdrawer.ZoopaV1;
 
 public class DrawerManager {
 	public static final String DEFAULT_DRAWER_NAME_CLOCK_V3 = "Clock V3";
@@ -79,6 +82,8 @@ public class DrawerManager {
 		drawer.put("SimpleCircle V1", new SimpleCircleV1());
 		drawer.put("SimpleCircle V2", new SimpleCircleV2());
 		drawer.put("SimpleCircle V3", new SimpleCircleV3());
+		drawer.put("SimpleCircle V4", new SimpleCircleV4());
+		drawer.put("SimpleCircle V5", new SimpleCircleV5());
 		drawer.put("Outline V1", new OutlineV1());
 		drawer.put("Outline V2", new OutlineV2());
 		drawer.put("Bricks V1", new BrickMadnessV1());
@@ -86,6 +91,7 @@ public class DrawerManager {
 		drawer.put("Binary Bars V1", new BinaryBarsV1());
 		drawer.put("SuperSimple V1", new SuperSimpleDrawer());
 		drawer.put("LevelBar V1", new LevelBar());
+		drawer.put("Zoopa V1", new ZoopaV1());
 		// drawer.put("BrickClock V1", new BrickClockV1()); // is h��lich, aber als Pattern f�r einen andere Klasse vielleicht irgendwann mal interessant!
 	}
 

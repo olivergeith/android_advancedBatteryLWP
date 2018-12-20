@@ -108,7 +108,7 @@ public class DarkV4 extends AdvancedBitmapDrawer {
 				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(96), GRAD_STYLE.top2bottom))//
 				.setOutline(new Outline(PaintProvider.getGray(64), strokeWidth / 2))//
 				.draw(bitmapCanvas);
-		// innere fläche
+		// innere flï¿½che
 		new RingPart(center, maxRadius * 0.80f, maxRadius * 0.0f, new Paint())//
 				.setGradient(new Gradient(PaintProvider.getGray(64), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
 				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth / 2))//
@@ -180,7 +180,7 @@ public class DarkV4 extends AdvancedBitmapDrawer {
 			new TextOnLinePart(center, maxRadius * 0.05f, -90, fontSizeArc, new Paint())//
 					.setColor(Settings.getBattStatusColor())//
 					.setAlign(Align.CENTER)//
-					.draw(bitmapCanvas, Settings.getBattTemperature() + " °C");
+					.draw(bitmapCanvas, Settings.getBattTemperature() + " Â°C");
 		}
 	}
 

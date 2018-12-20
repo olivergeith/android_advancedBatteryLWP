@@ -197,7 +197,7 @@ public class TachoV2 extends AdvancedBitmapDrawer {
 			new TextOnCirclePart(center, maxRadius * 0.59f, -2, fontSizeArc * 0.85f, new Paint())//
 					.setColor(Settings.getBattStatusColor())//
 					.setAlign(Align.RIGHT)//
-					.draw(bitmapCanvas, Settings.getBattTemperature() + " °C");
+					.draw(bitmapCanvas, Settings.getBattTemperature() + " Â°C");
 		}
 	}
 

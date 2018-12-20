@@ -10,9 +10,9 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.util.Log;
 import de.geithonline.abattlwp.settings.Settings;
-import de.geithonline.abattlwp.utils.BitmapHelper;
 import de.geithonline.abattlwp.utils.Toaster;
 import de.geithonline.abattlwp.utils.URIHelper;
+import de.geithonline.android.basics.utils.BitmapHelper;
 
 /**
  * This fragment shows the preferences for the second header.
@@ -30,7 +30,7 @@ public class BackgroundPreferencesFragment extends MyAbstractPreferenceFragment 
 		backgroundPicker = findPreference(BACKGROUND_PICKER_KEY);
 		backgroundPicker.setEnabled(PermissionRequester.isReadWritePermission());
 
-		// Dürfen wir ins Filesystem?
+		// Dï¿½rfen wir ins Filesystem?
 		if (PermissionRequester.isReadWritePermission()) {
 			backgroundPicker.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 				@Override
@@ -43,7 +43,7 @@ public class BackgroundPreferencesFragment extends MyAbstractPreferenceFragment 
 				}
 			});
 			setBackgroundPickerData();
-		} else { // nein wir dürfen nicht ins filesystem
+		} else { // nein wir dï¿½rfen nicht ins filesystem
 			backgroundPicker.setSummary("Custom background selection not possible, because the Read/Write Permission to sdcard was NOT granted!");
 		}
 	}

@@ -234,7 +234,7 @@ public class AsymetricV2 extends AdvancedBitmapDrawer {
 					.setColor(Settings.getBattStatusColor())//
 					.setAlign(Align.CENTER)//
 					.invert(true)//
-					.draw(bitmapCanvas, Settings.getBattTemperature() + " °C");
+					.draw(bitmapCanvas, Settings.getBattTemperature() + " Â°C");
 		}
 	}
 

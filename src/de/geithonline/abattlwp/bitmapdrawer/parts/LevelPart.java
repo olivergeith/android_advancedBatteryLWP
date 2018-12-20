@@ -29,6 +29,7 @@ public class LevelPart {
 	private float strokeWidthSegmente = 1f;
 	private final int level;
 	private final EZColoring coloring;
+	private boolean inverted = false;
 
 	public LevelPart(final PointF center, final float radAussen, final float radInnen, //
 			final int level, final float startWinkel, final float maxWinkel, final EZColoring coloring) {
@@ -122,6 +123,17 @@ public class LevelPart {
 	}
 
 	/**
+	 * Draws the inverted level arc everything above the actual level up to 100%
+	 * 
+	 * @param inverted
+	 * @return
+	 */
+	public LevelPart setInverted(final boolean inverted) {
+		this.inverted = inverted;
+		return this;
+	}
+
+	/**
 	 * @param abstandsWinkel
 	 *            in grad (default ist 1.5 grad)
 	 * @return
@@ -168,29 +180,43 @@ public class LevelPart {
 	}
 
 	private void drawSweepWithOutline(final Canvas canvas) {
-		final Path path = new LevelArcPath(c, ra, ri, startWinkel, maxWinkel);
+		final Path outline = new LevelArcPath(c, ra, ri, startWinkel, maxWinkel);
 		paint.setStyle(Style.STROKE);
-		canvas.drawPath(path, paint);
+		canvas.drawPath(outline, paint);
 		final float winkelProSegment = maxWinkel / anzahlSegmente;
 		final float sweep = winkelProSegment * levelIntern;
-		final Path path2 = new LevelArcPath(c, ra, ri, startWinkel, sweep);
+		final Path path = new LevelArcPath(c, ra, ri, startWinkel, sweep);
+		final Path pathInverted = new LevelArcPath(c, ra, ri, startWinkel + sweep, maxWinkel - sweep);
 		paint.setStyle(Style.FILL);
-		canvas.drawPath(path2, paint);
-
+		if (!inverted) {
+			canvas.drawPath(path, paint);
+		} else {
+			canvas.drawPath(pathInverted, paint);
+		}
 	}
 
 	private void drawSweepWithAlpha(final Canvas canvas) {
 		final float winkelProSegment = maxWinkel / anzahlSegmente;
 		final float sweep = winkelProSegment * levelIntern;
+
 		final Path path = new LevelArcPath(c, ra, ri, startWinkel, sweep);
 		final Path path2 = new LevelArcPath(c, ra, ri, startWinkel + sweep, maxWinkel - sweep);
 		paint.setStyle(Style.FILL);
 		final int alpha = paint.getAlpha();
-		canvas.drawPath(path, paint);
+		if (!inverted) {
+			canvas.drawPath(path, paint);
+		} else {
+			canvas.drawPath(path2, paint);
+		}
 		// rest in ein drittel alpha malen
 		paint.setColor(PaintProvider.getColorForLevel(100));
 		paint.setAlpha(alpha / 3);
-		canvas.drawPath(path2, paint);
+		if (!inverted) {
+			canvas.drawPath(path2, paint);
+		} else {
+			canvas.drawPath(path, paint);
+		}
+
 	}
 
 	private void drawSweepWithBackground(final Canvas canvas) {
@@ -199,18 +225,33 @@ public class LevelPart {
 		final Path path = new LevelArcPath(c, ra, ri, startWinkel, sweep);
 		final Path path2 = new LevelArcPath(c, ra, ri, startWinkel + sweep, maxWinkel - sweep);
 		paint.setStyle(Style.FILL);
-		canvas.drawPath(path, paint);
+		if (!inverted) {
+			canvas.drawPath(path, paint);
+		} else {
+			canvas.drawPath(path2, paint);
+		}
 		// rest in ein drittel alpha malen
 		paint.setColor(PaintProvider.getBackgroundPaint().getColor());
-		canvas.drawPath(path2, paint);
+		if (!inverted) {
+			canvas.drawPath(path2, paint);
+		} else {
+			canvas.drawPath(path, paint);
+		}
+
 	}
 
 	private void drawSweep(final Canvas canvas) {
 		final float winkelProSegment = maxWinkel / anzahlSegmente;
 		final float sweep = winkelProSegment * levelIntern;
-		final Path path = new LevelArcPath(c, ra, ri, startWinkel, sweep);
-		paint.setStyle(Style.FILL);
-		canvas.drawPath(path, paint);
+		if (!inverted) {
+			final Path path = new LevelArcPath(c, ra, ri, startWinkel, sweep);
+			paint.setStyle(Style.FILL);
+			canvas.drawPath(path, paint);
+		} else {
+			final Path path = new LevelArcPath(c, ra, ri, startWinkel + sweep, maxWinkel - sweep);
+			paint.setStyle(Style.FILL);
+			canvas.drawPath(path, paint);
+		}
 	}
 
 	private void drawSegemtedOnlyAct(final Canvas canvas) {
@@ -225,7 +266,7 @@ public class LevelPart {
 		final int alpha = paint.getAlpha();
 		for (int i = 0; i < anzahlSegmente; i = i + 1) {
 			float winkel;
-			if (i < levelIntern) {
+			if ((i < levelIntern && !inverted) || (i >= levelIntern && inverted)) {
 				if (winkelProSegment < 0) {
 					winkel = startWinkel + i * winkelProSegment - abstandZwischenSegemten / 2;
 				} else {
@@ -235,7 +276,7 @@ public class LevelPart {
 					final int faktor = (int) (100 / anzahlSegmente);
 					paint.setColor(PaintProvider.getColorForLevel(i * faktor));
 				}
-				// für den Colorfull Fall wieder setzen von Alpha!
+				// fï¿½r den Colorfull Fall wieder setzen von Alpha!
 				paint.setAlpha(alpha);
 				final Path path = new LevelArcPath(c, ra, ri, winkel, sweepProSeg);
 				canvas.drawPath(path, paint);
@@ -257,7 +298,7 @@ public class LevelPart {
 		final int alpha = paint.getAlpha();
 		for (int i = 0; i < anzahlSegmente; i = i + 1) {
 			paint.setStrokeWidth(strokeWidthSegmente);
-			if (levelIntern > i) {
+			if ((i < levelIntern && !inverted) || (i >= levelIntern && inverted)) {
 				paint.setStyle(Style.FILL_AND_STROKE);
 			} else {
 				paint.setStyle(Style.STROKE);
@@ -293,7 +334,7 @@ public class LevelPart {
 				paint.setColor(PaintProvider.getColorForLevel(i * faktor));
 			}
 			paint.setStrokeWidth(strokeWidthSegmente);
-			if (levelIntern > i) {
+			if ((i < levelIntern && !inverted) || (i >= levelIntern && inverted)) {
 				paint.setAlpha(alpha);
 			} else {
 				paint.setAlpha(alpha / 3);
@@ -320,7 +361,7 @@ public class LevelPart {
 		}
 		for (int i = 0; i < anzahlSegmente; i = i + 1) {
 			paint.setStrokeWidth(strokeWidthSegmente);
-			if (levelIntern > i) {
+			if ((i < levelIntern && !inverted) || (i >= levelIntern && inverted)) {
 				if (coloring.equals(EZColoring.Colorfull)) {
 					final int faktor = (int) (100 / anzahlSegmente);
 					paint.setColor(PaintProvider.getColorForLevel(i * faktor));

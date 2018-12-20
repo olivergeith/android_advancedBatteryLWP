@@ -142,7 +142,7 @@ public class ClockV3 extends AdvancedBitmapDrawer {
 				.setDropShadow(new DropShadow(3 * strokeWidth, Color.BLACK))//
 				.draw(bitmapCanvas);
 
-		// Innen Fläche
+		// Innen Flï¿½che
 		new RingPart(center, maxRadius * 0.30f, maxRadius * 0.00f, new Paint())//
 				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(128), GRAD_STYLE.top2bottom))//
 				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth))//
@@ -197,7 +197,7 @@ public class ClockV3 extends AdvancedBitmapDrawer {
 					.setDropShadow(new DropShadow(strokeWidth * 2, Color.BLACK))//
 					.setAlign(Align.CENTER)//
 					.invert(true)//
-					.draw(bitmapCanvas, Settings.getBattTemperature() + " °C");
+					.draw(bitmapCanvas, Settings.getBattTemperature() + " Â°C");
 		}
 
 	}

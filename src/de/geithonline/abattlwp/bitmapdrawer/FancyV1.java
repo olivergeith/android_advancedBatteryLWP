@@ -135,7 +135,7 @@ public class FancyV1 extends AdvancedBitmapDrawer {
 				.setDropShadow(new DropShadow(1.5f * strokeWidth, 0, 1.5f * strokeWidth, Color.BLACK))//
 				.draw(bitmapCanvas);
 
-		// Innen Fläche
+		// Innen Flï¿½che
 		new RingPart(center, maxRadius * 0.25f, maxRadius * 0.00f, new Paint())//
 				.setGradient(new Gradient(PaintProvider.getGray(160), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
 				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth))//
@@ -172,7 +172,7 @@ public class FancyV1 extends AdvancedBitmapDrawer {
 					.overrideColor(ColorHelper.changeBrightness(Settings.getZeigerColor(), -32))//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//
 					.draw(bitmapCanvas);
-			// Innen Fläche
+			// Innen Flï¿½che
 			new RingPart(centerV, maxRadius * 0.18f, maxRadius * 0.00f, new Paint())//
 					.setGradient(new Gradient(PaintProvider.getGray(160), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
 					.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth))//
@@ -207,7 +207,7 @@ public class FancyV1 extends AdvancedBitmapDrawer {
 					.overrideColor(ColorHelper.changeBrightness(Settings.getZeigerColor(), -32))//
 					.setDropShadow(new DropShadow(strokeWidth * 3, Color.BLACK))//
 					.draw(bitmapCanvas);
-			// Innen Fläche
+			// Innen Flï¿½che
 			new RingPart(centerV, maxRadius * 0.18f, maxRadius * 0.00f, new Paint())//
 					.setGradient(new Gradient(PaintProvider.getGray(160), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
 					.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth))//
@@ -216,7 +216,7 @@ public class FancyV1 extends AdvancedBitmapDrawer {
 					.setColor(Settings.getBattStatusColor())//
 					.invert(true)//
 					.setAlign(Align.CENTER)//
-					.draw(bitmapCanvas, Settings.getBattTemperature() + " °C");
+					.draw(bitmapCanvas, Settings.getBattTemperature() + " Â°C");
 		}
 	}
 

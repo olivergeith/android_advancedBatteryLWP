@@ -175,7 +175,7 @@ public class RotatingV3 extends AdvancedBitmapDrawer {
 			// .draw(bitmapCanvas);
 
 		}
-		// Innen Fläche
+		// Innen Flï¿½che
 		new RingPart(center, maxRadius * 0.15f, maxRadius * 0.00f, new Paint())//
 				.setGradient(new Gradient(PaintProvider.getGray(192), PaintProvider.getGray(32), GRAD_STYLE.top2bottom))//
 				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth))//
@@ -230,7 +230,7 @@ public class RotatingV3 extends AdvancedBitmapDrawer {
 					.setColor(Settings.getBattStatusColor())//
 					.setAlign(Align.CENTER)//
 					.invert(true)//
-					.draw(bitmapCanvas, Settings.getBattTemperature() + " °C");
+					.draw(bitmapCanvas, Settings.getBattTemperature() + " Â°C");
 		}
 	}
 
@@ -253,7 +253,7 @@ public class RotatingV3 extends AdvancedBitmapDrawer {
 
 	@Override
 	public void drawLevelNumber(final int level) {
-		// Rotierendes Feld für Levelnummer
+		// Rotierendes Feld fï¿½r Levelnummer
 		new LevelZeigerPart(center, level, maxRadius * 0.98f, maxRadius * 0.70f, 25, -180, 180, EZMode.Einer)//
 				.setZeigerType(ZEIGER_TYP.inward_triangle)//
 				.setDropShadow(new DropShadow(strokeWidth * 2, Color.BLACK))//

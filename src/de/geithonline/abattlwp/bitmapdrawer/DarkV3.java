@@ -119,7 +119,7 @@ public class DarkV3 extends AdvancedBitmapDrawer {
 				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth / 2))//
 				.draw(bitmapCanvas);
 
-		// Hintergrund für Level
+		// Hintergrund fï¿½r Level
 		new ArchPart(center, maxRadius * 0.80f, maxRadius * 0.50f, startWinkel, sweep, PaintProvider.getBackgroundPaint())//
 				.setEraseBeforDraw()//
 				.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth / 2))//
@@ -163,7 +163,7 @@ public class DarkV3 extends AdvancedBitmapDrawer {
 
 	private void drawVoltMeter() {
 		if (Settings.isShowVoltmeter()) {
-			// Hintergrund für Level
+			// Hintergrund fï¿½r Level
 			new ArchPart(center, maxRadius * 0.42f, maxRadius * 0.25f, -180, 270, PaintProvider.getBackgroundPaint())//
 					.setEraseBeforDraw()//
 					.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth / 2))//
@@ -189,7 +189,7 @@ public class DarkV3 extends AdvancedBitmapDrawer {
 
 	private void drawThermoMeter() {
 		if (Settings.isShowThermometer()) {
-			// Hintergrund für Level
+			// Hintergrund fï¿½r Level
 			new ArchPart(center, maxRadius * 0.80f, maxRadius * 0.60f, -45, 90, PaintProvider.getBackgroundPaint())//
 					.setEraseBeforDraw()//
 					.setOutline(new Outline(PaintProvider.getGray(32), strokeWidth / 2))//
@@ -207,7 +207,7 @@ public class DarkV3 extends AdvancedBitmapDrawer {
 			new TextOnCirclePart(center, maxRadius * 0.67f, -65, fontSizeArc, new Paint())//
 					.setColor(Settings.getBattStatusColor())//
 					.setAlign(Align.CENTER)//
-					.draw(bitmapCanvas, Settings.getBattTemperature() + " °C");
+					.draw(bitmapCanvas, Settings.getBattTemperature() + " Â°C");
 		}
 	}
 

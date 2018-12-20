@@ -16,7 +16,7 @@ import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.enums.BitmapRatio;
 import de.geithonline.abattlwp.settings.PaintProvider;
 import de.geithonline.abattlwp.settings.Settings;
-import de.geithonline.abattlwp.utils.BitmapHelper;
+import de.geithonline.android.basics.utils.BitmapHelper;
 
 /**
  * @author Oliver
@@ -148,11 +148,11 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	public void draw(final int level, final Canvas canvas, final boolean forcedraw) {
 		final int h = canvas.getHeight();
 		final int w = canvas.getWidth();
-		// Bitmap neu berechnen wenn Level sich Ändert oder Canvas dimensions
+		// Bitmap neu berechnen wenn Level sich ï¿½ndert oder Canvas dimensions
 		if (oldLevel != level || w != displayWidth || h != displayHeight || bitmap == null || forcedraw) {
 			displayWidth = w;
 			displayHeight = h;
-			// Memory frei geben für altes bitmap
+			// Memory frei geben fï¿½r altes bitmap
 			if (bitmap != null) {
 				bitmap.recycle();
 			}
@@ -185,7 +185,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	public Bitmap drawIcon(final int level, final int size) {
 		final int h = size;
 		final int w = size;
-		// Bitmap neu berechnen wenn Level sich Ändert oder Canvas dimensions
+		// Bitmap neu berechnen wenn Level sich ï¿½ndert oder Canvas dimensions
 		displayWidth = w;
 		displayHeight = h;
 		Bitmap icon = initBitmap(true);
@@ -205,7 +205,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	}
 
 	private void drawNonPremiumBanner(final Canvas canvas) {
-		// Wenn die APP nicht Premium ist UND dieser Drawer nur für Premium
+		// Wenn die APP nicht Premium ist UND dieser Drawer nur fï¿½r Premium
 		if (!Settings.isPremium() && isPremiumDrawer()) {
 			// new PremiumBannerDrawer(bitmapCanvas).drawDiagonalBanner();
 			// new PremiumBannerDrawer(bitmapCanvas).drawHalfCircleBanner();
@@ -339,7 +339,7 @@ public abstract class AdvancedBitmapDrawer implements IBitmapDrawer {
 	}
 
 	/**
-	 * Diese Methode kann von Kindklassen überschrieben werden, wenn sie ein anderes Ratio als SQUARE haben wollen!
+	 * Diese Methode kann von Kindklassen ï¿½berschrieben werden, wenn sie ein anderes Ratio als SQUARE haben wollen!
 	 * 
 	 * @return the ratio Enum
 	 */

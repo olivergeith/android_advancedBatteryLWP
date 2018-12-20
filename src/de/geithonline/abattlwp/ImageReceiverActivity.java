@@ -20,8 +20,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import de.geithonline.abattlwp.settings.Settings;
-import de.geithonline.abattlwp.utils.BitmapHelper;
 import de.geithonline.abattlwp.utils.URIHelper;
+import de.geithonline.android.basics.utils.BitmapHelper;
 
 public class ImageReceiverActivity extends Activity {
 

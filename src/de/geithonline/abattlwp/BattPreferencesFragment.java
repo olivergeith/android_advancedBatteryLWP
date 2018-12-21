@@ -28,8 +28,8 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 	private int level = 66;
 	// private SharedPreferences prefs;
 	private CoolListPreference styleVariante;
-	private Preference levelMode;
-	private Preference levelStyles;
+	private CoolListPreference levelMode;
+	private CoolListPreference levelStyles;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -37,8 +37,8 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 
 		addPreferencesFromResource(R.xml.preferences_style);
 
-		levelStyles = findPreference("levelStyles");
-		levelMode = findPreference("levelMode");
+		levelStyles = (CoolListPreference) findPreference("levelStyles");
+		levelMode = (CoolListPreference) findPreference("levelMode");
 
 		styleVariante = (CoolListPreference) findPreference(Settings.KEY_BATT_STYLE_VARIANTE);
 		styleVariante.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -90,7 +90,7 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 	}
 
 	private void enableSettingsForStyle(final String style, final String key) {
-		// Ausgewählte Batterie zeichnen
+		// Ausgewï¿½hlte Batterie zeichnen
 		redrawPreview();
 
 		final IBitmapDrawer drawer = DrawerManager.getDrawer(style);
@@ -124,15 +124,15 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 	private void handleStyleVariante(final String style, final String newVariante) {
 		final IBitmapDrawer drawer = DrawerManager.getDrawer(style);
 		if (drawer.supportsVariants()) {
-			// Erstmal die Variantenbox füllen
+			// Erstmal die Variantenbox fï¿½llen
 			final List<String> list = drawer.getVariants();
 			styleVariante.setEntries(getVariantsArray(list));
 			styleVariante.setEntryValues(getVariantsArray(list));
 			styleVariante.setEnabled(true);
 			getPreferenceScreen().addPreference(styleVariante);
-			// übergbebene Variante null?
+			// ï¿½bergbebene Variante null?
 			if (newVariante == null) {
-				// dann schauen wir, ob wir für diesen Drawer schon eine Variante gespeichert haben
+				// dann schauen wir, ob wir fï¿½r diesen Drawer schon eine Variante gespeichert haben
 				final String currentVarianteInSettings = Settings.getStyleVariante(drawer.getClass().getSimpleName());
 				if (list.contains(currentVarianteInSettings)) {
 					styleVariante.setValue(currentVarianteInSettings);
@@ -140,7 +140,7 @@ public class BattPreferencesFragment extends MyAbstractPreferenceFragment {
 					styleVariante.setValueIndex(0);
 				}
 			} else {
-				// eine neue Variante wurde selektiert...die speichern wir unter dem Key für den Drawer
+				// eine neue Variante wurde selektiert...die speichern wir unter dem Key fï¿½r den Drawer
 				Settings.saveStyleVariante(drawer.getClass().getSimpleName(), newVariante);
 				// styleVariante.setValue(newVariante);
 			}

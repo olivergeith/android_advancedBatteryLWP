@@ -15,12 +15,14 @@ import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.CirclePath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.SquarePath;
 import de.geithonline.abattlwp.bitmapdrawer.shapes.SquarePath.SQUARE_STYLE;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.SquareWithInnerCirclePath;
+import de.geithonline.abattlwp.bitmapdrawer.shapes.SquareWithInnerCirclePath.SQUARE2_STYLE;
 import de.geithonline.abattlwp.settings.PaintProvider;
 
 public class RingPart {
 
 	public enum RingType {
-		Circle, SquareRoundet, Square
+		Circle, SquareRoundet, Square, SquareInnerCircle, SquareRoundedInnerCircle
 	};
 
 	private PointF c;
@@ -57,6 +59,12 @@ public class RingPart {
 				break;
 			case Square:
 				path = new SquarePath(c, ra, ri, SQUARE_STYLE.NORMAL);
+				break;
+			case SquareInnerCircle:
+				path = new SquareWithInnerCirclePath(c, ra, ri, SQUARE2_STYLE.NORMAL);
+				break;
+			case SquareRoundedInnerCircle:
+				path = new SquareWithInnerCirclePath(c, ra, ri, SQUARE2_STYLE.ROUNDED);
 				break;
 		}
 	}
@@ -124,6 +132,10 @@ public class RingPart {
 					final int[] colors = new int[] { gradient.getColor1(), gradient.getColor2() };
 					paint.setShader(new RadialGradient(c.x, c.y, ra, colors, getDistancesRadial(), Shader.TileMode.CLAMP));
 					break;
+				case diagonal:
+					paint.setShader(
+							new LinearGradient(c.x - ra, c.y - ra, c.x + ra, c.y + ra, gradient.getColor1(), gradient.getColor2(), Shader.TileMode.MIRROR));
+					break;
 			}
 		}
 	}
@@ -139,7 +151,7 @@ public class RingPart {
 		}
 		// Outline?
 		if (outline != null) {
-			// aufräumen für Outline
+			// aufrï¿½umen fï¿½r Outline
 			paint.setShader(null);
 			paint.setShadowLayer(0, 0, 0, Color.BLACK);
 			// stroke einstellen

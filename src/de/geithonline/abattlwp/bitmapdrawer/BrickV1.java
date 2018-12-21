@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Path;
@@ -13,6 +14,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import de.geithonline.abattlwp.EasterEgg;
+import de.geithonline.abattlwp.bitmapdrawer.data.DropShadow;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient;
 import de.geithonline.abattlwp.bitmapdrawer.data.Gradient.GRAD_STYLE;
 import de.geithonline.abattlwp.bitmapdrawer.data.Outline;
@@ -30,7 +32,7 @@ import de.geithonline.abattlwp.utils.GeometrieHelper;
 import de.geithonline.abattlwp.utils.PathHelper;
 import de.geithonline.abattlwp.utils.Randomizer;
 
-public class BrickMadnessV1 extends AdvancedBitmapDrawer {
+public class BrickV1 extends AdvancedBitmapDrawer {
 
 	private float strokeWidth;
 
@@ -75,7 +77,12 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 		return p;
 	}
 
-	public BrickMadnessV1() {
+	@Override
+	public boolean supportsGlowScala() {
+		return true;
+	}
+
+	public BrickV1() {
 		final List<Point> positions = new ArrayList<>();
 		final List<Point> positionsRandom = new ArrayList<>();
 		// Liste mit Positionen bauen
@@ -85,7 +92,7 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 				positionsRandom.add(new Point(x, y));
 			}
 		}
-		// alle level durchgehen und ein zufälligen Punkt ziehen
+		// alle level durchgehen und ein zufï¿½lligen Punkt ziehen
 		for (int i = 1; i <= 100; i++) {
 			positionMap.put(i, drawFirstPoint(positions));
 			positionMapRandom.put(i, drawRandomPoint(positionsRandom));
@@ -120,12 +127,25 @@ public class BrickMadnessV1 extends AdvancedBitmapDrawer {
 		new RingPart(center, maxRadius * 0.99f, maxRadius * 0.0f, PaintProvider.getBackgroundPaint(), RingType.Square)//
 				.draw(bitmapCanvas);
 
+		if (Settings.isShowGlowScala()) {
+			new RingPart(center, maxRadius * 0.99f, maxRadius - randOffset, new Paint(), RingType.Square)//
+					.setColor(Color.BLACK)//
+					.setDropShadow(new DropShadow(strokeWidth * 30, Settings.getGlowScalaColor()))//
+					.draw(bitmapCanvas);
+			new RingPart(center, maxRadius * 0.99f, maxRadius - randOffset, new Paint(), RingType.Square)//
+					.setColor(Color.BLACK)//
+					.setDropShadow(new DropShadow(strokeWidth * 10, Settings.getGlowScalaColor()))//
+					.draw(bitmapCanvas);
+			new RingPart(center, maxRadius * 0.99f, maxRadius - randOffset, new Paint(), RingType.Square)//
+					.setColor(Color.BLACK)//
+					.setDropShadow(new DropShadow(strokeWidth * 3, Settings.getGlowScalaColor()))//
+					.draw(bitmapCanvas);
+		}
 		new RingPart(center, maxRadius * 0.99f, maxRadius - randOffset, new Paint(), RingType.Square)//
 				.setGradient(new Gradient(PaintProvider.getGray(32), PaintProvider.getGray(96), GRAD_STYLE.top2bottom))//
 				.setOutline(new Outline(PaintProvider.getGray(128), strokeWidth / 2))//
 				.draw(bitmapCanvas);
-
-		// Kästchen malen
+		// Kï¿½stchen malen
 		final float raster = 2 * maxRadius * 0.85f / 10;
 		final float abstand = maxRadius * 0.01f;
 		// EasterEgg... On December we use stars!

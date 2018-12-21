@@ -4,13 +4,13 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
-public class SquarePath extends Path {
+public class SquareWithInnerCirclePath extends Path {
 
-	public enum SQUARE_STYLE {
+	public enum SQUARE2_STYLE {
 		ROUNDED, NORMAL;
 	}
 
-	public SquarePath(final PointF center, final float ra, final float ri, final SQUARE_STYLE variant) {
+	public SquareWithInnerCirclePath(final PointF center, final float ra, final float ri, final SQUARE2_STYLE variant) {
 		super();
 		final Direction dOuter = Direction.CW;
 		final Direction dInner = Direction.CCW;
@@ -33,20 +33,11 @@ public class SquarePath extends Path {
 		if (!rounded) {
 			addRect(rect, dOuter);
 		} else {
-			final float cornerRad = ra * 0.2f;
+			final float cornerRad = ra * 0.15f;
 			addRoundRect(rect, cornerRad, cornerRad, dOuter);
 		}
 		if (ri > 0) {
-			rect.left = center.x - ri;
-			rect.right = center.x + ri;
-			rect.top = center.y - ri;
-			rect.bottom = center.y + ri;
-			if (!rounded) {
-				addRect(rect, dInner);
-			} else {
-				final float cornerRad = ri * 0.15f;
-				addRoundRect(rect, cornerRad, cornerRad, dInner);
-			}
+			addCircle(center.x, center.y, ri, dInner);
 		}
 	}
 }

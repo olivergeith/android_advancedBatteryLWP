@@ -108,7 +108,7 @@ public class ZoopaV1 extends AdvancedBitmapDrawer {
 				.draw(bitmapCanvas);
 		// SkalaBackground
 		new RingPart(center, maxRadius * 0.79f, maxRadius * 0.0f, new Paint())//
-				.setColor(PaintProvider.getGray(32, 128))//
+				.setColor(Settings.getBackgroundColor())//
 				.draw(bitmapCanvas);
 
 		// Level

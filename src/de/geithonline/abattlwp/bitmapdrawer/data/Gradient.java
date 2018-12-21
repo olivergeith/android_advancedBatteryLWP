@@ -3,7 +3,7 @@ package de.geithonline.abattlwp.bitmapdrawer.data;
 public class Gradient {
 
 	public enum GRAD_STYLE {
-		radial, top2bottom;
+		radial, top2bottom, diagonal;
 	}
 
 	private final int color1;

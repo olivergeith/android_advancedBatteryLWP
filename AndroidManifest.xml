@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.geithonline.abattlwp"
-    android:versionCode="7"
-    android:versionName="7" >
+    android:versionCode="8"
+    android:versionName="8" >
 
     <uses-sdk
-        android:minSdkVersion="21"
-        android:targetSdkVersion="27" />
+        android:minSdkVersion="23"
+        android:targetSdkVersion="29" />
 
     <!-- For Accessing Gallery images -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

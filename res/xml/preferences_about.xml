@@ -11,21 +11,6 @@
 	            android:data="https://play.google.com/store/apps/developer?id=Oliver+Geith" />
 	    </Preference>
 
-	    <Preference 
-	        android:title="The BatteryLWP(s) on Google+" 
-	        android:icon="@drawable/googleplus"
-	        >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="https://plus.google.com/u/0/communities/102647653092301648632" />
-        </Preference>
-	    
-	    <Preference 
-	        android:title="Contact developer" 
-	        android:icon="@drawable/email"
-	        >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="mailto:oliver.geith@gmail.com?subject=A-BatteryLWP-Mail" />
-        </Preference>
 	    </PreferenceCategory>
 	    
     <PreferenceCategory android:title="Special internal Options">
